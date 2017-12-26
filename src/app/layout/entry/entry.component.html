@@ -1,0 +1,25 @@
+<div class="container-fluid pagination-centered">
+
+ <div class="row">
+	<form class="col-xl-10" [formGroup]="entryForm" >
+	  <div class="form-group">
+	    <label class="col-form-label" for="groupItems">Name</label>
+	    <input type="text" formControlName="entryGroupName" class="form-control" id="groupItems" placeholder="Name">
+	  </div>
+	  <div class="form-group">
+	    <label class="col-form-label" for="place">Place</label>
+	    <input type="text" formControlName="entryGroupPlace" class="form-control" id="place" placeholder="Place">
+	  </div>
+	  <div class="form-group">
+	    <label class="col-form-label" for="group-type">Type</label>
+	    <input type="text" formControlName="entryGroupGroup" class="form-control" id="group-type" placeholder="Type">
+	  </div>
+	  <div class="form-group">
+	    <label class="col-form-label" for="group-date">Date</label>
+	    <input type="date" formControlName="entryGroupDate"  class="form-control" id="group-date" placeholder="Type">
+	  </div>
+	  <!-- formArray to add or remote fields -->
+	</form>
+ </div>
+
+</div>

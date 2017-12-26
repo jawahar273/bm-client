@@ -1,10 +1,10 @@
 {
-    "name": "SB-Admin-BS4-Angular-5",
+    "name": "BM",
     "version": "4.0.0",
     "license": "MIT",
     "scripts": {
         "ng": "ng",
-        "start": "ng serve --ec true",
+        "start": "ng serve --ec true --port 4300",
         "build": "ng build --prod",
         "gitbuild": "ng build --prod --base /start-angular/SB-Admin-BS4-Angular-5/master/dist/",
         "test": "ng test",
