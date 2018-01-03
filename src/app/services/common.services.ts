@@ -8,7 +8,8 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CommonService {
-    constructor(private http: Http) {}
+    constructor(private http: Http) {
+    }
 
     private commonURL = 'http://127.0.0.1:8000/api';
     private joinURL(str1: string, str2: string) {
@@ -47,5 +48,11 @@ export class CommonService {
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
-
+    public isClinetOrServerSidesError(statusMessage: Object): any {
+        if (400 <= statusMessage['status_code'] < 500) {
+            return statusMessage['detail'];
+        } else if (500 <= statusMessage['status_code'] < 600) {
+            return 'Server error';
+        }
+    }
 }

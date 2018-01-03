@@ -56,14 +56,17 @@ export class EntryComponent implements OnInit {
      this.entryFormAlert.push({type: _type, message: msg});
   }
 
+
   private getOneItemListObject(id: any): any {
+      const _self = this;
       this.service.get(`package/itemslist/${id}`, this.headers).subscribe((_object) => {
           this.entryFormGroupContents = this.getObjectForUpdate(_object);
           this.entryForm = this.entryFormGroup.group(this.entryFormGroupContents);
           },
           (error) => {
             //   if (error.status )
-            console.log(error.message, error.status);
+              const msg = this.service.isClinetOrServerSidesError(error);
+              this.showFormErrorOnAlert(msg);
               return undefined;
           });
   }
