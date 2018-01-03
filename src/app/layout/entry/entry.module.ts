@@ -8,18 +8,21 @@ import { HttpModule } from '@angular/http';
 import { EntryRoutingModule } from './entry-routing.module';
 
 import { EntryComponent } from './entry.component';
-
+import { ListedItemsModule } from './listed-items/listed-items.module';
+import { ListedItemsComponent } from './listed-items/listed-items.component';
 
 @NgModule({
   imports: [
     CommonModule,
     EntryRoutingModule,
+    ListedItemsModule,
     ReactiveFormsModule,
     NgbModule.forRoot(),
     HttpModule,
   ],
   declarations: [
-  EntryComponent
+  EntryComponent,
+  // ListedItemsComponent
   ]
 })
 export class EntryModule { }

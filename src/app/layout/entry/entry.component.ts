@@ -24,12 +24,11 @@ export class EntryComponent implements OnInit {
     // @Input() isUpdateFields: boolean = false;
     // @Input() entryFormGroupContents: Object = undefined;
     constructor(public entryFormGroup: FormBuilder, public service: CommonService, public route: ActivatedRoute) {
-      this.headers = new Headers({ 'Accept': 'application / json' });
+      this.headers = new Headers({ 'Accept': 'application/json' });
       let id: number;
       this.route.params.subscribe(params => { id = params['id']; });
       this.entryFormGroupContents = !!id ? this.getOneItemListObject(id) : undefined;
-      this.entryFormGroupContents = !!this.entryFormGroupContents ? this.getObjectForUpdate(this.entryFormGroupContents)
-           : this.getObjectForUpdate();
+      this.entryFormGroupContents = this.getObjectForUpdate();
         // const headers = new Headers({ 'Accept': 'application/json'});
         // this.service.get('package/itemslist/', headers).subscribe(
         //     (data) => {
@@ -48,12 +47,59 @@ export class EntryComponent implements OnInit {
     //  this.entryForm.valueChanges.subscribe(form => { console.log(form); });
   }
 
-  private getOneItemListObject(id: any): Object {
-      return this.service.get(`package/itemslist/${id}`, this.headers);
-  }
-
   /**
    *
+   * @param msg get the message for the error to display in the form alert 
+   * @param _type get the type of alert to be displayed
+   */
+  private showFormErrorOnAlert( msg: string , _type: string = 'danger') {
+     this.entryFormAlert.push({type: _type, message: msg});
+  }
+
+  private getOneItemListObject(id: any): any {
+      this.service.get(`package/itemslist/${id}`, this.headers).subscribe((_object) => {
+          this.entryFormGroupContents = this.getObjectForUpdate(_object);
+          this.entryForm = this.entryFormGroup.group(this.entryFormGroupContents);
+          },
+          (error) => {
+            //   if (error.status )
+            console.log(error.message, error.status);
+              return undefined;
+          });
+  }
+
+/**
+ *
+ * @param _object Object from the response api.
+ * @return {Object} object for createing dymanic based on the request data
+ */
+  private getObjectForUpdate(_object?: Object): Object {
+      const temp = !!_object ? this.generateListOfItems(_object['items']) : [this.generateGroupItemsFormControl()];
+      return {
+          entryGroupName: [!!_object ? _object['name'] : '', Validators.required],
+          entryGroupPlace: [!!_object ? _object['place'] : '', Validators.required],
+          entryGroupGroup: [!!_object ? _object['group'] : '', Validators.required],
+          entryGroupDate: [!!_object ? _object['date'] : '', Validators.required],
+          entryGroupItems: this.entryFormGroup.array(temp)
+        //   Validators.compose([Validators.required, Validators.minLength(7)])
+      };
+  }
+
+  private generateGroupItemsFormControl(value?: string): FormGroup {
+     value =  !!value ? value : '' ;
+     return this.entryFormGroup.group({ amount: [value] });
+  }
+
+  private generateListOfItems(items): Array<FormGroup> {
+      let pushArray = [];
+      Object.keys(items).forEach((element, index) => {
+          pushArray.push(this.generateGroupItemsFormControl(items[element]['amount']));
+      });
+      return pushArray;
+  }
+
+
+  /**
    * @param {any} alert it is an object of the current alert.
    * @description used to close alert in display.
    */
@@ -61,11 +107,22 @@ export class EntryComponent implements OnInit {
         const index: number = this.entryFormAlert.indexOf(alert);
         this.entryFormAlert.splice(index, 1);
   }
+
+  /**
+   * @param name get the formcontrol's name
+   * @return {boolean}
+   * @description check the form is valid or not
+   */
+  private checkFormHasError(name: string): boolean {
+      const temp = this.entryForm.get(name);
+      return (!temp.valid && temp.touched);
+  }
+
   /**
    * @description add the form field.
    */
   public addItem() {
-      (<FormArray>this.entryForm.controls['entryGroupItems']).push(new FormControl('', Validators.required));
+      (<FormArray>this.entryForm.controls['entryGroupItems']).push(this.generateGroupItemsFormControl());
   }
 
   public delectItem(index) {
@@ -77,46 +134,31 @@ export class EntryComponent implements OnInit {
   private entrySubmit() {
     if (this.entryForm.valid) {
         // entryFormAlert
-        this.loadingSpin(true);
+        this.hideLoadingSpin(false);
         const url = 'package/itemslist/';
         let serviceMethod = (!!this.entryFormGroupContents ?
             this.service.update(url + this.entryFormGroupContents['id'], this.headers, JSON.parse(this.entryForm.value)).subscribe(() => { }, (error) => { this.entryFormAlert.push({ type: 'danger', message: error })}) :
             this.service.post(url, this.headers, JSON.parse(this.entryForm.value)).subscribe((data) => { }, (error) => { this.entryFormAlert.push({ type: 'danger', message: error })})
                             );
     } else {
-        this.loadingSpin(false);
-        this.entryFormAlert.push({
-            type: 'danger',
-            message: 'Error in the form value.'
-        });
+        this.hideLoadingSpin(true);
+        this.showFormErrorOnAlert(`Error in the form value: ${this.findInvalidControls()} `);
     }
  }
 
- private loadingSpin(condition: boolean): void {
+ private hideLoadingSpin(condition: boolean): void {
      this.hideLoadSpin = condition;
  }
-/**
- *
- * @param _object Object from the response api.
- * @return {Object} object for createing dymanic based on the request data
- */
- private getObjectForUpdate(_object?: Object): Object {
-     const temp = [!!_object ? this.generateListOfItems(_object['items']) : new FormControl('', Validators.required)];
-     return {
-         entryGroupName: [!!_object ? _object['name'] : '', Validators.required],
-         entryGroupPlace: [!!_object ? _object['place'] : '', Validators.required],
-         entryGroupGroup: [!!_object ? _object['group'] : '', Validators.required],
-         entryGroupDate: [!!_object ? _object['date'] : '', Validators.required],
-         entryGroupItems: this.entryFormGroup.array(temp)
-     };
- }
 
- private generateListOfItems(items): Array<FormControl> {
-     let pushArray: Array<FormControl>;
-   Object.keys(items).forEach((element, index) => {
-       pushArray.push(new FormControl(items[element]));
-   });
-   return pushArray;
+ public findInvalidControls() {
+     const invalid = [];
+     const controls = this.entryForm.controls;
+     for (const name in controls) {
+         if (controls[name].invalid) {
+             invalid.push(name);
+         }
+     }
+     return invalid;
  }
 
 }

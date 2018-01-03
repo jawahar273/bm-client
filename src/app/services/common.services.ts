@@ -20,15 +20,16 @@ export class CommonService {
         const options = new RequestOptions({ headers: headers});
         return this.http.get(url, options)
             .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.json()));
     }
+    // Observable.throw(error.json().error || 'Server error'));
 
     public post(url: string, headers?: Headers, body?: any): Observable<any []> {
         url = this.joinURL(this.commonURL, url);
         const options = new RequestOptions({ headers: headers });
         return this.http.post(url, options)
             .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.json()));
     }
 
     public update(url: string, headers?: Headers, body?: any): Observable<any[]> {
@@ -36,7 +37,7 @@ export class CommonService {
         const options = new RequestOptions({ headers: headers });
         return this.http.put(url, options)
             .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.json()));
     }
 
     public delete(url: string, headers?: Headers, body?: any): Observable<any[]> {
@@ -44,7 +45,7 @@ export class CommonService {
         const options = new RequestOptions({ headers: headers });
         return this.http.delete(url, options)
             .map((res: Response) => res.json())
-            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+            .catch((error: any) => Observable.throw(error.json()));
     }
 
 }
