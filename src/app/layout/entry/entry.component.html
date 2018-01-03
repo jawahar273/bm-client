@@ -1,25 +1,47 @@
 <div class="container-fluid pagination-centered">
-
- <div class="row">
-	<form class="col-xl-10" [formGroup]="entryForm" >
-	  <div class="form-group">
-	    <label class="col-form-label" for="groupItems">Name</label>
-	    <input type="text" formControlName="entryGroupName" class="form-control" id="groupItems" placeholder="Name">
-	  </div>
-	  <div class="form-group">
-	    <label class="col-form-label" for="place">Place</label>
-	    <input type="text" formControlName="entryGroupPlace" class="form-control" id="place" placeholder="Place">
-	  </div>
-	  <div class="form-group">
-	    <label class="col-form-label" for="group-type">Type</label>
-	    <input type="text" formControlName="entryGroupGroup" class="form-control" id="group-type" placeholder="Type">
-	  </div>
-	  <div class="form-group">
-	    <label class="col-form-label" for="group-date">Date</label>
-	    <input type="date" formControlName="entryGroupDate"  class="form-control" id="group-date" placeholder="Type">
-	  </div>
-	  <!-- formArray to add or remote fields -->
-	</form>
- </div>
+	<p *ngFor="let alert of entryFormAlert">
+		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+	</p>
+	<div class="row">
+		<form class="col-xl-10" [formGroup]="entryForm" (ngSubmit)="entrySubmit()">
+			<div class="form-group">
+				<label class="col-form-label" for="groupItems">Name</label>
+				<input type="text" formControlName="entryGroupName" [ngClass]="{'has-error':!entryForm.get('entryGroupName').valid}" class="form-control"
+				 id="groupItems" placeholder="Name">
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="place">Place</label>
+				<input type="text" formControlName="entryGroupPlace" [ngClass]="{'has-error':!entryForm.get('entryGroupPlace').valid}" class="form-control"
+				 id="place" placeholder="Place">
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="group-category">Category</label>
+				<input type="text" formControlName="entryGroupGroup" [ngClass]="{'has-error':!entryForm.get('entryGroupGroup').valid}" class="form-control"
+				 id="group-category" placeholder="Category">
+			</div>
+			<div class="form-group">
+				<label class="col-form-label" for="group-date">Date</label>
+				<input type="date" formControlName="entryGroupDate" [ngClass]="{'has-error':!entryForm.get('entryGroupDate').valid}" class="form-control"
+				 id="group-date" placeholder="Type">
+			</div>
+			<!-- formArray to add or remote fields -->
+			<div class="" formArrayName="entryGroupItems" [ngClass]="{'has-error':!entryForm.get('entryGroupItems').valid}">
+				<div class=" d-flex form-group" *ngFor="let form of entryForm.get('entryGroupItems').controls; let indx = index; trackBy: indx">
+					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->
+					<input type="number" name="entryGroupItems-{{indx}}" 
+					id="entryGroupItems-{{indx}}"
+					placeholder="count: {{indx}}" class="form-control col-xl-7">
+					<div class="col-xl-4">
+						<button (click)="addItem()">+</button>
+						<button (click)="delectItem(indx)">-</button>
+					</div>
+				</div>
+				<button>
+				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
+			</button>
+			</div>
+		</form>
+		{{ entryForm.value | json }}
+	</div>
 
 </div>
