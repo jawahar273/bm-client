@@ -4,7 +4,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import {ReactiveFormsModule} from "@angular/forms";
 import { HttpModule } from '@angular/http';
 
-
+import { PageHeaderModule } from '../../shared';
 import { EntryRoutingModule } from './entry-routing.module';
 
 import { EntryComponent } from './entry.component';
@@ -19,6 +19,7 @@ import { ListedItemsComponent } from './listed-items/listed-items.component';
     ReactiveFormsModule,
     NgbModule.forRoot(),
     HttpModule,
+    PageHeaderModule,
   ],
   declarations: [
   EntryComponent,

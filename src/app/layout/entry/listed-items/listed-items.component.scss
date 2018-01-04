@@ -1,0 +1,10 @@
+
+$border_color_1: rgba(250, 56, 100, 0.80);
+
+.has-error {
+
+		border-color: $border_color_1;
+		box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(250, 56, 100, 0.80);
+		outline: 0 none;
+	
+}

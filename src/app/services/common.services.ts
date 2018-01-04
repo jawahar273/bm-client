@@ -13,11 +13,11 @@ export class CommonService {
     }
 
     private commonURL = 'http://127.0.0.1:8000/api';
-    private joinURL(str1: string, str2: string) {
+    public joinURL(str1: string, str2: string) {
         return `${str1}/${str2}/`;
     }
 
-    public get(url: string, headers?: Headers, body?: any): Observable<any []> {
+    public get(url: string, headers?: Headers): Observable<any []> {
         url = this.joinURL(this.commonURL, url);
         const options = new RequestOptions({ headers: headers});
         return this.http.get(url, options)
@@ -29,7 +29,7 @@ export class CommonService {
     public post(url: string, headers?: Headers, body?: any): Observable<any []> {
         url = this.joinURL(this.commonURL, url);
         const options = new RequestOptions({ headers: headers });
-        return this.http.post(url, options)
+        return this.http.post(url, body, options)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
@@ -37,12 +37,12 @@ export class CommonService {
     public update(url: string, headers?: Headers, body?: any): Observable<any[]> {
         url = this.joinURL(this.commonURL, url);
         const options = new RequestOptions({ headers: headers });
-        return this.http.put(url, options)
+        return this.http.put(url, body, options)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
 
-    public delete(url: string, headers?: Headers, body?: any): Observable<any[]> {
+    public delete(url: string, headers?: Headers): Observable<any[]> {
         url = this.joinURL(this.commonURL, url);
         const options = new RequestOptions({ headers: headers });
         return this.http.delete(url, options)
@@ -65,14 +65,15 @@ export class CommonService {
         }
     }
 
-    public renameObjectAllKeys(oldKeys: Array, newKeys: Array, el: Object): boolean {
+    public renameObjectAllKeys(oldKeys: Array, newKeys: Array, ele: Object): Object {
+        let el = Object.assign({}, ele);
         if (oldKeys.length === newKeys.length) {
             oldKeys.forEach((element, index) => {
                 this.renameObjectKey(element, newKeys[index], el);
             });
-            return true;
+            return el;
         } else {
-            return false;
+            return undefined;
         }
     }
 }

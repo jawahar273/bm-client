@@ -5,6 +5,7 @@ import {  Headers } from '@angular/http';
 
 import { CommonService } from '../../services/common.services';
 
+
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
@@ -17,16 +18,18 @@ export class EntryComponent implements OnInit {
     today: Date;
     hiddleAlert: boolean = true;
     entryFormAlert: Array<any> = [];
+
     hideLoadSpin: boolean = true;
     entryFormGroupContents: Object;
     headers: Headers;
     id: number;
+    serviceFields: Object;
+    submitForm: boolean = false;
 
     constructor(public entryFormGroup: FormBuilder, public service: CommonService, public route: ActivatedRoute) {
-      this.headers = new Headers({ 'Accept': 'application/json' });
+        this.headers = new Headers({ 'Accept': 'application/json', 'content-type': 'application/json' });
       this.route.params.subscribe(params => { this.id = params['id']; });
-      this.entryFormGroupContents = !!this.id ? this.getOneItemListObject(this.id) : undefined;
-      this.entryFormGroupContents = this.getObjectForUpdate();
+      this.entryFormGroupContents = !!this.id ? this.getOneItemListObject(this.id) : this.getObjectForUpdate();
         // const headers = new Headers({ 'Accept': 'application/json'});
         // this.service.get('package/itemslist/', headers).subscribe(
         //     (data) => {
@@ -42,15 +45,23 @@ export class EntryComponent implements OnInit {
      this.entryForm = this.entryFormGroup.group(this.entryFormGroupContents);
      this.today = new Date();
      this.entryForm.get('entryGroupDate').setValue(this.today.toISOString().substring(0, 10));
+     this.serviceFields = {
+         entryGroupName: 'name',
+         entryGroupPlace: 'place',
+         entryGroupGroup: 'group',
+         entryGroupDate: 'date',
+         entryGroupItems: 'items'
+     };
     //  this.entryForm.valueChanges.subscribe(form => { console.log(form); });
   }
 
   /**
    *
-   * @param msg get the message for the error to display in the form alert 
+   * @param msg get the message for the error to display in the form alert
    * @param _type get the type of alert to be displayed
    */
-  private showFormErrorOnAlert( msg: string , _type: string = 'danger') {
+  private showFormAlert( msg: string , _type: string = 'danger') {
+      this.entryFormAlert = [];
      this.entryFormAlert.push({type: _type, message: msg});
   }
 
@@ -81,7 +92,7 @@ export class EntryComponent implements OnInit {
           (error) => {
             //   if (error.status )
               const msg = this.service.isClinetOrServerSidesError(error);
-              this.showFormErrorOnAlert(msg);
+              this.showFormAlert(msg);
               return undefined;
           });
   }
@@ -89,7 +100,7 @@ export class EntryComponent implements OnInit {
 /**
  *
  * @param _object Object from the response api.
- * @return {Object} object for createing dymanic based on the request data
+ * @return {Object}  for createing dymanic based on the request data
  */
   private getObjectForUpdate(_object?: Object): Object {
       const temp = !!_object ? this.generateListOfItems(_object['items']) : [this.generateGroupItemsFormControl()];
@@ -115,7 +126,11 @@ export class EntryComponent implements OnInit {
   private generateGroupItemsFormControl(value?: string, name?: string): FormGroup {
      value =  !!value ? value : '';
      name = !!name ? name : '';
-     return this.entryFormGroup.group({ amount: [value], hint: [name] });
+     const temp = {
+         amount: [value, Validators.compose([Validators.required])],
+         name: [name, Validators.compose([Validators.required])],
+     };
+     return this.entryFormGroup.group(temp);
   }
 
   /**
@@ -142,50 +157,79 @@ export class EntryComponent implements OnInit {
         (<FormArray>this.entryForm.controls['entryGroupItems']).removeAt(index);
     }
   }
-
-  private entrySubmit() {
-    if (this.entryForm.valid) {
+  /**
+   *
+   * @return {void}
+   * @description this function is called on the event `onsubmit`.
+   */
+  private entrySubmit(): void {
+    if (this.entryForm.valid && this.submitForm) {
         // entryFormAlert
         this.hideLoadingSpin(false);
-        const url = 'package/itemslist/';
-        if (!!this.entryFormGroupContents) {
-            this.service.update(url + this.id, header = this.headers, body = JSON.stringify(this.entryForm.value))
+        const url = 'package/itemslist';
+        const oldName = Object.keys(this.serviceFields);
+        const newName = Object.values(this.serviceFields);
+        let _body = this.service.renameObjectAllKeys(oldName, newName, this.entryForm.value);
+        _body = JSON.stringify(_body);
+        if (!!this.id) {
+            this.service.update(url + `/${this.id}`, this.headers,  _body)
               .subscribe(
-                  () => {
-
+                  (data) => {
+                      this.showFormAlert('Content Updated', 'success');
+                      this.hideLoadingSpin(true);
                   },
                   (error) => {
-                      this.entryFormAlert.push({ type: 'danger', message: error });
+                      this.showFormAlert(error, 'danger' );
                   }
               );
         } else {
-            this.service.post(url, this.headers, JSON.stringify(this.entryForm.value))
+            this.service.post(url, this.headers, _body)
               .subscribe(
                   (data) => {
-
+                      console.log(data);
+                      this.showFormAlert('Content Created', 'success');
+                      this.hideLoadingSpin(true);
                   },
                   (error) => {
-                      this.entryFormAlert.push({ type: 'danger', message: error });
+                      this.showFormAlert(error, 'danger');
                   });
         }
+    } else if (this.submitForm) {
+        this.hideLoadingSpin(true);
+        this.showFormAlert(`Error in the form value: ${this.findInvalidControls()} `);
     } else {
         this.hideLoadingSpin(true);
-        this.showFormErrorOnAlert(`Error in the form value: ${this.findInvalidControls()} `);
     }
+    this.submitForm = false;
  }
 
  private hideLoadingSpin(condition: boolean): void {
      this.hideLoadSpin = condition;
  }
 
- public findInvalidControls() {
-     const invalid = [];
+ public findInvalidControls(checkAllFields: boolean = false) {
+     let invalid = [];
      const controls = this.entryForm.controls;
+     // check for the formcontrol under `entryForm`.
      for (const name in controls) {
          if (controls[name].invalid) {
-             invalid.push(name);
              controls[name].markAsTouched({onlySelf: true});
+            if (!checkAllFields) {
+                return name;
+            }
+            invalid.push(name);
          }
+     }
+     // check for the formcontrol under form array `entryGroupItems`
+     if (controls['entryGroupItems'].invalid) {
+         controls.entryGroupItems['controls'].forEach((element, index) => {
+            //  element.invalid ? element.markAsTouched({ onlySelf: true }) : undefined;
+             const amount = element.controls['amount'];
+             const name = element.controls['name'];
+             amount.invalid ? amount.markAsTouched({ onlySelf: true }) : undefined;
+             name.invalid ? name.markAsTouched({ onlySelf: true }) : undefined;
+         });
+        //  return invalid;
      }
      return invalid;
  }

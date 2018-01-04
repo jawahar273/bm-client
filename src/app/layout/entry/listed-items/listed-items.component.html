@@ -1,11 +1,13 @@
 <div [formGroup]="formGroupToList" class="">
   <input type="text" name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"
-  formControlName="hint"
+  formControlName="name"
   placeholder="hint to remember"
    class="form-control"
+   [ngClass]="{'has-error':checkFormError('name')}"
   />
   <input type="text" name="entryGroupItemsAmount-{{indx}}" id="entryGroupItemsAmount-{{indx}}"
    formControlName="amount"
    pattern="[0-9]{1,4}\.?[0-9]{0,2}"
-  placeholder="amount Eg: 2001.12" class="form-control">
+  placeholder="amount Eg: 2001.12" class="form-control"
+   [ngClass]="{'has-error':checkFormError('amount')}"/>
 </div>

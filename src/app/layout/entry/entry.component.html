@@ -1,9 +1,10 @@
 <div class="container-fluid pagination-centered">
+	<app-page-header [heading]="'Entry'" [icon]="'fa-etsy'"></app-page-header>
 	<p *ngFor="let alert of entryFormAlert">
 		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
 	</p>
 	<div class="row">
-		<form class="col-xl-10" [formGroup]="entryForm" (ngSubmit)="entrySubmit()">
+		<form class="col-xl-10" [formGroup]="entryForm" (ngSubmit)="entrySubmit();">
 			<div class="form-group">
 				<label class="col-form-label" for="groupItems">Name</label>
 				<input type="text" formControlName="entryGroupName" [ngClass]="{'has-error':checkFormHasError('entryGroupName')}" class="form-control"
@@ -29,14 +30,15 @@
 				<div class="row d-flex form-group" *ngFor="let form of entryForm.get('entryGroupItems').controls; let indx = index; trackBy: indx">
 					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->
 					<div formGroupName="{{indx}}" class="">
-					   <app-listed-items [count]="indx" [formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"></app-listed-items>
+					   <app-listed-items [count]="indx" [formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]">
+					   </app-listed-items>
 					   <div class="">
 						  <button (click)="addItem()">+</button>
 						  <button (click)="delectItem(indx)">-</button>
 					   </div>
 					</div>
 				</div>
-			<button>
+			<button (click)="submitForm=true;">
 				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
 			</button>
 			</div>
