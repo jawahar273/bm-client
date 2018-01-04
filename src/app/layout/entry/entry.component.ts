@@ -20,14 +20,12 @@ export class EntryComponent implements OnInit {
     hideLoadSpin: boolean = true;
     entryFormGroupContents: Object;
     headers: Headers;
+    id: number;
 
-    // @Input() isUpdateFields: boolean = false;
-    // @Input() entryFormGroupContents: Object = undefined;
     constructor(public entryFormGroup: FormBuilder, public service: CommonService, public route: ActivatedRoute) {
       this.headers = new Headers({ 'Accept': 'application/json' });
-      let id: number;
-      this.route.params.subscribe(params => { id = params['id']; });
-      this.entryFormGroupContents = !!id ? this.getOneItemListObject(id) : undefined;
+      this.route.params.subscribe(params => { this.id = params['id']; });
+      this.entryFormGroupContents = !!this.id ? this.getOneItemListObject(this.id) : undefined;
       this.entryFormGroupContents = this.getObjectForUpdate();
         // const headers = new Headers({ 'Accept': 'application/json'});
         // this.service.get('package/itemslist/', headers).subscribe(
@@ -56,7 +54,24 @@ export class EntryComponent implements OnInit {
      this.entryFormAlert.push({type: _type, message: msg});
   }
 
-
+  /**
+   *
+   * @param {any} alert it is an object of the current alert.
+   * @description used to close alert in display.
+   */
+  public closeAlert(alert?: Object, removeAll?: boolean ) {
+      if (removeAll) {
+          this.entryFormAlert = [];
+      } else {
+          const index: number = this.entryFormAlert.indexOf(alert);
+          this.entryFormAlert.splice(index, 1);
+      }
+  }
+  /**
+   *
+   * @param id unique id of the entry which is from back-end.
+   * @return {undefined} return `undefined` if their is any error.
+   */
   private getOneItemListObject(id: any): any {
       const _self = this;
       this.service.get(`package/itemslist/${id}`, this.headers).subscribe((_object) => {
@@ -88,40 +103,34 @@ export class EntryComponent implements OnInit {
       };
   }
 
-  private generateGroupItemsFormControl(value?: string): FormGroup {
-     value =  !!value ? value : '' ;
-     return this.entryFormGroup.group({ amount: [value] });
-  }
-
   private generateListOfItems(items): Array<FormGroup> {
       let pushArray = [];
       Object.keys(items).forEach((element, index) => {
-          pushArray.push(this.generateGroupItemsFormControl(items[element]['amount']));
+          const temp = this.generateGroupItemsFormControl(items[element]['amount'], items[element]['name'] );
+          pushArray.push(temp);
       });
       return pushArray;
   }
 
-
-  /**
-   * @param {any} alert it is an object of the current alert.
-   * @description used to close alert in display.
-   */
-  public closeAlert(alert: any) {
-        const index: number = this.entryFormAlert.indexOf(alert);
-        this.entryFormAlert.splice(index, 1);
+  private generateGroupItemsFormControl(value?: string, name?: string): FormGroup {
+     value =  !!value ? value : '';
+     name = !!name ? name : '';
+     return this.entryFormGroup.group({ amount: [value], hint: [name] });
   }
 
   /**
+   *
    * @param name get the formcontrol's name
    * @return {boolean}
    * @description check the form is valid or not
    */
   private checkFormHasError(name: string): boolean {
       const temp = this.entryForm.get(name);
-      return (!temp.valid && temp.touched);
+      return (temp.invalid && temp.touched);
   }
 
   /**
+   *
    * @description add the form field.
    */
   public addItem() {
@@ -139,10 +148,26 @@ export class EntryComponent implements OnInit {
         // entryFormAlert
         this.hideLoadingSpin(false);
         const url = 'package/itemslist/';
-        let serviceMethod = (!!this.entryFormGroupContents ?
-            this.service.update(url + this.entryFormGroupContents['id'], this.headers, JSON.parse(this.entryForm.value)).subscribe(() => { }, (error) => { this.entryFormAlert.push({ type: 'danger', message: error })}) :
-            this.service.post(url, this.headers, JSON.parse(this.entryForm.value)).subscribe((data) => { }, (error) => { this.entryFormAlert.push({ type: 'danger', message: error })})
-                            );
+        if (!!this.entryFormGroupContents) {
+            this.service.update(url + this.id, header = this.headers, body = JSON.stringify(this.entryForm.value))
+              .subscribe(
+                  () => {
+
+                  },
+                  (error) => {
+                      this.entryFormAlert.push({ type: 'danger', message: error });
+                  }
+              );
+        } else {
+            this.service.post(url, this.headers, JSON.stringify(this.entryForm.value))
+              .subscribe(
+                  (data) => {
+
+                  },
+                  (error) => {
+                      this.entryFormAlert.push({ type: 'danger', message: error });
+                  });
+        }
     } else {
         this.hideLoadingSpin(true);
         this.showFormErrorOnAlert(`Error in the form value: ${this.findInvalidControls()} `);
@@ -159,6 +184,7 @@ export class EntryComponent implements OnInit {
      for (const name in controls) {
          if (controls[name].invalid) {
              invalid.push(name);
+             controls[name].markAsTouched({onlySelf: true});
          }
      }
      return invalid;

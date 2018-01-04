@@ -6,6 +6,7 @@ import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+
 @Injectable()
 export class CommonService {
     constructor(private http: Http) {
@@ -13,7 +14,7 @@ export class CommonService {
 
     private commonURL = 'http://127.0.0.1:8000/api';
     private joinURL(str1: string, str2: string) {
-        return `${str1}/${str2}`;
+        return `${str1}/${str2}/`;
     }
 
     public get(url: string, headers?: Headers, body?: any): Observable<any []> {
@@ -53,6 +54,25 @@ export class CommonService {
             return statusMessage['detail'];
         } else if (500 <= statusMessage['status_code'] < 600) {
             return 'Server error';
+        }
+    }
+
+    public renameObjectKey(oldKeyName: string, newKeyName: string, el: Object): void {
+        if (oldKeyName !== newKeyName) {
+            Object.defineProperty(el, newKeyName,
+                Object.getOwnPropertyDescriptor(el, oldKeyName));
+            delete el[oldKeyName];
+        }
+    }
+
+    public renameObjectAllKeys(oldKeys: Array, newKeys: Array, el: Object): boolean {
+        if (oldKeys.length === newKeys.length) {
+            oldKeys.forEach((element, index) => {
+                this.renameObjectKey(element, newKeys[index], el);
+            });
+            return true;
+        } else {
+            return false;
         }
     }
 }
