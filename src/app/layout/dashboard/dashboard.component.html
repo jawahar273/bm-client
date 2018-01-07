@@ -1,6 +1,6 @@
 <div [@routerTransition]>
     <h2 class="text-muted">Show <small>list</small></h2>
-    <!-- slideShows <div class="row">
+    <!-- slideShows <div class="row">d
         <div class="col-md-12">
             <ngb-carousel>
                 <ng-template ngbSlide *ngFor="let slider of sliders">
@@ -52,33 +52,28 @@
     </div> -->
         <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3 ">
-                <div class="card-header">Hoverable rows</div>
+                <div class="card-header">List Spendings</div>
                 <table class="card-body table table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                            <th>Username</th>
+                            <th>Serires No</th>
+                            <th>Bundle Name</th>
+                            <th>place</th>
+                            <th>group</th>
+                            <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <th scope="row">1</th>
-                            <td>Mark</td>
-                            <td>Otto</td>
-                            <td>@mdo</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">2</th>
-                            <td>Jacob</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                        </tr>
-                        <tr>
-                            <th scope="row">3</th>
-                            <td colspan="2">Larry the Bird</td>
-                            <td>@twitter</td>
+                        <tr *ngFor="let ngRow of tableContent">
+                            <th scope="row">{{ngRow?.id}}</th>
+                            <td>{{ngRow?.name}}</td>
+                            <td>{{ngRow?.place}}</td>
+                            <td>{{ngRow?.group}}</td>
+                            <td>
+                                <a [routerLink]="['/entry/', ngRow?.id]">
+                                    Update
+                                </a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>

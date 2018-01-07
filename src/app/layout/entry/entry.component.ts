@@ -20,16 +20,30 @@ export class EntryComponent implements OnInit {
     entryFormAlert: Array<any> = [];
 
     hideLoadSpin: boolean = true;
-    entryFormGroupContents: Object;
+    // entryFormGroupContents: Object;
     headers: Headers;
     id: number;
     serviceFields: Object;
     submitForm: boolean = false;
-
-    constructor(public entryFormGroup: FormBuilder, public service: CommonService, public route: ActivatedRoute) {
-        this.headers = new Headers({ 'Accept': 'application/json', 'content-type': 'application/json' });
+    content404: boolean = false;
+    /**
+     *
+     * @param entryFormGroupBuilder
+     * @param service
+     * @param {ActivatedRoute} route using this object routing paramas can be obtain.
+     *
+     * @var {FormGroup} entryForm this is the link member between the html and JS and must
+     *         be initilize for formgroup and form html.
+     * @var {Object} serviceFields to convert the server and client fields in between sending & receving objects.
+     * @var {Object} entryFormGroupContent a Object to contain the newly or object from the service formgroup.
+     */
+    constructor(public entryFormGroupBuilder: FormBuilder, public service: CommonService, public route: ActivatedRoute) {
+        // @entryForm
+        this.today = new Date();
+      this.headers = this.service.headers;
       this.route.params.subscribe(params => { this.id = params['id']; });
-      this.entryFormGroupContents = !!this.id ? this.getOneItemListObject(this.id) : this.getObjectForUpdate();
+      this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
+      !!this.id ? this.getOneItemListObject(this.id) : '';
         // const headers = new Headers({ 'Accept': 'application/json'});
         // this.service.get('package/itemslist/', headers).subscribe(
         //     (data) => {
@@ -39,20 +53,18 @@ export class EntryComponent implements OnInit {
         //         console.error(error);
         //     },
         // );
+    //  this.entryForm.valueChanges.subscribe(form => { console.log(form); });
   }
 
   ngOnInit() {
-     this.entryForm = this.entryFormGroup.group(this.entryFormGroupContents);
-     this.today = new Date();
-     this.entryForm.get('entryGroupDate').setValue(this.today.toISOString().substring(0, 10));
-     this.serviceFields = {
-         entryGroupName: 'name',
-         entryGroupPlace: 'place',
-         entryGroupGroup: 'group',
-         entryGroupDate: 'date',
-         entryGroupItems: 'items'
-     };
-    //  this.entryForm.valueChanges.subscribe(form => { console.log(form); });
+      this.entryForm.get('entryGroupDate').setValue(this.today.toISOString().substring(0, 10));
+      this.serviceFields = {
+          entryGroupName: 'name',
+          entryGroupPlace: 'place',
+          entryGroupGroup: 'group',
+          entryGroupDate: 'date',
+          entryGroupItems: 'items'
+      };
   }
 
   /**
@@ -81,19 +93,22 @@ export class EntryComponent implements OnInit {
   /**
    *
    * @param id unique id of the entry which is from back-end.
-   * @return {undefined} return `undefined` if their is any error.
    */
   private getOneItemListObject(id: any): any {
       const _self = this;
-      this.service.get(`package/itemslist/${id}`, this.headers).subscribe((_object) => {
-          this.entryFormGroupContents = this.getObjectForUpdate(_object);
-          this.entryForm = this.entryFormGroup.group(this.entryFormGroupContents);
+      this.service.get(`package/itemslist/${id}`, this.headers)
+       .subscribe(
+         (_object) => {
+             const entryFormGroupContents = this.getObjectForUpdate(_object);
+             this.entryForm = this.entryFormGroupBuilder.group(entryFormGroupContents);
+             this.content404 = false;
           },
           (error) => {
             //   if (error.status )
               const msg = this.service.isClinetOrServerSidesError(error);
-              this.showFormAlert(msg);
-              return undefined;
+              this.showFormAlert(`the List is ${msg} in the server.`);
+              this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
+              this.content404 = true;
           });
   }
 
@@ -104,14 +119,15 @@ export class EntryComponent implements OnInit {
  */
   private getObjectForUpdate(_object?: Object): Object {
       const temp = !!_object ? this.generateListOfItems(_object['items']) : [this.generateGroupItemsFormControl()];
-      return {
+      const _return =  {
           entryGroupName: [!!_object ? _object['name'] : '', Validators.required],
           entryGroupPlace: [!!_object ? _object['place'] : '', Validators.required],
           entryGroupGroup: [!!_object ? _object['group'] : '', Validators.required],
           entryGroupDate: [!!_object ? _object['date'] : '', Validators.required],
-          entryGroupItems: this.entryFormGroup.array(temp)
+          entryGroupItems: this.entryFormGroupBuilder.array(temp)
         //   Validators.compose([Validators.required, Validators.minLength(7)])
       };
+      return _return;
   }
 
   private generateListOfItems(items): Array<FormGroup> {
@@ -130,7 +146,7 @@ export class EntryComponent implements OnInit {
          amount: [value, Validators.compose([Validators.required])],
          name: [name, Validators.compose([Validators.required])],
      };
-     return this.entryFormGroup.group(temp);
+      return this.entryFormGroupBuilder.group(temp);
   }
 
   /**
@@ -171,15 +187,17 @@ export class EntryComponent implements OnInit {
         const newName = Object.values(this.serviceFields);
         let _body = this.service.renameObjectAllKeys(oldName, newName, this.entryForm.value);
         _body = JSON.stringify(_body);
-        if (!!this.id) {
+        if (!!this.id && !this.content404) {
             this.service.update(url + `/${this.id}`, this.headers,  _body)
               .subscribe(
                   (data) => {
                       this.showFormAlert('Content Updated', 'success');
                       this.hideLoadingSpin(true);
+                      this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
-                      this.showFormAlert(error, 'danger' );
+                      const msg = this.service.isClinetOrServerSidesError(error);
+                      this.showFormAlert(msg, 'danger' );
                   }
               );
         } else {
@@ -189,6 +207,7 @@ export class EntryComponent implements OnInit {
                       console.log(data);
                       this.showFormAlert('Content Created', 'success');
                       this.hideLoadingSpin(true);
+                      this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
                       this.showFormAlert(error, 'danger');
