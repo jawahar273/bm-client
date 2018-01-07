@@ -1,5 +1,8 @@
 <div [@routerTransition]>
     <h2 class="text-muted">Show <small>list</small></h2>
+    <p *ngFor="let alert of alerts">
+        <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
+    </p>
     <!-- slideShows <div class="row">d
         <div class="col-md-12">
             <ngb-carousel>
@@ -58,22 +61,25 @@
                         <tr>
                             <th>Serires No</th>
                             <th>Bundle Name</th>
-                            <th>place</th>
-                            <th>group</th>
+                            <th>Place</th>
+                            <th>Group</th>
+                            <th>Total Amount</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let ngRow of tableContent">
-                            <th scope="row">{{ngRow?.id}}</th>
+                        <tr *ngFor="let ngRow of tableContent; let inx = index;">
+                            <th scope="row">{{inx}}</th>
                             <td>{{ngRow?.name}}</td>
                             <td>{{ngRow?.place}}</td>
                             <td>{{ngRow?.group}}</td>
+                            <td>{{ngRow?.total_amount}}</td>
                             <td>
-                                <a [routerLink]="['/entry/', ngRow?.id]">
+                                <a [routerLink]="['/entry/', ngRow?.id]" class="btn btn-warning">
                                     Update
                                 </a>
                             </td>
+                            <td><span class="btn btn-danger" (click)="deleteRow(ngRow?.id)">Delete</span></td>
                         </tr>
                     </tbody>
                 </table>

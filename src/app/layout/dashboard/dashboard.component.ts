@@ -85,4 +85,18 @@ export class DashboardComponent implements OnInit {
             }
         );
     }
+
+    private deleteRow(itemID: number) {
+        if (itemID) {
+            this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
+                .subscribe(
+                   (data) => {
+                    this.showErrorAlert('Item has been delete successully', 'success');
+                    },
+                   (error) => {
+                    this.showErrorAlert('Unexpected error has occured');
+                   }
+                );
+            }
+        }
 }

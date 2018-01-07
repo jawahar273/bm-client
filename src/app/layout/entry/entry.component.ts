@@ -193,7 +193,7 @@ export class EntryComponent implements OnInit {
                   (data) => {
                       this.showFormAlert('Content Updated', 'success');
                       this.hideLoadingSpin(true);
-                      this.service.requireUpdate['entry'] = true;
+                    //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
                       const msg = this.service.isClinetOrServerSidesError(error);
@@ -207,7 +207,7 @@ export class EntryComponent implements OnInit {
                       console.log(data);
                       this.showFormAlert('Content Created', 'success');
                       this.hideLoadingSpin(true);
-                      this.service.requireUpdate['entry'] = true;
+                    //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
                       this.showFormAlert(error, 'danger');
