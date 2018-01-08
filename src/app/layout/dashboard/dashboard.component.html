@@ -103,11 +103,11 @@
                 [rows]="tableContent"
                 [columns]="columnName">
                         <ngx-datatable-column name="Series No" >
-                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                            <ng-template  let-column="column" let-sort="sortFn" ngx-datatable-header-template>
                                 <span (click)="sort()">{{column?.name}}</span>
                             </ng-template>
-                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                {{value}}
+                            <ng-template style="background-color: rgba(241, 235, 235, 0.05);" let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
+                                {{rowIndex}}
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Bundle Name" prop="name">
@@ -153,11 +153,20 @@
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Update" prop="entry_link_item">
-                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                            <ng-template let-column="column" ngx-datatable-header-template>
                                 <span>{{column?.name}}</span>
                             </ng-template>
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 <a class="btn btn-warning" href="{{value}}">Update</a>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Delete" prop="id">
+                            <ng-template let-column="column" ngx-datatable-header-template>
+                                <span>{{column?.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-rowIndex="rowIndex" 
+                            let-value="value" ngx-datatable-cell-template>
+                                <span class="btn btn-danger" (click)="deleteRow(value, rowIndex)">Delete</span>
                             </ng-template>
                         </ngx-datatable-column>
                 </ngx-datatable>

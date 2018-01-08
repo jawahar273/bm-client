@@ -20,14 +20,16 @@ export class ChartsComponent implements OnInit {
         '2009',
         '2010',
         '2011',
-        '2012'
+        '2012',
+        '2013',
+        '2014'
     ];
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
 
     public barChartData: any[] = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' }
+        { data: [65, 59, 80, 81, 56, 55, 40, 120, 60], label: 'Series A' },
+        { data: [28, 48, 40, 19, 86, 27, 90, 0, 40], label: 'Series B' }
     ];
 
     // Doughnut

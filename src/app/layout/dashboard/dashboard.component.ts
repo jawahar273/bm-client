@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { CommonService } from '../../services/common.services';
 import * as moment from 'moment';
@@ -7,7 +7,8 @@ import * as moment from 'moment';
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
     styleUrls: ['./dashboard.component.scss'],
-    animations: [routerTransition()]
+    animations: [routerTransition()],
+    encapsulation: ViewEncapsulation.None,
 })
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
@@ -108,7 +109,7 @@ export class DashboardComponent implements OnInit {
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
-                       this.tableContent.slice(indx, 1);
+                       indx > -1 ? this.tableContent.splice(indx, 1) : '';
                        this.showErrorAlert('Item has been delete successully', 'success');
                     },
                    (error) => {
