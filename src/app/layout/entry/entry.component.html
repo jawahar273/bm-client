@@ -1,4 +1,9 @@
-<div class="container-fluid pagination-centered">
+<div class="spinner" [hidden]="loadBoncer">
+	<div class="bounce1"></div>
+	<div class="bounce2"></div>
+	<div class="bounce3"></div>
+</div>
+<div class="container-fluid pagination-centered" [hidden]="!loadBoncer">
 	<app-page-header [heading]="'Entry'" [icon]="'fa-etsy'"></app-page-header>
 	<p *ngFor="let alert of entryFormAlert">
 		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>

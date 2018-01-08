@@ -15,7 +15,6 @@ export class EntryComponent implements OnInit {
 
     entryForm: FormGroup;
     itemEntry: Array<any> = [];
-    today: Date;
     hiddleAlert: boolean = true;
     entryFormAlert: Array<any> = [];
 
@@ -26,6 +25,7 @@ export class EntryComponent implements OnInit {
     serviceFields: Object;
     submitForm: boolean = false;
     content404: boolean = false;
+    loadBoncer: boolean = true;
     /**
      *
      * @param entryFormGroupBuilder
@@ -39,7 +39,7 @@ export class EntryComponent implements OnInit {
      */
     constructor(public entryFormGroupBuilder: FormBuilder, public service: CommonService, public route: ActivatedRoute) {
         // @entryForm
-        this.today = new Date();
+
       this.headers = this.service.headers;
       this.route.params.subscribe(params => { this.id = params['id']; });
       this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
@@ -57,7 +57,7 @@ export class EntryComponent implements OnInit {
   }
 
   ngOnInit() {
-      this.entryForm.get('entryGroupDate').setValue(this.today.toISOString().substring(0, 10));
+      this.entryForm.get('entryGroupDate').setValue(this.service.today.toISOString().substring(0, 10));
       this.serviceFields = {
           entryGroupName: 'name',
           entryGroupPlace: 'place',
@@ -65,6 +65,10 @@ export class EntryComponent implements OnInit {
           entryGroupDate: 'date',
           entryGroupItems: 'items'
       };
+  }
+
+  private showLoadBoncer(value: boolean): void {
+      this.loadBoncer = !value;
   }
 
   /**
@@ -95,6 +99,7 @@ export class EntryComponent implements OnInit {
    * @param id unique id of the entry which is from back-end.
    */
   private getOneItemListObject(id: any): any {
+      this.showLoadBoncer(true);
       const _self = this;
       this.service.get(`package/itemslist/${id}`, this.headers)
        .subscribe(
@@ -109,7 +114,8 @@ export class EntryComponent implements OnInit {
               this.showFormAlert(`the List is ${msg} in the server.`);
               this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
               this.content404 = true;
-          });
+      });
+     this.showLoadBoncer(false);
   }
 
 /**

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { CommonService } from '../../services/common.services';
+import * as moment from 'moment';
+// import { debug } from 'util';
 @Component({
     selector: 'app-dashboard',
     templateUrl: './dashboard.component.html',
@@ -10,7 +12,7 @@ import { CommonService } from '../../services/common.services';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    public tableContent: Object;
+    public tableContent: Array<any> = [] ;
 
     constructor(private service: CommonService) {
         this.updateTable();
@@ -86,17 +88,25 @@ export class DashboardComponent implements OnInit {
         );
     }
 
-    private deleteRow(itemID: number) {
+    private getTheDays(date?: Date): string {
+        if (date) {
+            return moment(date, 'YYYY-MM-DD').fromNow();
+        }
+        return 'err';
+    }
+    private deleteRow(itemID?: number, indx?: number) {
         if (itemID) {
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
-                    this.showErrorAlert('Item has been delete successully', 'success');
+                       this.tableContent.slice(indx, 1);
+                       this.showErrorAlert('Item has been delete successully', 'success');
                     },
                    (error) => {
-                    this.showErrorAlert('Unexpected error has occured');
+                       this.showErrorAlert('Unable to request the delete operation due to "some unexpected errors"');
                    }
                 );
             }
         }
+
 }

@@ -11,8 +11,10 @@ import 'rxjs/add/operator/catch';
 export class CommonService {
     requireUpdate: object;
     headers: Headers;
+    today: Date;
     constructor(private http: Http) {
         this.headers = new Headers({ 'Accept': 'application/json', 'content-type': 'application/json' });
+        this.today  = new Date();
     }
 
     private commonURL = 'http://127.0.0.1:8000/api';

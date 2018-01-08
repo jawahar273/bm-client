@@ -1,3 +1,8 @@
+<div class="spinner">
+    <div class="bounce1"></div>
+    <div class="bounce2"></div>
+    <div class="bounce3"></div>
+</div>
 <div [@routerTransition]>
     <h2 class="text-muted">Show <small>list</small></h2>
     <p *ngFor="let alert of alerts">
@@ -64,22 +69,24 @@
                             <th>Place</th>
                             <th>Group</th>
                             <th>Total Amount</th>
+                            <th>Days Count</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let ngRow of tableContent; let inx = index;">
+                        <tr *ngFor="let ngRow of tableContent; let inx = index;" [hidden]="!ngRow">
                             <th scope="row">{{inx}}</th>
                             <td>{{ngRow?.name}}</td>
                             <td>{{ngRow?.place}}</td>
                             <td>{{ngRow?.group}}</td>
                             <td>{{ngRow?.total_amount}}</td>
+                            <td>{{getTheDays(ngRow?.date)}}</td>
                             <td>
                                 <a [routerLink]="['/entry/', ngRow?.id]" class="btn btn-warning">
                                     Update
                                 </a>
                             </td>
-                            <td><span class="btn btn-danger" (click)="deleteRow(ngRow?.id)">Delete</span></td>
+                            <td><span class="btn btn-danger" (click)="deleteRow(ngRow?.id, inx)">Delete</span></td>
                         </tr>
                     </tbody>
                 </table>
