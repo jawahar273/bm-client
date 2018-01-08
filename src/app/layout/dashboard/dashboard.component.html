@@ -1,8 +1,3 @@
-<div class="spinner">
-    <div class="bounce1"></div>
-    <div class="bounce2"></div>
-    <div class="bounce3"></div>
-</div>
 <div [@routerTransition]>
     <h2 class="text-muted">Show <small>list</small></h2>
     <p *ngFor="let alert of alerts">
@@ -71,6 +66,7 @@
                             <th>Total Amount</th>
                             <th>Days Count</th>
                             <th></th>
+                            <th></th>                            
                         </tr>
                     </thead>
                     <tbody>
@@ -80,7 +76,11 @@
                             <td>{{ngRow?.place}}</td>
                             <td>{{ngRow?.group}}</td>
                             <td>{{ngRow?.total_amount}}</td>
-                            <td>{{getTheDays(ngRow?.date)}}</td>
+                            <td >
+                                <span placement="top" ngbTooltip="Create At: {{ngRow?.date | date: 'dd/MM/yyyy'}}">
+                                     {{getTheDays(ngRow?.date)}}
+                                </span>
+                            </td>
                             <td>
                                 <a [routerLink]="['/entry/', ngRow?.id]" class="btn btn-warning">
                                     Update
@@ -90,6 +90,77 @@
                         </tr>
                     </tbody>
                 </table>
+            </div>
+        </div>
+        <div class="col col-xl-12 col-lg-12">
+            <div class="card mb-3 ">
+                <div class="card-header">List Spendings</div>
+                <ngx-datatable
+                class="bootstrap"
+                [limit]="20"
+                 [columnMode]="'force'"
+                 [rowHeight]="'auto'"
+                [rows]="tableContent"
+                [columns]="columnName">
+                        <ngx-datatable-column name="Series No" >
+                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                                <span (click)="sort()">{{column?.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Bundle Name" prop="name">
+                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                                <span (click)="sort()">{{column?.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Place" prop="place">
+                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                                <span (click)="sort()">{{column?.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Group" prop="group">
+                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                                <span (click)="sort()">{{column.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Total Amount" prop="total_amount">
+                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                                <span (click)="sort()">{{column.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                {{value}}
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Date" prop="date">
+                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                                <span (click)="sort()">{{column?.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <span placement="top" ngbTooltip="Create At: {{value | date: 'dd/MM/yyyy'}}">
+                                    {{getTheDays(value)}}
+                                </span>
+                            </ng-template>
+                        </ngx-datatable-column>
+                        <ngx-datatable-column name="Update" prop="entry_link_item">
+                            <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+                                <span>{{column?.name}}</span>
+                            </ng-template>
+                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
+                                <a class="btn btn-warning" href="{{value}}">Update</a>
+                            </ng-template>
+                        </ngx-datatable-column>
+                </ngx-datatable>
             </div>
         </div>
 </div>

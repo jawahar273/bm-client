@@ -12,7 +12,16 @@ import * as moment from 'moment';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    public tableContent: Array<any> = [] ;
+    public tableContent: Array<any> = [];
+    public columnName: Array<Object> = [
+        { name: 'Bundle Name', prop: 'name' },
+        { name: 'Place', prop: 'place' },
+        { name: 'Group', prop: 'group' },
+        { name: 'Total Amount', prop: 'total_amount' },
+        { name: 'Days Count' },
+        { name: 'Update'},
+        { name: 'Delete' }
+    ];
 
     constructor(private service: CommonService) {
         this.updateTable();

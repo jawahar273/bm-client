@@ -4,12 +4,13 @@ import { ActivatedRoute } from '@angular/router';
 import {  Headers } from '@angular/http';
 
 import { CommonService } from '../../services/common.services';
-
+import { routerTransition } from '../../router.animations';
 
 @Component({
   selector: 'app-entry',
   templateUrl: './entry.component.html',
-  styleUrls: ['./entry.component.scss']
+  styleUrls: ['./entry.component.scss'],
+  animations: [routerTransition()]
 })
 export class EntryComponent implements OnInit {
 
@@ -25,7 +26,6 @@ export class EntryComponent implements OnInit {
     serviceFields: Object;
     submitForm: boolean = false;
     content404: boolean = false;
-    loadBoncer: boolean = true;
     /**
      *
      * @param entryFormGroupBuilder
@@ -67,9 +67,6 @@ export class EntryComponent implements OnInit {
       };
   }
 
-  private showLoadBoncer(value: boolean): void {
-      this.loadBoncer = !value;
-  }
 
   /**
    *
@@ -99,7 +96,6 @@ export class EntryComponent implements OnInit {
    * @param id unique id of the entry which is from back-end.
    */
   private getOneItemListObject(id: any): any {
-      this.showLoadBoncer(true);
       const _self = this;
       this.service.get(`package/itemslist/${id}`, this.headers)
        .subscribe(
@@ -115,7 +111,6 @@ export class EntryComponent implements OnInit {
               this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
               this.content404 = true;
       });
-     this.showLoadBoncer(false);
   }
 
 /**
