@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import {  Headers } from '@angular/http';
@@ -10,7 +10,8 @@ import { routerTransition } from '../../router.animations';
   selector: 'app-entry',
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss'],
-  animations: [routerTransition()]
+  animations: [routerTransition()],
+    encapsulation: ViewEncapsulation.none
 })
 export class EntryComponent implements OnInit {
 
@@ -230,14 +231,18 @@ export class EntryComponent implements OnInit {
  public findInvalidControls(checkAllFields: boolean = false) {
      let invalid = [];
      const controls = this.entryForm.controls;
+     const _names = Object.keys(controls);
+     const inx = _names.indexOf('entryGroupItems');
+     _names.splice(inx, 1);
      // check for the formcontrol under `entryForm`.
-     for (const name in controls) {
+     for (const name in _names) {
          if (controls[name].invalid) {
              controls[name].markAsTouched({onlySelf: true});
             if (!checkAllFields) {
                 return name;
+            } else {
+                invalid.push(name);
             }
-            invalid.push(name);
          }
      }
      // check for the formcontrol under form array `entryGroupItems`

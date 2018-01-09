@@ -141,7 +141,7 @@
                                 {{value}}
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Date" prop="date">
+                        <ngx-datatable-column name="Date Count" prop="date">
                             <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
                                 <span (click)="sort()">{{column?.name}}</span>
                             </ng-template>
@@ -151,21 +151,19 @@
                                 </span>
                             </ng-template>
                         </ngx-datatable-column>
-                        <ngx-datatable-column name="Update" prop="entry_link_item">
-                            <ng-template let-column="column" ngx-datatable-header-template>
-                                <span>{{column?.name}}</span>
-                            </ng-template>
-                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                <a class="btn btn-warning" href="{{value}}">Update</a>
-                            </ng-template>
-                        </ngx-datatable-column>
-                        <ngx-datatable-column name="Delete" prop="id">
+                        <ngx-datatable-column name="Action" prop="id">
                             <ng-template let-column="column" ngx-datatable-header-template>
                                 <span>{{column?.name}}</span>
                             </ng-template>
                             <ng-template let-row="row" let-rowIndex="rowIndex" 
                             let-value="value" ngx-datatable-cell-template>
-                                <span class="btn btn-danger" (click)="deleteRow(value, rowIndex)">Delete</span>
+                                <a href="entry/{{value}}" >
+                                    <i class="fa fa-pencil-square-o"></i>
+                                </a>   
+                                <span class=" db-warning">
+                                    <i class="fa fa-eraser" (click)="deleteRow(value, rowIndex)">
+                                    </i>
+                                </span>             
                             </ng-template>
                         </ngx-datatable-column>
                 </ngx-datatable>

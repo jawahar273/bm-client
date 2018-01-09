@@ -27,24 +27,23 @@
 				 id="group-date" placeholder="Type">
 			</div>
 			<!-- formArray to add or remote fields -->
-			<div class="" formArrayName="entryGroupItems" >
-				<div class="row d-flex form-group" *ngFor="let form of entryForm.get('entryGroupItems').controls; let indx = index; trackBy: indx">
+			<div class="form-inline" formArrayName="entryGroupItems" >
+				<div class="d-flex" *ngFor="let form of entryForm.get('entryGroupItems').controls; let indx = index; trackBy: indx">
 					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->
-					<div formGroupName="{{indx}}" class="">
-					   <app-listed-items [count]="indx" [formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]">
+					<div formGroupName="{{indx}}" class="form-group">
+					   <app-listed-items [count]="indx"
+						[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"
+						(addItemList)="addItem()"
+						(deleteItemList)="deleteItem(e)">
 					   </app-listed-items>
-					   <div class="">
-						  <button (click)="addItem()">+</button>
-						  <button (click)="delectItem(indx)">-</button>
-					   </div>
 					</div>
+					<br>
 				</div>
-			<button (click)="submitForm=true;">
+			</div>
+			<button (click)="submitForm=true;" class="btn app-button form-group" [disabled]="!hideLoadSpin">
 				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
 			</button>
-			</div>
 		</form>
-		{{ entryForm.value | json }}
 	</div>
-
+		<!-- {{ entryForm.value | json }} -->
 </div>
