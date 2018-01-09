@@ -1,3 +1,12 @@
 .fs-12 {
     font-size: 12px;
 }
+
+.btn.app-button {
+   background-color: black;
+   color: #fff;
+   &:hover {
+     background-color: black;
+     color: #fff;
+    }
+}

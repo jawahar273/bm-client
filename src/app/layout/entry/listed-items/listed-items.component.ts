@@ -8,6 +8,8 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ListedItemsComponent implements OnInit {
   @Input('formGroupToList') public formGroupToList: any;
   @Input('count') public indx: number;
+  @Output() public addItemList = new EventEmitter();
+  @Output() public deleteItemList = new EventEmitter<number>();
 
 
   constructor() {
@@ -21,6 +23,14 @@ export class ListedItemsComponent implements OnInit {
     // this.checkFormErrorItemsFunc.emit({ name: name, index: this.indx});
     const temp = this.formGroupToList.get(name);
     return (temp.invalid && temp.touched);
+  }
+
+  private addItem() {
+    this.addItemList.emit();
+  }
+
+  private deleteItem(index: number) {
+    this.deleteItemList.emit(index);
   }
 
 }

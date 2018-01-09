@@ -2,12 +2,21 @@
   <input type="text" name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"
   formControlName="name"
   placeholder="hint to remember"
-   class="form-control"
+   class="form-control col-xl-6"
    [ngClass]="{'has-error':checkFormError('name')}"
   />
   <input type="text" name="entryGroupItemsAmount-{{indx}}" id="entryGroupItemsAmount-{{indx}}"
    formControlName="amount"
    pattern="[0-9]{1,4}\.?[0-9]{0,2}"
-  placeholder="amount Eg: 2001.12" class="form-control"
+  placeholder="amount Eg: 2001.12"
+   class="form-control col-xl-6"
    [ngClass]="{'has-error':checkFormError('amount')}"/>
+
+     <span (click)="addItem()">
+       <i class="fa fa-plus-circle"></i>
+     </span>
+     <span (click)="deleteItem(indx)">
+       <i class="fa fa-minus-circle"></i>
+     </span>
+
 </div>
