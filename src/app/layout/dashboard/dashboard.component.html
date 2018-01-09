@@ -53,7 +53,7 @@
             <app-chat></app-chat>
         </div>
     </div> -->
-        <div class="col col-xl-12 col-lg-12">
+        <!-- <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3 ">
                 <div class="card-header">List Spendings</div>
                 <table class="card-body table table-hover">
@@ -91,7 +91,7 @@
                     </tbody>
                 </table>
             </div>
-        </div>
+        </div> -->
         <div class="col col-xl-12 col-lg-12">
             <div class="card mb-3 ">
                 <div class="card-header">List Spendings</div>
@@ -100,8 +100,7 @@
                 [limit]="20"
                  [columnMode]="'force'"
                  [rowHeight]="'auto'"
-                [rows]="tableContent"
-                [columns]="columnName">
+                [rows]="tableContent">
                         <ngx-datatable-column name="Series No" >
                             <ng-template  let-column="column" let-sort="sortFn" ngx-datatable-header-template>
                                 <span (click)="sort()">{{column?.name}}</span>
