@@ -55,7 +55,7 @@ export class CommonService {
             .catch((error: any) => Observable.throw(error.json()));
     }
 
-    public isClinetOrServerSidesError(status: Object, lookUpField: Object): string {
+    public isClinetOrServerSidesError(status: Object, lookUpField?: Object): string {
         console.log("statusMessage: " + typeof status);
         const status_code: number = status['status_code'];
         if (400 <= status_code < 500) {

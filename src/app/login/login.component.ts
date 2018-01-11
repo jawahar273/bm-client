@@ -65,7 +65,7 @@ export class LoginComponent implements OnInit {
               (data) => {
                   !!data ? '' : console.log('something went wrong in server');
                   this.router.navigate(['/dashboard']);
-                  localStorage.setItem('isLoggedin', 'true');
+                  localStorage.setItem('isLoggedin', 'false');
                   localStorage.setItem('loginKey', data['key']);
               },
               (error) => {
@@ -73,6 +73,5 @@ export class LoginComponent implements OnInit {
                   this.showLoginAlert(msg);
               }
           );
-        // localStorage.setItem('isLoggedin', 'true');
     }
 }
