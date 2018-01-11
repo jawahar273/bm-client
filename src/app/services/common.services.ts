@@ -13,7 +13,10 @@ export class CommonService {
     headers: Headers;
     today: Date;
     constructor(private http: Http) {
-        this.headers = new Headers({ 'Accept': 'application/json', 'content-type': 'application/json' });
+        this.headers = new Headers({ 'Accept': 'application/json',
+             'content-type': 'application/json',
+            'Authorization': `Basic ${sessionStorage.getItem('authToken')}`,
+        });
         this.today  = new Date();
     }
 
@@ -22,7 +25,7 @@ export class CommonService {
     'password': undefined,
     'email': undefined,
     'non_field_errors': undefined,
-    'details': undefined,
+    'detail': undefined,
     'items': undefined,
 };
 
@@ -92,12 +95,31 @@ export class CommonService {
                 }
             }
             // const msg = status[lookUpField];
-            return !!msg ? msg : 'unexpected error occured';
+            msg = !!msg ? `${msg} ${this.addtionalInfomationOnSErviceError(status[status_code])}` :
+                                  'unexpected error occured';
+            return msg;
         } else if (500 <= status_code < 600) {
             return 'Server error';
         }
     }
-
+    /**
+     *
+     * @param statusCode error status code
+     */
+    public addtionalInfomationOnSErviceError(statusCode: number): string {
+        const preCommonMsg = 'or';
+        const sufCommonMsg = '.';
+        switch (statusCode) {
+            case 400:
+                return `${preCommonMsg} Somthing wrong with the request ${sufCommonMsg} `;
+            case 401:
+                return `${preCommonMsg} Please Login again ${sufCommonMsg} `;
+            case 403:
+                return `${preCommonMsg} Somthing worng with request content ${sufCommonMsg} `;
+            //   default:
+            //       return `${preCommonMsg}  ${sufCommonMsg} `;
+        }
+    }
     /**
      *
      * @param main is a argument for getting addtion header options.

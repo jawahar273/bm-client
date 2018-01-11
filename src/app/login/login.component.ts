@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
             loginPassName: ['', Validators.compose([Validators.required])],
             loginPassword: ['', Validators.required]
         });
-        // this.loginAlert.push({ message: "dfajfajlkd", type: 'danger'});
     }
 
     ngOnInit() {}
@@ -51,18 +50,20 @@ export class LoginComponent implements OnInit {
                   localStorage.setItem('isLoggedin', 'false');
                   localStorage.setItem('loginKey', data['key']);
                   localStorage.setItem('userName', 'User Name');
+                  sessionStorage.setItem('authToken', data['key']);
                   this.service.get('rest-auth/user', this.service.headers)
                    .subscribe(
-                       (data) => {
-                           localStorage.setItem('userName', data['username']);
+                       (_data) => {
+                           localStorage.setItem('userName', _data['username']);
                        },
-                       (error) => {
-                           const msg = this.service.isClinetOrServerSidesError(error);
+                       (_error) => {
+                           const msg = this.service.isClinetOrServerSidesError(_error, {'detail': undefined});
                            this.service.showGlobalAlert(msg);
                        }
                    );
               },
               (error) => {
+                  
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
                   this.service.showGlobalAlert(msg);
               }
