@@ -13,7 +13,10 @@ export class CommonService {
     headers: Headers;
     today: Date;
     constructor(private http: Http) {
-        this.headers = new Headers({ 'Accept': 'application/json', 'content-type': 'application/json' });
+        this.headers = new Headers({ 'Accept': 'application/json',
+             'content-type': 'application/json',
+            'Authorization': `Basic ${sessionStorage.getItem('authToken')}`,
+        });
         this.today  = new Date();
     }
 
@@ -22,11 +25,18 @@ export class CommonService {
     'password': undefined,
     'email': undefined,
     'non_field_errors': undefined,
-    'details': undefined,
+    'detail': undefined,
     'items': undefined,
 };
 
     private commonURL = 'http://127.0.0.1:8000/api';
+    /**
+     * 
+     * @param str1 first part of the url.
+     * @param str2 second part of the url.
+     * @description to help in concating the base url with the given url
+     * and the end slash is must as it is configure in server.
+     */
     public joinURL(str1: string, str2: string) {
         return `${str1}/${str2}/`;
     }
@@ -63,7 +73,14 @@ export class CommonService {
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
-
+    /**
+     * 
+     * @param {Object} status error object from the service.
+     * @param {any} lookUpField look up field which contains the error fields and error message.
+     * @return {string} the error to be displayed.
+     * @description check the error is client side or server side if client side
+     * return corresponding error message.
+     */
     public isClinetOrServerSidesError(status: Object, lookUpField?: any): string {
         console.log("statusMessage: " + typeof status);
         const status_code: number = status['status_code'];
@@ -78,12 +95,31 @@ export class CommonService {
                 }
             }
             // const msg = status[lookUpField];
-            return !!msg ? msg : 'unexpected error occured';
+            msg = !!msg ? `${msg} ${this.addtionalInfomationOnSErviceError(status[status_code])}` :
+                                  'unexpected error occured';
+            return msg;
         } else if (500 <= status_code < 600) {
             return 'Server error';
         }
     }
-
+    /**
+     *
+     * @param statusCode error status code
+     */
+    public addtionalInfomationOnSErviceError(statusCode: number): string {
+        const preCommonMsg = 'or';
+        const sufCommonMsg = '.';
+        switch (statusCode) {
+            case 400:
+                return `${preCommonMsg} Somthing wrong with the request ${sufCommonMsg} `;
+            case 401:
+                return `${preCommonMsg} Please Login again ${sufCommonMsg} `;
+            case 403:
+                return `${preCommonMsg} Somthing worng with request content ${sufCommonMsg} `;
+            //   default:
+            //       return `${preCommonMsg}  ${sufCommonMsg} `;
+        }
+    }
     /**
      *
      * @param main is a argument for getting addtion header options.
@@ -137,6 +173,7 @@ export class CommonService {
     /**
     *
     * @param {any} alert it is an object of the current alert.
+    * @param {boolean} removeAll set this true to remove all the alert on single click.
     * @description used to close alert in display.
     */
     public closeGlobalAlert(alert?: Object, removeAll?: boolean) {
@@ -150,9 +187,11 @@ export class CommonService {
 
   /**
    *
-   * @param name get the formcontrol's name
-   * @return {boolean}
-   * @description check the form is valid or not
+   * @param {string} name get the formcontrol's name
+   * @param {formGroup} current formGroup object
+   * @return {boolean} is form valid or not
+   * @description check the form is valid or not note:- need to redeclared in local
+   * components to wrap with `_fb`(FormGroup) object.
    */
     public checkFormHasError(name: string, _fb: any): boolean {
       const temp = _fb.get(name);

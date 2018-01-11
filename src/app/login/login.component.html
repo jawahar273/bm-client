@@ -12,12 +12,14 @@
             <form role="form" [formGroup]="loginForm" (ngSubmit)="onLoggedin()" >
                 <div class="form-content">
                     <div class="form-group">
-                        <input type="text" formControlName="loginPassName"
+                        <input type="text" [ngClass]="{'has-error':checkFormHasError('loginPassName')}"
+                         formControlName="loginPassName"
                          class="form-control input-underline input-lg"
-                          id="loginPassName1" placeholder="Email">
+                          id="loginPassName1" placeholder="User Name">
                     </div>
                     <div class="form-group">
-                        <input type="password" formControlName="loginPassword"
+                        <input type="password" [ngClass]="{'has-error':checkFormHasError('loginPassword')}"
+                         formControlName="loginPassword"
                          class="form-control input-underline input-lg" id="loginPassword1" placeholder="Password">
                     </div>
                 </div>

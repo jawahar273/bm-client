@@ -27,10 +27,9 @@ export class LoginComponent implements OnInit {
 
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
         this.loginForm = this.fb.group({
-            loginPassName: ['', Validators.required],
+            loginPassName: ['', Validators.compose([Validators.required])],
             loginPassword: ['', Validators.required]
         });
-        // this.loginAlert.push({ message: "dfajfajlkd", type: 'danger'});
     }
 
     ngOnInit() {}
@@ -50,11 +49,33 @@ export class LoginComponent implements OnInit {
                   this.router.navigate(['/dashboard']);
                   localStorage.setItem('isLoggedin', 'false');
                   localStorage.setItem('loginKey', data['key']);
+                  localStorage.setItem('userName', 'User Name');
+                  sessionStorage.setItem('authToken', data['key']);
+                  this.service.get('rest-auth/user', this.service.headers)
+                   .subscribe(
+                       (_data) => {
+                           localStorage.setItem('userName', _data['username']);
+                       },
+                       (_error) => {
+                           const msg = this.service.isClinetOrServerSidesError(_error, {'detail': undefined});
+                           this.service.showGlobalAlert(msg);
+                       }
+                   );
               },
               (error) => {
+                  
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
                   this.service.showGlobalAlert(msg);
               }
           );
+    }
+    /**
+     *
+     * @param name get the formcontrol's name
+     * @return {boolean}
+     * @description check the form is valid or not
+     */
+    private checkFormHasError(name: string): boolean {
+        return this.service.checkFormHasError(name, this.loginForm);
     }
 }
