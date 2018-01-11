@@ -810,6 +810,10 @@
         <tbody>
 
 
+            <tr>
+                <td class="col-md-3">encapsulation</td>
+                <td class="col-md-9"><code>ViewEncapsulation.None</code></td>
+            </tr>
 
 
 
@@ -1063,7 +1067,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="168" class="link-to-prism">src/app/layout/entry/entry.component.ts:168</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/layout/entry/entry.component.ts:167</a></div>
                                 </td>
                             </tr>
     
@@ -1251,7 +1255,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/layout/entry/entry.component.ts:172</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="171" class="link-to-prism">src/app/layout/entry/entry.component.ts:171</a></div>
                                 </td>
                             </tr>
     
@@ -1318,7 +1322,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/app/layout/entry/entry.component.ts:182</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="181" class="link-to-prism">src/app/layout/entry/entry.component.ts:181</a></div>
                                 </td>
                             </tr>
     
@@ -1357,7 +1361,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="230" class="link-to-prism">src/app/layout/entry/entry.component.ts:230</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="229" class="link-to-prism">src/app/layout/entry/entry.component.ts:229</a></div>
                                 </td>
                             </tr>
     
@@ -1710,7 +1714,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="226" class="link-to-prism">src/app/layout/entry/entry.component.ts:226</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="225" class="link-to-prism">src/app/layout/entry/entry.component.ts:225</a></div>
                                 </td>
                             </tr>
     
@@ -1943,7 +1947,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="17" class="link-to-prism">src/app/layout/entry/entry.component.ts:17</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/layout/entry/entry.component.ts:18</a></div>
                                 </td>
                             </tr>
     
@@ -1982,7 +1986,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/layout/entry/entry.component.ts:20</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/layout/entry/entry.component.ts:21</a></div>
                                 </td>
                             </tr>
     
@@ -2090,7 +2094,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/layout/entry/entry.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/layout/entry/entry.component.ts:20</a></div>
                                 </td>
                             </tr>
     
@@ -2202,7 +2206,7 @@
                         </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/layout/entry/entry.component.ts:18</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/layout/entry/entry.component.ts:19</a></div>
                                 </td>
                             </tr>
     
@@ -2364,7 +2368,7 @@
 
 
     <div class="tab-pane fade tab-source-code" id="c-source">
-        <pre class="line-numbers"><code class="language-typescript">import { Component, OnInit, Input } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers"><code class="language-typescript">import { Component, OnInit, Input, ViewEncapsulation } from &#x27;@angular/core&#x27;;
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from &#x27;@angular/forms&#x27;;
 import { ActivatedRoute } from &#x27;@angular/router&#x27;;
 import {  Headers } from &#x27;@angular/http&#x27;;
@@ -2376,7 +2380,8 @@ import { routerTransition } from &#x27;../../router.animations&#x27;;
   selector: &#x27;app-entry&#x27;,
   templateUrl: &#x27;./entry.component.html&#x27;,
   styleUrls: [&#x27;./entry.component.scss&#x27;],
-  animations: [routerTransition()]
+  animations: [routerTransition()],
+    encapsulation: ViewEncapsulation.None
 })
 export class EntryComponent implements OnInit {
 
@@ -2384,7 +2389,6 @@ export class EntryComponent implements OnInit {
     itemEntry: Array&lt;any&gt; &#x3D; [];
     hiddleAlert: boolean &#x3D; true;
     entryFormAlert: Array&lt;any&gt; &#x3D; [];
-
     hideLoadSpin: boolean &#x3D; true;
     // entryFormGroupContents: Object;
     headers: Headers;
@@ -2523,8 +2527,7 @@ export class EntryComponent implements OnInit {
    * @description check the form is valid or not
    */
   private checkFormHasError(name: string): boolean {
-      const temp &#x3D; this.entryForm.get(name);
-      return (temp.invalid &amp;&amp; temp.touched);
+      return this.service.checkFormHasError(name, this.entryForm);
   }
 
   /**
@@ -2596,14 +2599,18 @@ export class EntryComponent implements OnInit {
  public findInvalidControls(checkAllFields: boolean &#x3D; false) {
      let invalid &#x3D; [];
      const controls &#x3D; this.entryForm.controls;
+     const _names &#x3D; Object.keys(controls);
+     const inx &#x3D; _names.indexOf(&#x27;entryGroupItems&#x27;);
+     _names.splice(inx, 1);
      // check for the formcontrol under &#x60;entryForm&#x60;.
-     for (const name in controls) {
+     for (const name in _names) {
          if (controls[name].invalid) {
              controls[name].markAsTouched({onlySelf: true});
             if (!checkAllFields) {
                 return name;
+            } else if (checkAllFields) {
+                invalid.push(name);
             }
-            invalid.push(name);
          }
      }
      // check for the formcontrol under form array &#x60;entryGroupItems&#x60;
@@ -2654,26 +2661,25 @@ export class EntryComponent implements OnInit {
 				 id&#x3D;&quot;group-date&quot; placeholder&#x3D;&quot;Type&quot;&gt;
 			&lt;/div&gt;
 			&lt;!-- formArray to add or remote fields --&gt;
-			&lt;div class&#x3D;&quot;&quot; formArrayName&#x3D;&quot;entryGroupItems&quot; &gt;
-				&lt;div class&#x3D;&quot;row d-flex form-group&quot; *ngFor&#x3D;&quot;let form of entryForm.get(&#x27;entryGroupItems&#x27;).controls; let indx &#x3D; index; trackBy: indx&quot;&gt;
+			&lt;div class&#x3D;&quot;form-inline&quot; formArrayName&#x3D;&quot;entryGroupItems&quot; &gt;
+				&lt;div class&#x3D;&quot;d-flex&quot; *ngFor&#x3D;&quot;let form of entryForm.get(&#x27;entryGroupItems&#x27;).controls; let indx &#x3D; index; trackBy: indx&quot;&gt;
 					&lt;!-- &lt;label class&#x3D;&quot;col-form-label col-sm-1&quot; for&#x3D;&quot;entryGroupItems-{{indx}}&quot;&gt;{{indx}}:&lt;/label&gt; --&gt;
-					&lt;div formGroupName&#x3D;&quot;{{indx}}&quot; class&#x3D;&quot;&quot;&gt;
-					   &lt;app-listed-items [count]&#x3D;&quot;indx&quot; [formGroupToList]&#x3D;&quot;entryForm.controls.entryGroupItems.controls[indx]&quot;&gt;
+					&lt;div formGroupName&#x3D;&quot;{{indx}}&quot; class&#x3D;&quot;form-group&quot;&gt;
+					   &lt;app-listed-items [count]&#x3D;&quot;indx&quot;
+						[formGroupToList]&#x3D;&quot;entryForm.controls.entryGroupItems.controls[indx]&quot;
+						(addItemList)&#x3D;&quot;addItem()&quot;
+						(deleteItemList)&#x3D;&quot;deleteItem(e)&quot;&gt;
 					   &lt;/app-listed-items&gt;
-					   &lt;div class&#x3D;&quot;&quot;&gt;
-						  &lt;button (click)&#x3D;&quot;addItem()&quot;&gt;+&lt;/button&gt;
-						  &lt;button (click)&#x3D;&quot;delectItem(indx)&quot;&gt;-&lt;/button&gt;
-					   &lt;/div&gt;
 					&lt;/div&gt;
+					&lt;br&gt;
 				&lt;/div&gt;
-			&lt;button (click)&#x3D;&quot;submitForm&#x3D;true;&quot;&gt;
+			&lt;/div&gt;
+			&lt;button (click)&#x3D;&quot;submitForm&#x3D;true;&quot; class&#x3D;&quot;btn app-button form-group&quot; [disabled]&#x3D;&quot;!hideLoadSpin&quot;&gt;
 				Submit &lt;i class&#x3D;&quot;fa fa-spinner fa-spin fa-1x fa-fw&quot; [hidden]&#x3D;&quot;hideLoadSpin&quot;&gt;&lt;/i&gt;
 			&lt;/button&gt;
-			&lt;/div&gt;
 		&lt;/form&gt;
-		{{ entryForm.value | json }}
 	&lt;/div&gt;
-
+		&lt;!-- {{ entryForm.value | json }} --&gt;
 &lt;/div&gt;</code></pre>
     </div>
 
@@ -2700,7 +2706,7 @@ export class EntryComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div [@routerTransition] class="container-fluid pagination-centered"  >	<app-page-header [heading]="\'Entry\'" [icon]="\'fa-etsy\'"></app-page-header>	<p *ngFor="let alert of entryFormAlert">		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>	</p>	<div class="row">		<form class="col-xl-10" [formGroup]="entryForm" (ngSubmit)="entrySubmit();">			<div class="form-group">				<label class="col-form-label" for="groupItems">Name</label>				<input type="text" formControlName="entryGroupName" [ngClass]="{\'has-error\':checkFormHasError(\'entryGroupName\')}" class="form-control"				 id="groupItems" placeholder="Name">			</div>			<div class="form-group">				<label class="col-form-label" for="place">Place</label>				<input type="text" formControlName="entryGroupPlace" [ngClass]="{\'has-error\':checkFormHasError(\'entryGroupPlace\')}" class="form-control"				 id="place" placeholder="Place">			</div>			<div class="form-group">				<label class="col-form-label" for="group-category">Category</label>				<input type="text" formControlName="entryGroupGroup" [ngClass]="{\'has-error\': checkFormHasError(\'entryGroupGroup\')}" class="form-control"				 id="group-category" placeholder="Category">			</div>			<div class="form-group">				<label class="col-form-label" for="group-date">Date</label>				<input type="date" formControlName="entryGroupDate" [ngClass]="{\'has-error\':checkFormHasError(\'entryGroupDate\')}" class="form-control"				 id="group-date" placeholder="Type">			</div>			<!-- formArray to add or remote fields -->			<div class="" formArrayName="entryGroupItems" >				<div class="row d-flex form-group" *ngFor="let form of entryForm.get(\'entryGroupItems\').controls; let indx = index; trackBy: indx">					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->					<div formGroupName="{{indx}}" class="">					   <app-listed-items [count]="indx" [formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]">					   </app-listed-items>					   <div class="">						  <button (click)="addItem()">+</button>						  <button (click)="delectItem(indx)">-</button>					   </div>					</div>				</div>			<button (click)="submitForm=true;">				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>			</button>			</div>		</form>		{{ entryForm.value | json }}	</div></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div [@routerTransition] class="container-fluid pagination-centered"  >	<app-page-header [heading]="\'Entry\'" [icon]="\'fa-etsy\'"></app-page-header>	<p *ngFor="let alert of entryFormAlert">		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>	</p>	<div class="row">		<form class="col-xl-10" [formGroup]="entryForm" (ngSubmit)="entrySubmit();">			<div class="form-group">				<label class="col-form-label" for="groupItems">Name</label>				<input type="text" formControlName="entryGroupName" [ngClass]="{\'has-error\':checkFormHasError(\'entryGroupName\')}" class="form-control"				 id="groupItems" placeholder="Name">			</div>			<div class="form-group">				<label class="col-form-label" for="place">Place</label>				<input type="text" formControlName="entryGroupPlace" [ngClass]="{\'has-error\':checkFormHasError(\'entryGroupPlace\')}" class="form-control"				 id="place" placeholder="Place">			</div>			<div class="form-group">				<label class="col-form-label" for="group-category">Category</label>				<input type="text" formControlName="entryGroupGroup" [ngClass]="{\'has-error\': checkFormHasError(\'entryGroupGroup\')}" class="form-control"				 id="group-category" placeholder="Category">			</div>			<div class="form-group">				<label class="col-form-label" for="group-date">Date</label>				<input type="date" formControlName="entryGroupDate" [ngClass]="{\'has-error\':checkFormHasError(\'entryGroupDate\')}" class="form-control"				 id="group-date" placeholder="Type">			</div>			<!-- formArray to add or remote fields -->			<div class="form-inline" formArrayName="entryGroupItems" >				<div class="d-flex" *ngFor="let form of entryForm.get(\'entryGroupItems\').controls; let indx = index; trackBy: indx">					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->					<div formGroupName="{{indx}}" class="form-group">					   <app-listed-items [count]="indx"						[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"						(addItemList)="addItem()"						(deleteItemList)="deleteItem(e)">					   </app-listed-items>					</div>					<br>				</div>			</div>			<button (click)="submitForm=true;" class="btn app-button form-group" [disabled]="!hideLoadSpin">				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>			</button>		</form>	</div>		<!-- {{ entryForm.value | json }} --></div></div>'
     var COMPONENTS = [{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AlertComponent', 'selector': 'app-alert'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BlankPageComponent', 'selector': 'app-blank-page'},{'name': 'BsComponentComponent', 'selector': 'app-bs-component'},{'name': 'BsElementComponent', 'selector': 'app-bs-element'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'CollapseComponent', 'selector': 'app-collapse'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DropdownComponent', 'selector': 'app-dropdown'},{'name': 'EntryComponent', 'selector': 'app-entry'},{'name': 'FormComponent', 'selector': 'app-form'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'ListedItemsComponent', 'selector': 'app-listed-items'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'PageHeaderComponent', 'selector': 'app-page-header'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'PopOverComponent', 'selector': 'app-pop-over'},{'name': 'ProgressbarComponent', 'selector': 'app-progressbar'},{'name': 'RatingComponent', 'selector': 'app-rating'},{'name': 'ServerErrorComponent', 'selector': 'app-server-error'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'StatComponent', 'selector': 'app-stat'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TimelineComponent', 'selector': 'app-timeline'},{'name': 'TimepickerComponent', 'selector': 'app-timepicker'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'EntryComponent'};

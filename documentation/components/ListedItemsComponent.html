@@ -855,7 +855,15 @@
                     <td class="col-md-4">
                         <ul class="index-list">
                             <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#addItem">addItem</a>
+                            </li>
+                            <li>
                                 <a href="#checkFormError">checkFormError</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#deleteItem">deleteItem</a>
                             </li>
                             <li>
                                 <a href="#ngOnInit">ngOnInit</a>
@@ -880,6 +888,23 @@
                         </ul>
                     </td>
                 </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#addItemList">addItemList</a>
+                            </li>
+                            <li>
+                                <a href="#deleteItemList">deleteItemList</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </section>
@@ -895,7 +920,7 @@
                     </tr>
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="10" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:10</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:12</a></div>
                                 </td>
                             </tr>
     
@@ -949,6 +974,47 @@
             </table>
     </section>
 
+    <section>
+        <h3 id="outputs">Outputs</h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="addItemList"></a>
+                            <code>addItemList</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="11" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:11</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-2">
+                            <a name="deleteItemList"></a>
+                            <code>deleteItemList</code>
+                        </td>
+                        <td class="col-md-10">
+                            <em><code>$event</code> type:</em>    <code><a href="https://angular.io/api/core/EventEmitter" target="_blank" >EventEmitter</a></code>
+
+                        </td>
+                    </tr>
+                            <tr>
+                                <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="12" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:12</a></div>
+                                </td>
+                            </tr>
+                </tbody>
+            </table>
+    </section>
 
 
 
@@ -957,6 +1023,45 @@
             <h3 id="methods">
                 Methods
             </h3>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <a name="addItem"></a>
+                            <span class="name">
+                                <b>
+                                    <span class="modifier">Private</span>
+                                addItem
+                                </b>
+                                <a href="#addItem"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon fa fa-reset"></span>
+                            <code>addItem()</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="28" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:28</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <table class="table table-sm table-bordered">
                 <tbody>
                     <tr>
@@ -979,7 +1084,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:19</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="21" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:21</a></div>
                                 </td>
                             </tr>
     
@@ -1027,6 +1132,74 @@
                 <tbody>
                     <tr>
                         <td class="col-md-4">
+                            <a name="deleteItem"></a>
+                            <span class="name">
+                                <b>
+                                    <span class="modifier">Private</span>
+                                deleteItem
+                                </b>
+                                <a href="#deleteItem"><span class="fa fa-link"></span></a>
+                            </span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <span class="modifier-icon fa fa-reset"></span>
+                            <code>deleteItem(index: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank">number</a>)</code>
+                        </td>
+                    </tr>
+    
+    
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="32" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:32</a></div>
+                                </td>
+                            </tr>
+    
+                    <tr>
+                        <td class="col-md-4">
+    
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Type</td>
+                                                    <td>Optional</td>
+                                                    <td>Description</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                      <td>index</td>
+                                                      <td>
+                                                              <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+                                                      </td>
+                                                      <td>
+                                                      </td>
+                                                      <td></td>
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+    
+                                </div>
+                                    <div class="io-description">
+                                        
+                                    </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <table class="table table-sm table-bordered">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
                             <a name="ngOnInit"></a>
                             <span class="name">
                                 <b>
@@ -1045,7 +1218,7 @@
     
                             <tr>
                                 <td class="col-md-4">
-                                    <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:16</a></div>
+                                    <div class="io-line">Defined in <a href="" data-line="18" class="link-to-prism">src/app/layout/entry/listed-items/listed-items.component.ts:18</a></div>
                                 </td>
                             </tr>
     
@@ -1077,6 +1250,8 @@
 export class ListedItemsComponent implements OnInit {
   @Input(&#x27;formGroupToList&#x27;) public formGroupToList: any;
   @Input(&#x27;count&#x27;) public indx: number;
+  @Output() public addItemList &#x3D; new EventEmitter();
+  @Output() public deleteItemList &#x3D; new EventEmitter&lt;number&gt;();
 
 
   constructor() {
@@ -1092,6 +1267,14 @@ export class ListedItemsComponent implements OnInit {
     return (temp.invalid &amp;&amp; temp.touched);
   }
 
+  private addItem() {
+    this.addItemList.emit();
+  }
+
+  private deleteItem(index: number) {
+    this.deleteItemList.emit(index);
+  }
+
 }
 </code></pre>
     </div>
@@ -1101,16 +1284,24 @@ export class ListedItemsComponent implements OnInit {
   &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;entryGroupItemsHint-{{indx}}&quot; id&#x3D;&quot;entryGroupItemsHint-{{indx}}&quot;
   formControlName&#x3D;&quot;name&quot;
   placeholder&#x3D;&quot;hint to remember&quot;
-   class&#x3D;&quot;form-control&quot;
+   class&#x3D;&quot;form-control col-xl-6&quot;
    [ngClass]&#x3D;&quot;{&#x27;has-error&#x27;:checkFormError(&#x27;name&#x27;)}&quot;
   /&gt;
   &lt;input type&#x3D;&quot;text&quot; name&#x3D;&quot;entryGroupItemsAmount-{{indx}}&quot; id&#x3D;&quot;entryGroupItemsAmount-{{indx}}&quot;
    formControlName&#x3D;&quot;amount&quot;
    pattern&#x3D;&quot;[0-9]{1,4}\.?[0-9]{0,2}&quot;
-  placeholder&#x3D;&quot;amount Eg: 2001.12&quot; class&#x3D;&quot;form-control&quot;
+  placeholder&#x3D;&quot;amount Eg: 2001.12&quot;
+   class&#x3D;&quot;form-control col-xl-6&quot;
    [ngClass]&#x3D;&quot;{&#x27;has-error&#x27;:checkFormError(&#x27;amount&#x27;)}&quot;/&gt;
-&lt;/div&gt;
-</code></pre>
+
+     &lt;span (click)&#x3D;&quot;addItem()&quot;&gt;
+       &lt;i class&#x3D;&quot;fa fa-plus-circle&quot;&gt;&lt;/i&gt;
+     &lt;/span&gt;
+     &lt;span (click)&#x3D;&quot;deleteItem(indx)&quot;&gt;
+       &lt;i class&#x3D;&quot;fa fa-minus-circle&quot;&gt;&lt;/i&gt;
+     &lt;/span&gt;
+
+&lt;/div&gt;</code></pre>
     </div>
 
     <div class="tab-pane fade" id="c-tree">
@@ -1136,7 +1327,7 @@ export class ListedItemsComponent implements OnInit {
 <script src="../js/libs/htmlparser.js"></script>
 <script src="../js/libs/deep-iterator.js"></script>
 <script>
-        var COMPONENT_TEMPLATE = '<div><div [formGroup]="formGroupToList" class="">  <input type="text" name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"  formControlName="name"  placeholder="hint to remember"   class="form-control"   [ngClass]="{\'has-error\':checkFormError(\'name\')}"  />  <input type="text" name="entryGroupItemsAmount-{{indx}}" id="entryGroupItemsAmount-{{indx}}"   formControlName="amount"   pattern="[0-9]{1,4}\.?[0-9]{0,2}"  placeholder="amount Eg: 2001.12" class="form-control"   [ngClass]="{\'has-error\':checkFormError(\'amount\')}"/></div></div>'
+        var COMPONENT_TEMPLATE = '<div><div [formGroup]="formGroupToList" class="">  <input type="text" name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"  formControlName="name"  placeholder="hint to remember"   class="form-control col-xl-6"   [ngClass]="{\'has-error\':checkFormError(\'name\')}"  />  <input type="text" name="entryGroupItemsAmount-{{indx}}" id="entryGroupItemsAmount-{{indx}}"   formControlName="amount"   pattern="[0-9]{1,4}\.?[0-9]{0,2}"  placeholder="amount Eg: 2001.12"   class="form-control col-xl-6"   [ngClass]="{\'has-error\':checkFormError(\'amount\')}"/>     <span (click)="addItem()">       <i class="fa fa-plus-circle"></i>     </span>     <span (click)="deleteItem(indx)">       <i class="fa fa-minus-circle"></i>     </span></div></div>'
     var COMPONENTS = [{'name': 'AccessDeniedComponent', 'selector': 'app-access-denied'},{'name': 'AlertComponent', 'selector': 'app-alert'},{'name': 'AppComponent', 'selector': 'app-root'},{'name': 'BlankPageComponent', 'selector': 'app-blank-page'},{'name': 'BsComponentComponent', 'selector': 'app-bs-component'},{'name': 'BsElementComponent', 'selector': 'app-bs-element'},{'name': 'ButtonsComponent', 'selector': 'app-buttons'},{'name': 'ChartsComponent', 'selector': 'app-charts'},{'name': 'ChatComponent', 'selector': 'app-chat'},{'name': 'CollapseComponent', 'selector': 'app-collapse'},{'name': 'DashboardComponent', 'selector': 'app-dashboard'},{'name': 'DatePickerComponent', 'selector': 'app-date-picker'},{'name': 'DropdownComponent', 'selector': 'app-dropdown'},{'name': 'EntryComponent', 'selector': 'app-entry'},{'name': 'FormComponent', 'selector': 'app-form'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HeaderComponent', 'selector': 'app-header'},{'name': 'LayoutComponent', 'selector': 'app-layout'},{'name': 'ListedItemsComponent', 'selector': 'app-listed-items'},{'name': 'LoginComponent', 'selector': 'app-login'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'NotFoundComponent', 'selector': 'app-not-found'},{'name': 'NotificationComponent', 'selector': 'app-notification'},{'name': 'PageHeaderComponent', 'selector': 'app-page-header'},{'name': 'PaginationComponent', 'selector': 'app-pagination'},{'name': 'PopOverComponent', 'selector': 'app-pop-over'},{'name': 'ProgressbarComponent', 'selector': 'app-progressbar'},{'name': 'RatingComponent', 'selector': 'app-rating'},{'name': 'ServerErrorComponent', 'selector': 'app-server-error'},{'name': 'SidebarComponent', 'selector': 'app-sidebar'},{'name': 'SignupComponent', 'selector': 'app-signup'},{'name': 'StatComponent', 'selector': 'app-stat'},{'name': 'TablesComponent', 'selector': 'app-tables'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TimelineComponent', 'selector': 'app-timeline'},{'name': 'TimepickerComponent', 'selector': 'app-timepicker'},{'name': 'TooltipComponent', 'selector': 'app-tooltip'}];
     var DIRECTIVES = [];
     var ACTUAL_COMPONENT = {'name': 'ListedItemsComponent'};

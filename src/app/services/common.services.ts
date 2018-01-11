@@ -55,11 +55,20 @@ export class CommonService {
             .catch((error: any) => Observable.throw(error.json()));
     }
 
-    public isClinetOrServerSidesError(status: Object): string {
+    public isClinetOrServerSidesError(status: Object, lookUpField: Object): string {
         console.log("statusMessage: " + typeof status);
         const status_code: number = status['status_code'];
         if (400 <= status_code < 500) {
-            const msg = status['detail'];
+            // check the lookupfield is ``undefined` if so then assign the `detail` field.
+            lookUpField = !!lookUpField ? lookUpField : { 'detail': undefined };
+            let msg;
+            for (const key in lookUpField) {
+                if (status[key]) {
+                    // check if the user given message is `udefined` then get the message from the service
+                    msg = !!lookUpField[key] ? lookUpField[key] : status[key];
+                }
+            }
+            // const msg = status[lookUpField];
             return !!msg ? msg : 'unexpected error occured';
         } else if (500 <= status_code < 600) {
             return 'Server error';
@@ -109,5 +118,16 @@ export class CommonService {
             return undefined;
         }
     }
+
+  /**
+   *
+   * @param name get the formcontrol's name
+   * @return {boolean}
+   * @description check the form is valid or not
+   */
+    public checkFormHasError(name: string, _fb: any): boolean {
+      const temp = _fb.get(name);
+      return (temp.invalid && temp.touched);
+  }
 
 }

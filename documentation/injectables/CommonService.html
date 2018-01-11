@@ -831,6 +831,10 @@
                                 <ul class="index-list">
                                     <li>
                                             <span class="modifier">Public</span>
+                                        <a href="#checkFormHasError">checkFormHasError</a>
+                                    </li>
+                                    <li>
+                                            <span class="modifier">Public</span>
                                         <a href="#delete">delete</a>
                                     </li>
                                     <li>
@@ -924,6 +928,84 @@
                     <h3 id="methods">
                         Methods
                     </h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                            <tr>
+                                <td class="col-md-4">
+                                    <a name="checkFormHasError"></a>
+                                    <span class="name">
+                                        <b>
+                                            <span class="modifier">Public</span>
+                                        checkFormHasError
+                                        </b>
+                                        <a href="#checkFormHasError"><span class="fa fa-link"></span></a>
+                                    </span>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                        <span class="modifier-icon fa fa-reset"></span>
+                                    <code>checkFormHasError(name: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, _fb: <a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank">any</a>)</code>
+                                </td>
+                            </tr>
+            
+            
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/services/common.services.ts:119</a></div>
+                                        </td>
+                                    </tr>
+            
+                            <tr>
+                                <td class="col-md-4">
+            
+                                        <div class="io-description">
+                                                <b>Parameters :</b>
+                                                <table class="params">
+                                                    <thead>
+                                                        <tr>
+                                                            <td>Name</td>
+                                                            <td>Type</td>
+                                                            <td>Optional</td>
+                                                            <td>Description</td>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                            <tr>
+                                                              <td>name</td>
+                                                              <td>
+                                                                      <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                                              </td>
+                                                              <td>
+                                                              </td>
+                                                              <td><p>get the formcontrol&#39;s name</p>
+            </td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>_fb</td>
+                                                              <td>
+                                                                      <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+                                                              </td>
+                                                              <td>
+                                                              </td>
+                                                              <td></td>
+                                                            </tr>
+                                                    </tbody>
+                                                </table>
+                                        </div>
+                                        <div>
+                                        </div>
+                                        <div class="io-description">
+                                            <b>Returns : </b>    <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+            
+                                        </div>
+                                            <div class="io-description">
+                                                
+                                            </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
                     <table class="table table-sm table-bordered">
                         <tbody>
                             <tr>
@@ -1097,7 +1179,7 @@
                             <tr>
                                 <td class="col-md-4">
                                         <span class="modifier-icon fa fa-reset"></span>
-                                    <code>isClinetOrServerSidesError(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>)</code>
+                                    <code>isClinetOrServerSidesError(status: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank">Object</a>, lookUpField: )</code>
                                 </td>
                             </tr>
             
@@ -1127,6 +1209,14 @@
                                                               <td>status</td>
                                                               <td>
                                                                       <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object" target="_blank" >Object</a></code>
+                                                              </td>
+                                                              <td>
+                                                              </td>
+                                                              <td></td>
+                                                            </tr>
+                                                            <tr>
+                                                              <td>lookUpField</td>
+                                                              <td>
                                                               </td>
                                                               <td>
                                                               </td>
@@ -1855,11 +1945,11 @@ export class CommonService {
             .catch((error: any) &#x3D;&gt; Observable.throw(error.json()));
     }
 
-    public isClinetOrServerSidesError(status: Object): string {
+    public isClinetOrServerSidesError(status: Object, lookUpField &#x3D; &#x27;detail&#x27;): string {
         console.log(&quot;statusMessage: &quot; + typeof status);
         const status_code: number &#x3D; status[&#x27;status_code&#x27;];
         if (400 &lt;&#x3D; status_code &lt; 500) {
-            const msg &#x3D; status[&#x27;detail&#x27;];
+            const msg &#x3D; status[lookUpField];
             return !!msg ? msg : &#x27;unexpected error occured&#x27;;
         } else if (500 &lt;&#x3D; status_code &lt; 600) {
             return &#x27;Server error&#x27;;
@@ -1909,6 +1999,17 @@ export class CommonService {
             return undefined;
         }
     }
+
+  /**
+   *
+   * @param name get the formcontrol&#x27;s name
+   * @return {boolean}
+   * @description check the form is valid or not
+   */
+    public checkFormHasError(name: string, _fb: any): boolean {
+      const temp &#x3D; _fb.get(name);
+      return (temp.invalid &amp;&amp; temp.touched);
+  }
 
 }
 </code></pre>
