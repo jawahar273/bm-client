@@ -52,4 +52,8 @@ export class HeaderComponent implements OnInit {
     changeLang(language: string) {
         this.translate.use(language);
     }
+
+    getUserName(): string {
+        return localStorage.getItem('userName');
+    }
 }

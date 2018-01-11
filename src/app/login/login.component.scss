@@ -36,12 +36,17 @@ $topnav-background-color: #222;
         box-shadow: none;
     }
     .has-error {
-        border-bottom: 2px solid rgb(247, 147, 147);
+        border-bottom: 2px solid rgb(240, 41, 41);
         box-shadow: none;
     }
     .has-error:focus {
-        border-bottom: 2px solid rgb(240, 41, 41);
+        border-bottom: 2px solid rgb(247, 147, 147);
         box-shadow: none;
+    }
+    .show-error-msg {
+        // border-bottom: 2px solid rgb(240, 41, 41);
+        color:red;
+        display: block;       
     }
     .rounded-btn {
         -webkit-border-radius: 50px;
