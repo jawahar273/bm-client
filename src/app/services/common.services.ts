@@ -17,6 +17,15 @@ export class CommonService {
         this.today  = new Date();
     }
 
+    globalalertBox: Array<any> = [];
+    globalServiceErrorMapping = {
+    'password': undefined,
+    'email': undefined,
+    'non_field_errors': undefined,
+    'details': undefined,
+    'items': undefined,
+};
+
     private commonURL = 'http://127.0.0.1:8000/api';
     public joinURL(str1: string, str2: string) {
         return `${str1}/${str2}/`;
@@ -55,12 +64,12 @@ export class CommonService {
             .catch((error: any) => Observable.throw(error.json()));
     }
 
-    public isClinetOrServerSidesError(status: Object, lookUpField: Object): string {
+    public isClinetOrServerSidesError(status: Object, lookUpField?: any): string {
         console.log("statusMessage: " + typeof status);
         const status_code: number = status['status_code'];
         if (400 <= status_code < 500) {
             // check the lookupfield is ``undefined` if so then assign the `detail` field.
-            lookUpField = !!lookUpField ? lookUpField : { 'detail': undefined };
+            lookUpField = !!lookUpField ? lookUpField : this.globalServiceErrorMapping;
             let msg;
             for (const key in lookUpField) {
                 if (status[key]) {
@@ -116,6 +125,26 @@ export class CommonService {
             return el;
         } else {
             return undefined;
+        }
+    }
+  // order of functions
+    public showGlobalAlert(msg: string, type = 'danger', removeAll = true) {
+        if (removeAll) {
+            this.globalalertBox = [];
+        }
+        this.globalalertBox.push({ 'message': msg, type: type });
+    }
+    /**
+    *
+    * @param {any} alert it is an object of the current alert.
+    * @description used to close alert in display.
+    */
+    public closeGlobalAlert(alert?: Object, removeAll?: boolean) {
+        if (removeAll) {
+            this.globalalertBox = [];
+        } else {
+            const index: number = this.globalalertBox.indexOf(alert);
+            this.globalalertBox.splice(index, 1);
         }
     }
 

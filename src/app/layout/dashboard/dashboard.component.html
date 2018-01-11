@@ -1,8 +1,4 @@
 <div [@routerTransition]>
-    <h2 class="text-muted">Show <small>list</small></h2>
-    <p *ngFor="let alert of alerts">
-        <ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
-    </p>
     <!-- slideShows <div class="row">d
         <div class="col-md-12">
             <ngb-carousel>
@@ -146,7 +142,8 @@
                                 <span (click)="sort()">{{column?.name}}</span>
                             </ng-template>
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                <span placement="top" ngbTooltip="Create At: {{value | date: 'dd/MM/yyyy'}}">
+                                <span placement="top" ngbTooltip="Create At: {{value | date: 'dd/MM/yyyy'}}"
+                                triggers="click:blur">
                                     {{getTheDays(value)}}
                                 </span>
                             </ng-template>

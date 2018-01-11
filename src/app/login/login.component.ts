@@ -20,8 +20,9 @@ export class LoginComponent implements OnInit {
     };
     serviceErrorMapping = {
         'password': undefined,
-        'email': undefined,
-        'non_field_errors': undefined
+        'email': 'Enter the mail has been register in our System. Or SignUp into our System',
+        'non_field_errors': undefined,
+        'detail': undefined,
     };
 
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
@@ -33,25 +34,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {}
-    /**
-     *
-     * @param {any} alert it is an object of the current alert.
-     * @description used to close alert in display.
-     */
-    public closeAlert(alert?: Object, removeAll?: boolean) {
-        if (removeAll) {
-            this.loginAlert = [];
-        } else {
-            const index: number = this.loginAlert.indexOf(alert);
-            this.loginAlert.splice(index, 1);
-        }
-    }
-    showLoginAlert(msg: string, type = 'danger', removeAll = true) {
-        if (removeAll) {
-            this.loginAlert = [];
-        }
-        this.loginAlert.push({'message': msg, type: type});
-    }
+
 
     onLoggedin(): void {
         let loginContent = this.loginForm.value;
@@ -65,14 +48,13 @@ export class LoginComponent implements OnInit {
               (data) => {
                   !!data ? '' : console.log('something went wrong in server');
                   this.router.navigate(['/dashboard']);
-                  localStorage.setItem('isLoggedin', 'true');
+                  localStorage.setItem('isLoggedin', 'false');
                   localStorage.setItem('loginKey', data['key']);
               },
               (error) => {
-                  const msg = this.service.isClinetOrServerSidesError(error, 'non_field_errors');
-                  this.showLoginAlert(msg);
+                  const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
+                  this.service.showGlobalAlert(msg);
               }
           );
-        // localStorage.setItem('isLoggedin', 'true');
     }
 }

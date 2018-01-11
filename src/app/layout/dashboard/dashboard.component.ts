@@ -62,12 +62,14 @@ export class DashboardComponent implements OnInit {
      * showErrorAlert
      */
     public showErrorAlert(msg: string, type: string = 'danger' ) {
-        this.alerts.push({type: type, message: msg});
+        // this.alerts.push({type: type, message: msg});
+        this.service.showGlobalAlert(msg, type);
     }
 
     public closeAlert(alert: any) {
-        const index: number = this.alerts.indexOf(alert);
-        this.alerts.splice(index, 1);
+        // const index: number = this.alerts.indexOf(alert);
+        // this.alerts.splice(index, 1);
+        this.service.closeGlobalAlert(alert);
     }
 
     public updateTable() {
