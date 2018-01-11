@@ -11,7 +11,7 @@ import { routerTransition } from '../../router.animations';
   templateUrl: './entry.component.html',
   styleUrls: ['./entry.component.scss'],
   animations: [routerTransition()],
-    encapsulation: ViewEncapsulation.none
+    encapsulation: ViewEncapsulation.None
 })
 export class EntryComponent implements OnInit {
 
@@ -19,7 +19,6 @@ export class EntryComponent implements OnInit {
     itemEntry: Array<any> = [];
     hiddleAlert: boolean = true;
     entryFormAlert: Array<any> = [];
-
     hideLoadSpin: boolean = true;
     // entryFormGroupContents: Object;
     headers: Headers;
@@ -158,8 +157,7 @@ export class EntryComponent implements OnInit {
    * @description check the form is valid or not
    */
   private checkFormHasError(name: string): boolean {
-      const temp = this.entryForm.get(name);
-      return (temp.invalid && temp.touched);
+      return this.service.checkFormHasError(name, this.entryForm);
   }
 
   /**
@@ -240,7 +238,7 @@ export class EntryComponent implements OnInit {
              controls[name].markAsTouched({onlySelf: true});
             if (!checkAllFields) {
                 return name;
-            } else {
+            } else if (checkAllFields) {
                 invalid.push(name);
             }
          }

@@ -35,6 +35,14 @@ $topnav-background-color: #222;
         border-bottom: 2px solid #fff;
         box-shadow: none;
     }
+    .has-error {
+        border-bottom: 2px solid rgb(247, 147, 147);
+        box-shadow: none;
+    }
+    .has-error:focus {
+        border-bottom: 2px solid rgb(240, 41, 41);
+        box-shadow: none;
+    }
     .rounded-btn {
         -webkit-border-radius: 50px;
         border-radius: 50px;
