@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbCarouselModule, NgbAlertModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
@@ -17,7 +17,7 @@ import { StatModule } from '../../shared';
     imports: [
         CommonModule,
         NgbCarouselModule.forRoot(),
-        NgbAlertModule.forRoot(),
+        // NgbAlertModule.forRoot(),
         NgbTooltipModule.forRoot(),
         DashboardRoutingModule,
         StatModule,

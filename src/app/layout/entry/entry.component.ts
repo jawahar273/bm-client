@@ -233,7 +233,7 @@ export class EntryComponent implements OnInit {
      const inx = _names.indexOf('entryGroupItems');
      _names.splice(inx, 1);
      // check for the formcontrol under `entryForm`.
-     for (const name in _names) {
+     for (const name of _names) {
          if (controls[name].invalid) {
              controls[name].markAsTouched({onlySelf: true});
             if (!checkAllFields) {
