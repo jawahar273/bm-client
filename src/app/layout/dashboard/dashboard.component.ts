@@ -14,6 +14,7 @@ export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     public tableContent: Array<any> = [];
+    private headers: any;
     constructor(private service: CommonService) {
         this.updateTable();
         // this.sliders.push(
@@ -54,6 +55,7 @@ export class DashboardComponent implements OnInit {
         //         voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
         //     }
         // );
+        this.headers = this.service.toLocalHeaders({});
     }
 
     ngOnInit() {}
@@ -73,7 +75,7 @@ export class DashboardComponent implements OnInit {
     }
 
     public updateTable() {
-        this.service.get('package/itemslist', this.service.headers).subscribe(
+        this.service.get('package/itemslist', this.headers).subscribe(
             (data) => {
                 this.tableContent = data;
                 console.log(data);
@@ -98,7 +100,7 @@ export class DashboardComponent implements OnInit {
     }
     private deleteRow(itemID?: number, indx?: number) {
         if (itemID) {
-            this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
+            this.service.delete(`package/itemslist/${itemID}`, this.headers)
                 .subscribe(
                    (data) => {
                        indx > -1 ? this.tableContent.splice(indx, 1) : '';

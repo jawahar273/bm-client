@@ -15,7 +15,7 @@ export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loginAlert: Array<object> = [];
     mappingKeys = {
-        'loginPassName': 'email',
+        'loginPassName': 'username',
         'loginPassword': 'password'
     };
     serviceErrorMapping = {
@@ -23,9 +23,11 @@ export class LoginComponent implements OnInit {
         'email': 'Enter the mail has been register in our System. Or SignUp into our System',
         'non_field_errors': undefined,
         'detail': undefined,
+        'username': undefined,
     };
-
+    headers: any;
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
+        this.headers = this.service.toLocalHeaders({}, ['Authorization']);
         this.loginForm = this.fb.group({
             loginPassName: ['', Validators.compose([Validators.required])],
             loginPassword: ['', Validators.required]
@@ -37,18 +39,16 @@ export class LoginComponent implements OnInit {
 
     onLoggedin(): void {
         let loginContent = this.loginForm.value;
-        // const oldName = ;
-        // const newName = ;
         let _body = this.service.renameObjectAllKeys(Object.keys(this.mappingKeys), Object.values(this.mappingKeys), loginContent);
         _body = JSON.stringify(_body);
         // debugger;
-        this.service.post('rest-auth/login', this.service.headers, _body)
+        this.service.post('rest-auth/login', this.headers, _body)
           .subscribe(
               (data) => {
                   !!data ? '' : console.log('something went wrong in server');
                   this.router.navigate(['/dashboard']);
                   localStorage.setItem('isLoggedin', 'false');
-                  localStorage.setItem('loginKey', data['key']);
+                //   localStorage.setItem('loginKey', data['key']);
                   localStorage.setItem('userName', 'User Name');
                   sessionStorage.setItem('authToken', data['key']);
                   this.service.get('rest-auth/user', this.service.headers)
@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
                    );
               },
               (error) => {
-                  
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
                   this.service.showGlobalAlert(msg);
               }

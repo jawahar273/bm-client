@@ -12,11 +12,14 @@ export class CommonService {
     requireUpdate: object;
     headers: Headers;
     today: Date;
+    headersContent: Object;
     constructor(private http: Http) {
-        this.headers = new Headers({ 'Accept': 'application/json',
-             'content-type': 'application/json',
+        this.headersContent = {
+            'Accept': 'application/json',
+            'content-type': 'application/json',
             'Authorization': `Basic ${sessionStorage.getItem('authToken')}`,
-        });
+        };
+        this.headers = new Headers(this.headersContent);
         this.today  = new Date();
     }
 
@@ -81,7 +84,7 @@ export class CommonService {
      * @description check the error is client side or server side if client side
      * return corresponding error message.
      */
-    public isClinetOrServerSidesError(status: Object, lookUpField?: any): string {
+    public isClinetOrServerSidesError(status: Object, lookUpField?: any, extraInfo=true): string {
         console.log("statusMessage: " + typeof status);
         const status_code: number = status['status_code'];
         if (400 <= status_code < 500) {
@@ -95,8 +98,15 @@ export class CommonService {
                 }
             }
             // const msg = status[lookUpField];
-            msg = !!msg ? `${msg} ${this.addtionalInfomationOnSErviceError(status[status_code])}` :
-                                  'unexpected error occured';
+            // msg = !!msg ? `${msg} ` :
+            //                       'unexpected error occured';
+            if (msg) {
+                if (extraInfo) {
+                    msg = msg + this.addtionalInfomationOnSErviceError(status_code);
+                }
+            } else {
+                msg = 'unexpected error occured';
+            }
             return msg;
         } else if (500 <= status_code < 600) {
             return 'Server error';
@@ -127,8 +137,16 @@ export class CommonService {
      * @description get the require header params and create a new localheader by merging with
      * global header.
      */
-    public toLocalHeaders(main: Object): Object {
-        return Object.assign({}, this.headers, main);
+    public toLocalHeaders(main: Object, removeKeys?: Array<String>): Object {
+        let output =  Object.assign({}, this.headersContent, main);
+        debugger;
+        if (removeKeys) {
+            for (const key of removeKeys) {
+                delete output[key];
+            }
+        }
+
+        return new Headers(output);
     }
     /**
      * 
