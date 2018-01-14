@@ -4,6 +4,7 @@ import { routerTransition } from '../router.animations';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 
 import { CommonService } from '../services/common.services';
+import { Headers } from '@angular/http';
 
 @Component({
     selector: 'app-login',
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
     };
     headers: any;
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
-        this.headers = this.service.toLocalHeaders({}, ['Authorization']);
+        this.headers = new Headers({ 'content-type': 'application/json'});
         this.loginForm = this.fb.group({
             loginPassName: ['', Validators.compose([Validators.required])],
             loginPassword: ['', Validators.required]
@@ -46,21 +47,12 @@ export class LoginComponent implements OnInit {
           .subscribe(
               (data) => {
                   !!data ? '' : console.log('something went wrong in server');
-                  this.router.navigate(['/dashboard']);
-                  localStorage.setItem('isLoggedin', 'false');
-                //   localStorage.setItem('loginKey', data['key']);
-                  localStorage.setItem('userName', 'User Name');
-                  sessionStorage.setItem('authToken', data['key']);
-                  this.service.get('rest-auth/user', this.service.headers)
-                   .subscribe(
-                       (_data) => {
-                           localStorage.setItem('userName', _data['username']);
-                       },
-                       (_error) => {
-                           const msg = this.service.isClinetOrServerSidesError(_error, {'detail': undefined});
-                           this.service.showGlobalAlert(msg);
-                       }
-                   );
+                sessionStorage.setItem('authToken', data['key']);
+                localStorage.setItem('isLoggedin', 'false');
+                //   localStorage.setItem('authToken', data['key']);
+                localStorage.setItem('userName', 'User Name');
+                this.router.navigate(['/dashboard']);
+                //   debugger;
               },
               (error) => {
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);

@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { CommonService } from '../../services/common.services';
 import * as moment from 'moment';
+import { Headers } from '@angular/http';
+
 // import { debug } from 'util';
 @Component({
     selector: 'app-dashboard',
@@ -17,45 +19,17 @@ export class DashboardComponent implements OnInit {
     private headers: any;
     constructor(private service: CommonService) {
         this.updateTable();
-        // this.sliders.push(
-        //     {
-        //         imagePath: 'assets/images/slider1.jpg',
-        //         label: 'First slide label',
-        //         text:
-        //             'Nulla vitae elit libero, a pharetra augue mollis interdum.'
-        //     },
-        //     {
-        //         imagePath: 'assets/images/slider2.jpg',
-        //         label: 'Second slide label',
-        //         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        //     },
-        //     {
-        //         imagePath: 'assets/images/slider3.jpg',
-        //         label: 'Third slide label',
-        //         text:
-        //             'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
-        //     }
-        // );
-
-        // this.alerts.push(
-        //     {
-        //         id: 1,
-        //         type: 'success',
-        //         message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        //         Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-        //         consectetur velit culpa molestias dignissimos
-        //         voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-        //     },
-        //     {
-        //         id: 2,
-        //         type: 'warning',
-        //         message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        //         Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-        //         consectetur velit culpa molestias dignissimos
-        //         voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-        //     }
-        // );
-        this.headers = this.service.toLocalHeaders({});
+        // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
+        this.service.get('rest-auth/user',this.service.headers)
+            .subscribe(
+              (_data) => {
+                localStorage.setItem('userName', _data['username']);
+              },
+              (_error) => {
+                const msg = this.service.isClinetOrServerSidesError(_error, { 'detail': undefined });
+                this.service.showGlobalAlert(msg);
+              }
+            );
     }
 
     ngOnInit() {}
@@ -75,7 +49,7 @@ export class DashboardComponent implements OnInit {
     }
 
     public updateTable() {
-        this.service.get('package/itemslist', this.headers).subscribe(
+        this.service.get('package/itemslist', this.service.headers).subscribe(
             (data) => {
                 this.tableContent = data;
                 console.log(data);
@@ -100,7 +74,7 @@ export class DashboardComponent implements OnInit {
     }
     private deleteRow(itemID?: number, indx?: number) {
         if (itemID) {
-            this.service.delete(`package/itemslist/${itemID}`, this.headers)
+            this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
                        indx > -1 ? this.tableContent.splice(indx, 1) : '';

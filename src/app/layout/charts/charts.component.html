@@ -7,7 +7,8 @@
                     Radar Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="150px" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
+                    <canvas  baseChart height="150px" *ngIf="radarChartLabels && radarChartData"
+                     [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
                         (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
@@ -22,7 +23,8 @@
                     Doughnut Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="150px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    <canvas baseChart *ngIf="doughnutChartData && doughnutChartLabels"
+                     height="150px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
                 <div class="card-footer">
@@ -38,7 +40,8 @@
                     Bar Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                    <canvas baseChart *ngIf="barChartLabels && barChartData"
+                     [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
                         [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
