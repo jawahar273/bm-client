@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { CommonService } from '../../services/common.services';
 import * as moment from 'moment';
@@ -17,6 +17,7 @@ export class DashboardComponent implements OnInit {
     public sliders: Array<any> = [];
     public tableContent: Array<any> = [];
     private headers: any;
+    @ViewChild('dashTable') dashTable;
     constructor(private service: CommonService) {
         this.updateTable();
         // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
@@ -75,6 +76,7 @@ export class DashboardComponent implements OnInit {
         return 'err';
     }
     private deleteRow(itemID?: number, indx?: number) {
+        // debugger;
         if (itemID) {
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
@@ -95,5 +97,17 @@ export class DashboardComponent implements OnInit {
                 );
             }
         }
+    toggleExpandRow(row) {
+        console.log('Toggled Expand Row!', row);
+        this.dashTable.rowDetail.toggleExpandRow(row);
+    }
+
+    onDetailToggle(event) {
+        console.log('Detail Toggled', event);
+    }
+
+    getObjectValue(t: Object): Array<any> {
+        return Object.values(t);
+    }
 
 }

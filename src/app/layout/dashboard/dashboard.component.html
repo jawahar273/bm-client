@@ -88,15 +88,63 @@
                 </table>
             </div>
         </div> -->
-        <div class="col col-xl-12 col-lg-12">
+        <div class="col col-xl-12 col-lg-12 col-sm-12">
             <div class="card mb-3 ">
                 <div class="card-header">List Spendings</div>
                 <ngx-datatable
                 class="bootstrap"
                 [limit]="20"
-                 [columnMode]="'force'"
+                 [columnMode]="'standard'"
                  [rowHeight]="'auto'"
+                 #dashTable
                 [rows]="tableContent">
+        <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow (toggle)="onDetailToggle($event)">
+            <ng-template let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
+             ngx-datatable-row-detail-template>
+                <div class="row">
+                    <ul class="list-group col-sm-12">
+                        <li class="list-group-item">
+                            <strong>Bundle Name</strong> : {{row.name}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Place</strong> : {{row.place}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Group</strong> : {{row.group}}
+                        </li>
+                        <li class="list-group-item"><strong>
+                            Total Amount</strong> : {{row.total_amount}}
+                        </li>
+                        <li class="list-group-item">
+                            <strong>Days Count</strong> :  {{row.date}}
+                                <div class="d-flex w-100 justify-content-between">
+                                    <small></small>
+                                </div>
+                            <span class="badge badge-default badge-pill">{{getTheDays(row.date)}}</span>
+                        </li>
+                       <li class="list-group-item">
+                            <strong>Action</strong> 
+                            <a href="entry/{{row.id}}">
+                                <i class="fa fa-pencil-square-o"></i>
+                            </a>
+                            <span class=" db-warning" (click)="deleteRow(row.id)">
+                                <i class="fa fa-eraser" >
+                                </i>
+                            </span>
+                        </li>
+                                                        
+                    </ul>
+                </div>
+            </ng-template>
+        </ngx-datatable-row-detail>
+        <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row"
+                    (click)="toggleExpandRow(row)">
+                </a>
+            </ng-template>
+            <!-- details shower -->
+        </ngx-datatable-column>
                         <ngx-datatable-column name="Series No" >
                             <ng-template  let-column="column" let-sort="sortFn" ngx-datatable-header-template>
                                 <span >{{column?.name}}</span>
