@@ -47,10 +47,12 @@ export class LoginComponent implements OnInit {
           .subscribe(
               (data) => {
                   !!data ? '' : console.log('something went wrong in server');
-                sessionStorage.setItem('authToken', data['key']);
+                  sessionStorage.setItem('authToken', `Token ${data['key']}`);
+                //   debugger;
                 localStorage.setItem('isLoggedin', 'false');
                 //   localStorage.setItem('authToken', data['key']);
                 localStorage.setItem('userName', 'User Name');
+                  this.headers.set('Authorization', `Token ${data['key']}`);
                 this.router.navigate(['/dashboard']);
                 //   debugger;
               },
@@ -60,6 +62,7 @@ export class LoginComponent implements OnInit {
               }
           );
     }
+
     /**
      *
      * @param name get the formcontrol's name

@@ -168,7 +168,7 @@ export class EntryComponent implements OnInit {
       (<FormArray>this.entryForm.controls['entryGroupItems']).push(this.generateGroupItemsFormControl());
   }
 
-  public delectItem(index) {
+  public deleteItem(index) {
     if (index > 0) {
         (<FormArray>this.entryForm.controls['entryGroupItems']).removeAt(index);
     }
@@ -196,6 +196,7 @@ export class EntryComponent implements OnInit {
                     //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
+                      this.hideLoadingSpin(false);
                       const msg = this.service.isClinetOrServerSidesError(error);
                       this.showFormAlert(msg, 'danger' );
                   }
@@ -210,7 +211,10 @@ export class EntryComponent implements OnInit {
                     //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
-                      this.showFormAlert(error, 'danger');
+                    //   this.showFormAlert(error, 'danger');
+                      this.hideLoadingSpin(false);
+                      const msg = this.service.isClinetOrServerSidesError(error);
+                      this.showFormAlert(msg, 'danger');
                   });
         }
     } else if (this.submitForm) {

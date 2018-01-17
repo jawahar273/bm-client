@@ -34,7 +34,7 @@
 					   <app-listed-items [count]="indx"
 						[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"
 						(addItemList)="addItem()"
-						(deleteItemList)="deleteItem(e)">
+						(deleteItemList)="deleteItem(indx)">
 					   </app-listed-items>
 					</div>
 					<br>

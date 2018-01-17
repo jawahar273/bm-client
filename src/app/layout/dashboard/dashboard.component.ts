@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit {
     constructor(private service: CommonService) {
         this.updateTable();
         // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
-        this.service.get('rest-auth/user',this.service.headers)
+        this.service.get('rest-auth/user', this.service.headers)
             .subscribe(
               (_data) => {
                 localStorage.setItem('userName', _data['username']);
@@ -48,16 +48,18 @@ export class DashboardComponent implements OnInit {
         this.service.closeGlobalAlert(alert);
     }
 
-    public updateTable() {
+    public updateTable(alert=true) {
         this.service.get('package/itemslist', this.service.headers).subscribe(
             (data) => {
                 this.tableContent = data;
                 console.log(data);
-                let msg = 'table update';
-                if (data.length === 0) {
-                    msg = 'No List need to been shown';
+                if (alert) {
+                    let msg = 'table update';
+                    if (data.length === 0) {
+                        msg = 'No List need to been shown';
+                    }
+                    this.showErrorAlert(msg, 'success');
                 }
-                this.showErrorAlert(msg, 'success');
             },
             (error) => {
                 const msg = this.service.isClinetOrServerSidesError(error);
@@ -77,8 +79,15 @@ export class DashboardComponent implements OnInit {
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
-                       indx > -1 ? this.tableContent.splice(indx, 1) : '';
+        // debugger;
+                    //    this.tableContent.find((obj, inx) => {
+                    //        if (obj.id === itemID) {
+                    //         //    debugger;
+                    //         //    this.tableContent.splice(inx, 1);
+                    //        }
+                    //   });
                        this.showErrorAlert('Item has been delete successully', 'success');
+                       this.updateTable(false);
                     },
                    (error) => {
                        this.showErrorAlert('Unable to request the delete operation due to "some unexpected errors"');
