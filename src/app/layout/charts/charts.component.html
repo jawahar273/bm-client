@@ -7,7 +7,8 @@
                     Radar Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="150px" [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
+                    <canvas  baseChart height="150px" *ngIf="radarChartLabels && radarChartData"
+                     [datasets]="radarChartData" [labels]="radarChartLabels" [chartType]="radarChartType" (chartHover)="chartHovered($event)"
                         (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
@@ -22,7 +23,8 @@
                     Doughnut Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="150px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    <canvas baseChart *ngIf="doughnutChartData && doughnutChartLabels"
+                     height="150px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
                 <div class="card-footer">
@@ -38,13 +40,41 @@
                     Bar Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                    <canvas baseChart *ngIf="barChartLabels && barChartData"
+                     [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
                         [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
                 <div class="card-footer">
                     getting all years budget amount and spend amount
-                    <button class="btn btn-info btn-sm" (click)="randomize()">Update</button>
+                    <!-- <button class="btn btn-info btn-sm" (click)="randomize()">Update</button> -->
+                            <!-- <select id="month" name="month">
+                                <option *ngFor="let month of service.listOfMonths" [ngValue]="month.value">
+                                    {{month.name}}
+                                </option>
+                            </select> -->
+                            <form [formGroup]="rangeMonthAndYear" (ngSubmit)="onSumitForm(rangeMonthAndYear.value)"
+                             class="form-inline">
+                                <div class="form-group">
+                                 <label class="col-form-label" for="start">Start</label>
+                                 <input formControlName="startMonthAndYear" id="start"
+                                   type="month" name="bday-month" min="2000-01"
+                                  max="{{service.today.getFullYear()}}-{{service.today.getMonth()+1}}"
+                                  placeholder="2015-07(Year-month)">
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-form-label" for="start">end</label>
+                                    <input formControlName="endMonthAndYear"
+                                     id="end" type="month" name="bday-month" min="2000-01"
+                                      max="{{service.today.getFullYear()}}-{{service.today.getMonth()+1}}"
+                                    [value]="service.today.getFullYear()+'-'+service.today.getMonth()+1"                                 
+                                      placeholder="2016-01(Year-month)">
+                                </div>
+                                <button class="btn btn-info btn-sm" type="submit">
+                                    Update
+                                </button>
+                                {{rangeMonthAndYear.value | json}}
+                            </form>
                 </div>
             </div>
         </div>

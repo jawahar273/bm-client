@@ -99,7 +99,7 @@
                 [rows]="tableContent">
                         <ngx-datatable-column name="Series No" >
                             <ng-template  let-column="column" let-sort="sortFn" ngx-datatable-header-template>
-                                <span (click)="sort()">{{column?.name}}</span>
+                                <span >{{column?.name}}</span>
                             </ng-template>
                             <ng-template style="background-color: rgba(241, 235, 235, 0.05);" let-row="row" let-rowIndex="rowIndex" let-value="value" ngx-datatable-cell-template>
                                 {{rowIndex}}
@@ -143,17 +143,17 @@
                             </ng-template>
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
                                 <span placement="top" ngbTooltip="Create At: {{value | date: 'dd/MM/yyyy'}}"
-                                triggers="click:blur">
+                                triggers="click">
                                     {{getTheDays(value)}}
                                 </span>
                             </ng-template>
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Action" prop="id">
-                            <ng-template let-column="column" ngx-datatable-header-template>
-                                <span>{{column?.name}}</span>
+                            <ng-template let-column="column"  let-sort="sortFn" ngx-datatable-header-template>
+                                <span (click)="sort()">{{column?.name}}</span>
                             </ng-template>
                             <ng-template let-row="row" let-rowIndex="rowIndex" 
-                            let-value="value" ngx-datatable-cell-template>
+                            let-value="value" ngx-datatable-cell-template >
                                 <a href="entry/{{value}}" >
                                     <i class="fa fa-pencil-square-o"></i>
                                 </a>   

@@ -8,7 +8,10 @@ import { CommonService } from '../services/common.services';
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-    constructor(private service: CommonService) {}
+    constructor(private service: CommonService) {
+        this.service.headers.set('Authorization', `${sessionStorage.getItem('authToken')}`);
+
+    }
 
     ngOnInit() {}
 }

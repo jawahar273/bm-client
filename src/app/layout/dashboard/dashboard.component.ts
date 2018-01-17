@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { routerTransition } from '../../router.animations';
 import { CommonService } from '../../services/common.services';
 import * as moment from 'moment';
+import { Headers } from '@angular/http';
+
 // import { debug } from 'util';
 @Component({
     selector: 'app-dashboard',
@@ -14,46 +16,20 @@ export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     public tableContent: Array<any> = [];
+    private headers: any;
     constructor(private service: CommonService) {
         this.updateTable();
-        // this.sliders.push(
-        //     {
-        //         imagePath: 'assets/images/slider1.jpg',
-        //         label: 'First slide label',
-        //         text:
-        //             'Nulla vitae elit libero, a pharetra augue mollis interdum.'
-        //     },
-        //     {
-        //         imagePath: 'assets/images/slider2.jpg',
-        //         label: 'Second slide label',
-        //         text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        //     },
-        //     {
-        //         imagePath: 'assets/images/slider3.jpg',
-        //         label: 'Third slide label',
-        //         text:
-        //             'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
-        //     }
-        // );
-
-        // this.alerts.push(
-        //     {
-        //         id: 1,
-        //         type: 'success',
-        //         message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        //         Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-        //         consectetur velit culpa molestias dignissimos
-        //         voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-        //     },
-        //     {
-        //         id: 2,
-        //         type: 'warning',
-        //         message: `Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-        //         Voluptates est animi quibusdam praesentium quam, et perspiciatis,
-        //         consectetur velit culpa molestias dignissimos
-        //         voluptatum veritatis quod aliquam! Rerum placeat necessitatibus, vitae dolorum`
-        //     }
-        // );
+        // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
+        this.service.get('rest-auth/user', this.service.headers)
+            .subscribe(
+              (_data) => {
+                localStorage.setItem('userName', _data['username']);
+              },
+              (_error) => {
+                const msg = this.service.isClinetOrServerSidesError(_error, { 'detail': undefined });
+                this.service.showGlobalAlert(msg);
+              }
+            );
     }
 
     ngOnInit() {}
@@ -72,16 +48,18 @@ export class DashboardComponent implements OnInit {
         this.service.closeGlobalAlert(alert);
     }
 
-    public updateTable() {
+    public updateTable(alert=true) {
         this.service.get('package/itemslist', this.service.headers).subscribe(
             (data) => {
                 this.tableContent = data;
                 console.log(data);
-                let msg = 'table update';
-                if (data.length === 0) {
-                    msg = 'No List need to been shown';
+                if (alert) {
+                    let msg = 'table update';
+                    if (data.length === 0) {
+                        msg = 'No List need to been shown';
+                    }
+                    this.showErrorAlert(msg, 'success');
                 }
-                this.showErrorAlert(msg, 'success');
             },
             (error) => {
                 const msg = this.service.isClinetOrServerSidesError(error);
@@ -101,8 +79,15 @@ export class DashboardComponent implements OnInit {
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
-                       indx > -1 ? this.tableContent.splice(indx, 1) : '';
+        // debugger;
+                    //    this.tableContent.find((obj, inx) => {
+                    //        if (obj.id === itemID) {
+                    //         //    debugger;
+                    //         //    this.tableContent.splice(inx, 1);
+                    //        }
+                    //   });
                        this.showErrorAlert('Item has been delete successully', 'success');
+                       this.updateTable(false);
                     },
                    (error) => {
                        this.showErrorAlert('Unable to request the delete operation due to "some unexpected errors"');

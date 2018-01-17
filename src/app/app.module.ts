@@ -8,6 +8,8 @@ import { HttpModule } from '@angular/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
@@ -37,9 +39,10 @@ export function createTranslateLoader(http: HttpClient) {
             }
         }),
         AppRoutingModule,
+        NgbModule.forRoot(),
     ],
     declarations: [AppComponent],
     providers: [AuthGuard, CommonService],
-    bootstrap: [AppComponent]
+    bootstrap: [AppComponent],
 })
 export class AppModule {}

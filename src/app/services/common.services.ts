@@ -12,24 +12,57 @@ export class CommonService {
     requireUpdate: object;
     headers: Headers;
     today: Date;
+    listOfMonths: Array<object>;
+    listOfYears: Array<number>;
+    countOfYears: number;
+    startLimitOfYears: number;
+    globalalertBox: Array<any> = [];
+    globalServiceErrorMapping = {
+        'password': undefined,
+        'email': undefined,
+        'non_field_errors': undefined,
+        'detail': undefined,
+        'items': undefined,
+    };
+
+
+    private commonURL = 'http://127.0.0.1:8000/api';
+
     constructor(private http: Http) {
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',
-            'Authorization': `Basic ${sessionStorage.getItem('authToken')}`,
+            'Authorization': ``,
         });
         this.today  = new Date();
+        this.listOfMonths = [{ 'name': 'January', 'value': '01' },
+            { 'name': 'February', 'value': '02' },
+            { 'name': 'March', 'value': '03' },
+            { 'name': 'April', 'value': '04' },
+            { 'name': 'May', 'value': '05' },
+            { 'name': 'June', 'value': '06' },
+            { 'name': 'July', 'value':  '07'},
+            { 'name': 'August', 'value': '08' },
+            { 'name': 'September', 'value': '09' },
+            { 'name': 'October', 'value': '10' },
+            { 'name': 'November', 'value': '11' },
+            { 'name': 'December', 'value': '12' }
+        ];
+        this.startLimitOfYears = 2000;
+        this.countOfYears = 10;
+        this.generateYears();
     }
+    /**
+     * generateYears
+     */
+    public generateYears() {
+        const date = this.today;
+        const year = date.getFullYear();
 
-    globalalertBox: Array<any> = [];
-    globalServiceErrorMapping = {
-    'password': undefined,
-    'email': undefined,
-    'non_field_errors': undefined,
-    'detail': undefined,
-    'items': undefined,
-};
-
-    private commonURL = 'http://127.0.0.1:8000/api';
+        // Make this year, and the 100 years before it available in the year <select>
+        for (let i = this.startLimitOfYears; i <= this.countOfYears; i++) {
+            this.listOfYears.push(i);
+        }
+    }
     /**
      * 
      * @param str1 first part of the url.
@@ -81,8 +114,8 @@ export class CommonService {
      * @description check the error is client side or server side if client side
      * return corresponding error message.
      */
-    public isClinetOrServerSidesError(status: Object, lookUpField?: any): string {
-        console.log("statusMessage: " + typeof status);
+    public isClinetOrServerSidesError(status: Object, lookUpField?: any, extraInfo = true): string {
+        console.log('statusMessage: ' + typeof status);
         const status_code: number = status['status_code'];
         if (400 <= status_code < 500) {
             // check the lookupfield is ``undefined` if so then assign the `detail` field.
@@ -95,8 +128,16 @@ export class CommonService {
                 }
             }
             // const msg = status[lookUpField];
-            msg = !!msg ? `${msg} ${this.addtionalInfomationOnSErviceError(status[status_code])}` :
-                                  'unexpected error occured';
+            // msg = !!msg ? `${msg} ${this.addtionalInfomationOnSErviceError(status['status_code'])}` :
+                                //   'unexpected error occured';
+            if (msg) {
+                if (extraInfo) {
+                    msg = msg + this.addtionalInfomationOnSErviceError(status_code);
+                }
+            } else {
+                msg = 'unexpected error occured';
+            }
+            return msg;
             return msg;
         } else if (500 <= status_code < 600) {
             return 'Server error';
