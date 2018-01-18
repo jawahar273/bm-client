@@ -306,6 +306,9 @@ export class CommonService {
              (data) => {
                  if (monthYearFormat == data['month_year'])
                     this.budgetAmount = parseFloat(data['budget_amount']);
+                
+                this.showGlobalAlert('date for buget amount updated', 'success');
+
                  // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
              },
              (error) => {
@@ -315,7 +318,7 @@ export class CommonService {
                      this.post(url, this.headers, _body)
                      .subscribe(
                          (data) => {
-                             this.showGlobalAlert('new date for buget amount created', 'success');
+                            this.showGlobalAlert('new date for buget amount created', 'success');
                          },
                          (error) => {
                             const msg = this.isClinetOrServerSidesError(error);
