@@ -1,0 +1,17 @@
+before_script:
+  - curl -sL https://deb.nodesource.com/setup_6.x | bash -
+  - apt-get install -y nodejs
+  - which node
+  - 
+
+stages:
+  - build
+  - test
+  - deploy
+
+
+simple_test:
+  only:
+    - master
+  - npm -v
+  - npm start
