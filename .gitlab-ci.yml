@@ -1,4 +1,5 @@
 before_script:
+  - lsb_release -a
   - curl -sL https://deb.nodesource.com/setup_6.x | bash -
   - apt-get install -y nodejs
   - which node
@@ -13,6 +14,7 @@ stages:
 .script: &build_script
   - npm -v
   - cd  /builds/jawahar273/bm-client
+  - npm install
   - npm start
 
 job1:
