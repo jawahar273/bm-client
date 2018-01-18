@@ -15,3 +15,4 @@ stages:
 
 simple_test:
   script: *build_script
+  only: master
