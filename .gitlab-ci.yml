@@ -11,7 +11,5 @@ stages:
 
 
 simple_test:
-  only:
-  - master
   - npm -v
   - npm start
