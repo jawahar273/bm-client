@@ -11,6 +11,12 @@ $topnav-background-color: #222;
                 color: #fff;
             }
         }
+        .nav-item > div {
+            color: #999;
+            &:hover {
+                color: #fff;
+            }
+        }
     }
     .messages {
         width: 300px;

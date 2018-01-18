@@ -17,8 +17,10 @@ export class DashboardComponent implements OnInit {
     public sliders: Array<any> = [];
     public tableContent: Array<any> = [];
     private headers: any;
+    private isMobileScreen: boolean;
     @ViewChild('dashTable') dashTable;
     constructor(private service: CommonService) {
+        this.isMobileScreen = window.innerWidth <= 992;
         this.updateTable();
         // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
         this.service.get('rest-auth/user', this.service.headers)
@@ -108,6 +110,10 @@ export class DashboardComponent implements OnInit {
 
     getObjectValue(t: Object): Array<any> {
         return Object.values(t);
+    }
+
+    getIsMobileScreen(): boolean {
+        return this.isMobileScreen;
     }
 
 }
