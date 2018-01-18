@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
         'username': undefined,
     };
     headers: any;
+    spinnerIcon: boolean = true;
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
         this.headers = new Headers({ 'content-type': 'application/json'});
         this.loginForm = this.fb.group({
@@ -37,9 +38,11 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {}
 
-
     onLoggedin(): void {
-        let loginContent = this.loginForm.value;
+      this.setLoadSpinner(false);
+      let loginContent = this.loginForm.value;
+      const checkFields = this.service.findInvalidControls(loginContent);
+      if (checkFields) {
         let _body = this.service.renameObjectAllKeys(Object.keys(this.mappingKeys), Object.values(this.mappingKeys), loginContent);
         _body = JSON.stringify(_body);
         // debugger;
@@ -59,8 +62,10 @@ export class LoginComponent implements OnInit {
               (error) => {
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
                   this.service.showGlobalAlert(msg);
+                  this.setLoadSpinner(true);
               }
           );
+      }
     }
 
     /**
@@ -71,5 +76,9 @@ export class LoginComponent implements OnInit {
      */
     private checkFormHasError(name: string): boolean {
         return this.service.checkFormHasError(name, this.loginForm);
+    }
+
+    private setLoadSpinner(value : boolean) {
+      this.spinnerIcon = value;
     }
 }
