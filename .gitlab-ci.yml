@@ -12,7 +12,9 @@ stages:
 
 .script: &build_script
   - npm -v
+  - npm start
 
-simple_test:
+job1:
+  stage: build
   script: *build_script
   only: master
