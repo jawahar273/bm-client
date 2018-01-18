@@ -28,6 +28,7 @@ export class SignupComponent implements OnInit {
     };
     signupFormGroup: FormGroup;
     showErrorInButton: boolean = false;
+    spinnerIcon: boolean = true;
     constructor(private _fb: FormBuilder, private service: CommonService, private router: Router) {
         this.signupFormGroup = this._fb.group({
             'signUpUserName': ['', Validators.required],
@@ -48,7 +49,7 @@ export class SignupComponent implements OnInit {
     }
     ngOnInit() {}
 
-    private confirmPasswordValidator(_fg: FormGroup) {
+    private confirmPasswordValidator(_fg: FormGroup = this.signupFormGroup) {
         if (_fg.get('signUpNewPassword').value !== _fg.get('signUpConfirmPassword').value) {
             this.showErrorInButton = true;
             this.service.showGlobalAlert('New password and confirm password are not same.');
@@ -60,9 +61,10 @@ export class SignupComponent implements OnInit {
 
     private onSignUpFormSubmit(formContent: Object): void {
         // this.service.post('rest-auth/registration/')
-        const pass_status = this.confirmPasswordValidator(this.signupFormGroup);
-        // console.log(formContent);
-        if (pass_status) {
+        // const pass_status = this.confirmPasswordValidator();
+        const checkFields = this.service.findInvalidControls(this.signupFormGroup);
+        if (!this.showErrorInButton && checkFields['valid']) {
+            this.setLoadSpinner(false);
             const url = 'rest-auth/registration';
             const keys = Object.keys(this.serviceMappingFields);
             const values = Object.values(this.serviceMappingFields);
@@ -72,14 +74,17 @@ export class SignupComponent implements OnInit {
               .subscribe(
                   (data) => {
                       this.router.navigate(['/login']);
-                      this.service.showGlobalAlert('Please accept Email verfication to Login', 'Success');
+                      this.service.showGlobalAlert('Please accept Email verfication to Login', 'success');
                   },
                   (error) => {
                       const msg = this.service.isClinetOrServerSidesError(error, this.serviceMappingForErrorHandling);
                       this.service.showGlobalAlert(msg);
                   }
               );
+        } else {
+          this.service.showGlobalAlert(`Check the fields again ${this.serviceMappingFields[checkFields['fields']]}`, 'warning');
         }
+        this.setLoadSpinner(true);
     }
     /**
      *
@@ -89,5 +94,8 @@ export class SignupComponent implements OnInit {
      */
     private checkFormHasError(name: string): boolean {
         return this.service.checkFormHasError(name, this.signupFormGroup);
+    }
+    private setLoadSpinner(value : boolean) {
+      this.spinnerIcon = value;
     }
 }

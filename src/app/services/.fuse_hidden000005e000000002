@@ -252,22 +252,7 @@ export class CommonService {
       const temp = _fb.get(name);
       return (temp.invalid && temp.touched);
   }
- public findInvalidControls(_fb: any, checkAllFields: boolean = false): object {
-     let invalid = [];
-     const controls = _fb.controls;
-     const _names = Object.keys(controls);
-     for (const name of _names) {
-         if (controls[name].invalid) {
-             controls[name].markAsTouched({onlySelf: true});
-            if (!checkAllFields) {
-                return {'valid': false, 'fields': name};
-            } else if (checkAllFields) {
-                invalid.push(name);
-            }
-         }
-     }
-     return checkAllFields ? {'valid': false, 'fields': invalid} : {'valid': true, 'fields': ''} ;
-   }
+
   // components headers and sidebars common function
      /*
      * @param {any} setting date

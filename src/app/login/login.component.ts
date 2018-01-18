@@ -27,6 +27,7 @@ export class LoginComponent implements OnInit {
         'username': undefined,
     };
     headers: any;
+    spinnerIcon: boolean = true;
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
         this.headers = new Headers({ 'content-type': 'application/json'});
         this.loginForm = this.fb.group({
@@ -39,6 +40,7 @@ export class LoginComponent implements OnInit {
 
 
     onLoggedin(): void {
+        this.setLoadSpinner(false);
         let loginContent = this.loginForm.value;
         let _body = this.service.renameObjectAllKeys(Object.keys(this.mappingKeys), Object.values(this.mappingKeys), loginContent);
         _body = JSON.stringify(_body);
@@ -59,6 +61,7 @@ export class LoginComponent implements OnInit {
               (error) => {
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
                   this.service.showGlobalAlert(msg);
+                  this.setLoadSpinner(true);
               }
           );
     }
@@ -71,5 +74,9 @@ export class LoginComponent implements OnInit {
      */
     private checkFormHasError(name: string): boolean {
         return this.service.checkFormHasError(name, this.loginForm);
+    }
+
+    private setLoadSpinner(value : boolean) {
+      this.spinnerIcon = value;
     }
 }

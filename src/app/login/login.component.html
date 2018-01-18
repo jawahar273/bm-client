@@ -23,8 +23,9 @@
                          class="form-control input-underline input-lg" id="loginPassword1" placeholder="Password">
                     </div>
                 </div>
-                <button class="btn rounded-btn" type="submit" >
+                <button class="btn rounded-btn" type="submit"  [disabled]="!spinnerIcon">
                      Log in 
+                     <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="spinnerIcon"></i>
                 </button>
                 &nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
