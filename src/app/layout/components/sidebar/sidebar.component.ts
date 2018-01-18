@@ -40,7 +40,7 @@ export class SidebarComponent {
       console.log("dsajfklajfkdsalfdsa"+this.datePickerModel);
     }
     onAmountSubmit() {
-        const datePicker = document.getElementById('datePickerModel').value;
+        const datePicker = (document.getElementById('datePickerModel') as HTMLInputElement).value;
         this.service.setBudgetAmount(this.sideBarAmountModel, datePicker);
         // debugger;
     }

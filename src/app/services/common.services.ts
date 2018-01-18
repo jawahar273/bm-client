@@ -25,6 +25,8 @@ export class CommonService {
         'detail': undefined,
         'items': undefined,
     };
+    public clientErrorCode = new Set([400, 401, 402, 403, 404, 405, 406, 407, 408, 409]);
+    public serverErrorCode = new Set([500, 501, 502, 503, 504, 505, 506, 507, 508, 509]);
     public currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
 
 
@@ -130,7 +132,7 @@ export class CommonService {
     public isClinetOrServerSidesError(status: Object, lookUpField?: any, extraInfo = true): string {
         console.log('statusMessage: ' + typeof status);
         const status_code: number = status['status_code'];
-        if (400 <= status_code < 500) {
+        if (this.clientErrorCode.has(status_code)) {
             // check the lookupfield is ``undefined` if so then assign the `detail` field.
             lookUpField = !!lookUpField ? lookUpField : this.globalServiceErrorMapping;
             let msg;
@@ -151,9 +153,10 @@ export class CommonService {
                 msg = 'unexpected error occured';
             }
             return msg;
-        } else if (500 <= status_code < 600) {
+        } else if (this.serverErrorCode.has(status_code)) {
             return 'Server error';
         }
+        return 'Error on ower end';
     }
     /**
      *
@@ -307,8 +310,10 @@ export class CommonService {
              (error) => {
                  const msg = this.isClinetOrServerSidesError(error);
                  this.showGlobalAlert(msg);
+                 return '';
              }
            );
+           return '';
     }
 
     public setBudgetAmount(amount: number, date: any): void {
