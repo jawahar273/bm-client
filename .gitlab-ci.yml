@@ -11,5 +11,6 @@ stages:
 
 
 simple_test:
-  - npm -v
-  - npm start
+  - script:
+    - npm -v
+    - npm start
