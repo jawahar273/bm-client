@@ -79,12 +79,13 @@ export class SignupComponent implements OnInit {
                   (error) => {
                       const msg = this.service.isClinetOrServerSidesError(error, this.serviceMappingForErrorHandling);
                       this.service.showGlobalAlert(msg);
+                      this.setLoadSpinner(true);
                   }
               );
         } else {
           this.service.showGlobalAlert(`Check the fields again ${this.serviceMappingFields[checkFields['fields']]}`, 'warning');
+          this.setLoadSpinner(true);
         }
-        this.setLoadSpinner(true);
     }
     /**
      *

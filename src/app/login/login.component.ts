@@ -38,10 +38,11 @@ export class LoginComponent implements OnInit {
 
     ngOnInit() {}
 
-
     onLoggedin(): void {
-        this.setLoadSpinner(false);
-        let loginContent = this.loginForm.value;
+      this.setLoadSpinner(false);
+      let loginContent = this.loginForm.value;
+      const checkFields = this.service.findInvalidControls(loginContent);
+      if (checkFields) {
         let _body = this.service.renameObjectAllKeys(Object.keys(this.mappingKeys), Object.values(this.mappingKeys), loginContent);
         _body = JSON.stringify(_body);
         // debugger;
@@ -64,6 +65,7 @@ export class LoginComponent implements OnInit {
                   this.setLoadSpinner(true);
               }
           );
+      }
     }
 
     /**
