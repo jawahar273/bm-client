@@ -15,8 +15,7 @@ stages:
   - npm start
 
 job1:
+  stage: build
   script: *build_script
-  stage: 
-    - 'build'
   only:
     - master
