@@ -1,5 +1,4 @@
 before_script:
-  - lsb_release -a
   - curl -sL https://deb.nodesource.com/setup_6.x | bash -
   - apt-get install -y nodejs
   - which node
