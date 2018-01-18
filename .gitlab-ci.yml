@@ -12,7 +12,10 @@ stages:
 
 .script: &build_script
   - npm -v
+  - cd  /builds/jawahar273/bm-client
+  - npm start
 
-simple_test:
+job1:
+  stage: build
   script: *build_script
   only: master
