@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbDropdownModule, NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
@@ -14,6 +15,7 @@ import { HeaderComponent } from './components/header/header.component';
         LayoutRoutingModule,
         TranslateModule,
         NgbDropdownModule.forRoot(),
+        ReactiveFormsModule,
         NgbModule.forRoot(),
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent]

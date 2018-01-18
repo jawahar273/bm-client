@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
+import * as moment from 'moment';
 
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
@@ -24,9 +25,13 @@ export class CommonService {
         'detail': undefined,
         'items': undefined,
     };
+    public currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
 
 
     private commonURL = 'http://127.0.0.1:8000/api';
+
+    // components headers and sidebar var
+    public budgetAmount: number = 0;
 
     constructor(private http: Http) {
         this.headers = new Headers({ 'Accept': 'application/json',
@@ -67,11 +72,13 @@ export class CommonService {
      * 
      * @param str1 first part of the url.
      * @param str2 second part of the url.
+     * @param {boolean} slash to add slash in the end
      * @description to help in concating the base url with the given url
      * and the end slash is must as it is configure in server.
      */
-    public joinURL(str1: string, str2: string) {
-        return `${str1}/${str2}/`;
+    public joinURL(str1: string, str2: string, slash=true): string {
+        const addSlash = slash ? '/' : '';
+        return `${str1}/${str2}${addSlash}`;
     }
 
     public get(url: string, headers?: Headers): Observable<any []> {
@@ -98,7 +105,13 @@ export class CommonService {
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
-
+    public updateOnly(url: string, headers?: Headers, body?: any): Observable<any[]> {
+        url = this.joinURL(this.commonURL, url);
+        const options = new RequestOptions({ headers: headers });
+        return this.http.patch(url, body, options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json()));
+    }
     public delete(url: string, headers?: Headers): Observable<any[]> {
         url = this.joinURL(this.commonURL, url);
         const options = new RequestOptions({ headers: headers });
@@ -138,7 +151,6 @@ export class CommonService {
                 msg = 'unexpected error occured';
             }
             return msg;
-            return msg;
         } else if (500 <= status_code < 600) {
             return 'Server error';
         }
@@ -157,6 +169,8 @@ export class CommonService {
                 return `${preCommonMsg} Please Login again ${sufCommonMsg} `;
             case 403:
                 return `${preCommonMsg} Somthing worng with request content ${sufCommonMsg} `;
+            case 404:
+                return `${preCommonMsg} The element might not present in the system ${sufCommonMsg}`;
             //   default:
             //       return `${preCommonMsg}  ${sufCommonMsg} `;
         }
@@ -238,5 +252,86 @@ export class CommonService {
       const temp = _fb.get(name);
       return (temp.invalid && temp.touched);
   }
+
+  // components headers and sidebars common function
+     /*
+     * @param {any} setting date
+     * get the budget amount  from the service if the argument is undefine
+     * the parameter to service is current month and year.
+     */
+    public getBudgetAmount(date?:any): string {
+        // debugger;
+        let monthYearFormat;
+        const currentMonthYear = this.getMonthYear(this.currentDateWithMomentJS)
+        if (date && this.getMonthYear(date) !== currentMonthYear) {
+            monthYearFormat = moment(date).format('YYYY-MM-DD');
+            monthYearFormat = this.getMonthYear(monthYearFormat);
+            return this._getBudgetAmount(monthYearFormat);
+             
+        } 
+
+          //.substr(0, this.currentDateWithMomentJS.lastIndexOf('-'));
+           return this._getBudgetAmount(currentMonthYear, true);
+        
+    }
+    // bmt => budget amount today
+    private _getBudgetAmount(monthYearFormat: string, bmt=false): string {
+        const url = `package/mba/${monthYearFormat}`;
+        const _body = {'month_year': `${monthYearFormat}`}
+        this.get(url, this.headers)
+           .subscribe(
+             (data) => {
+                 if (bmt){
+                    this.budgetAmount = parseFloat(data[0]['budget_amount']);
+                    return data[0]['budget_amount'];
+                 } else {
+                     return data[0]['budget_amount'];
+                 }
+                 // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
+             },
+             (error) => {
+                 const msg = this.isClinetOrServerSidesError(error);
+                 this.showGlobalAlert(msg);
+             }
+           );
+    }
+
+    public setBudgetAmount(amount: number, date: any): void {
+        const temp = moment(date).format('YYYY-MM-DD');
+        const monthYearFormat = this.getMonthYear(temp);
+        const url = 'package/mba';
+        const _body = {'budget_amount': amount};
+        this.update(this.joinURL(url, monthYearFormat, false), this.headers, _body )
+           .subscribe(
+             (data) => {
+                 if (monthYearFormat == data['month_year'])
+                    this.budgetAmount = parseFloat(data['budget_amount']);
+                 // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
+             },
+             (error) => {
+                 // creat the element is it not present
+                 if (error['status_code'] == 404) {
+                     _body['month_year'] = monthYearFormat;
+                     this.post(url, this.headers, _body)
+                     .subscribe(
+                         (data) => {
+                             this.showGlobalAlert('new date for buget amount created', 'success');
+                         },
+                         (error) => {
+                            const msg = this.isClinetOrServerSidesError(error);
+                            this.showGlobalAlert(msg);
+                         }
+                     );
+                 } else {
+                    const msg = this.isClinetOrServerSidesError(error);
+                    this.showGlobalAlert(msg);
+                 }
+             }
+           );   
+    }
+
+    public getMonthYear(data: string) {
+        return  `${data.substr(0, data.lastIndexOf('-'))}-01`; 
+    }
 
 }

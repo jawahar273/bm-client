@@ -94,7 +94,7 @@
                 <ngx-datatable
                 class="bootstrap"
                 [limit]="20"
-                 [rowHeight]="'auto'"
+                 [rowHeight]=" getIsMobileScreen() ? 'standard' : 'auto' "
                  #dashTable
                 [rows]="tableContent">
         <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow (toggle)="onDetailToggle($event)">
@@ -196,7 +196,6 @@
                         </ngx-datatable-column>
                         <ngx-datatable-column name="Action" prop="id">
                             <ng-template let-column="column"  let-sort="sortFn" ngx-datatable-header-template>
-                                <span (click)="sort()">{{column?.name}}</span>
                             </ng-template>
                             <ng-template let-row="row" let-rowIndex="rowIndex" 
                             let-value="value" ngx-datatable-cell-template >

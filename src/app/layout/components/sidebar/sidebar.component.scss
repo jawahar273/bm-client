@@ -96,7 +96,14 @@ $topnav-background-color: #222;
 .nested-menu {
     .list-group-item {
         cursor: pointer;
+
+        .popover-header {
+           color: black;
+           background-color: red;
+        }
+
     }
+
     .nested {
         list-style-type: none;
     }

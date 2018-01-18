@@ -1,7 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {ReactiveFormsModule} from "@angular/forms";
+import { ReactiveFormsModule } from '@angular/forms';
+
 import { HttpModule } from '@angular/http';
 
 import { PageHeaderModule } from '../../shared';
@@ -16,10 +17,10 @@ import { ListedItemsComponent } from './listed-items/listed-items.component';
     CommonModule,
     EntryRoutingModule,
     ListedItemsModule,
-    ReactiveFormsModule,
     NgbModule.forRoot(),
     HttpModule,
     PageHeaderModule,
+    ReactiveFormsModule,
   ],
   declarations: [
   EntryComponent,

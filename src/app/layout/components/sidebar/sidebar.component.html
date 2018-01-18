@@ -9,6 +9,62 @@
         <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Charts' | translate }}
         </a>
+        <div class="nested-menu">
+            <a class="list-group-item" >
+                <span placement="bottom" [ngbTooltip]="sideBarAmountToolTip"
+                    trigger="click:focus" (click)="open(sideBarAmountModelcontent)">
+                    <i class="fa fa-plus"></i><!--  {{ 'Menu1' | translate }} -->
+                    <ng-template #sideBarAmountToolTip>
+                        <strong>
+                            Budget Amount of this Month
+                        </strong>
+                    </ng-template>
+                    Amount: {{service.budgetAmount | currency:"&#8377;"}}
+                </span>
+            </a>
+            <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Setting Budget Amount</h4>
+                <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input  type="number" class="form-control"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
+                            >
+                    </div>
+                    <div class="input-group">
+                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                            <input  type="text" class="form-control" name="datePicker"
+                            id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel" ngbDatepicker #d="ngbDatepicker">
+                            <span class="btn btn-outline-secondary" (click)="d.toggle();" type="button">
+                              <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
+                            </span>
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-info" (click)="onAmountSubmit()" >Submit</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+              </div>
+            </ng-template>
+<!--             <li class="nested" [class.expand]="showMenu === 'bm'">
+                <ul class="submenu">
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
+                    </li>
+                </ul>
+            </li> -->
+        </div>
         <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Tables' | translate }}
         </a>
@@ -24,7 +80,7 @@
         <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' | translate }}
         </a>
-        <div class="nested-menu">
+<!--         <div class="nested-menu">
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <span><i class="fa fa-plus"></i>&nbsp; {{ 'Menu' | translate }}</span>
             </a>
@@ -41,7 +97,7 @@
                     </li>
                 </ul>
             </li>
-        </div>
+        </div> -->
         <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ 'Blank Page' | translate }}
         </a>
@@ -50,3 +106,4 @@
         </a> -->
     </div>                    
 </nav>
+
