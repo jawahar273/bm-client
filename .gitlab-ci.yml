@@ -10,7 +10,7 @@ stages:
   - deploy
 
 
+.script: &build_script
+  - npm -v
+
 simple_test:
-  - script:
-    - npm -v
-    - npm start
