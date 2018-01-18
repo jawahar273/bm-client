@@ -14,3 +14,4 @@ stages:
   - npm -v
 
 simple_test:
+  script: *build_script
