@@ -17,6 +17,6 @@ stages:
 job1:
   script: *build_script
   stage: 
-    - build
+    - 'build'
   only:
-    - master
+    - 'master'
