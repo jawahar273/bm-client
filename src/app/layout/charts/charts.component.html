@@ -14,6 +14,14 @@
                 </div>
                 <div class="card-footer">
                     get the current's month group
+                    <span placement="top" [ngbTooltip]=tipDashTableContent triggers="click">
+                        <i class="fa fa-question-circle "></i>
+                        <ng-template #tipDashTableContent>
+                            <ol>
+                                <li>On 2 entry alone the radar chart show in as line</li>
+                            </ol>
+                        </ng-template>
+                    </span>
                 </div>
             </div>
         </div>
@@ -33,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="row">
+<!--     <div class="row">
         <div class="col col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
@@ -47,12 +55,12 @@
                 </div>
                 <div class="card-footer">
                     getting all years budget amount and spend amount
-                    <!-- <button class="btn btn-info btn-sm" (click)="randomize()">Update</button> -->
-                            <!-- <select id="month" name="month">
+                     <button class="btn btn-info btn-sm" (click)="randomize()">Update</button> 
+                             <select id="month" name="month">
                                 <option *ngFor="let month of service.listOfMonths" [ngValue]="month.value">
                                     {{month.name}}
                                 </option>
-                            </select> -->
+                            </select> 
                             <form [formGroup]="rangeMonthAndYear" (ngSubmit)="onSumitForm(rangeMonthAndYear.value)"
                              class="form-inline">
                                 <div class="form-group">
@@ -93,7 +101,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </div> -->
     <!-- <div class="row">
         <div class="col col-sm-6">
             <div class="card mb-3">

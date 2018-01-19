@@ -32,13 +32,13 @@
               <div class="modal-body">
                 <div class="form-horizontal">
                     <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input  type="number" class="form-control"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
+                            <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
+                            <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
                             >
                     </div>
                     <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                            <input  type="text" class="form-control" name="datePicker"
+                            <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
+                            <input  type="text" class="form-control input-underline" name="datePicker"
                             id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel" ngbDatepicker #d="ngbDatepicker">
                             <span class="btn btn-outline-secondary" (click)="d.toggle();" type="button">
                               <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>

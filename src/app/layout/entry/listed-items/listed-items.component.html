@@ -1,15 +1,16 @@
-<div [formGroup]="formGroupToList" class="">
+<div [formGroup]="formGroupToList" class="input-group">
   <input type="text" name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"
   formControlName="name"
   placeholder="hint to remember"
-   class="form-control col-xl-6"
+   class="form-control input-underline"
    [ngClass]="{'has-error':checkFormError('name')}"
   />
   <input type="text" name="entryGroupItemsAmount-{{indx}}" id="entryGroupItemsAmount-{{indx}}"
    formControlName="amount"
    pattern="[0-9]{1,4}\.?[0-9]{0,2}"
   placeholder="amount Eg: 2001.12"
-   class="form-control col-xl-6"
+   class="form-control input-underline"
+   style="margin-right: 2%;" 
    [ngClass]="{'has-error':checkFormError('amount')}"/>
 
      <span (click)="addItem()">

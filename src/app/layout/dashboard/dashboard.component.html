@@ -90,7 +90,17 @@
         </div> -->
         <div class="col col-xl-12 col-lg-12 col-sm-12">
             <div class="card mb-3 ">
-                <div class="card-header">List Spendings</div>
+                <div class="card-header">
+                    List Spendings
+                    <span placement="top" [ngbTooltip]=tipDashTableContent triggers="click">
+                        <i class="fa fa-question-circle "></i>
+                        <ng-template #tipDashTableContent>
+                            <ol>
+                                <li>Colums are resiable</li>
+                            </ol>
+                        </ng-template>
+                    </span>
+                </div>
                 <ngx-datatable
                 class="bootstrap"
                 [limit]="20"
@@ -98,9 +108,14 @@
                  #dashTable
                 [rows]="tableContent">
         <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow (toggle)="onDetailToggle($event)">
-            <ng-template let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
+            <ng-template  let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
              ngx-datatable-row-detail-template>
-                <div class="row">
+                <div class="row" *ngIf="getIsMobileScreen() then toMobileRendering else NoToMobileRendering">
+                </div>
+                <ng-template #NoToMobileRendering>
+                    <p style="text-align: center;font-style: bold;">Only for mobile rendering</p>
+                </ng-template>
+                <ng-template #toMobileRendering>
                     <ul class="list-group col-sm-12">
                         <li class="list-group-item">
                             <strong>Bundle Name</strong> : {{row.name}}
@@ -132,7 +147,7 @@
                             </span>
                         </li>                          
                     </ul>
-                </div>
+                </ng-template>
             </ng-template>
         </ngx-datatable-row-detail>
         <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">

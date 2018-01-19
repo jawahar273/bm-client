@@ -170,7 +170,7 @@ export class ChartsComponent implements OnInit {
         });
 
         this.getRaderChartData();
-        this.getBarChart();
+        // this.getBarChart(); // remove comment to active bar chart
      }
 
     ngOnInit() { }

@@ -41,7 +41,8 @@ export class LoginComponent implements OnInit {
     onLoggedin(): void {
       this.setLoadSpinner(false);
       let loginContent = this.loginForm.value;
-      const checkFields = this.service.findInvalidControls(loginContent);
+      const checkFields = this.service.findInvalidControls(this.loginForm);
+      // debugger;
       if (checkFields) {
         let _body = this.service.renameObjectAllKeys(Object.keys(this.mappingKeys), Object.values(this.mappingKeys), loginContent);
         _body = JSON.stringify(_body);
