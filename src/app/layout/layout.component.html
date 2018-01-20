@@ -2,7 +2,7 @@
 <app-sidebar></app-sidebar>
 <section class="main-container">
     <p *ngFor="let alert of service.globalalertBox">
-        <ngb-alert [type]="alert.type" (close)="service.closeGlobalAlert(alert)">
+        <ngb-alert [type]="alert.type" (close)="closeGlobalAlert(alert)">
             {{ alert.message }}
         </ngb-alert>
     </p>

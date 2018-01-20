@@ -14,4 +14,7 @@ export class LayoutComponent implements OnInit {
     }
 
     ngOnInit() {}
+    public closeGlobalAlert(alert) {
+    	this.service.closeGlobalAlert(alert);
+    }
 }

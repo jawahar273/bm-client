@@ -19,7 +19,7 @@
                             Budget Amount of this Month
                         </strong>
                     </ng-template>
-                    Amount: {{service.budgetAmount | currency:"&#8377;"}}
+                    Amount: {{getBudgetAmount() | currency:"&#8377;"}}
                 </span>
             </a>
             <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">

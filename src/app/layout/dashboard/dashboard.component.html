@@ -110,11 +110,11 @@
         <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow (toggle)="onDetailToggle($event)">
             <ng-template  let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
              ngx-datatable-row-detail-template>
-                <div class="row" *ngIf="getIsMobileScreen() then toMobileRendering else NoToMobileRendering">
-                </div>
-                <ng-template #NoToMobileRendering>
+            <div class="row" *ngIf="getIsMobileScreen() then toMobileRendering else NoToMobileRendering">
+            </div>
+<!--                 <ng-template #NoToMobileRendering>
                     <p style="text-align: center;font-style: bold;">Only for mobile rendering</p>
-                </ng-template>
+                </ng-template> -->
                 <ng-template #toMobileRendering>
                     <ul class="list-group col-sm-12">
                         <li class="list-group-item">
@@ -151,9 +151,9 @@
             </ng-template>
         </ngx-datatable-row-detail>
         <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
-            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
-                <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded" title="Expand/Collapse Row"
-                    (click)="toggleExpandRow(row)">
+            <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template >
+                <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                    (click)="toggleExpandRow(row)" placement="right" ngbTooltip="drop down only for mobile view" >
                 </a>
             </ng-template>
             <!-- details shower -->

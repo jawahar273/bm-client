@@ -156,7 +156,7 @@ export class EntryComponent implements OnInit {
    * @return {boolean}
    * @description check the form is valid or not
    */
-  private checkFormHasError(name: string): boolean {
+  public checkFormHasError(name: string): boolean {
       return this.service.checkFormHasError(name, this.entryForm);
   }
 

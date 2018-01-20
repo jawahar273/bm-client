@@ -39,6 +39,9 @@ export class SidebarComponent {
     temp_() {
       console.log("dsajfklajfkdsalfdsa"+this.datePickerModel);
     }
+    public getBudgetAmount():any {
+      return this.service.budgetAmount;
+    }
     onAmountSubmit() {
         const datePicker = (document.getElementById('datePickerModel') as HTMLInputElement).value;
         this.service.setBudgetAmount(this.sideBarAmountModel, datePicker);

@@ -4,7 +4,7 @@ before_script:
   - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
   - apt-get update
   - apt-get install -y nodejs
-  - apt-get install -y yarn
+  - apt-get install -y yarn=1.3.2
   - which node
 
 stages:
@@ -14,11 +14,10 @@ stages:
 
 
 .script: &build_script
-  - npm -v
   - yarn -v
   - cd  /builds/jawahar273/bm-client
   - yarn install
-  - yarn add  @angular-devkit/core --save-dev
+  - yarn add  @angular-devkit/core@0.0.28 --save-dev
   - yarn start
 
 job1:

@@ -7,7 +7,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 ### How to start
-**Note** that this seed project requires  **node >=v6.9.0 and npm >=3**.
+**Note** that this seed project requires  **node >=v6.9.0 and npm >=3/yarn >=1.3.2**.
 
 In order to start the project use:
 ```bash
@@ -35,6 +35,6 @@ Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.
 Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 Before running the tests make sure you are serving the app via `ng serve`.
 
-###credit
+### credit
 
 This project is a port of the famous Free Admin Bootstrap Theme [demo](http://rawgit.com/start-angular/SB-Admin-BS4-Angular-5/master/dist/).
