@@ -29,7 +29,7 @@ export class SignupComponent implements OnInit {
     signupFormGroup: FormGroup;
     showErrorInButton: boolean = false;
     spinnerIcon: boolean = true;
-    constructor(private _fb: FormBuilder, private service: CommonService, private router: Router) {
+    constructor(private _fb: FormBuilder, public service: CommonService, private router: Router) {
         this.signupFormGroup = this._fb.group({
             'signUpUserName': ['', Validators.required],
             'signUpEmail': ['', Validators.compose([Validators.required, Validators.email])],
@@ -49,7 +49,7 @@ export class SignupComponent implements OnInit {
     }
     ngOnInit() {}
 
-    private confirmPasswordValidator(_fg: FormGroup = this.signupFormGroup) {
+    public confirmPasswordValidator(_fg: FormGroup = this.signupFormGroup) {
         if (_fg.get('signUpNewPassword').value !== _fg.get('signUpConfirmPassword').value) {
             this.showErrorInButton = true;
             this.service.showGlobalAlert('New password and confirm password are not same.');
@@ -59,7 +59,7 @@ export class SignupComponent implements OnInit {
         return true;
     }
 
-    private onSignUpFormSubmit(formContent: Object): void {
+    public onSignUpFormSubmit(formContent: Object): void {
         // this.service.post('rest-auth/registration/')
         // const pass_status = this.confirmPasswordValidator();
         const checkFields = this.service.findInvalidControls(this.signupFormGroup);
@@ -93,10 +93,13 @@ export class SignupComponent implements OnInit {
      * @return {boolean}
      * @description check the form is valid or not
      */
-    private checkFormHasError(name: string): boolean {
+    public checkFormHasError(name: string): boolean {
         return this.service.checkFormHasError(name, this.signupFormGroup);
     }
-    private setLoadSpinner(value : boolean) {
+    public setLoadSpinner(value : boolean) {
       this.spinnerIcon = value;
+    }
+    public closeGlobalAlert(alert) {
+      this.service.closeGlobalAlert(alert);
     }
 }

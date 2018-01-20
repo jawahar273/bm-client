@@ -75,11 +75,11 @@ export class LoginComponent implements OnInit {
      * @return {boolean}
      * @description check the form is valid or not
      */
-    private checkFormHasError(name: string): boolean {
+    public checkFormHasError(name: string): boolean {
         return this.service.checkFormHasError(name, this.loginForm);
     }
 
-    private setLoadSpinner(value : boolean) {
+    public setLoadSpinner(value : boolean) {
       this.spinnerIcon = value;
     }
 }

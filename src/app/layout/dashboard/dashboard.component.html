@@ -104,10 +104,10 @@
                 <ngx-datatable
                 class="bootstrap"
                 [limit]="20"
-                 [rowHeight]=" getIsMobileScreen() ? 'standard' : 'auto' "
+                [rowHeight]="60"
                  #dashTable
                 [rows]="tableContent">
-        <ngx-datatable-row-detail [rowHeight]="auto" #myDetailRow (toggle)="onDetailToggle($event)">
+        <ngx-datatable-row-detail [rowHeight]="40" #myDetailRow (toggle)="onDetailToggle($event)">
             <ng-template  let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
              ngx-datatable-row-detail-template>
             <div class="row" *ngIf="getIsMobileScreen() then toMobileRendering else NoToMobileRendering">

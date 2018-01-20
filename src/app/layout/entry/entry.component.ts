@@ -178,7 +178,7 @@ export class EntryComponent implements OnInit {
    * @return {void}
    * @description this function is called on the event `onsubmit`.
    */
-  private entrySubmit(): void {
+  public entrySubmit(): void {
     if (this.entryForm.valid && this.submitForm) {
         // entryFormAlert
         this.hideLoadingSpin(false);
@@ -224,6 +224,10 @@ export class EntryComponent implements OnInit {
         this.hideLoadingSpin(true);
     }
     this.submitForm = false;
+ }
+
+ public getEntryGroupItemsControl() {
+   return (<FormArray>this.entryForm.get('entryGroupItems')).controls;
  }
 
  private hideLoadingSpin(condition: boolean): void {

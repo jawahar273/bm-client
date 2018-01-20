@@ -18,7 +18,7 @@ stages:
   - cd  /builds/jawahar273/bm-client
   - yarn install
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
-  - yarn start
+  - yarn build
 
 job1:
   stage: build

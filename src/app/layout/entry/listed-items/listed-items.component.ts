@@ -25,11 +25,11 @@ export class ListedItemsComponent implements OnInit {
     return (temp.invalid && temp.touched);
   }
 
-  private addItem() {
+  public addItem() {
     this.addItemList.emit();
   }
 
-  private deleteItem(index: number) {
+  public deleteItem(index: number) {
     this.deleteItemList.emit(index);
   }
 
