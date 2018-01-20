@@ -11,16 +11,18 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 In order to start the project use:
 ```bash
-
-$ cd SB-Admin-BS4-Angular-5
+$ git clone https://gitlab.com/jawahar273/bm-client.git
+$ cd bm-client
 # install the project's dependencies
-$ npm install
-# watches your files and uses livereload by default run `npm start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-$ npm start
+$ yarn
+# watches your files and uses livereload by default run `yarn start` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+$ yarn start
 # prod build, will output the production application in `dist`
 # the produced code can be deployed (rsynced) to a remote server
 $ npm run build
 ```
+
+> install `yarn` to install dependencies quickly.
 
 ### Code scaffolding
 
