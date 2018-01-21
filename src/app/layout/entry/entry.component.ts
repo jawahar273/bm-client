@@ -173,6 +173,10 @@ export class EntryComponent implements OnInit {
         (<FormArray>this.entryForm.controls['entryGroupItems']).removeAt(index);
     }
   }
+
+  public trackByFnForEntryGroupItems(index, item) { 
+      return item.id; 
+  }
   /**
    *
    * @return {void}

@@ -5,14 +5,19 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
+
+import { ServiceWorkerModule } from '@angular/service-worker';
+
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
+import { environment } from '../environments/environment';
 
 import { CommonService } from './services/common.services';
 
@@ -40,6 +45,7 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         AppRoutingModule,
         NgbModule.forRoot(),
+        environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
     ],
     declarations: [AppComponent],
     providers: [AuthGuard, CommonService],

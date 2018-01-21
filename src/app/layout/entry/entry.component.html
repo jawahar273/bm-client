@@ -28,7 +28,7 @@
 			</div>
 			<!-- formArray to add or remote fields -->
 			<div formArrayName="entryGroupItems" >
-				<div  *ngFor="let form of getEntryGroupItemsControl(); let indx = index; trackBy: indx">
+				<div  *ngFor="let form of getEntryGroupItemsControl(); let indx = index; trackBy: trackByFnForEntryGroupItems">
 					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->
 					   <app-listed-items [count]="indx"
 						[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"
