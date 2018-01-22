@@ -75,7 +75,8 @@ export class EntryComponent implements OnInit {
    */
   private showFormAlert( msg: string , _type: string = 'danger') {
       this.entryFormAlert = [];
-     this.entryFormAlert.push({type: _type, message: msg});
+     // this.entryFormAlert.push({type: _type, message: msg});
+     this.service.showGlobalAlert(msg, _type);
   }
 
   /**
@@ -84,12 +85,13 @@ export class EntryComponent implements OnInit {
    * @description used to close alert in display.
    */
   public closeAlert(alert?: Object, removeAll?: boolean ) {
-      if (removeAll) {
-          this.entryFormAlert = [];
-      } else {
-          const index: number = this.entryFormAlert.indexOf(alert);
-          this.entryFormAlert.splice(index, 1);
-      }
+      // if (removeAll) {
+      //     this.entryFormAlert = [];
+      // } else {
+      //     const index: number = this.entryFormAlert.indexOf(alert);
+      //     this.entryFormAlert.splice(index, 1);
+      // }
+      this.service.closeGlobalAlert(alert, removeAll);
   }
   /**
    *

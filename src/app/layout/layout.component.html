@@ -1,10 +1,10 @@
 <app-header></app-header>
 <app-sidebar></app-sidebar>
 <section class="main-container">
-<!--     <p *ngFor="let alert of service.globalalertBox">
+    <p *ngFor="let alert of service.globalalertBox">
         <ngb-alert [type]="alert.type" (close)="closeGlobalAlert(alert)">
             {{ alert.message }}
         </ngb-alert>
-    </p> -->
+    </p>
     <router-outlet></router-outlet>
 </section>

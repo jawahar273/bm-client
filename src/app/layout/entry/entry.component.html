@@ -1,7 +1,7 @@
 
 <div [@routerTransition] class="container-fluid pagination-centered"  >
 	<app-page-header [heading]="'Entry'" [icon]="'fa-etsy'"></app-page-header>
-	<p *ngFor="let alert of entryFormAlert">
+	<p *ngFor="let alert of globalalertBox">
 		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
 	</p>
 	<div class="row allow-center">

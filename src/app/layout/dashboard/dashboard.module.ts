@@ -6,6 +6,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
+import { PageHeaderModule } from '../../shared';
+
 import {
     TimelineComponent,
     NotificationComponent,
@@ -21,7 +23,8 @@ import { StatModule } from '../../shared';
         NgbTooltipModule.forRoot(),
         DashboardRoutingModule,
         StatModule,
-        NgxDatatableModule
+        NgxDatatableModule,
+        PageHeaderModule
     ],
     declarations: [
         DashboardComponent,
