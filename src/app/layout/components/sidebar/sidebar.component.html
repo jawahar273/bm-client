@@ -41,13 +41,13 @@
                             <input  type="text" class="form-control input-underline" name="datePicker"
                             id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel" ngbDatepicker #d="ngbDatepicker">
                             <span class="btn btn-outline-secondary" (click)="d.toggle();" type="button">
-                              <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer;"></i>
+                              <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer; color: black;"></i>
                             </span>
                     </div>
                 </div>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-info" (click)="onAmountSubmit()" >Submit</button>
+                <button class="btn btn-info" (click)="onAmountSubmit(c)" >Submit</button>
                 <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
               </div>
             </ng-template>

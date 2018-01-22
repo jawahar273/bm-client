@@ -16,6 +16,10 @@
 //         }
 // }
 
+textarea:not(textarea), textarea.form-control:not(textarea), input.form-control:not(textarea), input[type=text]:not(textarea), input[type=password]:not(textarea), input[type=email]:not(textarea), input[type=number]:not(textarea), [type=text].form-control:not(textarea), [type=password].form-control:not(textarea), [type=email].form-control:not(textarea), [type=tel].form-control:not(textarea), [contenteditable].form-control:not(textarea) {
+        border-radius: 0px;
+}
+
 .has-error {
         // border-bottom: 2px solid rgba(250, 56, 100, 0.80);
         box-shadow: inset 0 -2px 0 red !important;

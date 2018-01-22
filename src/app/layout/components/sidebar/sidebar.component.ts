@@ -36,15 +36,14 @@ export class SidebarComponent {
         }
     }
 
-    temp_() {
-      console.log("dsajfklajfkdsalfdsa"+this.datePickerModel);
-    }
+    
     public getBudgetAmount():any {
       return this.service.budgetAmount;
     }
-    onAmountSubmit() {
+   public onAmountSubmit(close: any) {
         const datePicker = (document.getElementById('datePickerModel') as HTMLInputElement).value;
-        this.service.setBudgetAmount(this.sideBarAmountModel, datePicker);
+        const output = this.service.setBudgetAmount(this.sideBarAmountModel, datePicker);
+        close('close')
         // debugger;
     }
 

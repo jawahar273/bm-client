@@ -301,10 +301,10 @@ export class CommonService {
              (data) => {
                  if (bmt){
                     this.budgetAmount = parseFloat(data[0]['budget_amount']);
-                    return data[0]['budget_amount'];
-                 } else {
-                     return data[0]['budget_amount'];
+                    // return data[0]['budget_amount'];
                  }
+                     return data[0]['budget_amount'];
+                 
                  // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
              },
              (error) => {
@@ -316,7 +316,7 @@ export class CommonService {
            return '';
     }
 
-    public setBudgetAmount(amount: number, date: any): void {
+    public setBudgetAmount(amount: number, date: any) {
         const temp = moment(date).format('YYYY-MM-DD');
         const monthYearFormat = this.getMonthYear(temp);
         const url = 'package/mba';
@@ -328,6 +328,7 @@ export class CommonService {
                     this.budgetAmount = parseFloat(data['budget_amount']);
                 
                 this.showGlobalAlert('date for buget amount updated', 'success');
+                return true;
 
                  // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
              },
@@ -339,10 +340,12 @@ export class CommonService {
                      .subscribe(
                          (data) => {
                             this.showGlobalAlert('new date for buget amount created', 'success');
+                            return true;
                          },
                          (error) => {
                             const msg = this.isClinetOrServerSidesError(error);
                             this.showGlobalAlert(msg);
+                            return false;
                          }
                      );
                  } else {
