@@ -28,6 +28,7 @@
     "@ngx-translate/core": "^8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
     "@swimlane/ngx-datatable": "*",
+    "angular-cli-ghpages": "^0.5.2",
     "bootswatch": "^4.0.0",
     "chart.js": "^2.7.1",
     "core-js": "^2.5.1",
