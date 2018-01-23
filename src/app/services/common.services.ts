@@ -35,6 +35,10 @@ export class CommonService {
     // components headers and sidebar var
     public budgetAmount: number = 0;
 
+    // components dashboard
+    public needTableUpdate: boolean = true;
+    public dataTableDashboard: Array<any>;
+
     constructor(private http: Http) {
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',

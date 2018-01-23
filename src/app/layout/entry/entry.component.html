@@ -28,9 +28,10 @@
 			</div>
 			<!-- formArray to add or remote fields -->
 			<div formArrayName="entryGroupItems" >
-				<div  *ngFor="let form of getEntryGroupItemsControl(); let indx = index; trackBy: trackByFnForEntryGroupItems">
+				<!-- <div  > -->
 					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->
 					   <app-listed-items [count]="indx"
+					   *ngFor="let form of getEntryGroupItemsControl(); let indx = index; trackBy: trackByFnForEntryGroupItems"
 						[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"
 						(addItemList)="addItem()"
 						(deleteItemList)="deleteItem(indx)">
@@ -38,7 +39,7 @@
 					<!-- <div formGroupName="{{indx}}">
 					</div>
  -->					<br>
-				</div>
+				<!-- </div> -->
 			</div>
 			<button (click)="submitForm=true;" class="btn app-button form-group right" [disabled]="!hideLoadSpin">
 				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>

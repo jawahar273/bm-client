@@ -15,27 +15,21 @@ import { Headers } from '@angular/http';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    public tableContent: Array<any> = [];
+    // public tableContent: Array<any> = [];
     private headers: any;
     private isMobileScreen: boolean;
     @ViewChild('dashTable') dashTable;
-    constructor(private service: CommonService) {
+    constructor(public service: CommonService) {
         this.isMobileScreen = window.innerWidth <= 992;
-        this.updateTable();
         // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
-        this.service.get('rest-auth/user', this.service.headers)
-            .subscribe(
-              (_data) => {
-                localStorage.setItem('userName', _data['username']);
-              },
-              (_error) => {
-                const msg = this.service.isClinetOrServerSidesError(_error, { 'detail': undefined });
-                this.service.showGlobalAlert(msg);
-              }
-            );
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+        if (this.service.needTableUpdate) {
+           this.updateTable();
+           this.service.needTableUpdate = false;
+        }
+    }
 
     /**
      * showErrorAlert
@@ -54,7 +48,7 @@ export class DashboardComponent implements OnInit {
     public updateTable(alert=true) {
         this.service.get('package/itemslist', this.service.headers).subscribe(
             (data) => {
-                this.tableContent = data;
+                this.service.dataTableDashboard = data;
                 console.log(data);
                 if (alert) {
                     let msg = 'table update';

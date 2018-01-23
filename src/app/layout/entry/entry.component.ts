@@ -199,6 +199,7 @@ export class EntryComponent implements OnInit {
                   (data) => {
                       this.showFormAlert('Content Updated', 'success');
                       this.hideLoadingSpin(true);
+                      this.service.needTableUpdate = true;
                     //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
@@ -214,6 +215,8 @@ export class EntryComponent implements OnInit {
                       console.log(data);
                       this.showFormAlert('Content Created', 'success');
                       this.hideLoadingSpin(true);
+                      this.service.needTableUpdate = true;
+                      
                     //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {

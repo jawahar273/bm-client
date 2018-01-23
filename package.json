@@ -1,7 +1,7 @@
 {
   "name": "BM",
   "version": "4.0.0",
-  "license": "MIT",
+  "license": "Apache",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ec true --port 4300 --proxy-config proxy.conf.json",
@@ -14,7 +14,6 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/core": "^0.0.28",
     "@angular/animations": "^5.0.1",
     "@angular/common": "^5.0.1",
     "@angular/compiler": "^5.0.1",
@@ -41,6 +40,7 @@
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
+    "@angular-devkit/core": "^0.0.28",
     "@angular/cli": "1.6.3",
     "@angular/compiler-cli": "^5.0.1",
     "@angular/language-service": "^5.0.1",

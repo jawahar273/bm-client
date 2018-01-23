@@ -93,12 +93,12 @@
             <div class="card mb-3 ">
                 <div class="card-header">
                     List Spendings
-                    <span placement="top" [ngbTooltip]=tipDashTableContent triggers="click">
+                    <span placement="top" [ngbTooltip]=tipDashTableContent>
                         <i class="fa fa-question-circle "></i>
                         <ng-template #tipDashTableContent>
-                            <ol>
+                            <ul>
                                 <li>Colums are resiable</li>
-                            </ol>
+                            </ul>
                         </ng-template>
                     </span>
                 </div>
@@ -107,7 +107,7 @@
                 [limit]="20"
                 [rowHeight]="60"
                  #dashTable
-                [rows]="tableContent">
+                [rows]="service.dataTableDashboard">
         <ngx-datatable-row-detail [rowHeight]="40" #myDetailRow (toggle)="onDetailToggle($event)">
             <ng-template  let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
              ngx-datatable-row-detail-template>
