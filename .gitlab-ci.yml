@@ -18,10 +18,16 @@ stages:
   - cd  /builds/jawahar273/bm-client
   - yarn install
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
-  - yarn build
+  - mkdir public
+  - yarn build -op public -bh bm-client
 
-job1:
+page_to_gitlab:
   stage: build
   script: *build_script
   only:
     - master
+  artifacts:
+    paths:
+    - public
+  only:
+  - master
