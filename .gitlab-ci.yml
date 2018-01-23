@@ -20,6 +20,7 @@ stages:
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
   - mkdir public
   - yarn build -op public -bh bm-client
+  - yarn global add angular-cli-ghpages
 
 page_to_gitlab:
   stage: build
