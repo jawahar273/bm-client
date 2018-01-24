@@ -80,27 +80,28 @@
         <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' | translate }}
         </a> -->
-<!--         <div class="nested-menu">
+        <hr style="background-color: white;color: white;width: 100%;" [hidden]="!service.isMobileScreen">
+        <div class="nested-menu" [hidden]="!service.isMobileScreen">
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <span><i class="fa fa-plus"></i>&nbsp; {{ 'Menu' | translate }}</span>
             </a>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
                     <li>
+                        <a [routerLink]="['/login']" (click)="onLoggedout()"><span>{{ 'Logout' | translate }}</span></a>
+                    </li>
+ <!--                    <li>
                         <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
                     </li>
                     <li>
                         <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
-                    </li>
+                    </li> -->
                 </ul>
             </li>
-        </div> -->
-        <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+        </div>
+<!--         <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-file-o"></i>&nbsp;{{ 'Blank Page' | translate }}
-        </a>
+        </a> -->
         
     </div>                    
 </nav>

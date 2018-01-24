@@ -18,6 +18,7 @@ export class DashboardComponent implements OnInit {
     // public tableContent: Array<any> = [];
     private headers: any;
     private isMobileScreen: boolean;
+    public hideLoadSpin: boolean = true;
     @ViewChild('dashTable') dashTable;
     constructor(public service: CommonService) {
         this.isMobileScreen = window.innerWidth <= 992;
@@ -46,6 +47,7 @@ export class DashboardComponent implements OnInit {
     }
 
     public updateTable(alert=true) {
+        this.hideLoadSpinIcon(false);
         this.service.get('package/itemslist', this.service.headers).subscribe(
             (data) => {
                 this.service.dataTableDashboard = data;
@@ -57,10 +59,13 @@ export class DashboardComponent implements OnInit {
                     }
                     this.showErrorAlert(msg, 'success');
                 }
+                this.hideLoadSpinIcon(true);
+
             },
             (error) => {
                 const msg = this.service.isClinetOrServerSidesError(error);
                 this.showErrorAlert(msg);
+                this.hideLoadSpinIcon(true);
             }
         );
     }
@@ -93,21 +98,25 @@ export class DashboardComponent implements OnInit {
                 );
             }
         }
-    toggleExpandRow(row) {
+    public toggleExpandRow(row) {
         console.log('Toggled Expand Row!', row);
         this.dashTable.rowDetail.toggleExpandRow(row);
     }
 
-    onDetailToggle(event) {
+    public onDetailToggle(event) {
         console.log('Detail Toggled', event);
     }
 
-    getObjectValue(t: Object): Array<any> {
+    public getObjectValue(t: Object): Array<any> {
         return Object.values(t);
     }
 
-    getIsMobileScreen(): boolean {
+    public getIsMobileScreen(): boolean {
         return this.isMobileScreen;
+    }
+
+    private hideLoadSpinIcon(value: boolean) {
+        this.hideLoadSpin = value;
     }
 
 }

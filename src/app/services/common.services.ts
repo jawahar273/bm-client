@@ -13,6 +13,7 @@ export class CommonService {
     requireUpdate: object;
     headers: Headers;
     today: Date;
+    isMobileScreen: boolean;
     listOfMonths: Array<object>;
     listOfYears: Array<number>;
     countOfYears: number;
@@ -40,6 +41,7 @@ export class CommonService {
     public dataTableDashboard: Array<any>;
 
     constructor(private http: Http) {
+        this.isMobileScreen = window.innerWidth <= 992;
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',
             'Authorization': ``,

@@ -15,7 +15,7 @@ export class SidebarComponent {
     private sideBarAmountModel: number = 0;
 
 
-    constructor(private service: CommonService, private modalService: NgbModal) {
+    constructor(public service: CommonService, private modalService: NgbModal) {
          this.service.getBudgetAmount();
          this.datePickerModel = this.service.currentDateWithMomentJS;
     }
@@ -66,4 +66,8 @@ export class SidebarComponent {
       return  `with: ${reason}`;
     }
   } 
+    onLoggedout() {
+        localStorage.removeItem('isLoggedin');
+        sessionStorage.removeItem('authToken');
+    }
 }
