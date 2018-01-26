@@ -6,7 +6,8 @@
     "resources": {
       "files": [
         "/icons/",
-        "/index.html"
+        "/index.html",
+        "ngsw-worker.js"
       ],
       "versionedFiles": [
         "/*.bundle.css",
