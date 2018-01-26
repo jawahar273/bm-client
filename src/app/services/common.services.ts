@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, isDevMode } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
@@ -31,7 +31,7 @@ export class CommonService {
     public currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
 
 
-    private commonURL = 'http://127.0.0.1:8000/api';
+    private commonURL:string;
 
     // components headers and sidebar var
     public budgetAmount: number = 0;
@@ -63,6 +63,11 @@ export class CommonService {
         this.startLimitOfYears = 2000;
         this.countOfYears = 10;
         this.generateYears();
+        if (isDevMode()) {
+            this.commonURL = 'http://127.0.0.1:8000/api';
+        } else {
+            this.commonURL = 'http://http://jawahar.pythonanywhere.com/api';
+        }
     }
     /**
      * generateYears
