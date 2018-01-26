@@ -11,7 +11,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 In order to start the project use:
 ```bash
-$ git clone https://gitlab.com/jawahar273/bm-client.git
+$ git clone https://github.com/jawahar273/bm-client.git
 $ cd bm-client
 # install the project's dependencies
 $ yarn
