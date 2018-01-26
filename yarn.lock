@@ -162,9 +162,9 @@
   dependencies:
     tslib "^1.7.1"
 
-"@angular/service-worker@^5.2.1":
-  version "5.2.1"
-  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-5.2.1.tgz#7c0172c55ddfeb8a360af46c4f6fa7b48eb9fb49"
+"@angular/service-worker@^5.2.2":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/service-worker/-/service-worker-5.2.2.tgz#bb0f174292bfce953af6ff971499c846e4d4f991"
   dependencies:
     tslib "^1.7.1"
 
