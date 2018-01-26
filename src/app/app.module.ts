@@ -44,7 +44,7 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         AppRoutingModule,
         NgbModule.forRoot(),
-        environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+        environment.production ? ServiceWorkerModule.register('bm-client/ngsw-worker.js') : [],
     ],
     declarations: [AppComponent],
     providers: [AuthGuard, CommonService],
