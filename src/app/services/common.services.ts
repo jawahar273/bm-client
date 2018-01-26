@@ -66,7 +66,7 @@ export class CommonService {
         if (isDevMode()) {
             this.commonURL = 'http://127.0.0.1:8000/api';
         } else {
-            this.commonURL = 'http://http://jawahar.pythonanywhere.com/api';
+            this.commonURL = 'http://jawahar.pythonanywhere.com/api';
         }
     }
     /**
