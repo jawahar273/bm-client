@@ -21,13 +21,14 @@ export class CommonService {
     globalalertBox: Array<any> = [];
     globalServiceErrorMapping = {
         'password': undefined,
-        'email': undefined,
+        'username': undefined,
         'non_field_errors': undefined,
         'detail': undefined,
         'items': undefined,
+        'month_year': undefined,
     };
-    public clientErrorCode = new Set([400, 401, 402, 403, 404, 405, 406, 407, 408, 409]);
-    public serverErrorCode = new Set([500, 501, 502, 503, 504, 505, 506, 507, 508, 509]);
+    public clientErrorCode = new Set([400, 401, 403, 404, 408, 410]);
+    public serverErrorCode = new Set([500, 502, 503, 504 ]);
     public currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
 
 
@@ -47,38 +48,11 @@ export class CommonService {
             'Authorization': ``,
         });
         this.today  = new Date();
-        this.listOfMonths = [{ 'name': 'January', 'value': '01' },
-            { 'name': 'February', 'value': '02' },
-            { 'name': 'March', 'value': '03' },
-            { 'name': 'April', 'value': '04' },
-            { 'name': 'May', 'value': '05' },
-            { 'name': 'June', 'value': '06' },
-            { 'name': 'July', 'value':  '07'},
-            { 'name': 'August', 'value': '08' },
-            { 'name': 'September', 'value': '09' },
-            { 'name': 'October', 'value': '10' },
-            { 'name': 'November', 'value': '11' },
-            { 'name': 'December', 'value': '12' }
-        ];
-        this.startLimitOfYears = 2000;
-        this.countOfYears = 10;
-        this.generateYears();
+
         if (isDevMode()) {
             this.commonURL = 'http://127.0.0.1:8000/api';
         } else {
-            this.commonURL = 'http://jawahar.pythonanywhere.com/api';
-        }
-    }
-    /**
-     * generateYears
-     */
-    public generateYears() {
-        const date = this.today;
-        const year = date.getFullYear();
-
-        // Make this year, and the 100 years before it available in the year <select>
-        for (let i = this.startLimitOfYears; i <= this.countOfYears; i++) {
-            this.listOfYears.push(i);
+            this.commonURL = 'https://jawahar.pythonanywhere.com/api';
         }
     }
     /**
