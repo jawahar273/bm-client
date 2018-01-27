@@ -3,7 +3,6 @@
  "dir": "ltr",
  "name": "Budget Manager",
  "short_name": "BM",
- "display": "fullscreen",
  "theme_color": "transparent",
  "orientation": "any",
  "background_color": "transparent",
@@ -47,4 +46,5 @@
    "density": "4.0"
   }
  ],
+ "display": "standalone"
 }
