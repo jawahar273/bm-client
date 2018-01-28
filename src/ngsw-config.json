@@ -15,9 +15,6 @@
         "/*.chunk.js"
       ],
       "urls": [],
-      "routing": {
-        "index": "/index.html"
-      }
     }
   }, {
     "name": "assets",
