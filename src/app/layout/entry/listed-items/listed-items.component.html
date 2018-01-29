@@ -11,9 +11,9 @@
    pattern="^\d{1,4}(\.\d{0,2})?$"
   placeholder="amount Eg: 2001.12"
    class="form-control input-underline"
+   title="Only 4 number and 2 number before point is allowed" 
    style="margin-right: 2%;" 
    [ngClass]="{'has-error':checkFormError('amount')}"/>
-
      <span (click)="addItem()">
        <i class="fa fa-plus-circle"></i>
      </span>
