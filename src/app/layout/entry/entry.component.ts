@@ -203,9 +203,9 @@ export class EntryComponent implements OnInit {
                     //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
-                      this.hideLoadingSpin(false);
                       const msg = this.service.isClinetOrServerSidesError(error);
                       this.showFormAlert(msg, 'danger' );
+                      this.hideLoadingSpin(false);
                   }
               );
         } else {

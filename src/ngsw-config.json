@@ -14,7 +14,7 @@
         "/*.bundle.js",
         "/*.chunk.js"
       ],
-      "urls": [],
+      "urls": []
     }
   }, {
     "name": "assets",
