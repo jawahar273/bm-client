@@ -7,7 +7,8 @@
  "orientation": "any",
  "background_color": "transparent",
  "related_applications": [],
- "start_url": "./login?launcher=true",
+ "start_url": "/?launcher=true",
+ "splash_pages": null,
  "icons": [
   {
    "src": "icons/android-icon-36x36.png",

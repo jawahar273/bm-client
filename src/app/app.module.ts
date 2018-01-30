@@ -49,7 +49,10 @@ export function createTranslateLoader(http: HttpClient) {
         // if you add diffrent base href pls update with relative path at font..
         // this might be bug and has been reposted 
         // https://github.com/angular/angular-cli/issues/9406 and https://github.com/angular/angular-cli/issues/8515
-        environment.production ? ServiceWorkerModule.register('/bm-client/ngsw-worker.js') : [],
+        // environment.production ? ServiceWorkerModule.register('/bm-client/ngsw-worker.js') : [],
+        ServiceWorkerModule.register('/bm-client/ngsw-worker.js', {
+           enabled: environment.production
+        }),
         AsyncLocalStorageModule,
     ],
     declarations: [AppComponent],

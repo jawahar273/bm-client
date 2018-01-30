@@ -23,7 +23,22 @@
     "resources": {
       "files": [
         "/assets/**"
+      ],
+      "urls": [
+        "https://fonts.googleapis.com/**"
       ]
     }
-  }]
+  }],
+  "dataGroups": [
+    {
+      "name": "dataGroupsCatch",
+      "urls": ["api/package/itemslist/", "api/package/mba/**", "/api/package/get_month/**"],
+      "cacheConfig": {
+        "strategy": "freshness",
+        "maxSize": 20,
+        "maxAge": "1h",
+        "timeout": "5s"
+      }
+    }
+  ]
 }

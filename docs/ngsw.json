@@ -46,10 +46,26 @@
         "/bm-client/assets/images/slider2.jpg",
         "/bm-client/assets/images/slider3.jpg"
       ],
-      "patterns": []
+      "patterns": [
+        "https:\\/\\/fonts\\.googleapis\\.com\\/.*"
+      ]
     }
   ],
-  "dataGroups": [],
+  "dataGroups": [
+    {
+      "name": "dataGroupsCatch",
+      "patterns": [
+        "\\/bm-client\\/api\\/package\\/itemslist\\/",
+        "\\/bm-client\\/api\\/package\\/mba\\/.*",
+        "\\/api\\/package\\/get_month\\/.*"
+      ],
+      "strategy": "freshness",
+      "maxSize": 20,
+      "maxAge": 3600000,
+      "timeoutMs": 5000,
+      "version": 1
+    }
+  ],
   "hashTable": {
     "/bm-client/0.chunk.js": "752fc643ef8a975b18cad88efe0ad9ae7e192640",
     "/bm-client/assets/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
@@ -63,19 +79,19 @@
     "/bm-client/assets/i18n/es.json": "6ea2e4ad6deb617c07919b64d17623113c5de3ea",
     "/bm-client/5.chunk.js": "47cf863116845cf3aaf1908bc2e9c5071e11edf1",
     "/bm-client/assets/i18n/fa.json": "b5ce35fb72839961c275f87459ed0daf592399ba",
-    "/bm-client/6.chunk.js": "d944f9acb98a3103b1296f10b4e97c74ed0ffa26",
+    "/bm-client/6.chunk.js": "573c0ad916d18efc87309d40b2cfbc5c3b7294b4",
     "/bm-client/assets/i18n/fr.json": "edd4c7435bafecb1624ad1c0396657510aede2a2",
     "/bm-client/7.chunk.js": "addcc77824b37cc8d86a1d543ac5960c44422e79",
     "/bm-client/assets/i18n/it.json": "989e77e5c28c5c2b316791803416d43753e9bd50",
     "/bm-client/inline.bundle.js": "e5736416877533e88a47348d14b25b1ae212cfff",
     "/bm-client/assets/i18n/ur.json": "e5e02e0492b587d29476b67b930c016a38e52178",
-    "/bm-client/main.bundle.js": "93ffd1bc4f860ac467f3b48d1f33300277b45837",
+    "/bm-client/main.bundle.js": "154f70bcf91ffeb51573784a3faaf6b00ca0114b",
     "/bm-client/assets/images/alex-6732-min.jpg": "ea0ef3cad622fde2e6402236836cded534dadce6",
     "/bm-client/polyfills.bundle.js": "6a0a12d68e5d940d673db893fa1f598d2008de42",
     "/bm-client/assets/images/alex-6732.jpg": "3c1ef0a63df1955bb5e7b66f5a590f9444a97279",
     "/bm-client/scripts.bundle.js": "f77024032010646a9b6ce99039c044ae5891177d",
     "/bm-client/assets/images/logo.png": "85ddebbb8bd316c1784e85cdda8dbeb6578d90cb",
-    "/bm-client/styles.bundle.css": "59b1fe826190df2d65b10f74ad3a3527ef8e0409",
+    "/bm-client/styles.bundle.css": "8ceaa2ecc76667e46461b083a7884fb8ece390a4",
     "/bm-client/assets/images/nick-nice-328476.jpg": "5b1aa5cde0cebaf70bad8b333e7d887e2660cec2",
     "/bm-client/index.html": "6975618ddc5b5657dc5c26d3c17d3e3657251ed4",
     "/bm-client/assets/images/slider1.jpg": "7270aa6438456e96ed66f8f6b1422085eb202089",
