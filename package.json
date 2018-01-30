@@ -68,6 +68,7 @@
     "tslint": "~5.8.0",
     "typescript": "~2.4.2",
     "webpack": "*",
-    "webpack-jarvis": "^0.1.1"
+    "webpack-jarvis": "^0.1.1",
+    "angular-cli-ghpages": "*"
   }
 }
