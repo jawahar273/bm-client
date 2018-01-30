@@ -160,10 +160,11 @@
                 <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
                     (click)="toggleExpandRow(row)" placement="right" ngbTooltip="drop down only for mobile view" triggers="click"
                     *ngSwitch="getIsMobileScreen()">
+                </a>
                 <!-- not showing the `drop down only for mobile view` in mobile -->
                 <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
                     (click)="toggleExpandRow(row)"
-                    *ngSwitchDefault="getIsMobileScreen()">
+                    *ngSwitch="!getIsMobileScreen()">
                 </a>
             </ng-template>
             <!-- details shower -->

@@ -47,7 +47,6 @@ export class DashboardComponent implements OnInit {
         this.service.get('package/itemslist', this.service.headers).subscribe(
             (data) => {
                 this.service.dataTableDashboard = data;
-                console.log(data);
                 if (alert) {
                     let msg = 'table update';
                     if (data.length === 0) {
