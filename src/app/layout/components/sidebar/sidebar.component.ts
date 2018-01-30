@@ -70,4 +70,7 @@ export class SidebarComponent {
         localStorage.removeItem('isLoggedin');
         sessionStorage.removeItem('authToken');
     }
+   public getUserName(): string {
+        return localStorage.getItem('userName');
+    }
 }
