@@ -156,7 +156,7 @@ export class CommonService {
             case 400:
                 return `${preCommonMsg} Somthing wrong with the request ${sufCommonMsg} `;
             case 401:
-                return `${preCommonMsg} Please Login again ${sufCommonMsg} `;
+                return `${preCommonMsg} Please Login again ${sufCommonMsg} <a routerLink="login">Login</a>`;
             case 403:
                 return `${preCommonMsg} Somthing worng with request content ${sufCommonMsg} `;
             case 404:
