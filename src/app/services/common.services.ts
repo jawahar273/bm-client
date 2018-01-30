@@ -214,6 +214,10 @@ export class CommonService {
             this.globalalertBox = [];
         }
         this.globalalertBox.push({ 'message': msg, type: type });
+        setTimeout(() => {
+            this.closeGlobalAlert(this.globalalertBox.length - 1, removeAll );
+            console.log('remove alert');
+        }, 3000);
     }
     /**
     *

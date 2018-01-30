@@ -79,6 +79,7 @@ export class DashboardComponent implements OnInit {
     private deleteRow(itemID?: number, indx?: number) {
         // debugger;
         if (itemID) {
+            this.hideLoadSpinIcon(false);
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
@@ -91,8 +92,10 @@ export class DashboardComponent implements OnInit {
                     //   });
                        this.showErrorAlert('Item has been delete successully', 'success');
                        this.updateTable(false);
+                       this.hideLoadSpinIcon(true);
                     },
                    (error) => {
+                       this.hideLoadSpinIcon(true);
                        this.showErrorAlert('Unable to request the delete operation due to "some unexpected errors"');
                    }
                 );
