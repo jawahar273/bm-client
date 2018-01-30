@@ -15,7 +15,6 @@ import { Headers } from '@angular/http';
 export class DashboardComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
-    // public tableContent: Array<any> = [];
     private headers: any;
     private isMobileScreen: boolean;
     public hideLoadSpin: boolean = true;
@@ -36,13 +35,10 @@ export class DashboardComponent implements OnInit {
      * showErrorAlert
      */
     public showErrorAlert(msg: string, type: string = 'danger' ) {
-        // this.alerts.push({type: type, message: msg});
         this.service.showGlobalAlert(msg, type);
     }
 
     public closeAlert(alert: any) {
-        // const index: number = this.alerts.indexOf(alert);
-        // this.alerts.splice(index, 1);
         this.service.closeGlobalAlert(alert);
     }
 
@@ -83,13 +79,6 @@ export class DashboardComponent implements OnInit {
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
-        // debugger;
-                    //    this.tableContent.find((obj, inx) => {
-                    //        if (obj.id === itemID) {
-                    //         //    debugger;
-                    //         //    this.tableContent.splice(inx, 1);
-                    //        }
-                    //   });
                        this.showErrorAlert('Item has been delete successully', 'success');
                        this.updateTable(false);
                        this.hideLoadSpinIcon(true);

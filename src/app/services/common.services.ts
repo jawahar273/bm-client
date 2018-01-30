@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 
 @Injectable()
 export class CommonService {
+    //global settings
     requireUpdate: object;
     headers: Headers;
     today: Date;
@@ -33,6 +34,7 @@ export class CommonService {
 
 
     private commonURL:string;
+    public timeOutForAlertBox: number;
 
     // components headers and sidebar var
     public budgetAmount: number = 0;
@@ -45,6 +47,7 @@ export class CommonService {
 
     constructor(private http: Http, public localStroage: AsyncLocalStorage) {
         this.isMobileScreen = window.innerWidth <= 992;
+        this.timeOutForAlertBox = 4100;
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',
             'Authorization': ``,
@@ -217,7 +220,7 @@ export class CommonService {
         setTimeout(() => {
             this.closeGlobalAlert(this.globalalertBox.length - 1, removeAll );
             console.log('remove alert');
-        }, 3000);
+        }, this.timeOutForAlertBox);
     }
     /**
     *
