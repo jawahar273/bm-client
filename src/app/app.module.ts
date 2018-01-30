@@ -46,7 +46,7 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         AppRoutingModule,
         NgbModule.forRoot(),
-        environment.production ? ServiceWorkerModule.register('bm-client/ngsw-worker.js') : [],
+        environment.production ? ServiceWorkerModule.register('ngsw-worker.js') : [],
         AsyncLocalStorageModule,
     ],
     declarations: [AppComponent],
