@@ -5,7 +5,7 @@
 		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
 	</p> -->
 	<div class="row allow-center">
-		<form id="entryFormGroup" class="col-xl-10" [formGroup]="entryForm" (ngSubmit)="entrySubmit();">
+		<form id="entryFormGroup" class="col-lg-8 col-xs-12" [formGroup]="entryForm" (ngSubmit)="entrySubmit();">
 			<div class="form-group" >
 				<!-- <label class="col-form-label" for="groupItems">Name</label> -->
 				<input type="text" formControlName="entryGroupName" [ngClass]="{'has-error':checkFormHasError('entryGroupName')}" class="form-control input-underline"

@@ -40,6 +40,8 @@ export class CommonService {
     // components dashboard
     public needTableUpdate: boolean = true;
     public dataTableDashboard: Array<any>;
+    // components chart
+    public needChartUpdate: boolean = true;
 
     constructor(private http: Http) {
         this.isMobileScreen = window.innerWidth <= 992;

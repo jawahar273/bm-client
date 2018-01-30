@@ -168,8 +168,10 @@ export class ChartsComponent implements OnInit {
             startMonthAndYear: [this.currentMonthSting, Validators.required],
             endMonthAndYear: [this.currentMonthSting, Validators.required]
         });
-
-        this.getRaderChartData();
+        if (this.service.needChartUpdate) {
+           this.getRaderChartData();
+           this.service.needChartUpdate = false;
+        }
         // this.getBarChart(); // remove comment to active bar chart
      }
 

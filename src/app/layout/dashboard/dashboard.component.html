@@ -99,7 +99,11 @@
                           <p>Colums are resiable</p>  
                         </ng-template>
                     </span>
+ 
+                    <button class="btn btn-xs  app-button" (click)="updateTable()" [disabled]="!hideLoadSpin">
+                    <span [hidden]="!hideLoadSpin">Update</span>
                     <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
+                    </button>
                 </div>
                 <ngx-datatable
                 class="bootstrap"
@@ -107,7 +111,7 @@
                 [rowHeight]="60"
                  #dashTable
                 [rows]="service.dataTableDashboard">
-        <ngx-datatable-row-detail [rowHeight]="323" #myDetailRow (toggle)="onDetailToggle($event)">
+        <ngx-datatable-row-detail [rowHeight]="getIsMobileScreen() ? 323 : 9" #myDetailRow (toggle)="onDetailToggle($event)">
             <ng-template  let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
              ngx-datatable-row-detail-template>
             <div class="row" *ngIf="getIsMobileScreen() then toMobileRendering else NoToMobileRendering">
