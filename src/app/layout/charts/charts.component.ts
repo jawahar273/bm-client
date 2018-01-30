@@ -171,6 +171,13 @@ export class ChartsComponent implements OnInit {
         if (this.service.needChartUpdate) {
            this.getRaderChartData();
            this.service.needChartUpdate = false;
+        } else {
+            this.service.localStroage.getItem<any>('radar').subscribe((data) => {
+                this.setChart(data['group'], data['data'], data['chartType']);
+            });
+            this.service.localStroage.getItem<any>('donut').subscribe((data) => {
+                this.setChart(data['lable'], data['data'], data['chartType']);
+            });         
         }
         // this.getBarChart(); // remove comment to active bar chart
      }
@@ -231,7 +238,7 @@ export class ChartsComponent implements OnInit {
          .subscribe(
             (data) => {
                 const totalAmountArray = [];
-                const groups = [];
+                let groups = [];
                 this.currentMonthitemsContent = data;
                 const _self = this;
                 this.currentMonthitemsContent.forEach((ele, indx) => {
@@ -241,7 +248,15 @@ export class ChartsComponent implements OnInit {
                     this.sumOfCurrentMonthSpending += temp;
                 });
                 // chartContent.push();
-                this.setChart(groups, [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'radar');
+                const content: Object = {'group': groups, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
+                this.setChart(content['group'],
+                                content['data'],
+                                content['chartType']);
+                this.service.localStroage.setItem(content['chartType'], content)
+                .subscribe((data) => {
+                }, (error) =>{
+                    console.log('stored data error', error);
+                });
                 this.getDoughNutChart();
             },
             (error) => {
@@ -260,11 +275,22 @@ export class ChartsComponent implements OnInit {
           .subscribe(
               (data) => {
                   const amount = parseInt(data[0]['budget_amount'], 10);
+                const content: Object ={
+                    'lable': ['Month\'s Budget Amount', 'Total Spending Amount'],
+                    'data': [amount, this.sumOfCurrentMonthSpending],
+                    'chartType': 'donut'
+                };
+
                   this.setChart(
-                      ['Month\'s Budget Amount', 'Total Spending Amount'],
-                      [amount, this.sumOfCurrentMonthSpending],
-                      'donut'
+                      content['lable'],
+                      content['data'],
+                      content['chartType']
                    );
+                this.service.localStroage.setItem(content['chartType'], content)
+                .subscribe((data) => {
+                }, (error) =>{
+                    console.log('stored data error', error);
+                });
               },
               (error) => {
                   this.service.showGlobalAlert('Pie chart have some error');

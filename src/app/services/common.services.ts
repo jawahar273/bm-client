@@ -2,7 +2,7 @@ import { Injectable, isDevMode } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
-
+import { AsyncLocalStorage } from 'angular-async-local-storage';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
@@ -43,7 +43,7 @@ export class CommonService {
     // components chart
     public needChartUpdate: boolean = true;
 
-    constructor(private http: Http) {
+    constructor(private http: Http, public localStroage: AsyncLocalStorage) {
         this.isMobileScreen = window.innerWidth <= 992;
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',

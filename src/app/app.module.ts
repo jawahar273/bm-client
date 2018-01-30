@@ -13,6 +13,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+import { AsyncLocalStorageModule } from 'angular-async-local-storage';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
@@ -45,6 +47,7 @@ export function createTranslateLoader(http: HttpClient) {
         AppRoutingModule,
         NgbModule.forRoot(),
         environment.production ? ServiceWorkerModule.register('/ngsw-worker.js') : [],
+        AsyncLocalStorageModule,
     ],
     declarations: [AppComponent],
     providers: [AuthGuard, CommonService],

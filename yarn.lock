@@ -122,6 +122,12 @@
   dependencies:
     tslib "^1.7.1"
 
+"@angular/core@>=4.3.1":
+  version "5.2.2"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.2.2.tgz#54950023b971d9e01f6f6fdbc30d2b68e4d05eb2"
+  dependencies:
+    tslib "^1.7.1"
+
 "@angular/core@^5.0.1":
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/@angular/core/-/core-5.0.1.tgz#a4a74afc7e2058d30b8263eb6d66daace9f427ba"
@@ -389,6 +395,10 @@ amdefine@>=0.0.4:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/amdefine/-/amdefine-1.0.1.tgz#4a5282ac164729e93619bcfd3ad151f817ce91f5"
 
+angular-async-local-storage@^3.1.1:
+  version "3.1.1"
+  resolved "https://registry.yarnpkg.com/angular-async-local-storage/-/angular-async-local-storage-3.1.1.tgz#a26ed076426f6cbcd8e4f430f9986d7850ba2a60"
+
 angular-cli-ghpages@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/angular-cli-ghpages/-/angular-cli-ghpages-0.5.2.tgz#9551c5022c6982d0e4c5c7c97a21cd29d728b14d"
@@ -397,6 +407,12 @@ angular-cli-ghpages@^0.5.2:
     denodeify "1.2.1"
     fs-extra "3.0.1"
     gh-pages "0.12.0"
+
+angular2-indexeddb@^1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/angular2-indexeddb/-/angular2-indexeddb-1.2.2.tgz#ec91bd2e94a451013a52060f7df4acb33fcec93b"
+  dependencies:
+    "@angular/core" ">=4.3.1"
 
 ansi-align@^2.0.0:
   version "2.0.0"
@@ -4692,6 +4708,10 @@ ng2-charts@^1.6.0:
   dependencies:
     chart.js "^2.6.0"
 
+ngx-cookie@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/ngx-cookie/-/ngx-cookie-2.0.1.tgz#031d8938bf9026954356b3b3ae668e2e1964e584"
+
 no-case@^2.2.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
@@ -7907,7 +7927,7 @@ webpack-subresource-integrity@^1.0.1:
   dependencies:
     webpack-core "^0.6.8"
 
-webpack@~3.10.0:
+webpack@*, webpack@~3.10.0:
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/webpack/-/webpack-3.10.0.tgz#5291b875078cf2abf42bdd23afe3f8f96c17d725"
   dependencies:
