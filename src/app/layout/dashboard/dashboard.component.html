@@ -100,7 +100,8 @@
                         </ng-template>
                     </span>
  
-                    <button class="btn btn-xs  app-button" (click)="updateTable()" [disabled]="!hideLoadSpin">
+                    <button class="btn btn-xs  app-button" (click)="updateTable()" [disabled]="!hideLoadSpin"
+                    [ngClass]="{'pull-right': getIsMobileScreen() }">
                     <span [hidden]="!hideLoadSpin">Update</span>
                     <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
                     </button>
@@ -157,7 +158,12 @@
         <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
             <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template >
                 <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
-                    (click)="toggleExpandRow(row)" placement="right" ngbTooltip="drop down only for mobile view" >
+                    (click)="toggleExpandRow(row)" placement="right" ngbTooltip="drop down only for mobile view" triggers="click"
+                    *ngSwitch="getIsMobileScreen()">
+                <!-- not showing the `drop down only for mobile view` in mobile -->
+                <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded" [class.datatable-icon-down]="expanded"
+                    (click)="toggleExpandRow(row)"
+                    *ngSwitchDefault="getIsMobileScreen()">
                 </a>
             </ng-template>
             <!-- details shower -->
