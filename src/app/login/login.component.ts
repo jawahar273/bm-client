@@ -58,6 +58,7 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('userName', 'User Name');
                   this.headers.set('Authorization', `Token ${data['key']}`);
                 this.router.navigate(['/dashboard']);
+                this.service.needTableUpdate = true;
                 //   debugger;
               },
               (error) => {

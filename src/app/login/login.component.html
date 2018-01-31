@@ -15,17 +15,17 @@
                         <input type="text" [ngClass]="{'has-error':checkFormHasError('loginPassName')}"
                          formControlName="loginPassName"
                          class="form-control input-underline input-lg"
-                          id="loginPassName1" placeholder="User Name">
+                          id="loginPassName" placeholder="User Name">
                     </div>
                     <div class="form-group">
                         <input type="password" [ngClass]="{'has-error':checkFormHasError('loginPassword')}"
                          formControlName="loginPassword"
-                         class="form-control input-underline input-lg" id="loginPassword1" placeholder="Password">
+                         class="form-control input-underline input-lg" id="loginPassword" placeholder="Password">
                     </div>
                 </div>
-                <button class="btn rounded-btn" type="submit"  [disabled]="!spinnerIcon">
+                <button class="btn rounded-btn" id="loginButton" type="submit"  [disabled]="!spinnerIcon">
                      Log in 
-                     <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="spinnerIcon"></i>
+                     <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="registerButton" [hidden]="spinnerIcon"></i>
                 </button>
                 &nbsp;
                 <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>

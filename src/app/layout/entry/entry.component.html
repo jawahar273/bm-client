@@ -9,22 +9,22 @@
 			<div class="form-group" >
 				<!-- <label class="col-form-label" for="groupItems">Name</label> -->
 				<input type="text" formControlName="entryGroupName" [ngClass]="{'has-error':checkFormHasError('entryGroupName')}" class="form-control input-underline"
-				 id="groupItems" placeholder="Name">
+				 id="groupName" placeholder="Name">
 			</div>
 			<div class="form-group">
 				<!-- <label class="col-form-label" for="place">Place</label> -->
 				<input type="text" formControlName="entryGroupPlace" [ngClass]="{'has-error':checkFormHasError('entryGroupPlace')}" class="form-control input-underline"
-				 id="place" placeholder="Place">
+				 id="groupPlace" placeholder="Place">
 			</div>
 			<div class="form-group">
 				<!-- <label class="col-form-label" for="group-category">Category</label> -->
 				<input type="text" formControlName="entryGroupGroup" [ngClass]="{'has-error': checkFormHasError('entryGroupGroup')}" class="form-control input-underline"
-				 id="group-category" placeholder="Category/Group">
+				 id="groupCategory" placeholder="Category/Group">
 			</div>
 			<div class="form-group">
 				<!-- <label class="col-form-label" for="group-date">Date</label> -->
 				<input type="date" formControlName="entryGroupDate" [ngClass]="{'has-error':checkFormHasError('entryGroupDate')}" class="form-control input-underline"
-				 id="group-date" placeholder="Date">
+				 id="groupDate" placeholder="Date">
 			</div>
 			<!-- formArray to add or remote fields -->
 			<div formArrayName="entryGroupItems" >
@@ -41,7 +41,7 @@
  -->					<br>
 				<!-- </div> -->
 			</div>
-			<button (click)="submitForm=true;" class="btn app-button form-group right" [disabled]="!hideLoadSpin">
+			<button (click)="submitForm=true;" class="btn app-button form-group right" [disabled]="!hideLoadSpin" id="entrySubmitButton">
 				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
 			</button>
 		</form>

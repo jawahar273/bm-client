@@ -7,7 +7,7 @@
  "orientation": "any",
  "background_color": "transparent",
  "related_applications": [],
- "start_url": "/?launcher=true",
+ "start_url": "/login?launcher=true",
  "splash_pages": null,
  "icons": [
   {

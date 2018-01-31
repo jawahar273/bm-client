@@ -10,9 +10,12 @@ exports.config = {
   ],
   capabilities: {
     'browserName': 'chrome'
+    // chromeOptions: {
+    //  args: [ "--headless", "--disable-gpu", "--window-size=800,600" ]
+    // }
   },
   directConnect: true,
-  baseUrl: 'http://localhost:4200/',
+  baseUrl: 'http://localhost:4400/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     showColors: true,

@@ -5,9 +5,8 @@ before_script:
   - apt-get update
   - apt-get install -y nodejs
   - apt-get install -y yarn
-  - curl -LO https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
+  - apt-get install -y openjdk-7-jre 
   - which node
-  - pip3 install selenium
 
 stages:
   - build
@@ -32,12 +31,14 @@ page_to_gitlab:
   only:
   - master
 
+.script: &script_Test_With_e2e
+  - ls
+  - yarn run e2e
 
-test_with_selenium:
+test_with_e2e:
   stage: test
-  only: master
-  script: python3 -version
-  allow-fail: true
+  script: *script_Test_With_e2e
   artifacts:
     paths:
     - public
+  only: master

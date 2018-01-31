@@ -1,8 +1,9 @@
 <div [formGroup]="formGroupToList" class="input-group">
-  <input type="text" name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"
+  <input type="text"
+   name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"
   formControlName="name"
   placeholder="hint to remember"
-   class="form-control input-underline"
+   class="form-control input-underline entrySubItem"
    [ngClass]="{'has-error':checkFormError('name')}"
   />
   <input type="text" name="entryGroupItemsAmount-{{indx}}"
@@ -10,7 +11,7 @@
    formControlName="amount"
    pattern="^\d{1,4}(\.\d{0,2})?$"
   placeholder="amount Eg: 2001.12"
-   class="form-control input-underline"
+   class="form-control input-underline entrySubItem"
    title="Only 4 number and 2 number before point is allowed" 
    style="margin-right: 2%;" 
    [ngClass]="{'has-error':checkFormError('amount')}"/>
