@@ -5,7 +5,9 @@ before_script:
   - apt-get update
   - apt-get install -y nodejs
   - apt-get install -y yarn
+  - curl -LO https://chromedriver.storage.googleapis.com/2.35/chromedriver_linux64.zip
   - which node
+  - pip3 install selenium
 
 stages:
   - build
@@ -19,16 +21,23 @@ stages:
   - yarn install
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
   - mkdir public
-  - yarn build -op public -bh bm-client
-  - yarn global add angular-cli-ghpages
+  - yarn build -op public -bh /bm-client/ && yarn run angular-cli-ghpages --dir public
 
 page_to_gitlab:
   stage: build
   script: *build_script
-  only:
-    - master
   artifacts:
     paths:
     - public
   only:
   - master
+
+
+test_with_selenium:
+  stage: test
+  only: master
+  script: python3 -version
+  allow-fail: true
+  artifacts:
+    paths:
+    - public
