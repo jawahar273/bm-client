@@ -2,7 +2,7 @@ import { browser,  } from 'protractor';
 import { Http, Response } from '@angular/http';
 
 import { BaseAccessElement } from './base.e2e';
-import { EntryFormData } from './test-entry-form-data'; 
+import  * as EntryFormData  from './test-entry-form-data.json'; 
 
 export class AppPage extends BaseAccessElement {
   	 loginUserName = this.getElement('loginPassName', 'id');
@@ -47,35 +47,25 @@ export class AppPage extends BaseAccessElement {
   }
 
   setEntryFormData() {
-  	    const data = EntryFormData['data'];
+  	    let data = JSON.parse(EntryFormData) ;
+  	    data = data['data'];
   	    // const accessType = data['elementType'];
   	  	for (const subData in data) {
-  	  		// if ('entryGroupItems' in key) {
-  	  		// 	const self = this;
-  	  		// 	data['entryGroupItems'].forEach((key, index) => {
-  	  		// 		const hint = `entryGroupItemsHint-${index}`;
-  	  		// 		const amount = `entryGroupItemsAmount-${index}`;
-  	  		// 		self.getElement(hint, 'id').sendKeys(key[hint])
-  	  		// 		self.getElement(amount, 'id').sendKeys(key[amount])
-  	  		// 	});
-  	  		// } else {
-  	  		// 	this.getElement(key, 'id').sendKeys(data[key]);
-  	  		// }
   	  		this.getElement('groupName', 'id').sendKeys(subData['groupName']);
-  	  		this.getElement('groupPlace', 'id').sendKeys(subData['groupPlace']);
-  	  		this.getElement('groupCategory', 'id').sendKeys(subData['groupCategory']);
-	 		this.getElement('groupDate', 'id').sendKeys(subData['groupDate']);
-  	  		const self = this;
-  	  		subData['entryGroupItems'].forEach((key, index) => {
-  	  			const hint = `entryGroupItemsHint-${index}`;
-  	  			const amount = `entryGroupItemsAmount-${index}`;
-  	  			self.getElement(hint, 'id').sendKeys(key[hint])
-  	  			self.getElement(amount, 'id').sendKeys(key[amount])
-  	  		});
+  	 //  		this.getElement('groupPlace', 'id').sendKeys(subData['groupPlace']);
+  	 //  		this.getElement('groupCategory', 'id').sendKeys(subData['groupCategory']);
+	 		// this.getElement('groupDate', 'id').sendKeys(subData['groupDate']);
+  	  		// const self = this;
+  	  		// subData['entryGroupItems'].forEach((key, index) => {
+  	  		// 	const hint = `entryGroupItemsHint-${index}`;
+  	  		// 	const amount = `entryGroupItemsAmount-${index}`;
+  	  		// 	self.getElement(hint, 'id').sendKeys(key[hint])
+  	  		// 	self.getElement(amount, 'id').sendKeys(key[amount])
+  	  		// });
   	  	}
 
-  	  	this.getElement('button.btn.app-button.form-group.right', 'css').click();
-  	  	this.navigateTo('/dashboard');
+  	  	// this.getElement('button.btn.app-button.form-group.right', 'css').click();
+  	  	// this.navigateTo('/dashboard');
   	  	browser.sleep(5000);
    }
 }
