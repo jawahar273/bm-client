@@ -7,7 +7,7 @@
  "orientation": "any",
  "background_color": "white",
  "related_applications": [],
- "start_url": "/login?launcher=true",
+ "start_url": "bm-client/login?launcher=true",
  "splash_pages": null,
  "icons": [
   {
