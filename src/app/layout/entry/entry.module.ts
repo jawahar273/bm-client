@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+// import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { HttpModule } from '@angular/http';
@@ -17,7 +17,7 @@ import { ListedItemsComponent } from './listed-items/listed-items.component';
     CommonModule,
     EntryRoutingModule,
     ListedItemsModule,
-    NgbModule.forRoot(),
+    // NgbModule.forRoot(),
     HttpModule,
     PageHeaderModule,
     ReactiveFormsModule,

@@ -14,6 +14,7 @@ export class CommonService {
     requireUpdate: object;
     headers: Headers;
     today: Date;
+    defaultMobileScreenOffSet: number;
     isMobileScreen: boolean;
     listOfMonths: Array<object>;
     listOfYears: Array<number>;
@@ -47,7 +48,8 @@ export class CommonService {
     public needChartUpdate: boolean = true;
 
     constructor(private http: Http, public localStroage: AsyncLocalStorage) {
-        this.isMobileScreen = window.innerWidth <= 992;
+        this.defaultMobileScreenOffSet = 992;
+        this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
         this.timeOutForAlertBoxDanger = 9000;
         this.headers = new Headers({ 'Accept': 'application/json',

@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
 
     ngOnInit() {
         if (this.service.needTableUpdate) {
-           this.updateTable();
+           this.updateTable(false);
            this.service.needTableUpdate = false;
         }
     }

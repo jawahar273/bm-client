@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ContentChild } from '@angular/core';
+import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { CommonService } from '../services/common.services';
@@ -50,4 +50,10 @@ export class LayoutComponent implements OnInit {
     private onFail() {
         this.router.navigate(['/login']);
     }
+
+    @HostListener('window:resize', ['$event'])
+    public layoutResizeListener(event) {
+      this.service.isMobileScreen = event.target.innerWidth <= this.service.defaultMobileScreenOffSet;
+    }
+
 }

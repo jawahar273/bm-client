@@ -93,7 +93,7 @@
             <div class="card mb-3 ">
                 <div class="card-header">
                     List Spendings
-                    <span placement="top" [ngbTooltip]=tipDashTableContent>
+                    <span placement="top" ngbTooltip="tipDashTableContent">
                         <i class="fa fa-question-circle "></i>
                         <ng-template #tipDashTableContent>
                           <p>Colums are resiable</p>  
@@ -214,7 +214,7 @@
                                 <span (click)="sort()">{{column?.name}}</span>
                             </ng-template>
                             <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-                                <span placement="top" ngbTooltip="Create At: {{value | date: 'dd/MM/yyyy'}}"
+                                <span placement="top" ngbTooltip="value"
                                 triggers="click">
                                     {{getTheDays(value)}}
                                 </span>

@@ -274,7 +274,7 @@ export class ChartsComponent implements OnInit {
         this.service.get(url, this.service.headers)
           .subscribe(
               (data) => {
-                this.service.showGlobalAlert(`Need to show 'Dounut chart'. Please click 'Amount' menu and fill.`);
+                this.service.showGlobalAlert(`Need to show 'Doughnut chart'. Please click 'Amount' menu and fill.`);
                 if (data.length) {
                     const amount = parseInt(data[0]['budget_amount'], 10);
                     const content: Object ={
