@@ -41,4 +41,5 @@ test_with_e2e:
   artifacts:
     paths:
     - public
-
+  only:
+  - master
