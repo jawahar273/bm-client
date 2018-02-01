@@ -274,23 +274,26 @@ export class ChartsComponent implements OnInit {
         this.service.get(url, this.service.headers)
           .subscribe(
               (data) => {
-                  const amount = parseInt(data[0]['budget_amount'], 10);
-                const content: Object ={
-                    'lable': ['Month\'s Budget Amount', 'Total Spending Amount'],
-                    'data': [amount, this.sumOfCurrentMonthSpending],
-                    'chartType': 'donut'
-                };
+                this.service.showGlobalAlert(`Need to show 'Dounut chart'. Please click 'Amount' menu and fill.`);
+                if (data.length) {
+                    const amount = parseInt(data[0]['budget_amount'], 10);
+                    const content: Object ={
+                        'lable': ['Month\'s Budget Amount', 'Total Spending Amount'],
+                        'data': [amount, this.sumOfCurrentMonthSpending],
+                        'chartType': 'donut'
+                    };
 
-                  this.setChart(
-                      content['lable'],
-                      content['data'],
-                      content['chartType']
-                   );
-                this.service.localStroage.setItem(content['chartType'], content)
-                .subscribe((data) => {
-                }, (error) =>{
-                    console.log('stored data error', error);
-                });
+                    this.setChart(
+                        content['lable'],
+                        content['data'],
+                        content['chartType']
+                    );
+                    this.service.localStroage.setItem(content['chartType'], content)
+                    .subscribe((data) => {
+                    }, (error) =>{
+                        console.log('stored data error', error);
+                    });
+                }
               },
               (error) => {
                   this.service.showGlobalAlert('Pie chart have some error');

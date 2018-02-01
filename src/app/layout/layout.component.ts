@@ -20,7 +20,6 @@ export class LayoutComponent implements OnInit {
         } else {
             this.onFail();
         }
-        console.log('layoutcomponent');
         this.service.get('rest-auth/user', this.service.headers)
             .subscribe(
               (_data) => {
@@ -35,19 +34,19 @@ export class LayoutComponent implements OnInit {
 
     ngOnInit() {}
     public closeGlobalAlert(alert) {
-    	this.service.closeGlobalAlert(alert);
+       this.service.closeGlobalAlert(alert);
     }
-
-    ngAfterViewInit() {
-        // console.log(`viewChild: ${this.dashboard}:: ContentChild ${this._da}`);
-    }
-
+    /**
+     * @description on login success then add the `Authorization` header
+     */
     private onSuccess() {
         this.service.headers.set('Authorization', `${sessionStorage.getItem('authToken')}`);
         // dashboard.updateTable();
         // debugger;
     }
-
+    /**
+     * @description on fail of login return to the login page.
+     */
     private onFail() {
         this.router.navigate(['/login']);
     }

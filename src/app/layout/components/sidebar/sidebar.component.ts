@@ -13,15 +13,20 @@ export class SidebarComponent {
     closeResult: string;
     private datePickerModel: string ;
     private sideBarAmountModel: number = 0;
+    // private returnof
+    @ViewChild('sideBarAmountModelcontent') sideBarAmountModelcontent;
 
 
     constructor(public service: CommonService, private modalService: NgbModal) {
-         this.service.getBudgetAmount();
-         this.datePickerModel = this.service.currentDateWithMomentJS;
+
+        this.datePickerModel = this.service.currentDateWithMomentJS;
     }
 
     ngAfterViewInit() { 
-
+        const temp = this.service.getBudgetAmount();
+        if (!this.checkBudgetAmountIsEmpty(temp)) {
+          this.open(this.sideBarAmountModelcontent);
+        }
     }
 
     eventCalled() {
@@ -72,5 +77,13 @@ export class SidebarComponent {
     }
    public getUserName(): string {
         return localStorage.getItem('userName');
+   }
+
+  public checkBudgetAmountIsEmpty(data?: string) {
+    if (!data.startsWith('error')) {
+      this.service.showGlobalAlert(`Can't start a month with out budget amount for this month. Please click 'Amount' menu and fill.`)
+      return false;
     }
+    return true;
+  }
 }

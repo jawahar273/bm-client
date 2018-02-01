@@ -35,6 +35,7 @@ export class CommonService {
 
     private commonURL:string;
     public timeOutForAlertBox: number;
+    public timeOutForAlertBoxDanger: number;
 
     // components headers and sidebar var
     public budgetAmount: number = 0;
@@ -48,6 +49,7 @@ export class CommonService {
     constructor(private http: Http, public localStroage: AsyncLocalStorage) {
         this.isMobileScreen = window.innerWidth <= 992;
         this.timeOutForAlertBox = 4100;
+        this.timeOutForAlertBoxDanger = 9000;
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',
             'Authorization': ``,
@@ -217,9 +219,13 @@ export class CommonService {
             this.globalalertBox = [];
         }
         this.globalalertBox.push({ 'message': msg, type: type });
+        let temp = this.timeOutForAlertBox;
+        if (type === 'danger') {
+            temp += this.timeOutForAlertBoxDanger;
+        }
         setTimeout(() => {
             this.closeGlobalAlert(this.globalalertBox.length - 1, removeAll );
-        }, this.timeOutForAlertBox);
+        }, temp);
     }
     /**
     *
@@ -269,9 +275,9 @@ export class CommonService {
      * @param {any} setting date
      * get the budget amount  from the service if the argument is undefine
      * the parameter to service is current month and year.
+     * this function build with generic view, so this might me confusing.
      */
     public getBudgetAmount(date?:any): string {
-        // debugger;
         let monthYearFormat;
         const currentMonthYear = this.getMonthYear(this.currentDateWithMomentJS)
         if (date && this.getMonthYear(date) !== currentMonthYear) {
@@ -292,6 +298,9 @@ export class CommonService {
         this.get(url, this.headers)
            .subscribe(
              (data) => {
+                 if (data) {
+                     return 'error no data';
+                 }
                  if (bmt){
                     this.budgetAmount = parseFloat(data[0]['budget_amount']);
                     // return data[0]['budget_amount'];
@@ -303,10 +312,10 @@ export class CommonService {
              (error) => {
                  const msg = this.isClinetOrServerSidesError(error);
                  this.showGlobalAlert(msg);
-                 return '';
+                 return 'error showed in alert box';
              }
            );
-           return '';
+           return 'error on ower end';
     }
 
     public setBudgetAmount(amount: number, date: any) {

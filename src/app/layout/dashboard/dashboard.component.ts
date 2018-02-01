@@ -30,19 +30,29 @@ export class DashboardComponent implements OnInit {
            this.service.needTableUpdate = false;
         }
     }
-
     /**
-     * showErrorAlert
+     *
+     * @param {string} msg message to display in the box.
+     * @param {string} type type of css class(based on boostrap) to show.
+     * @description show the alert box for the dashboard.
      */
     public showErrorAlert(msg: string, type: string = 'danger' ) {
         this.service.showGlobalAlert(msg, type);
     }
-
+    /**
+     *
+     * @param {any} alert get the object that has been show in the alert.
+     * @description to close the alert box in the page.
+     */
     public closeAlert(alert: any) {
         this.service.closeGlobalAlert(alert);
     }
-
-    public updateTable(alert=true) {
+    /**
+     *
+     * @param {boolean} alert a flag setting for alert box
+     * @description the perpouse of this function is update the dashboard table
+     */
+    public updateTable(alert = true) {
         this.hideLoadSpinIcon(false);
         this.service.get('package/itemslist', this.service.headers).subscribe(
             (data) => {
@@ -64,12 +74,13 @@ export class DashboardComponent implements OnInit {
             }
         );
     }
-
-    private getTheDays(date?: Date): string {
-        if (date) {
-            return moment(date, 'YYYY-MM-DD').fromNow();
-        }
-        return 'err';
+    /**
+     * 
+     * @param {Date} date JS date object.
+     * @description get the JS date object and find the number of distance in human terms.
+     */
+    private getTheDays(date: Date): string {
+        return moment(date, 'YYYY-MM-DD').fromNow();
     }
     private deleteRow(itemID?: number, indx?: number) {
         // debugger;

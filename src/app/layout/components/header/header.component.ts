@@ -30,31 +30,32 @@ export class HeaderComponent implements OnInit {
 
     ngOnInit() {}
 
-    isToggled(): boolean {
+    public isToggled(): boolean {
         const dom: Element = document.querySelector('body');
         return dom.classList.contains(this.pushRightClass);
     }
 
-    toggleSidebar() {
+    public toggleSidebar() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);
     }
 
-    rltAndLtr() {
+    public rltAndLtr() {
         const dom: any = document.querySelector('body');
         dom.classList.toggle('rtl');
     }
 
-    onLoggedout() {
+    public onLoggedout() {
+        console.log(this.service.budgetAmount.toLocaleString());
         localStorage.removeItem('isLoggedin');
         sessionStorage.removeItem('authToken');
     }
 
-    changeLang(language: string) {
+    public changeLang(language: string) {
         this.translate.use(language);
     }
 
-    getUserName(): string {
+    public getUserName(): string {
         return localStorage.getItem('userName');
     }
 
