@@ -5,7 +5,7 @@
  "short_name": "BM",
  "theme_color": "transparent",
  "orientation": "any",
- "background_color": "transparent",
+ "background_color": "white",
  "related_applications": [],
  "start_url": "/login?launcher=true",
  "splash_pages": null,
