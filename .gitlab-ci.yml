@@ -19,7 +19,6 @@ stages:
   - cd  /builds/jawahar273/bm-client
   - yarn install
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
-  - mkdir public
   - yarn build -op public -bh /bm-client/ 
 
 page_to_gitlab:
@@ -33,6 +32,7 @@ page_to_gitlab:
 
 .script: &script_Test_With_e2e
   - ls
+  - yarn install
   - yarn run e2e
 
 test_with_e2e:
