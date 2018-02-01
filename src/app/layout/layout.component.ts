@@ -20,27 +20,32 @@ export class LayoutComponent implements OnInit {
         } else {
             this.onFail();
         }
-        this.service.get('rest-auth/user', this.service.headers)
-            .subscribe(
-              (_data) => {
-                localStorage.setItem('userName', _data['username']);
-              },
-              (_error) => {
-                const msg = this.service.isClinetOrServerSidesError(_error, { 'detail': undefined });
-                this.service.showGlobalAlert(msg);
-              }
-        );
     }
 
     ngOnInit() {}
     public closeGlobalAlert(alert) {
        this.service.closeGlobalAlert(alert);
     }
+
+    private getUserDetails() {
+          this.service.get('rest-auth/user', this.service.headers)
+            .subscribe(
+            (_data) => {
+              localStorage.setItem('userName', _data['username']);
+              localStorage.setItem('userProfileURL', _data['profile_url'])
+            },
+            (_error) => {
+              const msg = this.service.isClinetOrServerSidesError(_error, { 'detail': undefined });
+              this.service.showGlobalAlert(msg);
+            }
+          );
+    }
     /**
      * @description on login success then add the `Authorization` header
      */
     private onSuccess() {
         this.service.headers.set('Authorization', `${sessionStorage.getItem('authToken')}`);
+        this.getUserDetails();
         // dashboard.updateTable();
         // debugger;
     }

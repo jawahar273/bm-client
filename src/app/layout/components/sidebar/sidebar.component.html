@@ -84,8 +84,8 @@
         <div class="nested-menu" [hidden]="!service.isMobileScreen">
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <!-- <span><i class="fa fa-user"></i>&nbsp; {{ getUserName() }}</span> -->
-                <img src="https://www.gravatar.com/avatar/d2cbb7c6e345cd648da871bf22db4876?d=identicon"  
-                    id="profileImage" />
+                <img src="{{getUserProfileURL()}}"  
+                    id="profileImageSideBar" alt="Profile Image" />
             </a>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">

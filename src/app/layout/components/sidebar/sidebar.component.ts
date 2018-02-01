@@ -26,7 +26,8 @@ export class SidebarComponent {
 
         if (!this.checkBudgetAmountIsEmpty(temp)) {
           setTimeout(() => {
-            this.open(this.sideBarAmountModelcontent);
+            const headerValue = this.service.headers.get('Authorization');
+            headerValue && headerValue !== '' ? this.open(this.sideBarAmountModelcontent) : '';
          },this.timeOutForPopUpModel );
         }
     }
@@ -78,7 +79,10 @@ export class SidebarComponent {
         sessionStorage.removeItem('authToken');
     }
    public getUserName(): string {
-        return localStorage.getItem('userName');
+      return localStorage.getItem('userName');
+   }
+   public getUserProfileURL(): string {
+      return localStorage.getItem('userProfileURL');
    }
 
   public checkBudgetAmountIsEmpty(data?: string) {

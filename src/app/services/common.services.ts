@@ -363,5 +363,5 @@ export class CommonService {
     public getMonthYear(data: string) {
         return  `${data.substr(0, data.lastIndexOf('-'))}-01`; 
     }
-
+    
 }

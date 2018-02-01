@@ -40,10 +40,10 @@ export class HeaderComponent implements OnInit {
         dom.classList.toggle(this.pushRightClass);
     }
 
-    public rltAndLtr() {
-        const dom: any = document.querySelector('body');
-        dom.classList.toggle('rtl');
-    }
+    // public rltAndLtr() {
+    //     const dom: any = document.querySelector('body');
+    //     dom.classList.toggle('rtl');
+    // }
 
     public onLoggedout() {
         console.log(this.service.budgetAmount.toLocaleString());
@@ -57,6 +57,10 @@ export class HeaderComponent implements OnInit {
 
     public getUserName(): string {
         return localStorage.getItem('userName');
+    }
+
+    public getUserProfileURL(): string {
+        return localStorage.getItem('userProfileURL');
     }
 
 }

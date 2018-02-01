@@ -126,6 +126,13 @@ $topnav-background-color: #222;
         }
     }
 }
+#profileImageSideBar {
+    width: 70px;
+    border-radius: 50%;
+    display: block;
+    margin: 0 auto;
+}
+
 @media screen and (max-width: 992px) {
     .sidebar {
         top: 54px;
