@@ -169,15 +169,10 @@ export class ChartsComponent implements OnInit {
             endMonthAndYear: [this.currentMonthSting, Validators.required]
         });
         if (this.service.needChartUpdate) {
-           this.getRaderChartData();
+           this.updateChart('rest');
            this.service.needChartUpdate = false;
         } else {
-            this.service.localStroage.getItem<any>('radar').subscribe((data) => {
-                this.setChart(data['group'], data['data'], data['chartType']);
-            });
-            this.service.localStroage.getItem<any>('donut').subscribe((data) => {
-                this.setChart(data['lable'], data['data'], data['chartType']);
-            });         
+            this.updateChart('local');
         }
         // this.getBarChart(); // remove comment to active bar chart
      }
@@ -252,7 +247,7 @@ export class ChartsComponent implements OnInit {
                 this.setChart(content['group'],
                                 content['data'],
                                 content['chartType']);
-                this.service.localStroage.setItem(content['chartType'], content)
+                this.service.localStorage.setItem(content['chartType'], content)
                 .subscribe((data) => {
                 }, (error) =>{
                     console.log('stored data error', error);
@@ -274,9 +269,9 @@ export class ChartsComponent implements OnInit {
         this.service.get(url, this.service.headers)
           .subscribe(
               (data) => {
-                this.service.showGlobalAlert(`Need to show 'Doughnut chart'. Please click 'Amount' menu and fill.`);
                 if (data.length) {
-                    const amount = parseInt(data[0]['budget_amount'], 10);
+                    let amount = parseInt(data[0]['budget_amount'], 10);
+                    amount -= this.sumOfCurrentMonthSpending;
                     const content: Object ={
                         'lable': ['Month\'s Budget Amount', 'Total Spending Amount'],
                         'data': [amount, this.sumOfCurrentMonthSpending],
@@ -288,11 +283,13 @@ export class ChartsComponent implements OnInit {
                         content['data'],
                         content['chartType']
                     );
-                    this.service.localStroage.setItem(content['chartType'], content)
+                    this.service.localStorage.setItem(content['chartType'], content)
                     .subscribe((data) => {
                     }, (error) =>{
                         console.log('stored data error', error);
                     });
+                } else {
+                   this.service.showGlobalAlert(`Need to show 'Doughnut chart'. Please click 'Amount' menu and fill.`);
                 }
               },
               (error) => {
@@ -320,6 +317,23 @@ export class ChartsComponent implements OnInit {
             case 'bar':
                 this.barChartLabels = label;
                 this.barChartData = _data;
+                break;
+        }
+    }
+
+    public updateChart(lable: string) {
+        switch (lable) {
+            case 'local':
+                    this.service.localStorage.getItem<any>('radar').subscribe((data) => {
+                        this.setChart(data['group'], data['data'], data['chartType']);
+                    });
+                    this.service.localStorage.getItem<any>('donut').subscribe((data) => {
+                        this.setChart(data['lable'], data['data'], data['chartType']);
+                    });   
+                break;
+            
+            case 'rest':
+                  this.getRaderChartData();
                 break;
         }
     }

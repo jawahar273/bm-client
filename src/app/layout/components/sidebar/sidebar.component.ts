@@ -21,15 +21,17 @@ export class SidebarComponent {
 
         this.datePickerModel = this.service.currentDateWithMomentJS;
 
-        const temp = this.service.getBudgetAmount();
-       this.service.showGlobalAlert(`Can't start a month without budget amount. Please click 'Amount' menu and fill.`)
+        this.service.getBudgetAmount().then((data) => {
+            if (!this.checkBudgetAmountIsEmpty(data)) {
+              this.service.showGlobalAlert(`Can't start a month without budget amount. Please click 'Amount' menu and fill.`)
+              // set time out to show the modle to get the budget amount.
+              setTimeout(() => {
+                const headerValue = this.service.headers.get('Authorization');
+                headerValue && headerValue !== '' ? this.open(this.sideBarAmountModelcontent) : '';
+             },this.timeOutForPopUpModel );
+            }
+        });  
 
-        if (!this.checkBudgetAmountIsEmpty(temp)) {
-          setTimeout(() => {
-            const headerValue = this.service.headers.get('Authorization');
-            headerValue && headerValue !== '' ? this.open(this.sideBarAmountModelcontent) : '';
-         },this.timeOutForPopUpModel );
-        }
     }
 
     eventCalled() {
@@ -86,7 +88,7 @@ export class SidebarComponent {
    }
 
   public checkBudgetAmountIsEmpty(data?: string) {
-    if (data.startsWith('error')) {
+    if (data.startsWith('error') || data.startsWith('0.00')) {
       return false;
     }
     return true;

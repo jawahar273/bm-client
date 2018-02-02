@@ -46,8 +46,9 @@ export class CommonService {
     public dataTableDashboard: Array<any>;
     // components chart
     public needChartUpdate: boolean = true;
+    public doughNutChartDataMonth: Array<any>;
 
-    constructor(private http: Http, public localStroage: AsyncLocalStorage) {
+    constructor(private http: Http, public localStorage: AsyncLocalStorage) {
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
@@ -279,45 +280,49 @@ export class CommonService {
      * the parameter to service is current month and year.
      * this function build with generic view, so this might me confusing.
      */
-    public getBudgetAmount(date?:any): string {
+    public async  getBudgetAmount(date?:any): Promise<string> {
         let monthYearFormat;
         const currentMonthYear = this.getMonthYear(this.currentDateWithMomentJS)
         if (date && this.getMonthYear(date) !== currentMonthYear) {
             monthYearFormat = moment(date).format('YYYY-MM-DD');
             monthYearFormat = this.getMonthYear(monthYearFormat);
-            return this._getBudgetAmount(monthYearFormat);
-             
+            const temp =  await this._getBudgetAmount(monthYearFormat);
+            return temp;
         } 
 
           //.substr(0, this.currentDateWithMomentJS.lastIndexOf('-'));
-           return this._getBudgetAmount(currentMonthYear, true);
-        
+           const temp =  await this._getBudgetAmount(currentMonthYear, true);
+           return temp;
     }
     // bmt => budget amount today
-    private _getBudgetAmount(monthYearFormat: string, bmt=false): string {
+    private  _getBudgetAmount(monthYearFormat: string, bmt=false): Promise<string> {
+
         const url = `package/mba/${monthYearFormat}`;
         const _body = {'month_year': `${monthYearFormat}`}
-        this.get(url, this.headers)
-           .subscribe(
-             (data) => {
-                 if (data) {
-                     return 'error no data';
+        return new Promise(resolve => {
+            let output;
+            this.get(url, this.headers)
+               .subscribe(
+                 (data) => {
+                     if (!data) {
+                         resolve('error no data');
+                     } else {
+                         if (bmt){
+                            this.budgetAmount = parseFloat(data[0]['budget_amount']);
+                            // return data[0]['budget_amount'];
+                         }
+                         resolve( data[0]['budget_amount']);
+                         
+                         // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
+                     }
+                 },
+                 (error) => {
+                     const msg = this.isClinetOrServerSidesError(error);
+                     this.showGlobalAlert(msg);
+                     resolve('error showed in alert box');
                  }
-                 if (bmt){
-                    this.budgetAmount = parseFloat(data[0]['budget_amount']);
-                    // return data[0]['budget_amount'];
-                 }
-                     return data[0]['budget_amount'];
-                 
-                 // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
-             },
-             (error) => {
-                 const msg = this.isClinetOrServerSidesError(error);
-                 this.showGlobalAlert(msg);
-                 return 'error showed in alert box';
-             }
-           );
-           return 'error on ower end';
+               );
+        });
     }
 
     public setBudgetAmount(amount: number, date: any) {
@@ -328,10 +333,21 @@ export class CommonService {
         this.update(this.joinURL(url, monthYearFormat, false), this.headers, _body )
            .subscribe(
              (data) => {
+
                  if (monthYearFormat == data['month_year'])
                     this.budgetAmount = parseFloat(data['budget_amount']);
                 
                 this.showGlobalAlert('date for buget amount updated', 'success');
+                this.localStorage.getItem<any>('donut').subscribe((read) => {
+                    read['data'][0] = data['budget_amount'];
+                    read['data'][0] -= read['data'][1];
+                    this.localStorage.setItem('donut', read).subscribe((store) => {
+                            debugger;
+
+                    });
+                            debugger;
+
+                }); 
                 return true;
 
                  // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
@@ -344,6 +360,12 @@ export class CommonService {
                      .subscribe(
                          (data) => {
                             this.showGlobalAlert('new date for buget amount created', 'success');
+                            this.localStorage.getItem<any>('donut').subscribe((read) => {
+                                read['data'][0] = data['budget_amount'];
+                                read['data'][0] -= read['data'][1];
+                                this.localStorage.setItem('donut', read).subscribe((store) => {
+                                });
+                            }); 
                             return true;
                          },
                          (error) => {
