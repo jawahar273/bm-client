@@ -164,7 +164,7 @@ export class CommonService {
             case 400:
                 return `${preCommonMsg} Somthing wrong with the request ${sufCommonMsg} `;
             case 401:
-                return `${preCommonMsg} Please Login again ${sufCommonMsg} <a routerLink="login">Login</a>`;
+                return `${preCommonMsg} Please Login again by loging out ${sufCommonMsg} `;
             case 403:
                 return `${preCommonMsg} Somthing worng with request content ${sufCommonMsg} `;
             case 404:
@@ -342,10 +342,7 @@ export class CommonService {
                     read['data'][0] = data['budget_amount'];
                     read['data'][0] -= read['data'][1];
                     this.localStorage.setItem('donut', read).subscribe((store) => {
-                            debugger;
-
                     });
-                            debugger;
 
                 }); 
                 return true;
