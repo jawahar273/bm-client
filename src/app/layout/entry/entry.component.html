@@ -19,7 +19,9 @@
 			<div class="form-group">
 				<!-- <label class="col-form-label" for="group-category">Category</label> -->
 				<input type="text" formControlName="entryGroupGroup" [ngClass]="{'has-error': checkFormHasError('entryGroupGroup')}" class="form-control input-underline"
-				 id="groupCategory" placeholder="Category/Group">
+				 id="groupCategory" placeholder="Category/Group"
+				 [ngbTypeahead]="typeAheadForGroupItems"
+				 [resultFormatter]="formatter">
 			</div>
 			<div class="form-group">
 				<!-- <label class="col-form-label" for="group-date">Date</label> -->

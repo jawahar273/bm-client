@@ -16,8 +16,6 @@ export class CommonService {
     today: Date;
     defaultMobileScreenOffSet: number;
     isMobileScreen: boolean;
-    listOfMonths: Array<object>;
-    listOfYears: Array<number>;
     countOfYears: number;
     startLimitOfYears: number;
     globalalertBox: Array<any> = [];
@@ -31,7 +29,7 @@ export class CommonService {
     };
     public clientErrorCode = new Set([400, 401, 403, 404, 408, 410]);
     public serverErrorCode = new Set([500, 502, 503, 504 ]);
-    public currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
+    public currentDateWithMomentJS;
 
 
     private commonURL:string;
@@ -44,11 +42,16 @@ export class CommonService {
     // components dashboard
     public needTableUpdate: boolean = true;
     public dataTableDashboard: Array<any>;
+    public listOfGroupItems: Array<string>;
+    public listOfMonths: Array<string>;
     // components chart
     public needChartUpdate: boolean = true;
     public doughNutChartDataMonth: Array<any>;
 
-    constructor(private http: Http, public localStorage: AsyncLocalStorage) {
+    constructor(public http: Http, public localStorage?: AsyncLocalStorage) {
+        this.today  = new Date();
+        this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
+        this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
@@ -57,13 +60,27 @@ export class CommonService {
              'content-type': 'application/json',
             'Authorization': ``,
         });
-        this.today  = new Date();
 
         if (isDevMode()) {
             this.commonURL = 'http://127.0.0.1:8000/api';
         } else {
             this.commonURL = 'https://jawahar.pythonanywhere.com/api';
         }
+        this.localStorage.getItem<any>('currency')
+         .subscribe((data) => {
+             if (!data) {
+                 this.get('package/currency', this.headers)
+                  .subscribe((data) => {
+                      this.localStorage.setItem('currency', data).subscribe(() => {
+                          console.log('stored currency in local')
+                      });
+                  }, (error) => {
+
+                  });
+             }
+         }, (error) => {
+
+         });
     }
     /**
      * 
@@ -382,5 +399,11 @@ export class CommonService {
     public getMonthYear(data: string) {
         return  `${data.substr(0, data.lastIndexOf('-'))}-01`; 
     }
-    
+    // Miscellaneous class methods
+    /*
+     * conver the given string intp title case 
+     */
+    public toTitleCase(input): string {
+        return input.replace(/\w\S*/g, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase() ));
+    }
 }

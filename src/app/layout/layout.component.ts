@@ -17,6 +17,12 @@ export class LayoutComponent implements OnInit {
     constructor(public service: CommonService, private router: Router) {
         if (sessionStorage.getItem('authToken')) {
             this.onSuccess();
+            this.service.get('package/get_group_items', this.service.headers)
+             .subscribe((data) => {
+                 this.service.listOfGroupItems = data;
+             }, (error) => {
+                 // this.showGlobalAlert('');
+             });
         } else {
             this.onFail();
         }
@@ -56,9 +62,5 @@ export class LayoutComponent implements OnInit {
         this.router.navigate(['/login']);
     }
 
-    @HostListener('window:resize', ['$event'])
-    public layoutResizeListener(event) {
-      this.service.isMobileScreen = event.target.innerWidth <= this.service.defaultMobileScreenOffSet;
-    }
 
 }

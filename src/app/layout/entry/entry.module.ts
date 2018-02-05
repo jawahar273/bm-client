@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { ReactiveFormsModule } from '@angular/forms';
-
+import {  NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
 
 import { PageHeaderModule } from '../../shared';
@@ -21,6 +21,7 @@ import { ListedItemsComponent } from './listed-items/listed-items.component';
     HttpModule,
     PageHeaderModule,
     ReactiveFormsModule,
+    NgbTypeaheadModule.forRoot(),
   ],
   declarations: [
   EntryComponent,

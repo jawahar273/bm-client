@@ -1,7 +1,13 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap"
 import {  Headers } from '@angular/http';
+
+import {Observable} from 'rxjs/Observable';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/debounceTime';
+import 'rxjs/add/operator/distinctUntilChanged';
 
 import { CommonService } from '../../services/common.services';
 import { routerTransition } from '../../router.animations';
@@ -179,6 +185,17 @@ export class EntryComponent implements OnInit {
   public trackByFnForEntryGroupItems(index, item) { 
       return item.id; 
   }
+  
+  formatter = (result: string) => this.service.toTitleCase(result);
+  typeAheadForGroupItems = (text$: Observable<string>) => 
+    text$
+      .debounceTime(200)
+      .distinctUntilChanged()
+      .map(term => term.length < 2 ? []
+        : this.service.listOfGroupItems.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+      // debugger;
+  
+
   /**
    *
    * @return {void}
