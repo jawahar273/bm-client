@@ -23,7 +23,7 @@ export class DashTableComponent implements OnInit {
 
     constructor(public service: CommonService) {
         this.isMobileScreen = window.innerWidth <= 992;
-        this.monthInMenu = `${this.service.today.getFullYear()}-${this.service.listOfMonths.slice(-1)}`;
+        this.monthInMenu = `${this.service.listOfMonths.slice(-1)}-${this.service.today.getFullYear()}`;
         // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
     }
 
