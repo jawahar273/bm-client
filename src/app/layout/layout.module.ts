@@ -10,11 +10,14 @@ import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
+import { ProfileModule } from './profile/profile.module';
+
 @NgModule({
     imports: [
         CommonModule,
         LayoutRoutingModule,
         TranslateModule,
+        ProfileModule,
         NgbDropdownModule.forRoot(),
         NgbTooltipModule.forRoot(),
         NgbAlertModule.forRoot(),
