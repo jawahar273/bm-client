@@ -50,18 +50,13 @@ export class EntryComponent implements OnInit {
       this.route.params.subscribe(params => { this.id = params['id']; });
       this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
       !!this.id ? this.getOneItemListObject(this.id) : '';
-        // const headers = new Headers({ 'Accept': 'application/json'});
-        // this.service.get('package/itemslist/', headers).subscribe(
-        //     (data) => {
-        //         console.log(data);
-        //     },
-        //     (error) => {
-        //         console.error(error);
-        //     },
-        // );
-    //  this.entryForm.valueChanges.subscribe(form => { console.log(form); });
   }
 
+    /**
+     *
+     * @var {Object}  hold the name of the formgroup and the filed name from 
+     * the service to act as mapping.
+     */
   ngOnInit() {
       this.entryForm.get('entryGroupDate').setValue(this.service.today.toISOString().substring(0, 10));
       this.serviceFields = {
@@ -86,9 +81,9 @@ export class EntryComponent implements OnInit {
   }
 
   /**
+   * Used to close alert in display.
    *
    * @param {any} alert it is an object of the current alert.
-   * @description used to close alert in display.
    */
   public closeAlert(alert?: Object, removeAll?: boolean ) {
       // if (removeAll) {
@@ -122,9 +117,13 @@ export class EntryComponent implements OnInit {
   }
 
 /**
- *
- * @param _object Object from the response api.
- * @return {Object}  for createing dymanic based on the request data
+ * Get the object from the service if the object is not null then
+ * get the value and embeded them into the form in the entry page or generate 
+ * new formgroup with empty data by calling the @function generateGroupItemsFormControl .
+ * 
+ * @param _object Object from the response(server) api.
+ * @return {Object}  for creating dymanic based on the request data
+ * 
  */
   private getObjectForUpdate(_object?: Object): Object {
       const temp = !!_object ? this.generateListOfItems(_object['items']) : [this.generateGroupItemsFormControl()];
@@ -159,10 +158,10 @@ export class EntryComponent implements OnInit {
   }
 
   /**
+   * Check the form is valid or not.
    *
    * @param name get the formcontrol's name
    * @return {boolean}
-   * @description check the form is valid or not
    */
   public checkFormHasError(name: string): boolean {
       return this.service.checkFormHasError(name, this.entryForm);
@@ -170,7 +169,7 @@ export class EntryComponent implements OnInit {
 
   /**
    *
-   * @description add the form field.
+   * Add the form field.
    */
   public addItem() {
       (<FormArray>this.entryForm.controls['entryGroupItems']).push(this.generateGroupItemsFormControl());
@@ -197,9 +196,9 @@ export class EntryComponent implements OnInit {
   
 
   /**
+   * This function is called on the event `onsubmit`.
    *
    * @return {void}
-   * @description this function is called on the event `onsubmit`.
    */
   public entrySubmit(): void {
     if (this.entryForm.valid && this.submitForm) {

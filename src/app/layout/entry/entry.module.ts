@@ -15,13 +15,12 @@ import { ListedItemsComponent } from './listed-items/listed-items.component';
 @NgModule({
   imports: [
     CommonModule,
-    EntryRoutingModule,
-    ListedItemsModule,
-    // NgbModule.forRoot(),
     HttpModule,
     PageHeaderModule,
     ReactiveFormsModule,
     NgbTypeaheadModule.forRoot(),
+    EntryRoutingModule,
+    ListedItemsModule,
   ],
   declarations: [
   EntryComponent,

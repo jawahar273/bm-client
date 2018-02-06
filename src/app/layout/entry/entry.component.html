@@ -1,52 +1,39 @@
 
 <div [@routerTransition] class="container-fluid pagination-centered"  >
 	<app-page-header [heading]="'Entry'" [icon]="'fa-etsy'"></app-page-header>
-<!-- 	<p *ngFor="let alert of service.globalalertBox">
-		<ngb-alert [type]="alert.type" (close)="closeAlert(alert)">{{ alert.message }}</ngb-alert>
-	</p> -->
 	<div class="row allow-center">
 		<form id="entryFormGroup" class="col-lg-8 col-xs-12" [formGroup]="entryForm" (ngSubmit)="entrySubmit();">
 			<div class="form-group" >
-				<!-- <label class="col-form-label" for="groupItems">Name</label> -->
 				<input type="text" formControlName="entryGroupName" [ngClass]="{'has-error':checkFormHasError('entryGroupName')}" class="form-control input-underline"
 				 id="groupName" placeholder="Name">
 			</div>
 			<div class="form-group">
-				<!-- <label class="col-form-label" for="place">Place</label> -->
 				<input type="text" formControlName="entryGroupPlace" [ngClass]="{'has-error':checkFormHasError('entryGroupPlace')}" class="form-control input-underline"
 				 id="groupPlace" placeholder="Place">
 			</div>
 			<div class="form-group">
-				<!-- <label class="col-form-label" for="group-category">Category</label> -->
 				<input type="text" formControlName="entryGroupGroup" [ngClass]="{'has-error': checkFormHasError('entryGroupGroup')}" class="form-control input-underline"
 				 id="groupCategory" placeholder="Category/Group"
 				 [ngbTypeahead]="typeAheadForGroupItems"
 				 [resultFormatter]="formatter">
 			</div>
 			<div class="form-group">
-				<!-- <label class="col-form-label" for="group-date">Date</label> -->
 				<input type="date" formControlName="entryGroupDate" [ngClass]="{'has-error':checkFormHasError('entryGroupDate')}" class="form-control input-underline"
 				 id="groupDate" placeholder="Date">
 			</div>
 			<!-- formArray to add or remote fields -->
 			<div formArrayName="entryGroupItems" >
-				<!-- <div  > -->
-					<!-- <label class="col-form-label col-sm-1" for="entryGroupItems-{{indx}}">{{indx}}:</label> -->
 					   <app-listed-items [count]="indx"
 					   *ngFor="let form of getEntryGroupItemsControl(); let indx = index; trackBy: trackByFnForEntryGroupItems"
 						[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"
 						(addItemList)="addItem()"
 						(deleteItemList)="deleteItem(indx)">
 					   </app-listed-items>
-					<!-- <div formGroupName="{{indx}}">
-					</div>
- -->					<br>
-				<!-- </div> -->
+					<br>
 			</div>
 			<button (click)="submitForm=true;" class="btn app-button form-group right" [disabled]="!hideLoadSpin" id="entrySubmitButton">
 				Submit <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
 			</button>
 		</form>
 	</div>
-		<!-- {{ entryForm.value | json }} -->
 </div>

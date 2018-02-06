@@ -1,0 +1,25 @@
+
+hr {
+	width: 100%;
+}
+
+.profile {
+	.p-body {
+		.p-image {
+			width: 150px;
+			height: 150px;
+		}
+	}
+}
+
+@media screen and (max-width: 992px) {
+	.profile {
+		.p-body {
+			.p-image {
+				text-align: center;
+				width: 150px;
+				height: 150px;
+			}
+		}
+	}
+}

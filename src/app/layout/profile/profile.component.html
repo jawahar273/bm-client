@@ -1,3 +1,29 @@
-<p>
-  profile works!
-</p>
+<div [@routerTransition] class="container-fluid pagination-centered profile"  >
+	<app-page-header [heading]="'Profile'" [icon]="'fa-etsy'"></app-page-header>
+	<div class="row p-content">
+		<div class="col-lg-12 col-xs-12 p-body">
+			<div class="row align-items-start">
+				<div class="col-lg-5 col-xs-6">
+					<h2>Public Image</h2>
+					<p>Please upload image to <a href="http://gravatar.com/" target="_black">gravatar.com</a></p>
+				</div>
+				<div class="col-lg-7 col-xs-6">
+					<img src="{{getUserProfileURL()}}&s=400" alt="profile image" class="rounded-circle p-image" [ngClass]="{'allow-center': service.isMobileScreen}">
+				</div>
+				<hr>
+			</div>
+		</div>
+		<div class="col-lg-12 col-xs-12 p-body">
+			<div class="row align-items-start">
+				<div class="col-lg-5 col-xs-6">
+					<h2>About Me</h2>
+				</div>
+				<div class="col-lg-7 col-xs-6">
+					<form>
+						
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
