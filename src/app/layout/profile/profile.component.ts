@@ -12,10 +12,18 @@ import { routerTransition } from '../../router.animations';
 })
 export class ProfileComponent implements OnInit {
   public profileForm: FormGroup;
+  public serviceProfileField: Object;
   constructor(public service: CommonService, public profileFormBuilder: FormBuilder) {
-     // this.profileForm = this.profileFormBuilder({
-
-     // });
+     this.profileForm = this.profileFormBuilder.group({
+       proFirstName : localStorage.getItem('userFirstName'),
+       proLastName: localStorage.getItem('userLastName'),
+       proGender: localStorage.getItem('userGender'),
+     });
+     this.serviceProfileField = {
+       'proFirstName' : 'first_name',
+       'proLastName': 'last_name',
+       'proGender': 'gender',
+     }
   }
 
   ngOnInit() {
@@ -23,6 +31,25 @@ export class ProfileComponent implements OnInit {
 
   public getUserProfileURL() {
   	return localStorage.getItem('userProfileURL');
+  }
+
+  public getUserEmail() {
+    return localStorage.getItem('userEmail');
+  }
+
+  public checkFormHasErrorUser(name:string): boolean {
+    return this.service.checkFormHasError(name, this.profileForm);
+  }
+
+  public onSubmitProfileDetails() {
+    const formValues = this.profileForm.value;
+    this.service.get('rest-auth/user', this.service.headers)
+     .subscribe((data) => {
+       this.service.showGlobalAlert('Personal details updated', 'success');
+     }, (error) => {
+       const temp = this.service.isClinetOrServerSidesError(error);
+       this.service.showGlobalAlert(temp);
+     });
   }
 
 }

@@ -1,5 +1,8 @@
 # Budget Manager 
 
+> Due to code complexcity in mapping rest data to form in entry component, code will 
+be reviewed.
+
 [Bm](https://jawahar273.github.io/bm-client/) is built using Angular 5 and Bootstrap 4
 
 

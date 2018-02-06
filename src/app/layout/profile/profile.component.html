@@ -15,12 +15,38 @@
 		</div>
 		<div class="col-lg-12 col-xs-12 p-body">
 			<div class="row align-items-start">
-				<div class="col-lg-5 col-xs-6">
+				<div class="col-lg-3 col-xs-6">
 					<h2>About Me</h2>
 				</div>
-				<div class="col-lg-7 col-xs-6">
-					<form>
-						
+				<div class="col-lg-9 col-xs-6">
+				<div class="form-group" >
+						<input type="text"  readonly="readonly" class="form-control input-underline"
+						[value]="getUserEmail()"
+						 id="proEmail" placeholder="Email">
+					</div>
+					<form [formGroup]="profileForm" (ngSubmit)="onSubmitProfileDetails()">
+						<div class="form-group" >
+							<input type="text" formControlName="proFirstName" [ngClass]="{'has-error':checkFormHasErrorUser('proFirstName')}" class="form-control input-underline"
+							 id="proFirstName" placeholder="First Name">
+						</div>
+						<div class="form-group" >
+							<input type="text" formControlName="proLastName" [ngClass]="{'has-error':checkFormHasErrorUser('proLastName')}" class="form-control input-underline"
+							 id="proLastName" placeholder="Last Name">
+						</div>
+						<div class="form-group" >
+							<select formControlName="proGender" id="proGender">
+								<option value="F">Female</option>
+								<option value="M">Male</option>
+								<option value="O">Other</option>
+								<option value="N">Not Willing to say</option>
+
+							</select>  
+						</div>
+                        <div>
+                        	<button class="btn app-button form-group .p-btn">
+                        	  Submit
+                            </button>
+                        </div>
 					</form>
 				</div>
 			</div>

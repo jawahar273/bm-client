@@ -20,32 +20,27 @@ import { routerTransition } from '../../router.animations';
     encapsulation: ViewEncapsulation.None
 })
 export class EntryComponent implements OnInit {
-
     entryForm: FormGroup;
     itemEntry: Array<any> = [];
     hiddleAlert: boolean = true;
     entryFormAlert: Array<any> = [];
     hideLoadSpin: boolean = true;
-    // entryFormGroupContents: Object;
     headers: Headers;
     id: number;
     serviceFields: Object;
     submitForm: boolean = false;
     content404: boolean = false;
+
     /**
      *
      * @param entryFormGroupBuilder
      * @param service
      * @param {ActivatedRoute} route using this object routing paramas can be obtain.
-     *
      * @var {FormGroup} entryForm this is the link member between the html and JS and must
      *         be initilize for formgroup and form html.
-     * @var {Object} serviceFields to convert the server and client fields in between sending & receving objects.
      * @var {Object} entryFormGroupContent a Object to contain the newly or object from the service formgroup.
      */
     constructor(public entryFormGroupBuilder: FormBuilder, public service: CommonService, public route: ActivatedRoute) {
-        // @entryForm
-
       this.headers = this.service.headers;
       this.route.params.subscribe(params => { this.id = params['id']; });
       this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
@@ -59,6 +54,7 @@ export class EntryComponent implements OnInit {
      */
   ngOnInit() {
       this.entryForm.get('entryGroupDate').setValue(this.service.today.toISOString().substring(0, 10));
+      /** @type {Object} serviceFields to convert the server and client fields in between sending & receving objects.*/
       this.serviceFields = {
           entryGroupName: 'name',
           entryGroupPlace: 'place',
@@ -119,7 +115,7 @@ export class EntryComponent implements OnInit {
 /**
  * Get the object from the service if the object is not null then
  * get the value and embeded them into the form in the entry page or generate 
- * new formgroup with empty data by calling the @function generateGroupItemsFormControl .
+ * new formgroup with empty data by calling the @method generateGroupItemsFormControl .
  * 
  * @param _object Object from the response(server) api.
  * @return {Object}  for creating dymanic based on the request data
@@ -196,7 +192,8 @@ export class EntryComponent implements OnInit {
   
 
   /**
-   * This function is called on the event `onsubmit`.
+   * This function is called on the event `onsubmit`. That the formcontrol are mapped to
+   * the service(rest server api) filed name. By using the @method service.renameObjectAllKeys.
    *
    * @return {void}
    */

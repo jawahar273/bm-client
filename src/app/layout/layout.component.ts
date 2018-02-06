@@ -38,7 +38,12 @@ export class LayoutComponent implements OnInit {
             .subscribe(
             (_data) => {
               localStorage.setItem('userName', _data['username']);
-              localStorage.setItem('userProfileURL', _data['profile_url'])
+              localStorage.setItem('userEmail', _data['email']);
+              localStorage.setItem('userProfileURL', _data['profile_url']);
+              localStorage.setItem('userFirstName', _data['first_name']);
+              localStorage.setItem('userLastName', _data['last_name']);
+              localStorage.setItem('userGender', _data['gender'])
+
             },
             (_error) => {
               const msg = this.service.isClinetOrServerSidesError(_error, { 'detail': undefined });

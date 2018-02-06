@@ -406,4 +406,5 @@ export class CommonService {
     public toTitleCase(input): string {
         return input.replace(/\w\S*/g, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase() ));
     }
+
 }
