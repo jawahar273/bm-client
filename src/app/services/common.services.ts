@@ -406,5 +406,17 @@ export class CommonService {
     public toTitleCase(input): string {
         return input.replace(/\w\S*/g, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase() ));
     }
-
+    /*
+     * set the data about the user and set them in localstorage
+     * of the brower.
+     */
+    public setUserDetailsToLocalStorage(_data) {
+      localStorage.setItem('userName', _data['username']);
+      localStorage.setItem('userEmail', _data['email']);
+      localStorage.setItem('userProfileURL', _data['profile_url']);
+      localStorage.setItem('userFirstName', _data['first_name']);
+      localStorage.setItem('userLastName', _data['last_name']);
+      localStorage.setItem('userGender', _data['gender']);
+    }
 }
+

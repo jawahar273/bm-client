@@ -42,9 +42,6 @@
                          class="form-control input-underline input-lg"
                          id="confirm-password" placeholder="Repeat Password"
                          (blur)="confirmPasswordValidator()">
-                        <div class="form-control-feedback show-error-msg" *ngIf='signupFormGroup.get("signUpConfirmPassword").hasError("minlength")'>
-                            Password should be length of 8.
-                        </div>
                         <div class="form-control-feedback show-error-msg" *ngIf='showErrorInButton'>
                              New password and confirm password are not same.
                         </div>

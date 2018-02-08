@@ -13,8 +13,19 @@ import { routerTransition } from '../../router.animations';
 export class ProfileComponent implements OnInit {
   public profileForm: FormGroup;
   public serviceProfileField: Object;
+
+  public packageForm: FormGroup;
+  public servicePackageSettingsField: Object;
   constructor(public service: CommonService, public profileFormBuilder: FormBuilder) {
-     this.profileForm = this.profileFormBuilder.group({
+     this.getInitProfileSetting();
+     this.getInitPackageSettings();
+  }
+
+  ngOnInit() {
+  }
+
+  private getInitProfileSetting() {
+      this.profileForm = this.profileFormBuilder.group({
        proFirstName : localStorage.getItem('userFirstName'),
        proLastName: localStorage.getItem('userLastName'),
        proGender: localStorage.getItem('userGender'),
@@ -23,10 +34,18 @@ export class ProfileComponent implements OnInit {
        'proFirstName' : 'first_name',
        'proLastName': 'last_name',
        'proGender': 'gender',
-     }
+     }   
   }
 
-  ngOnInit() {
+  private getInitPackageSettings() {
+    this.packageForm = this.profileFormBuilder.group({
+      packCurrencyDetails: '',
+      packForceMbaUpdate: ''
+    });
+    this.servicePackageSettingsField = {
+      'packCurrencyDetails': 'currency_details',
+      'packForceMbaUpdate': 'force_mba_update'
+    }
   }
 
   public getUserProfileURL() {
@@ -41,11 +60,23 @@ export class ProfileComponent implements OnInit {
     return this.service.checkFormHasError(name, this.profileForm);
   }
 
-  public onSubmitProfileDetails() {
+  public onSubmitProfileSetting() {
     const formValues = this.profileForm.value;
     this.service.get('rest-auth/user', this.service.headers)
      .subscribe((data) => {
        this.service.showGlobalAlert('Personal details updated', 'success');
+       this.service.setUserDetailsToLocalStorage(data);
+     }, (error) => {
+       const temp = this.service.isClinetOrServerSidesError(error);
+       this.service.showGlobalAlert(temp);
+     });
+  }
+
+  public onSumitPackageSetting() {
+    const formValues = this.packageForm.value;
+    this.service.get('package/settings', this.service.headers)
+     .subscribe((data) => {
+       this.service.showGlobalAlert('package setting updated', 'success');
      }, (error) => {
        const temp = this.service.isClinetOrServerSidesError(error);
        this.service.showGlobalAlert(temp);
