@@ -29,6 +29,7 @@ export class EntryComponent implements OnInit {
     id: number;
     serviceFields: Object;
     submitForm: boolean = false;
+    // flag for check the value has been found or not in getting entry object on `id`.
     content404: boolean = false;
 
     /**
@@ -91,7 +92,8 @@ export class EntryComponent implements OnInit {
       this.service.closeGlobalAlert(alert, removeAll);
   }
   /**
-   *
+   * Get the object based on the given id and map them to the form value
+   * 
    * @param id unique id of the entry which is from back-end.
    */
   private getOneItemListObject(id: any): any {

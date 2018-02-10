@@ -19,15 +19,16 @@ import { formValues } from './package-settings-form.config';
 })
 export class PackageSettingsComponent implements OnInit {
   packageSettingForm: FormGroup;
-  packageSettingFields: object;
+  serviceFields: object;
   formFieldsValue:Array<object>;
   hideLoadSpin: boolean;
   currencyCode: Array<string>;
 
   constructor(public service: CommonService, public fb: FormBuilder) { 
-      this.packageSettingFields = {
+      this.serviceFields = {
         'packCurrencyDetails': 'currency_details',
-        'packForceMbaUpdate': 'force_mba_update'
+        'packForceMbaUpdate': 'force_mba_update',
+        'packActivePaytm': 'active_paytm',
       };
       this.hideLoadSpin = false;
       this.packageSettingForm = this.fb.group({});
@@ -70,7 +71,8 @@ export class PackageSettingsComponent implements OnInit {
   
 
   /*
-   * Set the package setting from the server or brower db and process them into
+   * Set the package setting from the rest api or from the
+   * brower-db and process them into
    * form object and display them into form to the user.
    */
   public getOrSetPackageSettingForm() {
@@ -81,14 +83,15 @@ export class PackageSettingsComponent implements OnInit {
       if (!data) {
         this.service.get('package/settings', this.service.headers)
          .subscribe((data) => {
-            const formFields = Object.assign({}, this.packageSettingFields);
+            const formFields = Object.assign({}, this.serviceFields);
             formFields['packCurrencyDetails'] = data['currency_details'];
             formFields['packForceMbaUpdate'] = data['force_mba_update'];
-            const temp = data['new_settings'];
-            for (const key in temp) {
-              const temp2 = this.convertToFormField(key, '_');
-              formFields[temp2] = temp[key];
-            }
+            formFields['packActivePaytm'] = data['active_paytm']
+            // const temp = data['new_settings'];
+            // for (const key in temp) {
+            //   const temp2 = this.convertToFormField(key, '_');
+            //   formFields[temp2] = temp[key];
+            // }
             // debugger;
             this.packageSettingForm = this.fb.group(formFields);
             // saving the setting to the brower db.
@@ -111,8 +114,15 @@ export class PackageSettingsComponent implements OnInit {
 
   public onSubmitPackageSettings() {
     // console.log(this.packageSettingForm.value);
-    this.service.update('package/settings', this.service.headers)
+    const oldField = Object.keys(this.serviceFields);
+    const newField = Object.values(this.serviceFields);
+    let body = this.service.renameObjectAllKeys(oldField, newField, this.packageSettingForm.value);
+    body = JSON.stringify(body);
+    this.service.update('package/settings', this.service.headers, body)
      .subscribe((data) => {
+       const name = `userCurrencyDetails-${localStorage.getItem('userName')}`;
+       const value = this.service.currencyDetails[data['currency_details']];
+       localStorage.setItem(name, value);
        this.service.showGlobalAlert('package setting has been updated', 'success');
      }, (error) => {
        const temp = this.service.isClinetOrServerSidesError(error);

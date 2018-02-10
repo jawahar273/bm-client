@@ -30,8 +30,15 @@ export class SidebarComponent {
                 headerValue && headerValue !== '' ? this.open(this.sideBarAmountModelcontent) : '';
              },this.timeOutForPopUpModel );
             }
-        });  
+        });
 
+        const temp = localStorage.getItem(`userCurrencyDetails-${localStorage.getItem('userName')}`);
+        if (!temp) {
+          this.service.get('package/settings', this.service.headers)
+           .subscribe((data) => {
+             
+           })
+        }
     }
 
     eventCalled() {

@@ -15,7 +15,7 @@
 							<input type="text" name="currency details" [ngbTypeahead]="typeAheadForCurrency"
 				 			[resultFormatter]="formatter"
 				 			formControlName="packCurrencyDetails"
-				 			placeholder="Currency Details" class="form-control">
+				 			placeholder="Currency Code Only" class="form-control">
 						</div>
 						<div *ngFor="let item of formFieldsValue" [ngSwitch]="item.baseTag">						
 							<div class="form-group" *ngSwitchCase="'input'">
@@ -32,8 +32,7 @@
 							  </div>
 							</div>
 						</div>
-						<button class="btn app-button"> Submit </button>
-						{{ packageSettingForm.value | json }}
+						<button class="btn app-button allow-center"> Submit </button>
 					</form>
 				</div>
 			</div>
