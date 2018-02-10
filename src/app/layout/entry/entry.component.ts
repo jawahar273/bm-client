@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap"
+import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import {  Headers } from '@angular/http';
 
 import {Observable} from 'rxjs/Observable';
@@ -188,7 +188,6 @@ export class EntryComponent implements OnInit {
       .distinctUntilChanged()
       .map(term => term.length < 2 ? []
         : this.service.listOfGroupItems.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
-      // debugger;
   
 
   /**
@@ -214,6 +213,7 @@ export class EntryComponent implements OnInit {
                       this.hideLoadingSpin(true);
                       this.service.needTableUpdate = true;
                       this.service.needChartUpdate = true;
+                      this.service.listOfGroupItems.push(data['group']);
                     //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
@@ -231,7 +231,7 @@ export class EntryComponent implements OnInit {
                       this.hideLoadingSpin(true);
                       this.service.needTableUpdate = true;
                       this.service.needChartUpdate = true;
-                      
+                      this.service.listOfGroupItems.push(data['group']);
                     //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {

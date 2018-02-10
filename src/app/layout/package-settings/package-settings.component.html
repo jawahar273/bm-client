@@ -10,8 +10,14 @@
 					<i class="fa fa-spinner fa-spin fa-1x fa-fw " style="font-size: 50px;" ></i>
 				</div>
 				<div class="col-lg-8 col-xs-6" *ngIf="hideLoadSpin">
-					<form [formGroup]="packageSettingForm" (ngSubmit)="onSubmitProfileSetting()" *ngFor="let item of formFieldsValue" >
-						<div [ngSwitch]="item.baseTag">						
+					<form [formGroup]="packageSettingForm" (ngSubmit)="onSubmitPackageSettings()"  >
+						<div class="form-group">
+							<input type="text" name="currency details" [ngbTypeahead]="typeAheadForCurrency"
+				 			[resultFormatter]="formatter"
+				 			formControlName="packCurrencyDetails"
+				 			placeholder="Currency Details" class="form-control">
+						</div>
+						<div *ngFor="let item of formFieldsValue" [ngSwitch]="item.baseTag">						
 							<div class="form-group" *ngSwitchCase="'input'">
 							  <div *ngIf="checkFormFields(item.type)" >
 			                      <input type="{{item.type}}"  name="{{item.name}}" class="form-control {{item?.class}}" id="{{item?.id}}" formControlName="{{convertToFormField(item.name)}}"
@@ -26,6 +32,8 @@
 							  </div>
 							</div>
 						</div>
+						<button class="btn app-button"> Submit </button>
+						{{ packageSettingForm.value | json }}
 					</form>
 				</div>
 			</div>

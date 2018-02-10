@@ -11,15 +11,18 @@
 	  </div>
   </div>
 </div>
-
 <div class="col col-xl-12 col-lg-12 col-sm-12">
     <div class="card mb-3 ">
         <div class="card-header">
-            List Spendings
+            Spendings List
             <span placement="top" [ngbTooltip]="tipDashTableContent">
                 <i class="fa fa-question-circle "></i>
                 <ng-template #tipDashTableContent>
-                  <p>Colums are resiable</p>  
+                  <p>
+                  	Columns are resiable.
+                  	<br>
+                  	Columns are sortable.
+                  </p>  
                 </ng-template>
             </span>
 
@@ -130,8 +133,8 @@
 	                                <span (click)="sort()">{{column?.name}}</span>
 	                            </ng-template>
 	                            <ng-template let-row="row" let-value="value" ngx-datatable-cell-template>
-	                                <span placement="top" ngbTooltip="value"
-	                                triggers="click">
+	                                <span placement="top" [ngbTooltip]="value"
+	                                >
 	                                    {{getTheDays(value)}}
 	                                </span>
 	                            </ng-template>

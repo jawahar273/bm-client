@@ -30,6 +30,7 @@ export class CommonService {
     public clientErrorCode = new Set([400, 401, 403, 404, 408, 410]);
     public serverErrorCode = new Set([500, 502, 503, 504 ]);
     public currentDateWithMomentJS;
+    public currencyDetails: object;
 
 
     private commonURL:string;
@@ -66,17 +67,20 @@ export class CommonService {
         } else {
             this.commonURL = 'https://jawahar.pythonanywhere.com/api';
         }
-        this.localStorage.getItem<any>('currency')
+        this.localStorage.getItem('currency')
          .subscribe((data) => {
              if (!data) {
                  this.get('package/currency', this.headers)
                   .subscribe((data) => {
-                      this.localStorage.setItem('currency', data).subscribe(() => {
-                          console.log('stored currency in local')
+                      this.localStorage.setItem('currency', data).subscribe((data) => {
+                          console.log('stored currency in local'+data);
                       });
+                      this.currencyDetails = data;
                   }, (error) => {
-
+                      console.error('error in stroing currency'+error);
                   });
+             } else {
+                 this.currencyDetails = data;
              }
          }, (error) => {
 

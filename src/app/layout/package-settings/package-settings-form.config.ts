@@ -1,16 +1,16 @@
 
 // name should equal to the service field with space or '_'
 export const formValues = [
-	{
-		baseTag: 'input',
-		type: 'text',
-		name: 'currency details',
-		class: '',
-		id: 'currencyDetails',
-		serviceField: '',
-		value: '',
-		placeholder: 'Currency Details',
-	},
+	// {
+	// 	baseTag: 'input',
+	// 	type: 'text',
+	// 	name: 'currency details',
+	// 	class: '',
+	// 	id: 'currencyDetails',
+	// 	serviceField: '',
+	// 	value: '',
+	// 	placeholder: 'Currency Details',
+	// },
 	{
 		baseTag: 'input',
 		type: 'radio',

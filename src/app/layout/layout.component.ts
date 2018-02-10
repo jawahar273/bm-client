@@ -19,7 +19,7 @@ export class LayoutComponent implements OnInit {
             this.onSuccess();
             this.service.get('package/get_group_items', this.service.headers)
              .subscribe((data) => {
-                 this.service.listOfGroupItems = data;
+                 this.service.listOfGroupItems = Array.from(new Set(data));
              }, (error) => {
                  // this.showGlobalAlert('');
              });
