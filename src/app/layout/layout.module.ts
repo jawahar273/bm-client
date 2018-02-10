@@ -11,6 +11,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
 
 import { ProfileModule } from './profile/profile.module';
+import { PackageSettingsModule } from './package-settings/package-settings.module';
 
 @NgModule({
     imports: [
@@ -22,6 +23,7 @@ import { ProfileModule } from './profile/profile.module';
         NgbTooltipModule.forRoot(),
         NgbAlertModule.forRoot(),
         NgbDatepickerModule.forRoot(),
+        PackageSettingsModule,
     ],
     declarations: [LayoutComponent, SidebarComponent, HeaderComponent]
 })

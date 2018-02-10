@@ -263,34 +263,42 @@ export class CommonService {
     }
 
   /**
-   *
+   * Check the form is valid or not note:- need to redeclared in local
+   * components to wrap with `_fb`(FormGroup) object.
    * @param {string} name get the formcontrol's name
    * @param {formGroup} current formGroup object
    * @return {boolean} is form valid or not
-   * @description check the form is valid or not note:- need to redeclared in local
-   * components to wrap with `_fb`(FormGroup) object.
    */
     public checkFormHasError(name: string, _fb: any): boolean {
       const temp = _fb.get(name);
       return (temp.invalid && temp.touched);
-  }
- public findInvalidControls(_fb: any, checkAllFields: boolean = false): object {
-     let invalid = [];
-     const controls = _fb.controls;
-     const _names = Object.keys(controls);
-     for (const name of _names) {
-         if (controls[name].invalid) {
-             controls[name].markAsTouched({onlySelf: true});
-            if (!checkAllFields) {
-                return {'valid': false, 'fields': name};
-            } else if (checkAllFields) {
-                invalid.push(name);
+    }
+
+   /*
+    * Finds any error in the form controll and show them in alert.
+    *
+    * @param {FormGroup} _fb get the formgroup of reactive form of angular.
+    * @param {boolean} checkAllFields check all the field on same time.
+    */
+    public findInvalidControls(_fb: any, checkAllFields: boolean = false): object {
+        let invalid = [];
+        const controls = _fb.controls;
+        const _names = Object.keys(controls);
+        for (const name of _names) {
+            if (controls[name].invalid) {
+                 controls[name].markAsTouched({onlySelf: true});
+                if (!checkAllFields) {
+                    return {'valid': false, 'fields': name};
+                } else if (checkAllFields) {
+                    invalid.push(name);
+                }
             }
-         }
-     }
-     return checkAllFields ? {'valid': false, 'fields': invalid} : {'valid': true, 'fields': ''} ;
-   }
-  // components headers and sidebars common function
+        }
+        return checkAllFields ? {'valid': false, 'fields': invalid} : {'valid': true, 'fields': ''} ;
+    }
+
+    // components headers and sidebars common function
+    
      /*
      * @param {any} setting date
      * get the budget amount  from the service if the argument is undefine

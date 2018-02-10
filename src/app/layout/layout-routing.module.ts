@@ -18,6 +18,7 @@ const routes: Routes = [
             { path: 'entry', loadChildren: './entry/entry.module#EntryModule'},
             { path: 'entry/:id', loadChildren: './entry/entry.module#EntryModule' },
             { path: 'profile', loadChildren: './profile/profile.module#ProfileModule' },
+            { path: 'settings', loadChildren: './package-settings/package-settings.module#PackageSettingsModule' },
         ]
     }
 ];
