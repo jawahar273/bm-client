@@ -98,7 +98,7 @@ export class PackageSettingsComponent implements OnInit {
             this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, formFields)
              .subscribe((data) => {
                console.log('save package setting ...');
-             })
+             });
             this.setHideLoadSpinner(true);
          }, (error) => {
            const temp = this.service.isClinetOrServerSidesError(error);
@@ -123,6 +123,10 @@ export class PackageSettingsComponent implements OnInit {
        const name = `userCurrencyDetails-${localStorage.getItem('userName')}`;
        const value = this.service.currencyDetails[data['currency_details']];
        localStorage.setItem(name, value);
+        this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, this.packageSettingForm.value)
+         .subscribe((data) => {
+           console.log('save package setting ...');
+         });
        this.service.showGlobalAlert('package setting has been updated', 'success');
      }, (error) => {
        const temp = this.service.isClinetOrServerSidesError(error);

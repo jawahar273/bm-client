@@ -12,7 +12,7 @@ import { routerTransition } from '../../router.animations';
 })
 export class ProfileComponent implements OnInit {
   public profileForm: FormGroup;
-  public serviceProfileField: Object;
+  public serviceField: Object;
 
   public packageForm: FormGroup;
   public servicePackageSettingsField: Object;
@@ -30,7 +30,7 @@ export class ProfileComponent implements OnInit {
        proLastName: localStorage.getItem('userLastName'),
        proGender: localStorage.getItem('userGender'),
      });
-     this.serviceProfileField = {
+     this.serviceField = {
        'proFirstName' : 'first_name',
        'proLastName': 'last_name',
        'proGender': 'gender',
@@ -62,7 +62,11 @@ export class ProfileComponent implements OnInit {
 
   public onSubmitProfileSetting() {
     const formValues = this.profileForm.value;
-    this.service.get('rest-auth/user', this.service.headers)
+    const oldName = Object.keys(this.serviceField);
+    const newName = Object.values(this.serviceField);
+    let body = this.service.renameObjectAllKeys(oldName, newName, formValues);
+    body = JSON.stringify(body);
+    this.service.update('rest-auth/user', this.service.headers, body)
      .subscribe((data) => {
        this.service.showGlobalAlert('Personal details updated', 'success');
        this.service.setUserDetailsToLocalStorage(data);
@@ -72,15 +76,15 @@ export class ProfileComponent implements OnInit {
      });
   }
 
-  public onSumitPackageSetting() {
-    const formValues = this.packageForm.value;
-    this.service.get('package/settings', this.service.headers)
-     .subscribe((data) => {
-       this.service.showGlobalAlert('package setting updated', 'success');
-     }, (error) => {
-       const temp = this.service.isClinetOrServerSidesError(error);
-       this.service.showGlobalAlert(temp);
-     });
-  }
+  // public onSumitPackageSetting() {
+  //   const formValues = this.packageForm.value;
+  //   this.service.get('package/settings', this.service.headers)
+  //    .subscribe((data) => {
+  //      this.service.showGlobalAlert('package setting updated', 'success');
+  //    }, (error) => {
+  //      const temp = this.service.isClinetOrServerSidesError(error);
+  //      this.service.showGlobalAlert(temp);
+  //    });
+  // }
 
 }
