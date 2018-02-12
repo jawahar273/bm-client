@@ -46,3 +46,9 @@ $topnav-background-color: #222;
         border-radius: 50%;
     }
 }
+
+@media screen and (max-width: 992px) { 
+   .navbar {
+     height: 68px;
+   }
+}
