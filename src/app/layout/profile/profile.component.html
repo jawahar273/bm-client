@@ -3,11 +3,11 @@
 	<div class="row p-content">
 		<div class="col-lg-12 col-xs-12 p-body">
 			<div class="row align-items-start">
-				<div class="col-lg-5 col-xs-6">
+				<div class="col-lg-4 col-xs-6">
 					<h2>Public Image</h2>
-					<p>Please upload image to <a href="http://gravatar.com/" target="_black">gravatar.com</a> in using for </p>
+					<p>Please upload image to <a href="http://gravatar.com/" target="_black">gravatar.com</a></p>
 				</div>
-				<div class="col-lg-7 col-xs-6">
+				<div class="col-lg-8 col-xs-6">
 					<img src="{{getUserProfileURL()}}&s=400" alt="profile image" class="rounded-circle p-image" [ngClass]="{'allow-center': service.isMobileScreen}">
 				</div>
 				<hr>
@@ -15,10 +15,10 @@
 		</div>
 		<div class="col-lg-12 col-xs-12 p-body">
 			<div class="row align-items-start">
-				<div class="col-lg-3 col-xs-6">
+				<div class="col-lg-4 col-xs-6">
 					<h2>About Me</h2>
 				</div>
-				<div class="col-lg-9 col-xs-6">
+				<div class="col-lg-8 col-xs-6">
 				    <div class="form-group" >
 						<input type="text"  readonly="readonly" class="form-control input-underline"
 						[value]="getUserEmail()"
