@@ -12,7 +12,7 @@ import { routerTransition } from '../router.animations';
     animations: [routerTransition()]
 })
 export class SignupComponent implements OnInit {
-    serviceMappingFields = {
+    serviceFields = {
         'signUpUserName': 'username',
         'signUpEmail': 'email',
         'signUpNewPassword': 'password1',
@@ -66,10 +66,9 @@ export class SignupComponent implements OnInit {
         if (!this.showErrorInButton && checkFields['valid']) {
             this.setLoadSpinner(false);
             const url = 'rest-auth/registration';
-            const keys = Object.keys(this.serviceMappingFields);
-            const values = Object.values(this.serviceMappingFields);
-            let _body = this.service.renameObjectAllKeys(keys, values, formContent);
-            _body = JSON.stringify(_body);
+            // const keys = Object.keys(this.serviceFields);
+            // const values = Object.values(this.serviceFields);
+            let _body = this.service.renameObjectAllKeys(this.serviceFields, formContent, 's');
             this.service.post(url, this.service.headers, _body )
               .subscribe(
                   (data) => {
@@ -83,7 +82,7 @@ export class SignupComponent implements OnInit {
                   }
               );
         } else {
-          this.service.showGlobalAlert(`Check the fields again ${this.serviceMappingFields[checkFields['fields']]}`, 'warning');
+          this.service.showGlobalAlert(`Check the fields again ${this.serviceFields[checkFields['fields']]}`, 'warning');
           this.setLoadSpinner(true);
         }
     }

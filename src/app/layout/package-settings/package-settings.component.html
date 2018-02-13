@@ -12,12 +12,32 @@
 				<div class="col-lg-8 col-xs-6" *ngIf="hideLoadSpin">
 					<form [formGroup]="packageSettingForm" (ngSubmit)="onSubmitPackageSettings()"  >
 						<div class="form-group">
-							<input type="text" name="currency details" [ngbTypeahead]="typeAheadForCurrency"
+							<input type="text" name="packCurrencyDetails" [ngbTypeahead]="typeAheadForCurrency"
 				 			[resultFormatter]="formatter"
 				 			formControlName="packCurrencyDetails"
 				 			placeholder="Currency Code Only" class="form-control">
 						</div>
-						<div *ngFor="let item of formFieldsValue" [ngSwitch]="item.baseTag">						
+						<div class="form-group">
+							<p>Select Yes option active Paytm Excel uploading</p>
+							<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="Y"
+							formControlName="packForceMbaUpdate">
+							<label for="mbaForceUpdateYes">Yes</label>
+
+							<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="N" 
+							formControlName="packForceMbaUpdate">
+							<label for="mbaForceUpdateNo">No</label>
+						</div>
+						<div class="form-group">
+							<p>Select Yes option for model automatically asking Month Amount</p>
+							<input type="radio" name="packActivePaytm" id="paytmActiveYes" value="Y"
+							formControlName="packActivePaytm">
+							<label for="paytmActiveYes">Yes</label>
+
+							<input type="radio" name="packActivePaytm" id="paytmActiveNo" value="N" 
+							formControlName="packActivePaytm" checked="checked">
+							<label for="paytmActiveNo">No</label>
+						</div>
+<!-- 						<div *ngFor="let item of formFieldsValue" [ngSwitch]="item.baseTag">						
 							<div class="form-group" *ngSwitchCase="'input'">
 							  <div *ngIf="checkFormFields(item.type)" >
 			                      <input type="{{item.type}}"  name="{{item.name}}" class="form-control {{item?.class}}" id="{{item?.id}}" formControlName="{{convertToFormField(item.name)}}"
@@ -31,7 +51,7 @@
 	                              </div>	
 							  </div>
 							</div>
-						</div>
+						</div> -->
 						<button class="btn app-button allow-center"> Submit </button>
 					</form>
 				</div>

@@ -15,7 +15,7 @@ import { Headers } from '@angular/http';
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
     loginAlert: Array<object> = [];
-    mappingKeys = {
+    serviceFields = {
         'loginPassName': 'username',
         'loginPassword': 'password'
     };
@@ -44,8 +44,7 @@ export class LoginComponent implements OnInit {
       const checkFields = this.service.findInvalidControls(this.loginForm);
       // debugger;
       if (checkFields) {
-        let _body = this.service.renameObjectAllKeys(Object.keys(this.mappingKeys), Object.values(this.mappingKeys), loginContent);
-        _body = JSON.stringify(_body);
+        let _body = this.service.renameObjectAllKeys(this.serviceFields, loginContent, 's');
         // debugger;
         this.service.post('rest-auth/login', this.headers, _body)
           .subscribe(

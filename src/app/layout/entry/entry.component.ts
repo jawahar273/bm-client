@@ -1,3 +1,4 @@
+
 import { Component, OnInit, Input, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
@@ -203,10 +204,9 @@ export class EntryComponent implements OnInit {
         // entryFormAlert
         this.hideLoadingSpin(false);
         const url = 'package/itemslist';
-        const oldName = Object.keys(this.serviceFields);
-        const newName = Object.values(this.serviceFields);
-        let _body = this.service.renameObjectAllKeys(oldName, newName, this.entryForm.value);
-        _body = JSON.stringify(_body);
+        // const oldName = Object.keys(this.serviceFields);
+        // const newName = Object.values(this.serviceFields);
+        let _body = this.service.renameObjectAllKeys(this.serviceFields, this.entryForm.value, 's');
         if (!!this.id && !this.content404) {
             this.service.update(url + `/${this.id}`, this.headers,  _body)
               .subscribe(

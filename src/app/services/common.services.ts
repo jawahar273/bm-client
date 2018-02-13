@@ -48,6 +48,12 @@ export class CommonService {
     // components chart
     public needChartUpdate: boolean = true;
     public doughNutChartDataMonth: Array<any>;
+    // components package settings
+    public serviceFieldPackageSettings = {
+        'packCurrencyDetails': 'currency_details',
+        'packForceMbaUpdate': 'force_mba_update',
+        'packActivePaytm': 'active_paytm',
+      };
 
     constructor(public http: Http, public localStorage?: AsyncLocalStorage) {
         this.today  = new Date();
@@ -221,19 +227,31 @@ export class CommonService {
 
     /**
      * 
-     * @param oldKeys get the list of current keys.
-     * @param newKeys get the list oif errorf new keys.
-     * @param ele content object.
+     * @param {object} serviceField which contains the client and service field name but the client is act as key.
+     * @param {object} ele content object.
      * @return {object/undefined} returns the object if no error occures or undeine 
      */
-    public renameObjectAllKeys(oldKeys: Array<string>, newKeys: Array<string>, ele: Object): Object {
+    public renameObjectAllKeys(serviceField: Object, ele: Object, toWhere='s'): Object {
+        // oldKeys, newKeys old arguments
         let el = Object.assign({}, ele);
+        let oldKeys;
+        let newKeys;
+        if (toWhere == 's') {
+            oldKeys = Object.keys(serviceField);
+            newKeys = Object.values(serviceField);
+        } else if (toWhere == 'c') {
+            oldKeys = Object.values(serviceField);
+            newKeys = Object.keys(serviceField);
+        }
+        const self = this;
         if (oldKeys.length === newKeys.length) {
             oldKeys.forEach((element, index) => {
-                this.renameObjectKey(element, newKeys[index], el);
+                self.renameObjectKey(element, newKeys[index], el);
             });
-            return el;
+            // if toWhere is s then convert to json string for the server.
+            return toWhere == 's' ?  JSON.stringify(el) : el;
         } else {
+            console.log('please check the given value .. renameObjectAllKeys');
             return undefined;
         }
     }

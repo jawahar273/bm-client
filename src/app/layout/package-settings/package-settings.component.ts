@@ -25,11 +25,7 @@ export class PackageSettingsComponent implements OnInit {
   currencyCode: Array<string>;
 
   constructor(public service: CommonService, public fb: FormBuilder) { 
-      this.serviceFields = {
-        'packCurrencyDetails': 'currency_details',
-        'packForceMbaUpdate': 'force_mba_update',
-        'packActivePaytm': 'active_paytm',
-      };
+      this.serviceFields = this.service.serviceFieldPackageSettings;
       this.hideLoadSpin = false;
       this.packageSettingForm = this.fb.group({});
       this.getOrSetPackageSettingForm();
@@ -106,7 +102,8 @@ export class PackageSettingsComponent implements OnInit {
            this.setHideLoadSpinner(true);
          });
       } else {
-         this.packageSettingForm = this.fb.group(data);
+           // const temp = this.service.renameObjectAllKeys(this.service.serviceFieldPackageSettings, data, 'c')
+           this.packageSettingForm = this.fb.group(data);
            this.setHideLoadSpinner(true);
       }
     });
@@ -114,10 +111,9 @@ export class PackageSettingsComponent implements OnInit {
 
   public onSubmitPackageSettings() {
     // console.log(this.packageSettingForm.value);
-    const oldField = Object.keys(this.serviceFields);
-    const newField = Object.values(this.serviceFields);
-    let body = this.service.renameObjectAllKeys(oldField, newField, this.packageSettingForm.value);
-    body = JSON.stringify(body);
+    // const clientField = Object.keys(this.serviceFields);
+    // const serverField = Object.values();
+    let body = this.service.renameObjectAllKeys(this.serviceFields, this.packageSettingForm.value, 's');
     this.service.update('package/settings', this.service.headers, body)
      .subscribe((data) => {
        const name = `userCurrencyDetails-${localStorage.getItem('userName')}`;
