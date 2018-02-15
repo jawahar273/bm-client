@@ -3,26 +3,20 @@ import { Router } from '@angular/router';
 
 import { CommonService } from '../services/common.services';
 
-// import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
     selector: 'app-layout',
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.scss'],
-    // entryComponents: [DashboardComponent]
 })
 export class LayoutComponent implements OnInit {
-    // @ViewChild(DashboardComponent) dashboard: DashboardComponent;
-    // @ContentChild(DashboardComponent) _da: DashboardComponent;
+
+    /*
+     * Most one time call REST should be call from here(or side bar/ header componet are allow allowed)
+     */
     constructor(public service: CommonService, private router: Router) {
         if (sessionStorage.getItem('authToken')) {
             this.onSuccess();
-            this.service.get('package/get_group_items', this.service.headers)
-             .subscribe((data) => {
-                 this.service.listOfGroupItems = Array.from(new Set(data));
-             }, (error) => {
-                 // this.showGlobalAlert('');
-             });
         } else {
             this.onFail();
         }
@@ -51,8 +45,30 @@ export class LayoutComponent implements OnInit {
     private onSuccess() {
         this.service.headers.set('Authorization', `${sessionStorage.getItem('authToken')}`);
         this.getUserDetails();
-        // dashboard.updateTable();
-        // debugger;
+            this.service.get('package/get_group_items', this.service.headers)
+             .subscribe((data) => {
+                 this.service.listOfGroupItems = Array.from(new Set(data));
+             }, (error) => {
+                 // this.showGlobalAlert('');
+             });
+             this.service.localStorage.getItem('currency')
+              .subscribe((data) => {
+                  if (!data) {
+                      this.service.get('package/currency', this.service.headers)
+                       .subscribe((data) => {
+                           this.service.localStorage.setItem('currency', data).subscribe((data) => {
+                               console.log('stored currency in local'+data);
+                           });
+                           this.service.currencyDetails = data;
+                       }, (error) => {
+                           console.error('error in stroing currency'+error);
+                       });
+                  } else {
+                      this.service.currencyDetails = data;
+                  }
+              }, (error) => {
+
+              });
     }
     /**
      * @description on fail of login return to the login page.

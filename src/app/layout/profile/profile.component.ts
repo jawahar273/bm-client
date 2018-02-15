@@ -62,10 +62,10 @@ export class ProfileComponent implements OnInit {
 
   public onSubmitProfileSetting() {
     const formValues = this.profileForm.value;
-    const oldName = Object.keys(this.serviceField);
-    const newName = Object.values(this.serviceField);
-    let body = this.service.renameObjectAllKeys(oldName, newName, formValues);
-    body = JSON.stringify(body);
+    // const oldName = Object.keys(this.serviceField);
+    // const newName = Object.values(this.serviceField);
+    let body = this.service.renameObjectAllKeys(this.serviceField, formValues, 's');
+    // body = JSON.stringify(body);
     this.service.update('rest-auth/user', this.service.headers, body)
      .subscribe((data) => {
        this.service.showGlobalAlert('Personal details updated', 'success');

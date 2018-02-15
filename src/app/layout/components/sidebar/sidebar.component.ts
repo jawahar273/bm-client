@@ -107,6 +107,7 @@ export class SidebarComponent {
             }
             
             // saving the setting to the brower db.
+            // this.service.currencyDetails
             let temp = this.service.renameObjectAllKeys(this.service.serviceFieldPackageSettings, data, 'c')
             this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, temp)
              .subscribe((data) => {

@@ -59,7 +59,6 @@ export class CommonService {
         this.today  = new Date();
         this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
-        this.listOfMonths.reverse();
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
@@ -74,24 +73,6 @@ export class CommonService {
         } else {
             this.commonURL = 'https://jawahar.pythonanywhere.com/api';
         }
-        this.localStorage.getItem('currency')
-         .subscribe((data) => {
-             if (!data) {
-                 this.get('package/currency', this.headers)
-                  .subscribe((data) => {
-                      this.localStorage.setItem('currency', data).subscribe((data) => {
-                          console.log('stored currency in local'+data);
-                      });
-                      this.currencyDetails = data;
-                  }, (error) => {
-                      console.error('error in stroing currency'+error);
-                  });
-             } else {
-                 this.currencyDetails = data;
-             }
-         }, (error) => {
-
-         });
     }
     /**
      * 
