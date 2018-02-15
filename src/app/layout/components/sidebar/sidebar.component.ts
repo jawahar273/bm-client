@@ -22,7 +22,6 @@ export class SidebarComponent {
         this.datePickerModel = this.service.currentDateWithMomentJS;
         this.service.getBudgetAmount();
         this.getOrSetPackageSetting();
-
     }
 
     eventCalled() {
@@ -107,8 +106,8 @@ export class SidebarComponent {
             }
             
             // saving the setting to the brower db.
-            // this.service.currencyDetails
-            let temp = this.service.renameObjectAllKeys(this.service.serviceFieldPackageSettings, data, 'c')
+            let temp = this.service.renameObjectAllKeys(this.service.serviceFieldPackageSettings, data, 'c');
+            this.setCurrencyDetails(temp);
             this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, temp)
              .subscribe((data) => {
                console.log('save package setting ...');
@@ -119,11 +118,26 @@ export class SidebarComponent {
            this.service.showGlobalAlert(temp);
          });
       } else {
-          if (data['force_mba_update'] == 'Y') {
+          if (data['packForceMbaUpdate'] == 'Y') {
             this.localGetBudgetAmount();
           }
+          this.setCurrencyDetails(data);
       }
     });
+  }
+  /*
+   * set the currency details
+   */
+  private setCurrencyDetails(value) {
+        // this.currencyDetails[''] = 'USD';
+
+    const temp = value['packCurrencyDetails'];
+    this.service.localStorage.getItem('currency')
+     .subscribe((data) => {
+       this.service.currencyDetails = data[temp];
+     }, (error) => {
+
+     });
   }
 
   public checkBudgetAmountIsEmpty(data?: string) {

@@ -12,7 +12,8 @@ import { CommonService } from '../services/common.services';
 export class LayoutComponent implements OnInit {
 
     /*
-     * Most one time call REST should be call from here(or side bar/ header componet are allow allowed)
+     * Singleton REST call (which don't affect other component)
+     * should be call from here(or side bar/ header componet are allow allowed)
      */
     constructor(public service: CommonService, private router: Router) {
         if (sessionStorage.getItem('authToken')) {

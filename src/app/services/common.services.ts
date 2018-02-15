@@ -59,10 +59,20 @@ export class CommonService {
         this.today  = new Date();
         this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
+        this.listOfMonths.reverse();
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
         this.timeOutForAlertBoxDanger = 9000;
+        this.currencyDetails = {
+            "symbol": "$",
+            "name": "US Dollar",
+            "symbol_native": "$",
+            "decimal_digits": 2,
+            "rounding": 0,
+            "code": "USD",
+            "name_plural": "US dollars"
+        }
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',
             'Authorization': ``,

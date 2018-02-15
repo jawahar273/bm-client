@@ -226,13 +226,36 @@ export class ChartsComponent implements OnInit {
     isTo = date => equals(date, this.toDate);
 
     private getRaderChartData() {
+        console.log(this.service.dataTableDashboard);
+        if (!this.service.dataTableDashboard) {
+            const rangeDate = { 
+              'start': moment(this.service.today).startOf('month').format('YYYY-MM-DD'),
+              'end': moment(this.service.today).endOf('month').format('YYYY-MM-DD')
+            }
+            this.service.get(`package/itemslist/${rangeDate['start']}/${rangeDate['end']}`, this.service.headers).subscribe(
+                (data) => {
+                    this.service.dataTableDashboard = data;
+                    this.calculateChartData(data);
+                },
+                (error) => {
+                    this.service.showGlobalAlert('Error in Chart and Table');
+            });
+            this.service.needTableUpdate = false;
+        } else {
+                this.calculateChartData(this.service.dataTableDashboard);
+        }
+    }
+
+    private calculateChartData(data) {
+        // const data = ;
         const chartContent = [];
+
         const monthYearFormat = this.currentDateFormat.substr(0, this.currentDateFormat.lastIndexOf('-'));
-        const url: string = `package/get_months/${monthYearFormat}-01`;
-        this.service.get(url, this.service.headers)
-         .subscribe(
-            (data) => {
-                const totalAmountArray = [];
+        // const url: string = `package/get_months/${monthYearFormat}-01`;
+        // this.service.get(url, this.service.headers)
+        //  .subscribe(
+        //     (data) => {
+                let totalAmountArray = [];
                 let groups = [];
                 this.currentMonthitemsContent = data;
                 const _self = this;
@@ -253,11 +276,11 @@ export class ChartsComponent implements OnInit {
                     console.log('stored data error', error);
                 });
                 this.getDoughNutChart();
-            },
-            (error) => {
-                this.currentMonthitemsContent = [];
-            }
-        );
+            // },
+        //     (error) => {
+        //         this.currentMonthitemsContent = [];
+        //     }
+        // );
     }
 
     /**
