@@ -16,6 +16,22 @@ hr {
 	}
 }
 
+
+select > option {
+    display: block;
+	border-radius: 20%;
+
+    width: 100%;
+    padding: 0.25rem 1.5rem;
+    clear: both;
+    font-weight: 400;
+    color: #212529;
+    text-align: inherit;
+    white-space: nowrap;
+    background-color: white;
+    border: 0;
+}
+
 @media screen and (max-width: 992px) {
 	.profile {
 		.p-body {

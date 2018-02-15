@@ -1,17 +1,22 @@
 
-<div class="col col-xl-12 col-lg-12 col-sm-12">
+<!-- <div class="col col-xl-12 col-lg-12 col-sm-12">
   <div ngbDropdown class="dropdown">
     <a href="javascript:void(0)"  ngbDropdownToggle style="color:black;">
         {{ getMonthInMenu() }} <b class="caret"></b>
     </a>
-	  <!-- <button class="btn btn-outline-primary" ngbDropdownToggle>Months</button> -->
 	  <div ngbDropdownMenu class="dropdown-menu">
-	  	<button *ngFor="let month of service.listOfMonths" class="dropdown-item" (click)="setMonthInMenu(month)" > {{month}}  <!-- {{service.today.getFullYear()}} -->
+	  	<button *ngFor="let month of service.listOfMonths" class="dropdown-item" (click)="setMonthInMenu(month)" > {{month}}
 	  	</button>
 	  </div>
   </div>
+</div> -->
+<div class="col-xl-5 col-lg-6 col-sm-12">
+	<select (change)="setMonthInMenu($event.target.value)" class="custom-select">
+	  	<option *ngFor="let month of service.listOfMonths" class="dropdown-item" [value]="month"> {{month+'-'+service.today.getFullYear()}}
+	  	</option>
+	</select>
 </div>
-<div class="col col-xl-12 col-lg-12 col-sm-12">
+<div class="col-xl-12 col-lg-12 col-sm-12">
     <div class="card mb-3 ">
         <div class="card-header">
             Spendings List
