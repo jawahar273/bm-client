@@ -19,12 +19,17 @@ export class DashTableComponent implements OnInit {
     private isMobileScreen: boolean;
     public hideLoadSpin: boolean = true;
     public monthInMenu: string;
+    public rangeDate: object;
     @ViewChild('dashTable') dashTable;
 
     constructor(public service: CommonService) {
         this.isMobileScreen = window.innerWidth <= 992;
         this.monthInMenu = `${this.service.listOfMonths.slice(-1)}-${this.service.today.getFullYear()}`;
         // const _head = new Headers({'Authorization': ` Basic ${localStorage.getItem('authToken')}`});
+        this.rangeDate = { 
+          'start': moment(this.service.today).startOf('month').format('YYYY-MM-DD'),
+          'end': moment(this.service.today).endOf('month').format('YYYY-MM-DD')
+        }
     }
 
     ngOnInit() {
@@ -55,15 +60,9 @@ export class DashTableComponent implements OnInit {
      * @param {boolean} alert a flag setting for alert box
      * @description the perpouse of this function is update the dashboard table
      */
-    public updateTable(alert = true, rangeDate?) {
+    public updateTable(alert = true) {
         this.hideLoadSpinIcon(false);
-        if (!rangeDate) {
-            rangeDate = { 
-                'start': moment(this.service.today).startOf('month').format('YYYY-MM-DD'),
-                'end': moment(this.service.today).endOf('month').format('YYYY-MM-DD')
-            }
-        }
-        this.service.get(`package/itemslist/${rangeDate['start']}/${rangeDate['end']}`, this.service.headers).subscribe(
+        this.service.get(`package/itemslist/${this.rangeDate['start']}/${this.rangeDate['end']}`, this.service.headers).subscribe(
             (data) => {
                 this.service.dataTableDashboard = data;
                 if (alert) {
@@ -138,11 +137,17 @@ export class DashTableComponent implements OnInit {
     }
 
     public getMonthInMenu() {
+
        return  this.monthInMenu; 
     }
 
     public setMonthInMenu(value: string) {
-       this.monthInMenu = `${this.service.today.getFullYear()}-${value}`;
+       this.monthInMenu = `${value}-${this.service.today.getFullYear()}`;
+       this.rangeDate = { 
+            'start': moment(`01-${this.monthInMenu}`, 'DD-MMMM-YYYY').startOf('month').format('YYYY-MM-DD'),
+            'end': moment(`01-${this.monthInMenu}`, 'DD-MMMM-YYYY').endOf('month').format('YYYY-MM-DD')
+       }
+       this.updateTable();
        return  this.monthInMenu; 
     }
 }

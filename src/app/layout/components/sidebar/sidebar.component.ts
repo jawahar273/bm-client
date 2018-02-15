@@ -20,14 +20,9 @@ export class SidebarComponent {
     constructor(public service: CommonService, private modalService: NgbModal) {
 
         this.datePickerModel = this.service.currentDateWithMomentJS;
+        this.service.getBudgetAmount();
+        this.getOrSetPackageSetting();
 
-        // const temp = localStorage.getItem(`userCurrencyDetails-${localStorage.getItem('userName')}`);
-        // if (!temp) {
-        //   this.service.get('package/settings', this.service.headers)
-        //    .subscribe((data) => {
-             
-        //    })
-        // }
     }
 
     eventCalled() {
@@ -106,24 +101,14 @@ export class SidebarComponent {
       if (!data) {
         this.service.get('package/settings', this.service.headers)
          .subscribe((data) => {
-            // const formFields = Object.assign({}, this.service.serviceFieldPackageSettings);
-            // formFields['packCurrencyDetails'] = data['currency_details'];
-            // formFields['packForceMbaUpdate'] = data['force_mba_update'];
-            // formFields['packActivePaytm'] = data['active_paytm']
-            // const temp = data['new_settings'];
-            // for (const key in temp) {
-            //   const temp2 = this.convertToFormField(key, '_');
-            //   formFields[temp2] = temp[key];
-            // }
-            // debugger;
-            // this.packageSettingForm = this.fb.group(formFields);
 
             if (data['force_mba_update'] == 'Y') {
               this.localGetBudgetAmount();
             }
             
             // saving the setting to the brower db.
-            this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, data)
+            let temp = this.service.renameObjectAllKeys(this.service.serviceFieldPackageSettings, data, 'c')
+            this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, temp)
              .subscribe((data) => {
                console.log('save package setting ...');
              });

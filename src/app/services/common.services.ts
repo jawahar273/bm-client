@@ -59,6 +59,7 @@ export class CommonService {
         this.today  = new Date();
         this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
+        this.listOfMonths.reverse();
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
@@ -383,6 +384,7 @@ export class CommonService {
 
                  if (monthYearFormat == data['month_year'])
                     this.budgetAmount = parseFloat(data['budget_amount']);
+                
                 
                 this.showGlobalAlert('date for buget amount updated', 'success');
                 this.localStorage.getItem<any>('donut').subscribe((read) => {

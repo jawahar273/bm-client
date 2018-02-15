@@ -6,7 +6,7 @@
     </a>
 	  <!-- <button class="btn btn-outline-primary" ngbDropdownToggle>Months</button> -->
 	  <div ngbDropdownMenu class="dropdown-menu">
-	  	<button *ngFor="let month of service.listOfMonths" class="dropdown-item" (click)="setMonthInMenu(month)" > {{month}}
+	  	<button *ngFor="let month of service.listOfMonths" class="dropdown-item" (click)="setMonthInMenu(month)" > {{month}}  <!-- {{service.today.getFullYear()}} -->
 	  	</button>
 	  </div>
   </div>
