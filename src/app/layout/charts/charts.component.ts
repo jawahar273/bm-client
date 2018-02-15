@@ -168,12 +168,13 @@ export class ChartsComponent implements OnInit {
             startMonthAndYear: [this.currentMonthSting, Validators.required],
             endMonthAndYear: [this.currentMonthSting, Validators.required]
         });
-        if (this.service.needChartUpdate) {
-           this.updateChart('rest');
-           this.service.needChartUpdate = false;
-        } else {
-            this.updateChart('local');
-        }
+        this.getRaderChartData();
+        // if (this.service.needChartUpdate) {
+        //    this.updateChart('rest');
+        //    this.service.needChartUpdate = false;
+        // } else {
+        //     this.updateChart('local');
+        // }
         // this.getBarChart(); // remove comment to active bar chart
      }
 
@@ -255,27 +256,27 @@ export class ChartsComponent implements OnInit {
         // this.service.get(url, this.service.headers)
         //  .subscribe(
         //     (data) => {
-                let totalAmountArray = [];
-                let groups = [];
-                this.currentMonthitemsContent = data;
-                const _self = this;
-                this.currentMonthitemsContent.forEach((ele, indx) => {
-                    groups.push(ele['group']);
-                    const temp = parseInt(ele['total_amount'], 10);
-                    totalAmountArray.push(temp);
-                    this.sumOfCurrentMonthSpending += temp;
-                });
-                // chartContent.push();
-                const content: Object = {'group': groups, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
-                this.setChart(content['group'],
-                                content['data'],
-                                content['chartType']);
-                this.service.localStorage.setItem(content['chartType'], content)
-                .subscribe((data) => {
-                }, (error) =>{
-                    console.log('stored data error', error);
-                });
-                this.getDoughNutChart();
+        let totalAmountArray = [];
+        let groups = [];
+        this.currentMonthitemsContent = data;
+        const _self = this;
+        this.currentMonthitemsContent.forEach((ele, indx) => {
+            groups.push(ele['group']);
+            const temp = parseInt(ele['total_amount'], 10);
+            totalAmountArray.push(temp);
+            this.sumOfCurrentMonthSpending += temp;
+        });
+        // chartContent.push();
+        const content: Object = {'group': groups, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
+        this.setChart(content['group'],
+                        content['data'],
+                        content['chartType']);
+        // this.service.localStorage.setItem(content['chartType'], content)
+        // .subscribe((data) => {
+        // }, (error) =>{
+        //     console.log('stored data error', error);
+        // });
+        this.getDoughNutChart();
             // },
         //     (error) => {
         //         this.currentMonthitemsContent = [];
@@ -287,7 +288,9 @@ export class ChartsComponent implements OnInit {
      * @description create a bar chart
      */
     private getDoughNutChart() {
-        const monthYearFormat = this.currentDateFormat.substr(0, this.currentDateFormat.lastIndexOf('-'));
+        // need to rewrite without REST call.
+        const startDateOfRange = this.service.dateRangOfMonths['start'];
+        const monthYearFormat = startDateOfRange.substr(0, startDateOfRange.lastIndexOf('-'));
         const url: string = `package/mba/${monthYearFormat}-01`;
         this.service.get(url, this.service.headers)
           .subscribe(
@@ -306,11 +309,11 @@ export class ChartsComponent implements OnInit {
                         content['data'],
                         content['chartType']
                     );
-                    this.service.localStorage.setItem(content['chartType'], content)
-                    .subscribe((data) => {
-                    }, (error) =>{
-                        console.log('stored data error', error);
-                    });
+                    // this.service.localStorage.setItem(content['chartType'], content)
+                    // .subscribe((data) => {
+                    // }, (error) =>{
+                    //     console.log('stored data error', error);
+                    // });
                 } else {
                    this.service.showGlobalAlert(`Need to show 'Doughnut chart'. Please click 'Amount' menu and fill.`);
                 }

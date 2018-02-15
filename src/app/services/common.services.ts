@@ -45,6 +45,8 @@ export class CommonService {
     public dataTableDashboard: Array<any>;
     public listOfGroupItems: Array<string>;
     public listOfMonths: Array<string>;
+    public dateRangOfMonths: Object;
+    public monthInMenu: string;
     // components chart
     public needChartUpdate: boolean = true;
     public doughNutChartDataMonth: Array<any>;
@@ -60,6 +62,7 @@ export class CommonService {
         this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
         this.listOfMonths.reverse();
+        this.monthInMenu = `${this.listOfMonths.slice(0,1)}-${this.today.getFullYear()}`;
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
@@ -72,6 +75,10 @@ export class CommonService {
             "rounding": 0,
             "code": "USD",
             "name_plural": "US dollars"
+        }
+        this.dateRangOfMonths = { 
+          'start': moment(this.today).startOf('month').format('YYYY-MM-DD'),
+          'end': moment(this.today).endOf('month').format('YYYY-MM-DD')
         }
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',
