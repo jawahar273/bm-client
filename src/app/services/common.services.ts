@@ -82,7 +82,7 @@ export class CommonService {
         }
         this.headers = new Headers({ 'Accept': 'application/json',
              'content-type': 'application/json',
-            'Authorization': ``,
+             'Authorization': ``,
         });
 
         if (isDevMode()) {

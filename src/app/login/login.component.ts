@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { routerTransition } from '../router.animations';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
-
-import { CommonService } from '../services/common.services';
 import { Headers } from '@angular/http';
+
+import { routerTransition } from '../router.animations';
+import { CommonService } from '../services/common.services';
 
 @Component({
     selector: 'app-login',

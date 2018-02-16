@@ -147,7 +147,7 @@ export class ChartsComponent implements OnInit {
     public lineChartLegend: boolean = true;
     public lineChartType: string = 'line';
     public displayMonths: number = 2; // used inside the html
-    public navigation: string = 'select';
+    public hideBudgetAmountZero: boolean ;
 
     private currentMonthitemsContent: Array<any>;
     private currentDateFormat: string;
@@ -160,8 +160,7 @@ export class ChartsComponent implements OnInit {
     currentMonthSting: string;
 
     constructor(private service: CommonService, calendar: NgbCalendar, private _fb: FormBuilder) {
-        this.fromDate = calendar.getToday();
-        this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
+        this.hideBudgetAmountZero = false;
         this.currentDateFormat = moment(this.service.today).format('YYYY-MM-DD');
         this.currentMonthSting = service.today.getFullYear() + '-' + service.today.getMonth() + 1;
         this.rangeMonthAndYear = this._fb.group({
@@ -169,13 +168,9 @@ export class ChartsComponent implements OnInit {
             endMonthAndYear: [this.currentMonthSting, Validators.required]
         });
         this.getRaderChartData();
-        // if (this.service.needChartUpdate) {
-        //    this.updateChart('rest');
-        //    this.service.needChartUpdate = false;
-        // } else {
-        //     this.updateChart('local');
-        // }
         // this.getBarChart(); // remove comment to active bar chart
+        this.fromDate = calendar.getToday();
+        this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
      }
 
     ngOnInit() { }
@@ -189,27 +184,27 @@ export class ChartsComponent implements OnInit {
         // console.log(e);
     }
 
-    public randomize(): void {
-        // Only Change 3 values
-        const data = [
-            Math.round(Math.random() * 100),
-            59,
-            80,
-            Math.random() * 100,
-            56,
-            Math.random() * 100,
-            40
-        ];
-        const clone = JSON.parse(JSON.stringify(this.barChartData));
-        clone[0].data = data;
-        this.barChartData = clone;
-        /**
-         * (My guess), for Angular to recognize the change in the dataset
-         * it has to change the dataset variable directly,
-         * so one way around it, is to clone the data, change it and then
-         * assign it;
-         */
-    }
+    // public randomize(): void {
+    //     // Only Change 3 values
+    //     const data = [
+    //         Math.round(Math.random() * 100),
+    //         59,
+    //         80,
+    //         Math.random() * 100,
+    //         56,
+    //         Math.random() * 100,
+    //         40
+    //     ];
+    //     const clone = JSON.parse(JSON.stringify(this.barChartData));
+    //     clone[0].data = data;
+    //     this.barChartData = clone;
+    //     /**
+    //      * (My guess), for Angular to recognize the change in the dataset
+    //      * it has to change the dataset variable directly,
+    //      * so one way around it, is to clone the data, change it and then
+    //      * assign it;
+    //      */
+    // }
     onDateChange(date: NgbDateStruct) {
         if (!this.fromDate && !this.toDate) {
             this.fromDate = date;
@@ -261,7 +256,7 @@ export class ChartsComponent implements OnInit {
         this.currentMonthitemsContent = data;
         const _self = this;
         this.currentMonthitemsContent.forEach((ele, indx) => {
-            groups.push(ele['group']);
+            groups.push(`${ele['group']}-${ele['date']}`);
             const temp = parseInt(ele['total_amount'], 10);
             totalAmountArray.push(temp);
             this.sumOfCurrentMonthSpending += temp;
@@ -271,12 +266,13 @@ export class ChartsComponent implements OnInit {
         this.setChart(content['group'],
                         content['data'],
                         content['chartType']);
+        this.getDoughNutChart();
+
         // this.service.localStorage.setItem(content['chartType'], content)
         // .subscribe((data) => {
         // }, (error) =>{
         //     console.log('stored data error', error);
         // });
-        this.getDoughNutChart();
             // },
         //     (error) => {
         //         this.currentMonthitemsContent = [];
@@ -297,7 +293,12 @@ export class ChartsComponent implements OnInit {
               (data) => {
                 if (data.length) {
                     let amount = parseInt(data[0]['budget_amount'], 10);
-                    amount -= this.sumOfCurrentMonthSpending;
+                    if (amount > this.sumOfCurrentMonthSpending) {
+                       amount -= this.sumOfCurrentMonthSpending;
+                    } else {
+                        amount = 0;
+                        this.hideBudgetAmountZero = false;
+                    }
                     const content: Object ={
                         'lable': ['Month\'s Budget Amount', 'Total Spending Amount'],
                         'data': [amount, this.sumOfCurrentMonthSpending],

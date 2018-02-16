@@ -35,6 +35,13 @@
                 </div>
                 <div class="card-footer">
                      Current month's budget and spend amount
+                    <span placement="left" [ngbTooltip]=tipDashTableContent 
+                    [hidden]="hideBudgetAmountZero">
+                        <i class="fa fa-question-circle "></i>
+                        <ng-template #tipDashTableContent>
+                           Spending amount exced the budget amount of the month.
+                        </ng-template>
+                    </span>
                 </div>
             </div>
         </div>
