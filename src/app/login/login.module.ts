@@ -5,6 +5,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
+import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
 
 @NgModule({
     imports: [
@@ -14,7 +15,8 @@ import { LoginComponent } from './login.component';
         NgbModule,
     ],
     declarations: [
-        LoginComponent
+        LoginComponent,
+        ForgotPasswordComponent,
     ]
 })
 export class LoginModule {}

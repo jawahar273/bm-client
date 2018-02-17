@@ -1,8 +1,9 @@
 $topnav-background-color: #222;
-:host {
+// :host {
+//     display: block;
+// }
+:host .login-page {
     display: block;
-}
-.login-page {
     position: absolute;
     top: 0;
     left: 0;

@@ -1,3 +1,7 @@
+input[type=text], input[type=email] {
+  padding: 10px 16px;
+}
+
 .fs-12 {
     font-size: 12px;
 }
@@ -22,6 +26,10 @@
 
 .modal.show .modal-dialog {
   margin-top: 10%;
+}
+
+.form-control > input[type=email], .form-control > input[type=text]  {
+  padding: 10px 16px;
 }
 
 @media screen and (max-width: 992px) {
