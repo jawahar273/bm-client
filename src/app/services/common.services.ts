@@ -92,12 +92,12 @@ export class CommonService {
         }
     }
     /**
+     * To help in concating the base url with the given url
+     * and the end slash is must as it is configure in server.
      * 
      * @param str1 first part of the url.
      * @param str2 second part of the url.
      * @param {boolean} slash to add slash in the end
-     * @description to help in concating the base url with the given url
-     * and the end slash is must as it is configure in server.
      */
     public joinURL(str1: string, str2: string, slash=true): string {
         const addSlash = slash ? '/' : '';
@@ -143,19 +143,24 @@ export class CommonService {
             .catch((error: any) => Observable.throw(error.json()));
     }
     /**
+     * Check the error is client side or server side if client side
+     * return corresponding error message.
      * 
      * @param {Object} status error object from the service.
      * @param {any} lookUpField look up field which contains the error fields and error message.
      * @return {string} the error to be displayed.
-     * @description check the error is client side or server side if client side
-     * return corresponding error message.
      */
     public isClinetOrServerSidesError(status: Object, lookUpField?: any, extraInfo = true): string {
         console.log('statusMessage: ' + typeof status);
         const status_code: number = status['status_code'];
         if (this.clientErrorCode.has(status_code)) {
             // check the lookupfield is ``undefined` if so then assign the `detail` field.
-            lookUpField = !!lookUpField ? lookUpField : this.globalServiceErrorMapping;
+            
+            lookUpField = !!lookUpField ?
+                             this.mergeJSObject(lookUpField,
+                                                this.globalServiceErrorMapping) :
+                                this.globalServiceErrorMapping;
+debugger;
             let msg;
             for (const key in lookUpField) {
                 if (status[key]) {
@@ -163,9 +168,8 @@ export class CommonService {
                     msg = !!lookUpField[key] ? lookUpField[key] : status[key];
                 }
             }
-            // const msg = status[lookUpField];
-            // msg = !!msg ? `${msg} ${this.addtionalInfomationOnSErviceError(status['status_code'])}` :
-                                //   'unexpected error occured';
+                    debugger;
+
             if (msg) {
                 if (extraInfo) {
                     msg = msg + this.addtionalInfomationOnSErviceError(status_code);
@@ -195,26 +199,28 @@ export class CommonService {
                 return `${preCommonMsg} Somthing worng with request content ${sufCommonMsg} `;
             case 404:
                 return `${preCommonMsg} The element might not present in the system ${sufCommonMsg}`;
-            //   default:
-            //       return `${preCommonMsg}  ${sufCommonMsg} `;
         }
     }
     /**
+     * Get the require header params and create a new localheader by merging with
+     * global header.
      *
      * @param main is a argument for getting addtion header options.
      * @returns {Object} return the new local headers for the service.
-     * @description get the require header params and create a new localheader by merging with
-     * global header.
      */
     public toLocalHeaders(main: Object): Object {
         return Object.assign({}, this.headers, main);
     }
+
+    public mergeJSObject(value1, value2): Object {
+        return Object.assign({}, value1, value2)   ;
+    }
     /**
+     * changes the key name of the given object.
      * 
      * @param oldKeyName current key of the object.
      * @param newKeyName new key for the object.
      * @param el content object
-     * @description changes the value of the object.
      */
     public renameObjectKey(oldKeyName: string, newKeyName: string, el: Object): void {
         if (oldKeyName !== newKeyName) {
@@ -225,7 +231,9 @@ export class CommonService {
     }
 
     /**
-     * 
+     * Get the service field object and form data in object convert the 
+     * value to given service field. 
+     *
      * @param {object} serviceField which contains the client and service field name but the client is act as key.
      * @param {object} ele content object.
      * @return {object/undefined} returns the object if no error occures or undeine 
@@ -269,10 +277,10 @@ export class CommonService {
         }, temp);
     }
     /**
+    * Used to close alert in display.
     *
     * @param {any} alert it is an object of the current alert.
     * @param {boolean} removeAll set this true to remove all the alert on single click.
-    * @description used to close alert in display.
     */
     public closeGlobalAlert(alert?: Object, removeAll?: boolean) {
         if (removeAll) {
@@ -286,6 +294,7 @@ export class CommonService {
   /**
    * Check the form is valid or not note:- need to redeclared in local
    * components to wrap with `_fb`(FormGroup) object.
+   *
    * @param {string} name get the formcontrol's name
    * @param {formGroup} current formGroup object
    * @return {boolean} is form valid or not
@@ -295,7 +304,7 @@ export class CommonService {
       return (temp.invalid && temp.touched);
     }
 
-   /*
+   /**
     * Finds any error in the form controll and show them in alert.
     *
     * @param {FormGroup} _fb get the formgroup of reactive form of angular.
@@ -320,11 +329,12 @@ export class CommonService {
 
     // components headers and sidebars common function
     
-     /*
-     * @param {any} setting date
+    /**
      * get the budget amount  from the service if the argument is undefine
      * the parameter to service is current month and year.
      * this function build with generic view, so this might me confusing.
+     *
+     * @param {any} setting date
      */
     public async  getBudgetAmount(date?:any): Promise<string> {
         let monthYearFormat;
@@ -380,18 +390,19 @@ export class CommonService {
            .subscribe(
              (data) => {
 
-                 if (monthYearFormat == data['month_year'])
-                    this.budgetAmount = parseFloat(data['budget_amount']);
+                if (monthYearFormat == data['month_year']){
+                  this.budgetAmount = parseFloat(data['budget_amount']);
+                }
                 
                 
                 this.showGlobalAlert('date for buget amount updated', 'success');
+                // # <-- review 
                 this.localStorage.getItem<any>('donut').subscribe((read) => {
                     read['data'][0] = data['budget_amount'];
                     read['data'][0] -= read['data'][1];
-                    this.localStorage.setItem('donut', read).subscribe((store) => {
-                    });
-
+                    this.localStorage.setItem('donut', read).subscribe();
                 }); 
+                // #  review -->
                 return true;
 
                  // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
@@ -404,12 +415,14 @@ export class CommonService {
                      .subscribe(
                          (data) => {
                             this.showGlobalAlert('new date for buget amount created', 'success');
+                            // # <-- review
                             this.localStorage.getItem<any>('donut').subscribe((read) => {
                                 read['data'][0] = data['budget_amount'];
                                 read['data'][0] -= read['data'][1];
                                 this.localStorage.setItem('donut', read).subscribe((store) => {
                                 });
-                            }); 
+                            });
+                            // #  review -->
                             return true;
                          },
                          (error) => {
@@ -430,13 +443,13 @@ export class CommonService {
         return  `${data.substr(0, data.lastIndexOf('-'))}-01`; 
     }
     // Miscellaneous class methods
-    /*
+    /**
      * conver the given string intp title case 
      */
     public toTitleCase(input): string {
         return input.replace(/\w\S*/g, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase() ));
     }
-    /*
+    /**
      * set the data about the user and set them in localstorage
      * of the brower.
      */

@@ -54,3 +54,4 @@ test_with_e2e:
     - public
   only:
   - master
+  allow_fail: true

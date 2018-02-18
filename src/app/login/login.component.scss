@@ -1,4 +1,6 @@
 $topnav-background-color: #222;
+$fouce-red-color: rgb(240, 41, 41);
+$place-holder-color: rgba(255, 255, 255, 0.85);
 // :host {
 //     display: block;
 // }
@@ -32,20 +34,20 @@ $topnav-background-color: #222;
         background: 0 0;
         border: none;
         box-shadow: none;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.5);
+        border-bottom: 2px solid $place-holder-color;
         color: #fff;
         border-radius: 0;
     }
     .input-underline:focus {
-        border-bottom: 2px solid #fff;
+        // border-bottom: 2px solid #fff;
         box-shadow: none;
     }
     .has-error {
-        border-bottom: 2px solid rgb(240, 41, 41);
+        border-bottom: 2px $fouce-red-color;
         box-shadow: none;
     }
     .has-error:focus {
-        border-bottom: 2px solid rgb(247, 147, 147);
+        // border-bottom: 2px solid rgb(247, 147, 147);
         box-shadow: none;
     }
     .show-error-msg {
@@ -85,21 +87,21 @@ $topnav-background-color: #222;
     .form-group {
         padding: 8px 0;
         input::-webkit-input-placeholder {
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: $place-holder-color !important;
         }
 
         input:-moz-placeholder {
             /* Firefox 18- */
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: $place-holder-color !important;
         }
 
         input::-moz-placeholder {
             /* Firefox 19+ */
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: $place-holder-color !important;
         }
 
         input:-ms-input-placeholder {
-            color: rgba(255, 255, 255, 0.6) !important;
+            color: $place-holder-color !important;
         }
     }
     .form-content {

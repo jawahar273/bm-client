@@ -16,6 +16,7 @@ export class PasswordChangeComponent implements OnInit {
   public token: string;
   public passwordChangeForm: FormGroup;
   public serviceField: Object;
+  public serviceError: Object;
   public spinnerIcon: boolean;
   constructor(public service: CommonService, public fb: FormBuilder, private router: ActivatedRoute) {
       this.router.params.subscribe(params => { 
@@ -34,6 +35,9 @@ export class PasswordChangeComponent implements OnInit {
       	'restNewPassword': 'new_password1',
       	'restConfirmPassword': 'new_password2'
       }
+      this.serviceError = {
+        'new_password2': undefined, 'token': 'token Invalid'
+    }
       this.spinnerIcon = true;
   }
 
@@ -66,7 +70,7 @@ export class PasswordChangeComponent implements OnInit {
       .subscribe((data) => {
         this.service.showGlobalAlert('Change password successfully', 'success');
       }, (error) => {
-        const msg = this.service.isClinetOrServerSidesError(error);
+        const msg = this.service.isClinetOrServerSidesError(error, this.serviceError, false);
         this.service.showGlobalAlert(msg);
       });
 
