@@ -46,9 +46,7 @@ export class HeaderComponent implements OnInit {
     // }
 
     public onLoggedout() {
-        console.log(this.service.budgetAmount.toLocaleString());
-        localStorage.removeItem('isLoggedin');
-        sessionStorage.removeItem('authToken');
+        this.service.onLoggedout()
     }
 
     public changeLang(language: string) {

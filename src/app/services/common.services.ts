@@ -151,11 +151,9 @@ export class CommonService {
      * @return {string} the error to be displayed.
      */
     public isClinetOrServerSidesError(status: Object, lookUpField?: any, extraInfo = true): string {
-        console.log('statusMessage: ' + typeof status);
         const status_code: number = status['status_code'];
         if (this.clientErrorCode.has(status_code)) {
             // check the lookupfield is ``undefined` if so then assign the `detail` field.
-            
             lookUpField = !!lookUpField ?
                              this.mergeJSObject(lookUpField,
                                                 this.globalServiceErrorMapping) :
@@ -461,5 +459,11 @@ debugger;
       localStorage.setItem('userLastName', _data['last_name']);
       localStorage.setItem('userGender', _data['gender']);
     }
+
+    public onLoggedout() {
+      localStorage.removeItem('isLoggedin');
+      sessionStorage.removeItem('authToken');
+      this.localStorage.clear();
+  }
 }
 

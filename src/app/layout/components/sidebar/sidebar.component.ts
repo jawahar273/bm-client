@@ -69,8 +69,7 @@ export class SidebarComponent {
   } 
 
   onLoggedout() {
-      localStorage.removeItem('isLoggedin');
-      sessionStorage.removeItem('authToken');
+      this.service.onLoggedout();
   }
 
   public getUserName(): string {
