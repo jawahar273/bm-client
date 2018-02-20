@@ -39,8 +39,8 @@ page_to_gitlab:
   - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
   # - echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
   # - apt-get install -y google-chrome-stable
-  - apt-get install -y xvfb
-  - apt-get install -y imagemagick x11-apps
+  # - apt-get install -y xvfb
+  # - apt-get install -y imagemagick x11-apps
   - Xvfb -ac :99 -screen 0 1280x1024x16 &
   - disown $1
   - export DISPLAY=:99
