@@ -3,6 +3,17 @@ before_script:
   - curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | apt-key add -
   - echo "deb https://dl.yarnpkg.com/debian/ stable main" | tee /etc/apt/sources.list.d/yarn.list
   - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
+  # - echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
+  # - apt-get install -y google-chrome-stable
+  # - apt-get install -y xvfb
+  # - apt-get install -y imagemagick x11-apps
+  - Xvfb -ac :99 -screen 0 1280x1024x16 &
+  - disown $1
+  - export DISPLAY=:99
+  - apt-get update
+  - apt-get install -y nodejs
+  - apt-get install -y yarn
   - apt-get update
   - apt-get install -y nodejs
   - apt-get install -y yarn
@@ -36,22 +47,12 @@ page_to_gitlab:
   - yarn install
   - yarn run e2e --progress false
 
-.before_script: &before_script_test_with_e2e
-  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
-  # - echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
-  # - apt-get install -y google-chrome-stable
-  # - apt-get install -y xvfb
-  # - apt-get install -y imagemagick x11-apps
-  - Xvfb -ac :99 -screen 0 1280x1024x16 &
-  - disown $1
-  - export DISPLAY=:99
-  - apt-get update
-  - apt-get install -y nodejs
-  - apt-get install -y yarn
+# .before_script: &before_script_test_with_e2e
+
 
 test_with_e2e:
   stage: test
-  before_script: *before_script_test_with_e2e
+  # before_script: *before_script_test_with_e2e
   script: *script_Test_With_e2e
   artifacts:
     paths:
