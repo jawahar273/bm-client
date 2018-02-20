@@ -17,6 +17,7 @@ before_script:
   - apt-get update
   - apt-get install -y nodejs
   - apt-get install -y yarn
+  - apt-get install default-jre
   - which node
 
 stages:
