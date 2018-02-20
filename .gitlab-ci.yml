@@ -38,6 +38,7 @@ page_to_gitlab:
 .before_script: &before_script_test_with_e2e
   - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
   - echo "deb http://dl.google.com/linux/chrome/deb/ stable main" | tee -a /etc/apt/sources.list
+  - echo 'deb [arch=amd64] http://dl.google.com/linux/chrome/deb/ stable main' | tee /etc/apt/sources.list.d/google-chrome.list
   - apt-get install -y google-chrome-stable
   - apt-get install -y xvfb
   - apt-get install -y imagemagick x11-apps
