@@ -86,11 +86,11 @@ export class CommonService {
              'Authorization': ``,
         });
 
-        if (isDevMode()) {
-            this.commonURL = 'http://127.0.0.1:8000/api';
-        } else {
+        // if (isDevMode()) {
+        //     this.commonURL = 'http://127.0.0.1:8000/api';
+        // } else {
             this.commonURL = serverDomainName();
-        }
+        // }
     }
     /**
      * To help in concating the base url with the given url
