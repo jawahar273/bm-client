@@ -30,6 +30,8 @@ stages:
   - yarn -v
   - cd  /builds/jawahar273/bm-client
   - yarn install
+  - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher
+  - yarn add --save intl 
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
   - yarn build -op public -bh /bm-client/ 
 
