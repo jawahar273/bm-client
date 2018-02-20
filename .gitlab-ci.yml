@@ -49,7 +49,7 @@ page_to_gitlab:
   - apt-get install -y nodejs
   - apt-get install -y yarn
   - apt-get install -y openjdk-7-jre
- 
+
 test_with_e2e:
   stage: test
   before_script: *before_script_test_with_e2e
@@ -59,4 +59,4 @@ test_with_e2e:
     - public
   only:
   - master
-  allow_fail: true
+
