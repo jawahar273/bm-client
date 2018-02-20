@@ -34,7 +34,6 @@ stages:
   # - yarn add --save intl 
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
   - mkdir docs2
-  - ./push.sh # personal user.. 
 
 page_to_gitlab:
   stage: build
