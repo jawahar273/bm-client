@@ -34,9 +34,10 @@ page_to_gitlab:
 .script: &script_Test_With_e2e
   - ls
   - yarn install
-  - yarn run e2e
+  - yarn run e2e --progress false
 
 .before_script: &before_script_test_with_e2e
+  - wget -q -O - https://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add -
   - apt-get install -y libxpm4 libxrender1 libgtk2.0-0 libnss3 libgconf-2-4
   - apt-get install -y google-chrome-stable
   - apt-get install -y xvfb gtk2-engines-pixbuf
