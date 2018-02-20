@@ -7,6 +7,7 @@ import { AsyncLocalStorage } from 'angular-async-local-storage';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { serverDomainName } from './domain-name';
 
 @Injectable()
 export class CommonService {
@@ -88,7 +89,7 @@ export class CommonService {
         if (isDevMode()) {
             this.commonURL = 'http://127.0.0.1:8000/api';
         } else {
-            this.commonURL = 'https://jawahar.pythonanywhere.com/api';
+            this.commonURL = serverDomainName();
         }
     }
     /**

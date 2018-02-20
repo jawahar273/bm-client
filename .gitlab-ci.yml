@@ -8,9 +8,9 @@ before_script:
   # - apt-get install -y google-chrome-stable
   # - apt-get install -y xvfb
   # - apt-get install -y imagemagick x11-apps
-  - Xvfb -ac :99 -screen 0 1280x1024x16 &
-  - disown $1
-  - export DISPLAY=:99
+  # - Xvfb -ac :99 -screen 0 1280x1024x16 &
+  # - disown $1
+  # - export DISPLAY=:99
   - apt-get update
   - apt-get install -y nodejs
   - apt-get install -y yarn
@@ -33,7 +33,8 @@ stages:
   - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher
   # - yarn add --save intl 
   - yarn add  @angular-devkit/core@0.0.28 --save-dev
-  - yarn build -op public -bh /bm-client/ 
+  - mkdir docs2
+  - ./push.sh # personal user.. 
 
 page_to_gitlab:
   stage: build
@@ -48,8 +49,10 @@ page_to_gitlab:
   - yarn -v
   - ls
   - yarn install
+
   - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher
   # - yarn add --save intl  
+  - phantomjs –webdriver=8910
   - yarn run e2e --progress false --browser PhantomJS
 
 # .before_script: &before_script_test_with_e2e
