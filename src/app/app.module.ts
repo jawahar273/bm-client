@@ -19,7 +19,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { environment } from '../environments/environment';
-
 import { CommonService } from './services/common.services';
 
 
@@ -50,7 +49,8 @@ export function createTranslateLoader(http: HttpClient) {
         // this might be bug and has been reposted 
         // https://github.com/angular/angular-cli/issues/9406 and https://github.com/angular/angular-cli/issues/8515
         // remove /bm-client/ if you are using diffrent name in <base href="" /> tag.
-        ServiceWorkerModule.register('/bm-client/ngsw-worker.js', {
+        // environment file used for basehref please define there..
+        ServiceWorkerModule.register(`${environment.ServiceWorkersBasehref}ngsw-worker.js`, {
            enabled: environment.production
         }),
         // environment.production ? ServiceWorkerModule.register('/bm-client/ngsw-worker.js') : [],
