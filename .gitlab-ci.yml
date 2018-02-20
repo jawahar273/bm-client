@@ -31,6 +31,7 @@ page_to_gitlab:
   - master
 
 .script: &script_Test_With_e2e
+  - yarn -v
   - ls
   - yarn install
   - yarn run e2e --progress false
