@@ -31,8 +31,8 @@
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
-        "prod": "environments/environment.prod.ts",
-        "karthic": "environment.alpha-user-karthic.ts"
+        "karthic": "environment.alpha-user-karthic.ts",
+        "prod": "environments/environment.prod.ts"
       }
     }
   ],

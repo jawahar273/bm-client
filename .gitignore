@@ -43,6 +43,6 @@ Thumbs.db
 
 documentation/
 
-environment.alpha-user-*.ts
+environment.au*.ts
 push.sh
 docs2/
