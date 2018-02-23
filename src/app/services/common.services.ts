@@ -12,15 +12,16 @@ import { serverDomainName } from './domain-name';
 @Injectable()
 export class CommonService {
     //global settings
-    requireUpdate: object;
-    headers: Headers;
-    today: Date;
-    defaultMobileScreenOffSet: number;
-    isMobileScreen: boolean;
-    countOfYears: number;
-    startLimitOfYears: number;
-    globalalertBox: Array<any> = [];
-    globalServiceErrorMapping = {
+    public isUserLogin: Object;
+    public requireUpdate: Object;
+    public headers: Headers;
+    public today: Date;
+    public defaultMobileScreenOffSet: number;
+    public isMobileScreen: boolean;
+    public countOfYears: number;
+    public startLimitOfYears: number;
+    public globalalertBox: Array<any> = [];
+    public globalServiceErrorMapping = {
         'password': undefined,
         'username': undefined,
         'non_field_errors': undefined,
@@ -31,7 +32,7 @@ export class CommonService {
     public clientErrorCode = new Set([400, 401, 403, 404, 408, 410]);
     public serverErrorCode = new Set([500, 502, 503, 504 ]);
     public currentDateWithMomentJS;
-    public currencyDetails: object;
+    public currencyDetails: Object;
 
 
     private commonURL:string;
@@ -59,6 +60,7 @@ export class CommonService {
       };
 
     constructor(public http: Http, public localStorage?: AsyncLocalStorage) {
+        this.isUserLogin = false;
         this.today  = new Date();
         this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
@@ -159,7 +161,6 @@ export class CommonService {
                              this.mergeJSObject(lookUpField,
                                                 this.globalServiceErrorMapping) :
                                 this.globalServiceErrorMapping;
-debugger;
             let msg;
             for (const key in lookUpField) {
                 if (status[key]) {
@@ -167,7 +168,6 @@ debugger;
                     msg = !!lookUpField[key] ? lookUpField[key] : status[key];
                 }
             }
-                    debugger;
 
             if (msg) {
                 if (extraInfo) {

@@ -55,7 +55,8 @@ export class LoginComponent implements OnInit {
                 localStorage.setItem('isLoggedin', 'false');
                 //   localStorage.setItem('authToken', data['key']);
                 localStorage.setItem('userName', 'User Name');
-                  this.headers.set('Authorization', `Token ${data['key']}`);
+                this.headers.set('Authorization', `Token ${data['key']}`);
+                this.service.isUserLogin = true;
                 this.router.navigate(['/dashboard']);
                 this.service.needTableUpdate = true;
                 //   debugger;

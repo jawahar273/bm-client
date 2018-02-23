@@ -43,6 +43,7 @@ Thumbs.db
 
 documentation/
 
-environment.au*.ts
-push.sh
+environment.alpha-user-*.ts
+build.sh
 docs2/
+__*.sh

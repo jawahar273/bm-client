@@ -242,42 +242,30 @@ export class ChartsComponent implements OnInit {
         }
     }
 
+    private addTwoValues(value1, value2): number {
+        return value1 + value2;
+    }
+
     private calculateChartData(data) {
-        // const data = ;
         const chartContent = [];
 
         const monthYearFormat = this.currentDateFormat.substr(0, this.currentDateFormat.lastIndexOf('-'));
-        // const url: string = `package/get_months/${monthYearFormat}-01`;
-        // this.service.get(url, this.service.headers)
-        //  .subscribe(
-        //     (data) => {
-        let totalAmountArray = [];
-        let groups = [];
+        let groups = {};
         this.currentMonthitemsContent = data;
         const _self = this;
         this.currentMonthitemsContent.forEach((ele, indx) => {
-            groups.push(`${ele['group']}-${ele['date']}`);
             const temp = parseInt(ele['total_amount'], 10);
-            totalAmountArray.push(temp);
-            this.sumOfCurrentMonthSpending += temp;
+            // add the value if present or it initilize new one..
+            groups[`${ele['group']}`] = groups[`${ele['group']}`] + temp || temp;
         });
+        const totalAmountArray = Object.values(groups);
+        this.sumOfCurrentMonthSpending = <number>totalAmountArray.reduce(this.addTwoValues);
         // chartContent.push();
-        const content: Object = {'group': groups, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
+        const content: Object = {'group': Object.keys(groups), 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
         this.setChart(content['group'],
                         content['data'],
                         content['chartType']);
         this.getDoughNutChart();
-
-        // this.service.localStorage.setItem(content['chartType'], content)
-        // .subscribe((data) => {
-        // }, (error) =>{
-        //     console.log('stored data error', error);
-        // });
-            // },
-        //     (error) => {
-        //         this.currentMonthitemsContent = [];
-        //     }
-        // );
     }
 
     /**
@@ -310,11 +298,6 @@ export class ChartsComponent implements OnInit {
                         content['data'],
                         content['chartType']
                     );
-                    // this.service.localStorage.setItem(content['chartType'], content)
-                    // .subscribe((data) => {
-                    // }, (error) =>{
-                    //     console.log('stored data error', error);
-                    // });
                 } else {
                    this.service.showGlobalAlert(`Need to show 'Doughnut chart'. Please click 'Amount' menu and fill.`);
                 }

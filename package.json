@@ -1,11 +1,12 @@
 {
   "name": "BM",
-  "version": "4.0.0",
-  "license": "Apache",
+  "version": "0.1.1",
+  "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ec true --port 4300 --proxy-config proxy.conf.json",
     "build": "ng build --prod",
+    "build-user-define": "ng build",
     "gitbuild": "ng build --prod --base /git-build/dist",
     "test": "ng test",
     "lint": "ng lint",

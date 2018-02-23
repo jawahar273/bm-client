@@ -14,7 +14,7 @@
                         <input type="text" [ngClass]="{'has-error':checkFormHasError('signUpUserName')}"
                          formControlName="signUpUserName"
                          class="form-control input-underline input-lg" id="signUpUserName"
-                          placeholder="User Name">
+                          placeholder="User name">
                     </div>
 
                     <div class="form-group">
@@ -31,7 +31,7 @@
                         <input type="password" [ngClass]="{'has-error':checkFormHasError('signUpNewPassword') || showErrorInButton}"
                          formControlName="signUpNewPassword"
                          class="form-control input-underline input-lg"
-                         id="new-password" placeholder="Password">
+                         id="new-password" placeholder="Confirm password">
                         <div class="form-control-feedback show-error-msg" *ngIf='signupFormGroup.get("signUpNewPassword").hasError("minlength")'>
                             Password should be length of 8.
                         </div>
@@ -40,7 +40,7 @@
                         <input type="password" [ngClass]="{'has-error':checkFormHasError('signUpConfirmPassword') || showErrorInButton}"
                         formControlName="signUpConfirmPassword"
                          class="form-control input-underline input-lg"
-                         id="confirm-password" placeholder="Repeat Password"
+                         id="confirm-password" placeholder="Repeat password"
                          (blur)="confirmPasswordValidator()">
                         <div class="form-control-feedback show-error-msg" *ngIf='showErrorInButton'>
                              New password and confirm password are not same.

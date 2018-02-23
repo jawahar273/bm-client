@@ -10,16 +10,16 @@
             <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" >
         </form> -->
         <ul class="navbar-nav ml-auto">
-<!--   <li class="nav-item">
+<!--            <li class="nav-item">
                 <a href="javascript:void(0)" class="nav-link mt-1"
                     style="padding: 0.375rem 1rem !important; border-color: #999;"
                     (click)="rltAndLtr()"
                 >
                     RTL/LTR
                 </a>
-            </li> &nbsp;
-     notification with image and message       
-          <li class="nav-item dropdown" ngbDropdown>
+            </li> &nbsp; -->
+     <!-- notification with image and message -->       
+          <!-- <li class="nav-item dropdown" ngbDropdown>
                 <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
                     <i class="fa fa-envelope"></i> <b class="caret"></b><span class="sr-only">(current)</span>
                 </a>
@@ -57,14 +57,17 @@
                         </div>
                     </li>
                 </ul>
-            </li>
-       notification for pending task
+            </li> -->
+       <!-- notification for pending task -->
             <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                     <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-right">
                     <a href="javascript:void(0)" class="dropdown-item">
+                        {{ 'Work in Progress' | translate }} <span class="badge badge-info"> 0</span>
+                    </a>
+                    <!-- <a href="javascript:void(0)" class="dropdown-item">
                         {{ 'Pending Task' | translate }} <span class="badge badge-info">6</span>
                     </a>
                     <a href="javascript:void(0)" class="dropdown-item">
@@ -76,9 +79,9 @@
                     <li class="dropdown-divider"></li>
                     <a href="javascript:void(0)" class="dropdown-item">
                         {{ 'View All' | translate }}
-                    </a>
+                    </a> -->
                 </ul>
-            </li> -->
+            </li>
             <li class="nav-item dropdown" ngbDropdown>
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                     <i class="fa fa-language"></i> {{ 'Language' | translate }} <b class="caret"></b>

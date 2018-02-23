@@ -5,6 +5,12 @@
             <div class="card mb-3">
                 <div class="card-header">
                     Radar Chart
+                    <span placement="right" [ngbTooltip]=tipDashTableContent1 >
+                        <i class="fa fa-question-circle "></i>
+                        <ng-template #tipDashTableContent1>
+                           minium three Group/Catogories are required to show radar chart.
+                        </ng-template>
+                    </span>
                 </div>
                 <div class="card-body">
                     <canvas  baseChart height="150px" *ngIf="radarChartLabels && radarChartData"
@@ -14,12 +20,6 @@
                 </div>
                 <div class="card-footer">
                     Current month's Group/Catogories
-                    <span placement="left" [ngbTooltip]=tipDashTableContent >
-                        <i class="fa fa-question-circle "></i>
-                        <ng-template #tipDashTableContent>
-                           minium three Group/Catogories are required to show radar chart.
-                        </ng-template>
-                    </span>
                 </div>
             </div>
         </div>
@@ -27,6 +27,13 @@
             <div class="card mb-3">
                 <div class="card-header">
                     Doughnut Chart
+                    <span placement="right" [ngbTooltip]=tipDashTableContent2 
+                    [hidden]="hideBudgetAmountZero">
+                        <i class="fa fa-question-circle "></i>
+                        <ng-template #tipDashTableContent2>
+                           Spending amount exced the budget amount of the month.
+                        </ng-template>
+                    </span>
                 </div>
                 <div class="card-body">
                     <canvas baseChart *ngIf="doughnutChartData && doughnutChartLabels"
@@ -35,13 +42,6 @@
                 </div>
                 <div class="card-footer">
                      Current month's budget and spend amount
-                    <span placement="left" [ngbTooltip]=tipDashTableContent 
-                    [hidden]="hideBudgetAmountZero">
-                        <i class="fa fa-question-circle "></i>
-                        <ng-template #tipDashTableContent>
-                           Spending amount exced the budget amount of the month.
-                        </ng-template>
-                    </span>
                 </div>
             </div>
         </div>
