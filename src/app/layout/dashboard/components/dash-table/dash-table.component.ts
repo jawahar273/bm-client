@@ -85,7 +85,8 @@ export class DashTableComponent implements OnInit {
     private getTheDays(date: Date): string {
         return moment(date, 'YYYY-MM-DD').fromNow();
     }
-    private deleteRow(itemID?: number, indx?: number) {
+    private deleteRow(itemID: number, indx: number) {
+        
         // debugger;
         if (itemID) {
             this.hideLoadSpinIcon(false);

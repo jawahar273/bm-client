@@ -35,8 +35,13 @@
             <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
             </button>
         </div>
-        <ngx-datatable  class="bootstrap" [limit]="20"  [rowHeight]="60"
-         #dashTable [rows]="service.dataTableDashboard">
+        <ngx-datatable
+         class="bootstrap"
+         [limit]="20"
+         [rowHeight]="60"
+         [footerHeight]="50"
+         #dashTable
+         [rows]="service.dataTableDashboard">
 	        <ngx-datatable-row-detail [rowHeight]="getIsMobileScreen() ? 323 : 9" #myDetailRow (toggle)="onDetailToggle($event)">
 	            <ng-template  let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"
 	             ngx-datatable-row-detail-template>
@@ -156,6 +161,34 @@
 	                                </span>             
 	                            </ng-template>
 	                        </ngx-datatable-column>
+           <ngx-datatable-footer>
+              <ng-template 
+                ngx-datatable-footer-template
+                let-rowCount="rowCount"
+                let-pageSize="pageSize"
+                let-selectedCount="selectedCount"
+                let-curPage="curPage"
+                let-offset="offset"
+                let-isVisible="isVisible">
+                  <div class="page-count">
+                    <!-- <span *ngIf="selectedMessage">
+                      {{selectedCount.toLocaleString()}} {{selectedMessage}} / 
+                    </span>
+ -->                    {{rowCount.toLocaleString() }}
+                  </div>
+                  <datatable-pager
+                      [pagerLeftArrowIcon]="'datatable-icon-left'"
+                      [pagerRightArrowIcon]="'datatable-icon-right'"
+                      [pagerPreviousIcon]="'datatable-icon-prev'"
+                      [pagerNextIcon]="'datatable-icon-skip'"
+                      [page]="curPage"
+                      [size]="pageSize"
+                      [count]="rowCount"
+                      [hidden]="!((rowCount / pageSize) > 1)"
+                       (change)="dashTable.onFooterPage($event)">
+                  </datatable-pager>
+              </ng-template>
+            </ngx-datatable-footer>
         </ngx-datatable>
     </div>
 </div>
