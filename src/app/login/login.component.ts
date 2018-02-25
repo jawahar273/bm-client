@@ -29,6 +29,7 @@ export class LoginComponent implements OnInit {
     headers: any;
     spinnerIcon: boolean = true;
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
+        this.service.localStorage.clear();
         this.headers = new Headers({ 'content-type': 'application/json'});
         this.loginForm = this.fb.group({
             loginPassName: ['', Validators.compose([Validators.required])],
