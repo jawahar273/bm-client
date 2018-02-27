@@ -1,0 +1,23 @@
+<div [@routerTransition]>
+    <app-page-header [heading]="'Upload'" [icon]="'fa-bar-chart-o'"></app-page-header>
+    <div class="row allow-center">
+    	<div class="card col-lg-8 col-xs-12">
+	    	<div class="card-block" style="padding-top: 10px; padding-bottom: 10px;">
+	    		<h2 class="card-title">
+	     			Upload file to the system
+	    		</h2>
+				<form id="entryFormGroup" class="" enctype="multipart/form-data" novalidate  [formGroup]="uploadForm" (ngSubmit)="uploadFormSubmit();">
+				   <div class="form-group custom-file-control">
+					   	 <input type="file" multiple name="file" 
+					   	 placeholder="Upload File" formControlName="UploadFile"
+					   	  accept="*.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
+			            <div class="form-control-feedback" >
+			                It is highly recommented to use MS-Excel 2007+
+			            </div>
+				   </div>
+				   <input type="submit" name="submit" class="btn app-button" value="submit">
+				</form>
+	    	</div>	
+    	</div>
+	</div>
+</div>

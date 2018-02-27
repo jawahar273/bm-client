@@ -5,6 +5,9 @@
 - Uploading file page.
 - UI change in date for dashboard.
 
+## 0.1.2
+- Remove unnessary import in layout module.
+
 ## 0.1.1
 - Remove the indexed db content in login.
 - Row Count and Footer for the dashboard.

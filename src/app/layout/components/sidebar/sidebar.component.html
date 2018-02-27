@@ -32,12 +32,10 @@
               <div class="modal-body">
                 <div class="form-horizontal">
                     <div class="input-group">
-                            <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
                             <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
                             >
                     </div>
                     <div class="input-group">
-                            <!-- <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span> -->
                             <input  type="text" class="form-control input-underline" name="datePicker"
                             id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel" ngbDatepicker #d="ngbDatepicker">
                             <span class="btn btn-outline-secondary" (click)="d.toggle();" type="button">
@@ -51,20 +49,11 @@
                 <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
               </div>
             </ng-template>
-<!--             <li class="nested" [class.expand]="showMenu === 'bm'">
-                <ul class="submenu">
-                    <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
-                    </li>
-                    <li>
-                        <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
-                    </li>
-                </ul>
-            </li> -->
         </div>
+        <a [routerLink]="['/upload']" [routerLinkActive]="['router-link-active']" class="list-group-item">
+            <i class="fa fa-cloud-upload"></i>&nbsp;{{ 'Upload' | translate }}
+            <span class="badge badge-info">Beta</span>
+        </a>
 <!--         <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Tables' | translate }}
         </a>
