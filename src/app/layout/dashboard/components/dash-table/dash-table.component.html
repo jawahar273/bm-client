@@ -42,7 +42,6 @@
          [footerHeight]="50"
          #dashTable
          [rows]="service.dataTableDashboard"
-         [scrollbarV]="true"
          [scrollbarH]="true">
 	        <ngx-datatable-row-detail [rowHeight]="getIsMobileScreen() ? 323 : 9" #myDetailRow (toggle)="onDetailToggle($event)">
 	            <ng-template  let-row="row" let-expanded="expanded" let-rowIndex="rowIndex"

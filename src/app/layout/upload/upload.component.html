@@ -1,21 +1,38 @@
 <div [@routerTransition]>
-    <app-page-header [heading]="'Upload'" [icon]="'fa-bar-chart-o'"></app-page-header>
+    <app-page-header [heading]="'Upload File'" [icon]="'fa-bar-chart-o'"></app-page-header>
     <div class="row allow-center">
     	<div class="card col-lg-8 col-xs-12">
 	    	<div class="card-block" style="padding-top: 10px; padding-bottom: 10px;">
 	    		<h2 class="card-title">
-	     			Upload file to the system
+	     			Entry Upload
 	    		</h2>
-				<form id="entryFormGroup" class="" enctype="multipart/form-data" novalidate  [formGroup]="uploadForm" (ngSubmit)="uploadFormSubmit();">
-				   <div class="form-group custom-file-control">
-					   	 <input type="file" multiple name="file" 
-					   	 placeholder="Upload File" formControlName="UploadFile"
-					   	  accept="*.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet">
-			            <div class="form-control-feedback" >
-			                It is highly recommented to use MS-Excel 2007+
+	    		<div>
+	    			Upload the csv/excel into your list just by some click.
+	    		</div> <br>
+				<form id="uploadFileForm" "uploadFileForm"="ngForm" (ngSubmit)="onSubmitUploadFile()" novalidate>
+				   <div class="form-group col-lg-12 col-xs-12 pull-left">
+				   	    <label for="entry-type">Choose Entry Type</label>
+					   	 <select class="custom-select" id="entry-type">
+					   	 	<option value="null">None</option>
+					   	 	<option value="paytm">Paytm</option>
+					   	 	<option value="other">Other</option>
+					   	 </select>
+				   </div><br>
+				   <div class="form-group col-lg-12 col-xs-12">
+				   	    <label for="entry-file">Choose File</label>
+
+					   	 <input type="file"
+					   	 id="entry-file"
+					   	 multiple
+					   	 #uplodFile
+					   	 name="file" 
+					   	 placeholder="Upload File"
+					   	 (change)="onChangeFile($event)">
+			            <div class="form-control-feedback show-error-msg" style="font-style: italic; font-size: 15px;" *ngIf="flagForUpload">
+			                {{flagMsg}}
 			            </div>
 				   </div>
-				   <input type="submit" name="submit" class="btn app-button" value="submit">
+				   <button class="btn app-button" [disabled]="flagForUpload">submit</button>
 				</form>
 	    	</div>	
     	</div>

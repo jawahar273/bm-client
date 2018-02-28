@@ -23,4 +23,8 @@ describe('ChartsComponent', () => {
     it('should create', () => {
         expect(component).toBeTruthy();
     });
+
+    // it('long sentence title case', () => {
+    //     expect(component.toTitleCaseLongSent('hello world')).toBeEqual('Hello World');
+    // });
 });

@@ -245,7 +245,10 @@ export class ChartsComponent implements OnInit {
     private addTwoValues(value1, value2): number {
         return value1 + value2;
     }
-
+    private toTitleCaseLongSent(data, service=this.service): string {
+      // data = 
+      return data.split().map(service.toTitleCase).join(' ')
+    }
     private calculateChartData(data) {
         const chartContent = [];
 
@@ -256,12 +259,15 @@ export class ChartsComponent implements OnInit {
         this.currentMonthitemsContent.forEach((ele, indx) => {
             const temp = parseInt(ele['total_amount'], 10);
             // add the value if present or it initilize new one..
-            groups[`${ele['group']}`] = groups[`${ele['group']}`] + temp || temp;
+            groups[`${ele['group'].toLowerCase()}`] = groups[`${ele['group'].toLowerCase()}`] + temp || temp;
         });
         const totalAmountArray = Object.values(groups);
         this.sumOfCurrentMonthSpending = <number>totalAmountArray.reduce(this.addTwoValues);
         // chartContent.push();
-        const content: Object = {'group': Object.keys(groups), 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
+        const tempGroup = Object.keys(groups).map((data) => {
+             return data.split(' ').map(this.service.toTitleCase).join(' ')
+         });
+        const content: Object = {'group': tempGroup, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
         this.setChart(content['group'],
                         content['data'],
                         content['chartType']);
