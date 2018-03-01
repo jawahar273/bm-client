@@ -201,11 +201,15 @@ export class CommonService {
         }
     }
     /**
+     * @deprecated since version 0.1.2
+     * 
      * Get the require header params and create a new localheader by merging with
      * global header.
      *
      * @param main is a argument for getting addtion header options.
      * @returns {Object} return the new local headers for the service.
+     *
+     * 
      */
     public toLocalHeaders(main: Object): Object {
         return Object.assign({}, this.headers, main);

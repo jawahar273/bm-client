@@ -9,32 +9,30 @@
 	    		<div>
 	    			Upload the csv/excel into your account with few clicks.
 	    		</div> <br>
-				<form id="uploadFileForm" #uploadFileForm="ngForm" (ngSubmit)="onSubmitUploadFile()" novalidate>
-				   <div class="form-group pull-left">
-				   	    <label for="entry-type">Choose Entry Type</label>
-					   	 <select class="custom-select" id="entry-type"
-					   	 name="entry-type" ngModel>
-					   	 	<option [value]="'null'" [selected]="true">None</option>
-					   	 	<option [value]="'paytm'">Paytm</option>
-					   	 	<option [value]="'other'">Other</option>
-					   	 </select>
-				   </div>
-				   <br><br>
-				   <div class="form-group pull-left">
-				   	    <label for="entry-file">Choose File</label>
-					   	 <input type="file"
-					   	 id="entry-file"
-					   	 multiple
-					   	 #uplodFile
-					   	 name="file" 
-					   	 placeholder="Upload File"
-					   	 (change)="onChangeFile($event)"
-					   	 ngModle>
-			            <div class="form-control-feedback show-error-msg" style="font-style: italic; font-size: 15px;" *ngIf="flagForUpload">
-			                {{flagMsg}}
-			            </div>
-				   </div>
-				   <button class="btn app-button" [disabled]="flagForUpload" [ngClass]='{"pull-right": !service.isMobileScreen}' >submit</button>
+				<form id="uploadFileForm" class="list-group list-group-flush"  #uploadFileForm="ngForm" (ngSubmit)="onSubmitUploadFile(uploadFileForm.value)" novalidate>
+					   <div class="form-group" [ngClass]="{'col-xs-12': service.isMobileScreen}">
+						   	<div class="">
+						   	    <label for="entry-type">Choose Entry Type</label>
+							   	 <select class="custom-select" id="entry-type"
+							   	 name="entryType" [(ngModel)]="defaultEntryOptionType" (change)="onChangEntryType($event)">
+							   	 	<option *ngFor="let item of entryOptionTypes" [value]="item.value">
+							   	 		{{ item.name }}
+							   	 	</option>
+							   	 </select>
+						   	</div>
+					   </div>
+					   <br><br>
+					   <div class="form-group" [ngClass]="{'col-xs-12': service.isMobileScreen}">
+					   	    <div class="">				   	    	
+						   	    <label for="entry-file" id="entry-file-lable">Choose File</label>
+							   	 <input type="file" id="entry-file" multiple
+							   	 name="file" placeholder="Upload File" 
+							   	 (change)="onChangeFile($event)" ngModle>
+					   	    </div>
+					   </div>
+					   <div class="card-text pull-right" [ngClass]="{'col-xs-12': service.isMobileScreen}">
+						   <button class="btn app-button" [disabled]="flagForUploadBtn" [ngClass]="{'pull-right': !service.isMobileScreen}" >submit</button>
+					   </div>
 				</form>
 	    	</div>	
     	</div>
