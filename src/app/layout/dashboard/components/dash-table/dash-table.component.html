@@ -1,15 +1,4 @@
 
-<!-- <div class="col col-xl-12 col-lg-12 col-sm-12">
-  <div ngbDropdown class="dropdown">
-    <a href="javascript:void(0)"  ngbDropdownToggle style="color:black;">
-        {{ getMonthInMenu() }} <b class="caret"></b>
-    </a>
-	  <div ngbDropdownMenu class="dropdown-menu">
-	  	<button *ngFor="let month of service.listOfMonths" class="dropdown-item" (click)="setMonthInMenu(month)" > {{month}}
-	  	</button>
-	  </div>
-  </div>
-</div> -->
 <div class="col-xl-5 col-lg-6 col-sm-12">
 	<select (change)="setMonthInMenu($event.target.value)" class="custom-select">
 	  	<option *ngFor="let month of service.listOfMonths" class="dropdown-item" [value]="month"> {{month+'-'+service.today.getFullYear()}}
@@ -66,11 +55,12 @@
 	                            Total Amount</strong> : {{row.total_amount}}
 	                        </li>
 	                        <li class="list-group-item">
-	                            <strong>Days Count</strong> :  {{row.date}}
+	                            <strong>Date</strong> :  {{row.date}}
 	                                <div class="d-flex w-100 justify-content-between">
 	                                    <small></small>
 	                                </div>
-	                            <span class="badge badge-default badge-pill">{{getTheDays(row.date)}}</span>
+	                            <span class="badge badge-default badge-pill">       {{getTheDays(row.date)}}
+	                            </span>
 	                        </li>
 	                       <li class="list-group-item">
 	                            <strong>Action</strong> 

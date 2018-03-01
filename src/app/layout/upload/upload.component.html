@@ -22,7 +22,6 @@
 				   <br><br>
 				   <div class="form-group pull-left">
 				   	    <label for="entry-file">Choose File</label>
-
 					   	 <input type="file"
 					   	 id="entry-file"
 					   	 multiple
@@ -35,7 +34,7 @@
 			                {{flagMsg}}
 			            </div>
 				   </div>
-				   <button class="btn app-button pull-right" [disabled]="flagForUpload">submit</button>
+				   <button class="btn app-button" [disabled]="flagForUpload" [ngClass]='{"pull-right": !service.isMobileScreen}' >submit</button>
 				</form>
 	    	</div>	
     	</div>
