@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { CommonService } from '../../services/common.services';
 import { routerTransition } from '../../router.animations';
@@ -19,7 +20,9 @@ export class UploadComponent implements OnInit {
   public entryOptionTypes: Array<Object>;
   public defaultEntryOptionType: string;
   public fileObject: any;
-  constructor(public service: CommonService) { 
+  public uploadTermsAndCondtions: Object;
+  public closeResult: string;
+  constructor(public service: CommonService, private modalService: NgbModal) { 
   	// console.log('jkfdljfklafjlakf')
     this.flagForUpload = {
       'entryType': false,
@@ -34,14 +37,57 @@ export class UploadComponent implements OnInit {
       { value: 'other', name: 'other' },
     ];
     this.defaultEntryOptionType = 'default';
+
+    this.getUploadTermsCondtions();
   }
 
   ngOnInit() {
   }
+
+  open(content) {
+    // this.sideBarAmountModel = this.service.budgetAmount;
+    this.modalService.open(content).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  } 
+  public getKeys(data: Object): Array<any> {
+    return Object.keys(data);
+  }
+  private getUploadTermsCondtions(): void {
+    this.service.localStorage.getItem('upload-terms-condtions')
+     .subscribe((data) => {
+       if (!data) {
+         this.service.get('package/upload-term-condition', this.service.headers)
+          .subscribe((data) => {
+              this.uploadTermsAndCondtions = data['detail'];
+              this.service.localStorage.setItem('upload-term-condition', data)
+              .subscribe((data)=>{});
+          }, (error) => {
+
+          });
+       } else {
+         this.uploadTermsAndCondtions = data; 
+       }
+     });
+  }
+
   // ({name, value, msg, msgType}: {name: string, value: Boolean, msg: string, msgTyp: string} = {})
   public onChangEntryType(event): void {
     this.setFlagVar({name: 'entryDummy', value: false})
   }
+
   private setFlagVar(
      {name, value, msg, msgType}:
      {name: string, value: Boolean, msg?: string, msgType?:string} = {name: '', value: null}
@@ -55,6 +101,7 @@ export class UploadComponent implements OnInit {
       this.service.showGlobalAlert(msg, msgType);
     }
   }
+
   public onChangeFile(event) {
     // console.log(event.srcElement.files[0]);
     const file = event.srcElement.files[0];
@@ -82,18 +129,21 @@ export class UploadComponent implements OnInit {
     } else {
       let url = 'package/upload';
       if (value['entryType'] == 'paytm') {
-        url = 'package/paytm-upload/'
+        url = 'package/paytm-upload'
+      } else {
+        url = 'package/upload'
       }
-      this.service.headers.append('Content-Disposition', `form-data; ${this.fileObject.name}`);
-      this.service.headers.append('Content-Type', this.fileObject.type);
+      this.service.headers.append('Content-Disposition', `form-data; filename=${this.fileObject.name}`);
+      this.service.headers.set('Content-Type', `${this.fileObject.type}`);
       this.service.post(`${url}/${this.fileObject.name}`, this.service.headers, value)
        .subscribe((data) => {
-
+         this.service.showGlobalAlert('File has been uploaded.', 'success');
        }, (error) => {
-
+         const msg = this.service.isClinetOrServerSidesError(error);
+         this.service.showGlobalAlert(msg);
        });
       this.service.headers.delete('Content-Disposition');
-      this.service.headers.delete('Content-Type');
+      this.service.headers.set('Content-Type', 'application/json');
     }
     // const headers = this.service.toLocalHeaders(this.service.headers);
   }

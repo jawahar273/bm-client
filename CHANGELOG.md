@@ -4,6 +4,12 @@
 - UI change in alert box for better interaction.
 - Uploading file page.
 - UI change in date for dashboard.
+- Tour for the app.
+
+## 0.2.0 
+- Intergating uploading of Paytm.
+- Showing the uploading condtions.
+- Showing model for upload condtions.
 
 ## 0.1.2
 - Remove unnessary import in layout module.

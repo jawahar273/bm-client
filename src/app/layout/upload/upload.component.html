@@ -4,7 +4,13 @@
     	<div class="card col-lg-8 col-xs-5">
 	    	<div class="card-block" style="padding-top: 10px; padding-bottom: 10px;">
 	    		<h2 class="card-title">
-	     			Entry Upload
+	     			Entry Upload 
+	     			<span placement="right" [ngbTooltip]=tootlTipUploadFile>
+	     				<i class="fa fa-question-circle " (click)="open(UploadTermsCondtionsModel)" ></i>
+	     				<ng-template #tootlTipUploadFile>
+	     					Click me.
+	     				</ng-template>
+	     			</span>
 	    		</h2>
 	    		<div>
 	    			Upload the csv/excel into your account with few clicks.
@@ -38,3 +44,28 @@
     	</div>
 	</div>
 </div>
+
+            <ng-template #UploadTermsCondtionsModel let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Condtions in Upload</h4>
+                <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <!-- {{uploadTermsAndCondtions | json}} -->
+                <ngb-tabset>
+	                <ngb-tab *ngFor="let title of getKeys(uploadTermsAndCondtions)">
+	                	<ng-template ngbTabTitle><b>{{title}}</b></ng-template>
+	                	<ng-template ngbTabContent>
+	                		<ul>
+	                		  <li *ngFor="let content of uploadTermsAndCondtions[title]"> {{content}}</li>
+	                		</ul>
+	                	</ng-template>
+	                </ngb-tab>
+                </ngb-tabset>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+              </div>
+            </ng-template>

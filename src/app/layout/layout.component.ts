@@ -44,6 +44,11 @@ export class LayoutComponent implements OnInit {
      * @description on login success then add the `Authorization` header
      */
     private onSuccess() {
+        this.setAuthorizationInHeader();
+        this.getCurrenctDetails();
+    }
+
+    private setAuthorizationInHeader(): void {
         this.service.headers.set('Authorization', `${sessionStorage.getItem('authToken')}`);
         this.getUserDetails();
             this.service.get('package/get_group_items', this.service.headers)
@@ -52,25 +57,28 @@ export class LayoutComponent implements OnInit {
              }, (error) => {
                  // this.showGlobalAlert('');
              });
-             this.service.localStorage.getItem('currency')
-              .subscribe((data) => {
-                  if (!data) {
-                      this.service.get('package/currency', this.service.headers)
-                       .subscribe((data) => {
-                           this.service.localStorage.setItem('currency', data).subscribe((data) => {
-                               console.log('stored currency in local'+data);
-                           });
-                           this.service.currencyDetails = data;
-                       }, (error) => {
-                           console.error('error in stroing currency'+error);
-                       });
-                  } else {
-                      this.service.currencyDetails = data;
-                  }
-              }, (error) => {
-
-              });
     }
+
+    private getCurrenctDetails(): void {
+       this.service.localStorage.getItem('currency')
+        .subscribe((data) => {
+            if (!data) {
+                this.service.get('package/currency', this.service.headers)
+                 .subscribe((data) => {
+                     this.service.localStorage.setItem('currency', data)
+                     .subscribe((data) => {});
+                     this.service.currencyDetails = data;
+                 }, (error) => {
+                     console.error('error in stroing currency'+error);
+                 });
+            } else {
+                this.service.currencyDetails = data;
+            }
+        }, (error) => {
+
+        });
+    }
+
     /**
      * @description on fail of login return to the login page.
      */

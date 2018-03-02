@@ -29,7 +29,7 @@ export class CommonService {
         'items': undefined,
         'month_year': undefined,
     };
-    public clientErrorCode = new Set([400, 401, 403, 404, 408, 410]);
+    public clientErrorCode = new Set([400, 401, 403, 404, 406,408, 410]);
     public serverErrorCode = new Set([500, 502, 503, 504 ]);
     public currentDateWithMomentJS;
     public currencyDetails: Object;
@@ -83,8 +83,9 @@ export class CommonService {
           'start': moment(this.today).startOf('month').format('YYYY-MM-DD'),
           'end': moment(this.today).endOf('month').format('YYYY-MM-DD')
         }
-        this.headers = new Headers({ 'Accept': 'application/json',
-             'content-type': 'application/json',
+        this.headers = new Headers({
+             'Accept': 'application/json',
+             'Content-Type': 'application/json',
              'Authorization': ``,
         });
 
