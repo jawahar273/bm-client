@@ -57,9 +57,9 @@
 	                <ngb-tab *ngFor="let title of getKeys(uploadTermsAndCondtions)">
 	                	<ng-template ngbTabTitle><b>{{title}}</b></ng-template>
 	                	<ng-template ngbTabContent>
-	                		<ul>
+	                		<ol>
 	                		  <li *ngFor="let content of uploadTermsAndCondtions[title]"> {{content}}</li>
-	                		</ul>
+	                		</ol>
 	                	</ng-template>
 	                </ngb-tab>
                 </ngb-tabset>

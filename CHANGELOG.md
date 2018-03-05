@@ -2,14 +2,15 @@
 
 ## [Planning]
 - UI change in alert box for better interaction.
-- Uploading file page.
 - UI change in date for dashboard.
-- Tour for the app.
+- Tourism for the app.
 
-## 0.2.0 
+## 0.2.0
+- Uploading file page.
 - Intergating uploading of Paytm.
 - Showing the uploading condtions.
 - Showing model for upload condtions.
+- Order list are showen.
 
 ## 0.1.2
 - Remove unnessary import in layout module.
