@@ -1,7 +1,7 @@
-<div [@routerTransition]>
+<div [@routerTransition] >
     <app-page-header [heading]="'Upload File'" [icon]="'fa-bar-chart-o'"></app-page-header>
     <div class="row allow-center">
-    	<div class="card col-lg-8 col-xs-5">
+    	<div class="card col-lg-6 col-xs-5">
 	    	<div class="card-block" style="padding-top: 10px; padding-bottom: 10px;">
 	    		<h2 class="card-title">
 	     			Entry Upload 
@@ -15,36 +15,35 @@
 	    		<div>
 	    			Upload the csv/excel into your account with few clicks.
 	    		</div> <br>
-				<form id="uploadFileForm" class="list-group list-group-flush"  #uploadFileForm="ngForm" (ngSubmit)="onSubmitUploadFile(uploadFileForm.value)" novalidate>
-					   <div class="form-group" [ngClass]="{'col-xs-12': service.isMobileScreen}">
-						   	<div class="">
-						   	    <label for="entry-type">Choose Entry Type</label>
-							   	 <select class="custom-select" id="entry-type"
-							   	 name="entryType" [(ngModel)]="defaultEntryOptionType" (change)="onChangEntryType($event)">
-							   	 	<option *ngFor="let item of entryOptionTypes" [value]="item.value">
-							   	 		{{ item.name }}
-							   	 	</option>
-							   	 </select>
-						   	</div>
-					   </div>
-					   <br><br>
-					   <div class="form-group" [ngClass]="{'col-xs-12': service.isMobileScreen}">
-					   	    <div class="">				   	    	
-						   	    <label for="entry-file" id="entry-file-lable">Choose File</label>
-							   	 <input type="file" id="entry-file" multiple
-							   	 name="file" placeholder="Upload File" 
-							   	 (change)="onChangeFile($event)" ngModle>
-					   	    </div>
-					   </div>
-					   <div class="card-text pull-right" [ngClass]="{'col-xs-12': service.isMobileScreen}">
-						   <button class="btn app-button" [disabled]="flagForUploadBtn" [ngClass]="{'pull-right': !service.isMobileScreen}" >submit</button>
-					   </div>
-				</form>
+	    		<div class="container-fluid">    			
+					<form id="uploadFileForm"  #uploadFileForm="ngForm" (ngSubmit)="onSubmitUploadFile(uploadFileForm.value)" novalidate>
+						   <div class="form-group">
+							   	<div class="">
+							   	    <label for="entry-type">Choose Entry Type</label>
+								   	 <select class="custom-select" id="entry-type"
+								   	 name="entryType" [(ngModel)]="defaultEntryOptionType" (change)="onChangEntryType($event)">
+								   	 	<option *ngFor="let item of entryOptionTypes" [value]="item.value">
+								   	 		{{ item.name }}
+								   	 	</option>
+								   	 </select>
+							   	</div>
+						   </div>
+						   <div class="form-group">
+						   	    <div class="">				   	    	
+							   	   <!--  <label for="entry-file" id="entry-file-lable">Choose File</label> -->
+								   	 <input type="file" id="entry-file" multiple
+								   	 name="file" placeholder="Upload File" 
+								   	 (change)="onChangeFile($event)" ngModle>
+						   	    </div>
+						   </div>
+						   <div class="card-text" [ngClass]="{'col-xs-12': service.isMobileScreen}">
+							   <button class="btn app-button" [disabled]="flagForUploadBtn" [ngClass]="{'pull-right': !service.isMobileScreen}" >submit</button>
+						   </div>
+					</form>
+	    		</div>
 	    	</div>	
     	</div>
 	</div>
-</div>
-
             <ng-template #UploadTermsCondtionsModel let-c="close" let-d="dismiss">
               <div class="modal-header">
                 <h4 class="modal-title">Condtions in Upload</h4>
@@ -69,3 +68,4 @@
                 <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
               </div>
             </ng-template>
+</div>

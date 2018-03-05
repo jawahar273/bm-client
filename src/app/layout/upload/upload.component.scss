@@ -5,18 +5,14 @@
 }
 
 .form-group {
-	position: absolute;
-	// width: 100px;
+	display: table;
 }
 
-.card {
-    padding-bottom: 12px;
+.card-title > span {
+	font-size: 50%;
 }
 
 @media screen and (max-width: 992px) {
-	.form-group {
-		position: none;
-	}
 	#entry-file-lable {
 		display: none;
 	}
