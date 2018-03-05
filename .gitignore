@@ -47,3 +47,4 @@ environment.alpha-user-*.ts
 build.sh
 docs2/
 __*.sh
+test_build/
