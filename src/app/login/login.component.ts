@@ -14,27 +14,31 @@ import { CommonService } from '../services/common.services';
 })
 export class LoginComponent implements OnInit {
     loginForm: FormGroup;
-    loginAlert: Array<object> = [];
-    serviceFields = {
-        'loginPassName': 'username',
-        'loginPassword': 'password'
-    };
-    serviceErrorMapping = {
-        'password': undefined,
-        'email': 'Enter the mail has been register in our System. Or SignUp into our System',
-        'non_field_errors': undefined,
-        'detail': undefined,
-        'username': undefined,
-    };
+    loginAlert: Array<object>;
+    serviceFields: Object;
+    serviceErrorMapping: Object;
     headers: any;
-    spinnerIcon: boolean = true;
+    spinnerIcon: Boolean;
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
         this.service.localStorage.clear();
-        this.headers = new Headers({ 'content-type': 'application/json'});
         this.loginForm = this.fb.group({
             loginPassName: ['', Validators.compose([Validators.required])],
             loginPassword: ['', Validators.required]
         });
+        this.loginAlert = [];
+        this.serviceFields = {
+            'loginPassName': 'username',
+            'loginPassword': 'password'
+        };
+        this.serviceErrorMapping = {
+            'password': undefined,
+            'email': 'Enter the mail has been register in our System. Or SignUp into our System',
+            'non_field_errors': undefined,
+            'detail': undefined,
+            'username': undefined,
+        };
+        this.headers = new Headers({ 'content-type': 'application/json'});
+        this.spinnerIcon = true;
     }
 
     ngOnInit() {}

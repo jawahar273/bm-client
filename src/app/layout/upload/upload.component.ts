@@ -22,8 +22,9 @@ export class UploadComponent implements OnInit {
   public fileObject: any;
   public uploadTermsAndCondtions: Object;
   public closeResult: string;
+  public spinnerIcon: Boolean;
+
   constructor(public service: CommonService, private modalService: NgbModal) { 
-  	// console.log('jkfdljfklafjlakf')
     this.flagForUpload = {
       'entryType': false,
       'entryFile': false,
@@ -37,22 +38,26 @@ export class UploadComponent implements OnInit {
       { value: 'other', name: 'other' },
     ];
     this.defaultEntryOptionType = 'default';
+    this.spinnerIcon = true;
 
     this.getUploadTermsCondtions();
   }
 
   ngOnInit() {
   }
+  
+  public setLoadSpinner(value: Boolean): void {
+    this.spinnerIcon = value;
+  }
 
-  open(content) {
-    // this.sideBarAmountModel = this.service.budgetAmount;
+  public open(content) {
     this.modalService.open(content).result.then((result) => {
       this.closeResult = `Closed with: ${result}`;
     }, (reason) => {
       this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
     });
   }
-
+  
   private getDismissReason(reason: any): string {
     if (reason === ModalDismissReasons.ESC) {
       return 'by pressing ESC';
@@ -62,9 +67,11 @@ export class UploadComponent implements OnInit {
       return  `with: ${reason}`;
     }
   } 
+
   public getKeys(data: Object): Array<any> {
     return Object.keys(data);
   }
+
   private getUploadTermsCondtions(): void {
     this.service.localStorage.getItem('upload-terms-condtions')
      .subscribe((data) => {
@@ -75,7 +82,6 @@ export class UploadComponent implements OnInit {
               this.service.localStorage.setItem('upload-term-condition', data)
               .subscribe((data)=>{});
           }, (error) => {
-
           });
        } else {
          this.uploadTermsAndCondtions = data; 
@@ -83,7 +89,6 @@ export class UploadComponent implements OnInit {
      });
   }
 
-  // ({name, value, msg, msgType}: {name: string, value: Boolean, msg: string, msgTyp: string} = {})
   public onChangEntryType(event): void {
     this.setFlagVar({name: 'entryDummy', value: false})
   }
@@ -103,18 +108,13 @@ export class UploadComponent implements OnInit {
   }
 
   public onChangeFile(event) {
-    // console.log(event.srcElement.files[0]);
     const file = event.srcElement.files[0];
-    // this.flagForUpload['entryFile'] = false;
-    // this.flagForUploadBtn = false;
     this.setFlagVar({name: 'entryFile', value: false});
     if (!(file.name.endsWith('.csv') || file.name.endsWith('.xlxs'))) {
-       // this.flagForUpload['entryFile'] = true; 
        const msg = 'It is highly recommented to use MS-Excel 2007+/CSV only';
        this.setFlagVar({name: 'entryFile', value: true, msg: msg});
     }
     if (file.size > 262144) {
-       // this.flagForUpload['entryFile'] = true; 
        const msg = 'Huge file size(equal or about of 2 MB) is not allowed.';
        this.setFlagVar({name: 'entryFile', value: true, msg: msg});
     }
@@ -127,6 +127,8 @@ export class UploadComponent implements OnInit {
       const msg = 'upload type `None` is not allowed. Please choose other options'
       this.setFlagVar({name: 'entryType', value: true, msg: msg})
     } else {
+
+      this.setLoadSpinner(false);
       let url = 'package/upload';
       if (value['entryType'] == 'paytm') {
         url = 'package/paytm-upload'
@@ -138,10 +140,13 @@ export class UploadComponent implements OnInit {
       this.service.post(`${url}/${this.fileObject.name}`, this.service.headers, value)
        .subscribe((data) => {
          this.service.showGlobalAlert('File has been uploaded.', 'success');
+         this.setLoadSpinner(false);
        }, (error) => {
          const msg = this.service.isClinetOrServerSidesError(error);
          this.service.showGlobalAlert(msg);
+         this.setLoadSpinner(false);
        });
+      //  resetting the header for api call.
       this.service.headers.delete('Content-Disposition');
       this.service.headers.set('Content-Type', 'application/json');
     }

@@ -22,4 +22,10 @@ describe('UploadComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('checking function getKeys()', () => {
+    const keys = component.getKeys({1: 12, 2: 344});
+    expect(keys).toEqual([1, 2]);
+  });
+
 });
