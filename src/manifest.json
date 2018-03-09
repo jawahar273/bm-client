@@ -4,7 +4,7 @@
  "name": "Budget Manager",
  "short_name": "BM",
  "theme_color": "transparent",
- "orientation": "any",
+ "orientation": "landscape",
  "background_color": "white",
  "related_applications": [],
  "start_url": "/bm-client/",

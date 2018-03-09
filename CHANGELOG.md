@@ -14,6 +14,7 @@
 - Renaming `calculateChartData` to `calculateBarChartData`.
 - Fixing the side bar icons.
 - Fixing the tab in upload condtions.
+- Changing the orientation in `manifest.json`
 
 ## 0.2.0
 - Uploading file page.
