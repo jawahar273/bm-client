@@ -1,3 +1,15 @@
+@mixin browsers-prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    #{'-' + $prefix + '-' + $property}: $value;
+  }
+}
+
+@mixin browsers-in-value-prefix($property, $value, $prefixes: ()) {
+  @each $prefix in $prefixes {
+    $property:  #{'-' + $prefix + '-' + $value};
+  }
+}
+
 .show-error-msg {
     // border-bottom: 2px solid rgb(240, 41, 41);
     color:red;
@@ -18,5 +30,19 @@
 	}
 	.app-button {
 		margin-top: 50px;
+	}
+	.card {
+		margin: 50px;
+	}
+}
+
+@media screen and (max-width: 425px) {
+	.card {
+		margin: 15px;
+	}
+	.justify-content-start {
+		overflow-y: scroll;
+		display: -webkit-box;
+		display: -moz-box;
 	}
 }

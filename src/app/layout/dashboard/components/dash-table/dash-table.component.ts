@@ -134,7 +134,7 @@ export class DashTableComponent implements OnInit {
 
     public getMonthInMenu() {
 
-       return  this.service.monthInMenu; 
+       return  this.service.monthInMenu.split('-')[0]; 
     }
 
     public setMonthInMenu(value: string) {

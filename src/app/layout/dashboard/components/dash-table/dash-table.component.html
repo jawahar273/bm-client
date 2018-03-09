@@ -1,6 +1,7 @@
 
 <div class="col-xl-5 col-lg-6 col-sm-12">
-	<select (change)="setMonthInMenu($event.target.value)" class="custom-select">
+	<select (change)="setMonthInMenu($event.target.value)" class="custom-select"
+	[value]="getMonthInMenu()">
 	  	<option *ngFor="let month of service.listOfMonths" class="dropdown-item" [value]="month"> {{month+'-'+service.today.getFullYear()}}
 	  	</option>
 	</select>

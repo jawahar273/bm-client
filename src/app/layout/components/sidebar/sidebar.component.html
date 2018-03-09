@@ -4,7 +4,7 @@
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
         </a>
         <a routerLink="/entry" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'New Entry' | translate }}
+            <i class="fa fa-fw fa-plus"></i>&nbsp;{{ 'New Entry' | translate }}
         </a>
         <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Charts' | translate }}
@@ -13,7 +13,7 @@
             <a class="list-group-item" >
                 <span placement="bottom" [ngbTooltip]="sideBarAmountToolTip"
                     trigger="click:focus" (click)="open(sideBarAmountModelcontent)">
-                    <i class="fa fa-plus"></i><!--  {{ 'Menu1' | translate }} -->
+                    <i class="fa fa-money"></i><!--  {{ 'Menu1' | translate }} -->
                     <ng-template #sideBarAmountToolTip>
                         <strong>
                             {{this.service.currentDateWithMomentJS}}

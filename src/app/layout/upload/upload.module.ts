@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 // import { ReactiveFormsModule } from '@angular/forms';
 import {FormsModule} from '@angular/forms';
-import {  NgbTooltipModule, NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 import { PageHeaderModule } from '../../shared';
@@ -15,8 +15,7 @@ import { UploadComponent } from './upload.component';
     PageHeaderModule,
     // ReactiveFormsModule,
     FormsModule,
-    NgbTooltipModule,
-    NgbTabsetModule,
+    NgbTabsetModule.forRoot(),
     UploadRoutingModule,
   ],
   declarations: [UploadComponent]

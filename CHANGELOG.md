@@ -4,6 +4,17 @@
 - UI change in alert box for better interaction.
 - UI change in date for dashboard.
 - Tourism for the app.
+- CSS issue in header bar for mid-size modbile screen.
+
+
+### 0.2.1
+- kickstart offline support.
+- Default value for radarChart
+- Adding deprecated function docstring.
+- Replacing Radar chart to Bar chart.
+- Renaming `calculateChartData` to `calculateBarChartData`.
+- Fixing the side bar icons.
+- Fixing the tab in upload condtions.
 
 ## 0.2.0
 - Uploading file page.

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
@@ -11,6 +11,7 @@ import { routerTransition } from '../../router.animations';
   templateUrl: './upload.component.html',
   styleUrls: ['./upload.component.scss'],
   animations: [routerTransition()],
+  encapsulation: ViewEncapsulation.None
 })
 export class UploadComponent implements OnInit {
   // public uploadForm: FormGroup;

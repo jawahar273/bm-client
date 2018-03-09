@@ -98,20 +98,20 @@ export class ChartsComponent implements OnInit {
     public polarAreaChartType: string = 'polarArea';
 
     // lineChart
-    public lineChartData: Array<any> = [
-        { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-        { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-        { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C' }
-    ];
-    public lineChartLabels: Array<any> = [
-        'January',
-        'February',
-        'March',
-        'April',
-        'May',
-        'June',
-        'July'
-    ];
+    public lineChartData: Array<any>; // = [
+    //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
+    //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
+    //     { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C' }
+    // ];
+    public lineChartLabels: Array<any>; // = [
+    //     'January',
+    //     'February',
+    //     'March',
+    //     'April',
+    //     'May',
+    //     'June',
+    //     'July'
+    // ];
     public lineChartOptions: any = {
         responsive: true
     };
@@ -147,10 +147,11 @@ export class ChartsComponent implements OnInit {
     public lineChartLegend: boolean = true;
     public lineChartType: string = 'line';
     public displayMonths: number = 2; // used inside the html
-    public hideBudgetAmountZero: boolean ;
+    // if the bugdet is less than the total spend amount 
+    // in the chart then hide the chart for budget amount in 
+    // chart.
+    public hideBudgetAmountZero: boolean ; 
 
-    private currentMonthitemsContent: Array<any>;
-    private currentDateFormat: string;
     private sumOfCurrentMonthSpending: number = 0;
     hoveredDate: NgbDateStruct;
 
@@ -161,14 +162,12 @@ export class ChartsComponent implements OnInit {
 
     constructor(private service: CommonService, calendar: NgbCalendar, private _fb: FormBuilder) {
         this.hideBudgetAmountZero = false;
-        this.currentDateFormat = moment(this.service.today).format('YYYY-MM-DD');
         this.currentMonthSting = service.today.getFullYear() + '-' + service.today.getMonth() + 1;
         this.rangeMonthAndYear = this._fb.group({
             startMonthAndYear: [this.currentMonthSting, Validators.required],
             endMonthAndYear: [this.currentMonthSting, Validators.required]
         });
-        this.getRaderChartData();
-        // this.getBarChart(); // remove comment to active bar chart
+        this.getBarChart();
         this.fromDate = calendar.getToday();
         this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
      }
@@ -183,28 +182,30 @@ export class ChartsComponent implements OnInit {
     public chartHovered(e: any): void {
         // console.log(e);
     }
-
-    // public randomize(): void {
-    //     // Only Change 3 values
-    //     const data = [
-    //         Math.round(Math.random() * 100),
-    //         59,
-    //         80,
-    //         Math.random() * 100,
-    //         56,
-    //         Math.random() * 100,
-    //         40
-    //     ];
-    //     const clone = JSON.parse(JSON.stringify(this.barChartData));
-    //     clone[0].data = data;
-    //     this.barChartData = clone;
-    //     /**
-    //      * (My guess), for Angular to recognize the change in the dataset
-    //      * it has to change the dataset variable directly,
-    //      * so one way around it, is to clone the data, change it and then
-    //      * assign it;
-    //      */
-    // }
+    /**
+     * @deprecated since 0.1.0 remove on next patch
+     */
+    public randomize(): void {
+        // Only Change 3 values
+        const data = [
+            Math.round(Math.random() * 100),
+            59,
+            80,
+            Math.random() * 100,
+            56,
+            Math.random() * 100,
+            40
+        ];
+        const clone = JSON.parse(JSON.stringify(this.barChartData));
+        clone[0].data = data;
+        this.barChartData = clone;
+        /**
+         * (My guess), for Angular to recognize the change in the dataset
+         * it has to change the dataset variable directly,
+         * so one way around it, is to clone the data, change it and then
+         * assign it;
+         */
+    }
     onDateChange(date: NgbDateStruct) {
         if (!this.fromDate && !this.toDate) {
             this.fromDate = date;
@@ -221,7 +222,7 @@ export class ChartsComponent implements OnInit {
     isFrom = date => equals(date, this.fromDate);
     isTo = date => equals(date, this.toDate);
 
-    private getRaderChartData() {
+    private getBarChart() {
         console.log(this.service.dataTableDashboard);
         if (!this.service.dataTableDashboard) {
             const rangeDate = { 
@@ -231,33 +232,40 @@ export class ChartsComponent implements OnInit {
             this.service.get(`package/itemslist/${rangeDate['start']}/${rangeDate['end']}`, this.service.headers).subscribe(
                 (data) => {
                     this.service.dataTableDashboard = data;
-                    this.calculateChartData(data);
+                    this.calculateBarChartData(data);
                 },
                 (error) => {
                     this.service.showGlobalAlert('Error in Chart and Table');
             });
             this.service.needTableUpdate = false;
         } else {
-                this.calculateChartData(this.service.dataTableDashboard);
+                this.calculateBarChartData(this.service.dataTableDashboard);
         }
+    }
+
+
+    private toTitleCaseLongSent(data, service=this.service): string {
+      // data = 
+      return data.split().map(service.toTitleCase).join(' ')
     }
 
     private addTwoValues(value1, value2): number {
         return value1 + value2;
     }
-    private toTitleCaseLongSent(data, service=this.service): string {
-      // data = 
-      return data.split().map(service.toTitleCase).join(' ')
-    }
-    private calculateChartData(data) {
-        const chartContent = [];
 
-        const monthYearFormat = this.currentDateFormat.substr(0, this.currentDateFormat.lastIndexOf('-'));
+    private calculateBarChartData(data) {
+        const chartContent = [];
+        let currentMonthitemsContent: Array<any>;
+
+        const selectedDateFormat = this.service.dateRangOfMonths['start'];
+        const monthYearFormat = selectedDateFormat.substr(0, selectedDateFormat.lastIndexOf('-'));
         let groups = {};
-        this.currentMonthitemsContent = data;
+        // checking the content is present or not
+        currentMonthitemsContent =  data.length === 0 ? data = [{'group' : '', 'total_amount': 0}] 
+                                       : data;
         const _self = this;
-        this.currentMonthitemsContent.forEach((ele, indx) => {
-            const temp = parseInt(ele['total_amount'], 10);
+        currentMonthitemsContent.forEach((ele, indx) => {
+            const temp = parseFloat(ele['total_amount']);
             // add the value if present or it initilize new one..
             groups[`${ele['group'].toLowerCase()}`] = groups[`${ele['group'].toLowerCase()}`] + temp || temp;
         });
@@ -267,10 +275,14 @@ export class ChartsComponent implements OnInit {
         const tempGroup = Object.keys(groups).map((data) => {
              return data.split(' ').map(this.service.toTitleCase).join(' ')
          });
-        const content: Object = {'group': tempGroup, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
-        this.setChart(content['group'],
+        // const content: Object = {'group': tempGroup, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
+        // this.setChart(content['group'],
+        //                 content['data'],
+        //                 content['chartType']);
+        const content: Object = {'lable': tempGroup , 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'bar'};
+        this.setChart(content['lable'],
                         content['data'],
-                        content['chartType']);
+                        content['chartType']);     
         this.getDoughNutChart();
     }
 
@@ -282,19 +294,20 @@ export class ChartsComponent implements OnInit {
         const startDateOfRange = this.service.dateRangOfMonths['start'];
         const monthYearFormat = startDateOfRange.substr(0, startDateOfRange.lastIndexOf('-'));
         const url: string = `package/mba/${monthYearFormat}-01`;
+        this.hideBudgetAmountZero = true;
         this.service.get(url, this.service.headers)
           .subscribe(
               (data) => {
                 if (data.length) {
-                    let amount = parseInt(data[0]['budget_amount'], 10);
+                    let amount = parseFloat(data[0]['budget_amount']);
                     if (amount > this.sumOfCurrentMonthSpending) {
                        amount -= this.sumOfCurrentMonthSpending;
                     } else {
                         amount = 0;
                         this.hideBudgetAmountZero = false;
                     }
-                    const content: Object ={
-                        'lable': ['Month\'s Budget Amount', 'Total Spending Amount'],
+                    const content: Object = {
+                        'lable': [`Month\'s Budget Amount`, 'Total Spending Amount'],
                         'data': [amount, this.sumOfCurrentMonthSpending],
                         'chartType': 'donut'
                     };
@@ -318,7 +331,7 @@ export class ChartsComponent implements OnInit {
      *
      * @param label array of label to the columns
      * @param data array of object with two field data and label of string.
-     * @description for one year only.
+     * @description set the given data for the correspond to the chart and display them.
      */
     public setChart(label: Array<String>, _data: Array<any>, type: string): void {
         switch (type) {
@@ -334,9 +347,17 @@ export class ChartsComponent implements OnInit {
                 this.barChartLabels = label;
                 this.barChartData = _data;
                 break;
+            case 'line':
+                this.lineChartLabels = label;
+                this.lineChartData = _data;
+                break;
         }
     }
 
+    /**
+     * @description create a bar chart
+     * @deprecated since 0.1.1
+     */
     public updateChart(lable: string) {
         switch (lable) {
             case 'local':
@@ -349,40 +370,45 @@ export class ChartsComponent implements OnInit {
                 break;
             
             case 'rest':
-                  this.getRaderChartData();
+                  // this.getRaderChartData();
                 break;
         }
     }
+
     /**
      * @description create a bar chart
      */
-    private getBarChart(start = this.currentMonthSting, end = this.currentMonthSting) {
+    // private getBarChart() {
+    //     const rangeDate = { 
+    //           'start': moment(this.service.today).startOf('month').format('YYYY-MM-DD'),
+    //           'end': moment(this.service.today).endOf('month').format('YYYY-MM-DD')
+    //     }
+    //     // const monthYearFormat = this.currentDateFormat.substr(0, this.currentDateFormat.lastIndexOf('-'));        
+    //     let url: string = `package/itemslist/${rangeDate['start']}/${rangeDate['end']}`;
+    //     const totalAmountData = [];
+    //     const totalAmountDate = [];
+    //     const _self = this;
+    //     // const default = [];
 
-        // const monthYearFormat = this.currentDateFormat.substr(0, this.currentDateFormat.lastIndexOf('-'));
-        let url: string = `package/get_months/${start}-01/`;
-        const totalAmountData = [];
-        const totalAmountDate = [];
-        const _self = this;
-        if (end) {
-            url = url + `/${end}-01`;
-        }
-        this.service.get(url, this.service.headers)
-            .subscribe(
-              (data) => {
-                 // const amount = parseInt(data[0]['budget_amount'], 10);
-                //  const amount = parseInt(data[0]['total_amount'], 10);
-                data.forEach((ele, inx) => {
-                    const amount = parseInt(ele['total_amount'], 10);
-                    totalAmountDate.push(ele['date']);
-                    totalAmountData.push(amount);
-                });
-                  this.setChart(totalAmountDate, [{ 'data': { totalAmountData }, 'label': 'total amount'}], 'bar');
-              },
-              (error) => {
-                this.service.showGlobalAlert('Bar chart have some error');
-             }
-            );
-    }
+    //     this.setChart([''], [{ 'data': { totalAmountData }, 'label': 'total amount'}], 'bar');
+    //     this.service.get(url, this.service.headers)
+    //         .subscribe(
+    //           (data) => {
+    //              // const amount = parseInt(data[0]['budget_amount'], 10);
+    //             //  const amount = parseInt(data[0]['total_amount'], 10);
+    //             data = data.length === 0 ? [{'date': '', 'total_amount': '0'}] : data;
+    //             data.forEach((ele, inx) => {
+    //                 const amount = parseFloat(ele['total_amount']);
+    //                 totalAmountDate.push(ele['date']);
+    //                 totalAmountData.push(amount);
+    //             });
+    //               this.setChart('er', [{ 'data': { totalAmountData }, 'label': totalAmountDate}], 'bar');
+    //           },
+    //           (error) => {
+    //             this.service.showGlobalAlert('Bar chart have some error');
+    //          }
+    //         );
+    // }
 
 
     public onSumitForm(value: Object) {

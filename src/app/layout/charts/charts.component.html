@@ -4,6 +4,47 @@
         <div class="col col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
+                    Bar Chart
+                </div>
+                <div class="card-body">
+                    <canvas baseChart *ngIf="barChartLabels && barChartData"
+                     [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
+                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
+                <div class="card-footer">
+                    Current Month's Group/Catogories
+                </div>
+            </div>
+        </div>
+        <div class="col col-sm-6">
+            <div class="card mb-3">
+                <div class="card-header">
+                    Doughnut Chart
+                    <span placement="right" [ngbTooltip]=tipDashTableContent2 
+                    [hidden]="hideBudgetAmountZero">
+                        <i class="fa fa-question-circle "></i>
+                        <ng-template #tipDashTableContent2>
+                           Spending amount exced the budget amount of the month.
+                        </ng-template>
+                    </span>
+                </div>
+                <div class="card-body">
+                    <canvas baseChart *ngIf="doughnutChartData && doughnutChartLabels"
+                     height="150px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                    </canvas>
+                </div>
+                <div class="card-footer">
+                     Selected Month's Budget and Spend Amount
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div class="row">
+        <div class="col col-sm-6">
+            <div class="card mb-3">
+
+                <div class="card-header">
                     Radar Chart
                     <span placement="right" [ngbTooltip]=tipDashTableContent1 >
                         <i class="fa fa-question-circle "></i>
@@ -26,78 +67,10 @@
         <div class="col col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    Doughnut Chart
-                    <span placement="right" [ngbTooltip]=tipDashTableContent2 
-                    [hidden]="hideBudgetAmountZero">
-                        <i class="fa fa-question-circle "></i>
-                        <ng-template #tipDashTableContent2>
-                           Spending amount exced the budget amount of the month.
-                        </ng-template>
-                    </span>
-                </div>
-                <div class="card-body">
-                    <canvas baseChart *ngIf="doughnutChartData && doughnutChartLabels"
-                     height="150px" [data]="doughnutChartData" [labels]="doughnutChartLabels" [chartType]="doughnutChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                    </canvas>
-                </div>
-                <div class="card-footer">
-                     Current month's budget and spend amount
-                </div>
-            </div>
-        </div>
-    </div>
-<!--     <div class="row">
-        <div class="col col-sm-6">
-            <div class="card mb-3">
-                <div class="card-header">
-                    Bar Chart
-                </div>
-                <div class="card-body">
-                    <canvas baseChart *ngIf="barChartLabels && barChartData"
-                     [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
-                    </canvas>
-                </div>
-                <div class="card-footer">
-                    getting all years budget amount and spend amount
-                     <button class="btn btn-info btn-sm" (click)="randomize()">Update</button> 
-                             <select id="month" name="month">
-                                <option *ngFor="let month of service.listOfMonths" [ngValue]="month.value">
-                                    {{month.name}}
-                                </option>
-                            </select> 
-                            <form [formGroup]="rangeMonthAndYear" (ngSubmit)="onSumitForm(rangeMonthAndYear.value)"
-                             class="form-inline">
-                                <div class="form-group">
-                                 <label class="col-form-label" for="start">Start</label>
-                                 <input formControlName="startMonthAndYear" id="start"
-                                   type="month" name="bday-month" min="2000-01"
-                                  max="{{service.today.getFullYear()}}-{{service.today.getMonth()+1}}"
-                                  placeholder="2015-07(Year-month)">
-                                </div>
-                                <div class="form-group">
-                                    <label class="col-form-label" for="start">end</label>
-                                    <input formControlName="endMonthAndYear"
-                                     id="end" type="month" name="bday-month" min="2000-01"
-                                      max="{{service.today.getFullYear()}}-{{service.today.getMonth()+1}}"
-                                    [value]="service.today.getFullYear()+'-'+service.today.getMonth()+1"                                 
-                                      placeholder="2016-01(Year-month)">
-                                </div>
-                                <button class="btn btn-info btn-sm" type="submit">
-                                    Update
-                                </button>
-                                {{rangeMonthAndYear.value | json}}
-                            </form>
-                </div>
-            </div>
-        </div>
-        <div class="col col-sm-6">
-            <div class="card mb-3">
-                <div class="card-header">
                     Line Chart
                 </div>
                 <div class="card-body">
-                    <canvas baseChart height="130" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
+                    <canvas baseChart height="130" *ngIf="lineChartLabels && lineChartData" [datasets]="lineChartData" [labels]="lineChartLabels" [options]="lineChartOptions" [colors]="lineChartColors"
                         [legend]="lineChartLegend" [chartType]="lineChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
                     </canvas>
                 </div>
