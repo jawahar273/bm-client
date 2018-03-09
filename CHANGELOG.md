@@ -6,7 +6,6 @@
 - Tourism for the app.
 - CSS issue in header bar for mid-size modbile screen.
 
-
 ### 0.2.1
 - kickstart offline support.
 - Default value for radarChart

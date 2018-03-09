@@ -22,53 +22,15 @@
                     Amount: {{getBudgetAmount() | currency:service.currencyDetails['code']:service.currencyDetails['symbol_native'] }}
                 </span>
             </a>
-            <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
-              <div class="modal-header">
-                <h4 class="modal-title">Setting Budget Amount</h4>
-                <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="input-group">
-                            <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
-                            >
-                    </div>
-                    <div class="input-group">
-                            <input  type="text" class="form-control input-underline" name="datePicker"
-                            id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel" ngbDatepicker #d="ngbDatepicker">
-                            <span class="btn btn-outline-secondary" (click)="d.toggle();" type="button">
-                              <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer; color: black;"></i>
-                            </span>
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-info" (click)="onAmountSubmit(c)" >Submit</button>
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
-              </div>
-            </ng-template>
         </div>
         <a [routerLink]="['/upload']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-cloud-upload"></i>&nbsp;{{ 'Upload' | translate }}
             <span class="badge badge-info">Beta</span>
         </a>
-<!--         <a [routerLink]="['/tables']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-table"></i>&nbsp;{{ 'Tables' | translate }}
+        <a herf="https://github.com/jawahar273/bm-client/blob/master/CHANGELOG.md" class="list-group-item" target="_blank">
+            <i class="fa fa-cloud-upload"></i>&nbsp;{{ 'Change Log' | translate }}
+            <span class="badge badge-info">Beta</span>
         </a>
-        <a [routerLink]="['/forms']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-edit"></i>&nbsp;{{ 'Forms' | translate }}
-        </a>
-        <a [routerLink]="['/bs-element']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-desktop"></i>&nbsp;{{ 'Bootstrap Element' | translate }}
-        </a>
-        <a [routerLink]="['/grid']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-fw fa-wrench"></i>&nbsp;{{ 'Bootstrap Grid' | translate }}
-        </a>
-        <a [routerLink]="['/components']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-th-list"></i>&nbsp;{{ 'Component' | translate }}
-        </a> -->
         <hr style="background-color: white;color: white;width: 100%;" [hidden]="!service.isMobileScreen">
         <div class="nested-menu" [hidden]="!service.isMobileScreen">
             <a class="list-group-item" (click)="addExpandClass('pages')">
@@ -99,10 +61,33 @@
                 </ul>
             </li>
         </div>
-<!--         <a [routerLink]="['/blank-page']" [routerLinkActive]="['router-link-active']" class="list-group-item">
-            <i class="fa fa-file-o"></i>&nbsp;{{ 'Blank Page' | translate }}
-        </a> -->
-        
     </div>                    
 </nav>
 
+            <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
+              <div class="modal-header">
+                <h4 class="modal-title">Setting Budget Amount</h4>
+                <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-horizontal">
+                    <div class="input-group">
+                            <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
+                            >
+                    </div>
+                    <div class="input-group">
+                            <input  type="text" class="form-control input-underline" name="datePicker"
+                            id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel" ngbDatepicker #d="ngbDatepicker">
+                            <span class="btn btn-outline-secondary" (click)="d.toggle();" type="button">
+                              <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer; color: black;"></i>
+                            </span>
+                    </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button class="btn btn-info" (click)="onAmountSubmit(c)" >Submit</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+              </div>
+            </ng-template>
