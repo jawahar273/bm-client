@@ -3,11 +3,13 @@ import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
+import { CookieService } from 'ngx-cookie';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
-import { serverDomainName } from './domain-name';
+// config from  ts.config.json
+import { environment } from 'environments/environment';
 
 @Injectable()
 export class CommonService {
@@ -59,7 +61,7 @@ export class CommonService {
         'packActivePaytm': 'active_paytm',
       };
 
-    constructor(public http: Http, public localStorage?: AsyncLocalStorage) {
+    constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
         this.isUserLogin = false;
         this.today  = new Date();
         this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
@@ -92,7 +94,7 @@ export class CommonService {
         // if (isDevMode()) {
         //     this.commonURL = 'http://127.0.0.1:8000/api';
         // } else {
-            this.commonURL = serverDomainName();
+            this.commonURL = `${environment.protocol}/${environment.domainName}`;
         // }
     }
     /**
@@ -447,6 +449,14 @@ export class CommonService {
         return  `${data.substr(0, data.lastIndexOf('-'))}-01`; 
     }
     // Miscellaneous class methods
+    public getCookie(key: string): string {
+        return this.cookieService.get(key);
+    }
+
+    public setCookie(key: string, value: string, options?: any): void {
+
+        this.cookieService.put(key, value, options);
+    }
     /**
      * conver the given string intp title case 
      */

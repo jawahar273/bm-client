@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
-  domainName: 'https://jawahar.pythonanywhere.com/api',
+  domainName: 'jawahar.pythonanywhere.com/api',
+  protocol: 'https://',
   ServiceWorkersBasehref: '/bm-client/',
 };

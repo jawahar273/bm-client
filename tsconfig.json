@@ -15,5 +15,12 @@
       "es2017",
       "dom"
     ]
+  },
+  "baseUrl": "./",
+  "rootDirs": [
+    "./src"
+  ],
+  "paths": {
+    "environments/*": ["environments/*"]
   }
 }

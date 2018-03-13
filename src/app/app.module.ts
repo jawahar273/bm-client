@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
-
 import { ServiceWorkerModule } from '@angular/service-worker';
 
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
@@ -14,6 +13,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AsyncLocalStorageModule } from 'angular-async-local-storage';
+import { CookieModule } from 'ngx-cookie';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,6 +55,7 @@ export function createTranslateLoader(http: HttpClient) {
         }),
         // environment.production ? ServiceWorkerModule.register('/bm-client/ngsw-worker.js') : [],
         AsyncLocalStorageModule,
+        CookieModule.forRoot(),
     ],
     declarations: [AppComponent],
     providers: [AuthGuard, CommonService],

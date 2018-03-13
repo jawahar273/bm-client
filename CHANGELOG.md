@@ -6,9 +6,13 @@
 - Tourism for the app.
 - CSS issue in header bar for mid-size modbile screen.
 
+### 0.2.2
+- Moving session to cookies.
+- Adding environment module in `ts.config.json`
+
 ### 0.2.1
 - kickstart offline support.
-- Default value for radarChart
+- ~~Default value for radarChart~~
 - Adding deprecated function docstring.
 - Replacing Radar chart to Bar chart.
 - Renaming `calculateChartData` to `calculateBarChartData`.

@@ -51,15 +51,16 @@ export class LoginComponent implements OnInit {
       if (checkFields) {
         let _body = this.service.renameObjectAllKeys(this.serviceFields, loginContent, 's');
         // debugger;
-        this.service.post('rest-auth/login', this.headers, _body)
+        this.service.post('rest-auth/login-auth', this.headers, _body)
           .subscribe(
               (data) => {
-                  !!data ? '' : console.log('something went wrong in server');
-                  sessionStorage.setItem('authToken', `Token ${data['key']}`);
+                !!data ? '' : console.log('something went wrong in server');
+                sessionStorage.setItem('authToken', `Token ${data['key']}`);
+
                 //   debugger;
                 localStorage.setItem('isLoggedin', 'false');
                 //   localStorage.setItem('authToken', data['key']);
-                localStorage.setItem('userName', 'User Name');
+                // localStorage.setItem('userName', 'User Name');
                 this.headers.set('Authorization', `Token ${data['key']}`);
                 this.service.isUserLogin = true;
                 this.router.navigate(['/dashboard']);
