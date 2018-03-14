@@ -5,6 +5,8 @@ import { Headers } from '@angular/http';
 
 import { routerTransition } from '../router.animations';
 import { CommonService } from '../services/common.services';
+// config from  ts.config.json
+import { environment } from 'environments/environment';
 
 @Component({
     selector: 'app-login',
@@ -55,14 +57,19 @@ export class LoginComponent implements OnInit {
           .subscribe(
               (data) => {
                 !!data ? '' : console.log('something went wrong in server');
-                sessionStorage.setItem('authToken', `Token ${data['key']}`);
+
+                sessionStorage.setItem('authToken', `Token ${data['key']}`,);
 
                 //   debugger;
                 localStorage.setItem('isLoggedin', 'false');
                 //   localStorage.setItem('authToken', data['key']);
                 // localStorage.setItem('userName', 'User Name');
-                this.headers.set('Authorization', `Token ${data['key']}`);
+
+                this.service.setCookie('authToken', `Token ${data['token']}`);
+                console.log(this.service.getCookie('authToken'))
+                this.headers.set('Authorization', `Token ${data['token']}`);
                 this.service.isUserLogin = true;
+                debugger;
                 this.router.navigate(['/dashboard']);
                 this.service.needTableUpdate = true;
                 //   debugger;
@@ -71,6 +78,7 @@ export class LoginComponent implements OnInit {
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
                   this.service.showGlobalAlert(msg);
                   this.setLoadSpinner(true);
+                  this.router.navigate(['/login']);
               }
           );
       }

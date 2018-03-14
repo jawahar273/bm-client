@@ -5,7 +5,8 @@
 
 export const environment = {
   production: false,
-  domainName: '127.0.0.1:8000/api',
+  domainName: '127.0.0.1:8000',
+  apiPath: 'api',
   protocol: 'http://',
-  ServiceWorkersBasehref: '/bm-client/',
+  ServiceWorkersBasehref: '/',
 };

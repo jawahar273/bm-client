@@ -16,7 +16,7 @@ export class LayoutComponent implements OnInit {
      * should be call from here(or side bar/ header componet are allow allowed)
      */
     constructor(public service: CommonService, private router: Router) {
-        if (sessionStorage.getItem('authToken')) {
+        if (this.service.getUserAuth()) {
             this.onSuccess();
         } else {
             this.onFail();
@@ -49,7 +49,7 @@ export class LayoutComponent implements OnInit {
     }
 
     private setAuthorizationInHeader(): void {
-        this.service.headers.set('Authorization', `${sessionStorage.getItem('authToken')}`);
+        this.service.headers.set('Authorization', `${this.service.getUserAuth()}`);
         this.getUserDetails();
             this.service.get('package/get_group_items', this.service.headers)
              .subscribe((data) => {
@@ -65,8 +65,8 @@ export class LayoutComponent implements OnInit {
             if (!data) {
                 this.service.get('package/currency', this.service.headers)
                  .subscribe((data) => {
-                     this.service.localStorage.setItem('currency', data)
-                     .subscribe((data) => {});
+                     this.service.localStorage.setItem('currency', data);
+                     // .subscribe((data) => {});
                      this.service.currencyDetails = data;
                  }, (error) => {
                      console.error('error in stroing currency'+error);
@@ -85,7 +85,5 @@ export class LayoutComponent implements OnInit {
     private onFail() {
         this.router.navigate(['/login']);
     }
-
-
 
 }

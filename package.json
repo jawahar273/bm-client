@@ -1,6 +1,6 @@
 {
   "name": "BM",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
@@ -56,6 +56,7 @@
     "@angular/compiler-cli": "^5.2.2",
     "@angular/language-service": "^5.2.2",
     "@compodoc/compodoc": "^1.0.5",
+    "@storybook/cli": "^3.3.15",
     "@types/jasmine": "~2.6.3",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.0.51",

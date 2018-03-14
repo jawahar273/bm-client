@@ -9,6 +9,7 @@
 ### 0.2.2
 - Moving session to cookies.
 - Adding environment module in `ts.config.json`
+- Changing the orientation in `manifest.json`
 
 ### 0.2.1
 - kickstart offline support.

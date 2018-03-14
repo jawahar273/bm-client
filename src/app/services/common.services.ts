@@ -90,12 +90,8 @@ export class CommonService {
              'Content-Type': 'application/json',
              'Authorization': ``,
         });
-
-        // if (isDevMode()) {
-        //     this.commonURL = 'http://127.0.0.1:8000/api';
-        // } else {
-            this.commonURL = `${environment.protocol}/${environment.domainName}`;
-        // }
+        const url = this.joinURL(environment.domainName, environment.apiPath, false);
+        this.commonURL = `${environment.protocol}${url}`;
     }
     /**
      * To help in concating the base url with the given url
@@ -454,8 +450,15 @@ export class CommonService {
     }
 
     public setCookie(key: string, value: string, options?: any): void {
-
         this.cookieService.put(key, value, options);
+        this.cookieService.put('sklf', '12slk', options);
+        debugger;
+    }
+    /*
+     * get the user auth token this function only.
+     */
+    public getUserAuth(): string {
+        return this.cookieService.get('authToken');
     }
     /**
      * conver the given string intp title case 
