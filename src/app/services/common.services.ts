@@ -64,7 +64,7 @@ export class CommonService {
     constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
         this.isUserLogin = false;
         this.today  = new Date();
-        this.currentDateWithMomentJS =  moment(this.today).format('YYYY-MM-DD');
+        this.currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
         this.listOfMonths.reverse();
         this.monthInMenu = `${this.listOfMonths.slice(0,1)}-${this.today.getFullYear()}`;
@@ -444,6 +444,17 @@ export class CommonService {
     public getMonthYear(data: string) {
         return  `${data.substr(0, data.lastIndexOf('-'))}-01`; 
     }
+    /*
+     * add the given date or today with count along in the terms of days, months, 
+     * etc.. as it given.
+     *
+     * @params count {number} count in the terms of number
+     */
+    public addTime(count: number, terms='days', useDate?:Date) {
+        useDate = !!useDate ? useDate : this.today; 
+        return moment(useDate).add(count, terms);
+    }
+
     // Miscellaneous class methods
     public getCookie(key: string): string {
         return this.cookieService.get(key);
@@ -451,8 +462,6 @@ export class CommonService {
 
     public setCookie(key: string, value: string, options?: any): void {
         this.cookieService.put(key, value, options);
-        this.cookieService.put('sklf', '12slk', options);
-        debugger;
     }
     /*
      * get the user auth token this function only.

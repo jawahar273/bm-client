@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Headers } from '@angular/http';
+import {  CookieOptions } from 'ngx-cookie';
 
 import { routerTransition } from '../router.animations';
 import { CommonService } from '../services/common.services';
@@ -60,19 +61,20 @@ export class LoginComponent implements OnInit {
 
                 sessionStorage.setItem('authToken', `Token ${data['key']}`,);
 
-                //   debugger;
                 localStorage.setItem('isLoggedin', 'false');
                 //   localStorage.setItem('authToken', data['key']);
                 // localStorage.setItem('userName', 'User Name');
+                let options: CookieOptions = {
+                  'expires': this.service.addTime(2, 'days').toString()
+                }
+                debugger;
 
-                this.service.setCookie('authToken', `Token ${data['token']}`);
+                this.service.setCookie('authToken', `Token ${data['token']}`, options);
                 console.log(this.service.getCookie('authToken'))
                 this.headers.set('Authorization', `Token ${data['token']}`);
                 this.service.isUserLogin = true;
-                debugger;
                 this.router.navigate(['/dashboard']);
                 this.service.needTableUpdate = true;
-                //   debugger;
               },
               (error) => {
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
