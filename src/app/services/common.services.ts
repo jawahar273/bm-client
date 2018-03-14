@@ -450,7 +450,7 @@ export class CommonService {
      *
      * @params count {number} count in the terms of number
      */
-    public addTime(count: number, terms='days', useDate?:Date) {
+    public addTime(count, terms='days', useDate?:Date) {
         useDate = !!useDate ? useDate : this.today; 
         return moment(useDate).add(count, terms);
     }
