@@ -50,24 +50,16 @@ export class LoginComponent implements OnInit {
       this.setLoadSpinner(false);
       let loginContent = this.loginForm.value;
       const checkFields = this.service.findInvalidControls(this.loginForm);
-      // debugger;
       if (checkFields) {
         let _body = this.service.renameObjectAllKeys(this.serviceFields, loginContent, 's');
-        // debugger;
         this.service.post('rest-auth/login-auth', this.headers, _body)
           .subscribe(
               (data) => {
                 !!data ? '' : console.log('something went wrong in server');
-
-                sessionStorage.setItem('authToken', `Token ${data['key']}`,);
-
                 localStorage.setItem('isLoggedin', 'false');
-                //   localStorage.setItem('authToken', data['key']);
-                // localStorage.setItem('userName', 'User Name');
                 let options: CookieOptions = {
                   'expires': this.service.addTime(2, 'days').toString()
                 }
-                debugger;
 
                 this.service.setCookie('authToken', `Token ${data['token']}`, options);
                 console.log(this.service.getCookie('authToken'))

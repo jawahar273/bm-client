@@ -60,14 +60,10 @@ export class SignupComponent implements OnInit {
     }
 
     public onSignUpFormSubmit(formContent: Object): void {
-        // this.service.post('rest-auth/registration/')
-        // const pass_status = this.confirmPasswordValidator();
         const checkFields = this.service.findInvalidControls(this.signupFormGroup);
         if (!this.showErrorInButton && checkFields['valid']) {
             this.setLoadSpinner(false);
             const url = 'rest-auth/registration';
-            // const keys = Object.keys(this.serviceFields);
-            // const values = Object.values(this.serviceFields);
             let _body = this.service.renameObjectAllKeys(this.serviceFields, formContent, 's');
             this.service.post(url, this.service.headers, _body )
               .subscribe(

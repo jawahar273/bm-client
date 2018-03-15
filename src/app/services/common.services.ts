@@ -113,7 +113,6 @@ export class CommonService {
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
-    // Observable.throw(error.json().error || 'Server error'));
 
     public post(url: string, headers?: Headers, body?: any): Observable<any []> {
         url = this.joinURL(this.commonURL, url);
@@ -238,10 +237,9 @@ export class CommonService {
      *
      * @param {object} serviceField which contains the client and service field name but the client is act as key.
      * @param {object} ele content object.
-     * @return {object/undefined} returns the object if no error occures or undeine 
+     * @return {object|undefined} returns the object if no error occures or undeine 
      */
     public renameObjectAllKeys(serviceField: Object, ele: Object, toWhere='s'): Object {
-        // oldKeys, newKeys old arguments
         let el = Object.assign({}, ele);
         let oldKeys;
         let newKeys;
@@ -257,7 +255,7 @@ export class CommonService {
             oldKeys.forEach((element, index) => {
                 self.renameObjectKey(element, newKeys[index], el);
             });
-            // if toWhere is s then convert to json string for the server.
+            // if toWhere `var s` is then convert to json string for the server.
             return toWhere == 's' ?  JSON.stringify(el) : el;
         } else {
             console.log('please check the given value .. renameObjectAllKeys');
@@ -348,7 +346,6 @@ export class CommonService {
             return temp;
         } 
 
-          //.substr(0, this.currentDateWithMomentJS.lastIndexOf('-'));
            const temp =  await this._getBudgetAmount(currentMonthYear, true);
            return temp;
     }
@@ -367,11 +364,8 @@ export class CommonService {
                      } else {
                          if (bmt){
                             this.budgetAmount = parseFloat(data[0]['budget_amount']);
-                            // return data[0]['budget_amount'];
                          }
-                         resolve( data[0]['budget_amount']);
-                         
-                         // console.log('budgetAmount ='+data['budget_amount'], this.budgetAmount);
+                         resolve( data[0]['budget_amount']);                         
                      }
                  },
                  (error) => {
@@ -489,8 +483,7 @@ export class CommonService {
     }
 
     public onLoggedout() {
-      localStorage.removeItem('isLoggedin');
-      sessionStorage.removeItem('authToken');
+      localStorage.clear();
       this.localStorage.clear();
   }
 }

@@ -10,7 +10,6 @@ import { EntryRoutingModule } from './entry-routing.module';
 
 import { EntryComponent } from './entry.component';
 import { ListedItemsModule } from './listed-items/listed-items.module';
-import { ListedItemsComponent } from './listed-items/listed-items.component';
 
 @NgModule({
   imports: [
@@ -23,8 +22,7 @@ import { ListedItemsComponent } from './listed-items/listed-items.component';
     ListedItemsModule,
   ],
   declarations: [
-  EntryComponent,
-  // ListedItemsComponent
+    EntryComponent,
   ]
 })
 export class EntryModule { }

@@ -1,21 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import * as moment from 'moment';
-import { NgbDateStruct, NgbCalendar } from '@ng-bootstrap/ng-bootstrap';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 
 import { CommonService } from '../../services/common.services';
 import { routerTransition } from '../../router.animations';
 
-const equals = (one: NgbDateStruct, two: NgbDateStruct) =>
-    one && two && two.year === one.year && two.month === one.month && two.day === one.day;
-
-const before = (one: NgbDateStruct, two: NgbDateStruct) =>
-    !one || !two ? false : one.year === two.year ? one.month === two.month ? one.day === two.day
-        ? false : one.day < two.day : one.month < two.month : one.year < two.year;
-
-const after = (one: NgbDateStruct, two: NgbDateStruct) =>
-    !one || !two ? false : one.year === two.year ? one.month === two.month ? one.day === two.day
-        ? false : one.day > two.day : one.month > two.month : one.year > two.year;
 
 @Component({
     selector: 'app-charts',
@@ -29,59 +18,25 @@ export class ChartsComponent implements OnInit {
         scaleShowVerticalLines: false,
         responsive: true
     };
-    public barChartLabels: any[]; // = [
-    //     '2006',
-    //     '2007',
-    //     '2008',
-    //     '2009',
-    //     '2010',
-    //     '2011',
-    //     '2012',
-    //     '2013',
-    //     '2014'
-    // ];
+    public barChartLabels: any[];
     public barChartType: string = 'bar';
     public barChartLegend: boolean = true;
 
-    public barChartData: any[]; // = [
-    //     { data: [65, 59, 80, 81, 56, 55, 40, 120, 60], label: 'Series A' },
-    //     { data: [28, 48, 40, 19, 86, 27, 90, 0, 40], label: 'Series B' }
-    // ];
+    public barChartData: any[];
 
     // Doughnut
-    public doughnutChartLabels: any[]; // = [
-    //     'Download Sales',
-    //     'In-Store Sales',
-    //     'Mail-Order Sales'
-    // ];
-    public doughnutChartData: any[]; // = [350, 450, 100];
+    public doughnutChartLabels: any[];
+    public doughnutChartData: any[];
     public doughnutChartType: string = 'doughnut';
 
     // Radar
-    public radarChartLabels: any[]; // = [
-        // 'b',
-        // 'a',
-        // 'Drinking',
-        // 'Sleeping',
-        // 'Designing',
-        // 'Coding',
-        // 'Cycling',
-        // 'Running'
-    // ];
-    public radarChartData: any[]; // = [
-        // { data: [2], label: '' },
-        // { data: [7], label: '' },
-        // { data: [28, 48, 40, 19, 96, 27, 100], label: 'Series B' }
-    // ];
+    public radarChartLabels: any[];
+    public radarChartData: any[];
     public radarChartType: string = 'radar';
 
     // Pie
-    public pieChartLabels: any[]; // = [
-    //     'Download Sales',
-    //     'In-Store Sales',
-    //     'Mail Sales'
-    // ];
-    public pieChartData: any[]; // = [300, 500, 100];
+    public pieChartLabels: any[];
+    public pieChartData: any[];
     public pieChartType: string = 'pie';
 
     // PolarArea
@@ -98,20 +53,8 @@ export class ChartsComponent implements OnInit {
     public polarAreaChartType: string = 'polarArea';
 
     // lineChart
-    public lineChartData: Array<any>; // = [
-    //     { data: [65, 59, 80, 81, 56, 55, 40], label: 'Series A' },
-    //     { data: [28, 48, 40, 19, 86, 27, 90], label: 'Series B' },
-    //     { data: [18, 48, 77, 9, 100, 27, 40], label: 'Series C' }
-    // ];
-    public lineChartLabels: Array<any>; // = [
-    //     'January',
-    //     'February',
-    //     'March',
-    //     'April',
-    //     'May',
-    //     'June',
-    //     'July'
-    // ];
+    public lineChartData: Array<any>;
+    public lineChartLabels: Array<any>; 
     public lineChartOptions: any = {
         responsive: true
     };
@@ -153,14 +96,10 @@ export class ChartsComponent implements OnInit {
     public hideBudgetAmountZero: boolean ; 
 
     private sumOfCurrentMonthSpending: number = 0;
-    hoveredDate: NgbDateStruct;
-
-    fromDate: NgbDateStruct;
-    toDate: NgbDateStruct;
     rangeMonthAndYear: FormGroup;
     currentMonthSting: string;
 
-    constructor(private service: CommonService, calendar: NgbCalendar, private _fb: FormBuilder) {
+    constructor(private service: CommonService, private _fb: FormBuilder) {
         this.hideBudgetAmountZero = false;
         this.currentMonthSting = service.today.getFullYear() + '-' + service.today.getMonth() + 1;
         this.rangeMonthAndYear = this._fb.group({
@@ -168,8 +107,6 @@ export class ChartsComponent implements OnInit {
             endMonthAndYear: [this.currentMonthSting, Validators.required]
         });
         this.getBarChart();
-        this.fromDate = calendar.getToday();
-        this.toDate = calendar.getNext(calendar.getToday(), 'd', 10);
      }
 
     ngOnInit() { }
@@ -182,45 +119,6 @@ export class ChartsComponent implements OnInit {
     public chartHovered(e: any): void {
         // console.log(e);
     }
-    /**
-     * @deprecated since 0.1.0 remove on next patch
-     */
-    public randomize(): void {
-        // Only Change 3 values
-        const data = [
-            Math.round(Math.random() * 100),
-            59,
-            80,
-            Math.random() * 100,
-            56,
-            Math.random() * 100,
-            40
-        ];
-        const clone = JSON.parse(JSON.stringify(this.barChartData));
-        clone[0].data = data;
-        this.barChartData = clone;
-        /**
-         * (My guess), for Angular to recognize the change in the dataset
-         * it has to change the dataset variable directly,
-         * so one way around it, is to clone the data, change it and then
-         * assign it;
-         */
-    }
-    onDateChange(date: NgbDateStruct) {
-        if (!this.fromDate && !this.toDate) {
-            this.fromDate = date;
-        } else if (this.fromDate && !this.toDate && after(date, this.fromDate)) {
-            this.toDate = date;
-        } else {
-            this.toDate = null;
-            this.fromDate = date;
-        }
-    }
-
-    isHovered = date => this.fromDate && !this.toDate && this.hoveredDate && after(date, this.fromDate) && before(date, this.hoveredDate);
-    isInside = date => after(date, this.fromDate) && before(date, this.toDate);
-    isFrom = date => equals(date, this.fromDate);
-    isTo = date => equals(date, this.toDate);
 
     private getBarChart() {
         console.log(this.service.dataTableDashboard);
@@ -245,7 +143,6 @@ export class ChartsComponent implements OnInit {
 
 
     private toTitleCaseLongSent(data, service=this.service): string {
-      // data = 
       return data.split().map(service.toTitleCase).join(' ')
     }
 
@@ -271,14 +168,10 @@ export class ChartsComponent implements OnInit {
         });
         const totalAmountArray = Object.values(groups);
         this.sumOfCurrentMonthSpending = <number>totalAmountArray.reduce(this.addTwoValues);
-        // chartContent.push();
         const tempGroup = Object.keys(groups).map((data) => {
              return data.split(' ').map(this.service.toTitleCase).join(' ')
          });
-        // const content: Object = {'group': tempGroup, 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'radar'};
-        // this.setChart(content['group'],
-        //                 content['data'],
-        //                 content['chartType']);
+
         const content: Object = {'lable': tempGroup , 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'bar'};
         this.setChart(content['lable'],
                         content['data'],
@@ -353,63 +246,6 @@ export class ChartsComponent implements OnInit {
                 break;
         }
     }
-
-    /**
-     * @description create a bar chart
-     * @deprecated since 0.1.1
-     */
-    public updateChart(lable: string) {
-        switch (lable) {
-            case 'local':
-                    this.service.localStorage.getItem<any>('radar').subscribe((data) => {
-                        this.setChart(data['group'], data['data'], data['chartType']);
-                    });
-                    this.service.localStorage.getItem<any>('donut').subscribe((data) => {
-                        this.setChart(data['lable'], data['data'], data['chartType']);
-                    });   
-                break;
-            
-            case 'rest':
-                  // this.getRaderChartData();
-                break;
-        }
-    }
-
-    /**
-     * @description create a bar chart
-     */
-    // private getBarChart() {
-    //     const rangeDate = { 
-    //           'start': moment(this.service.today).startOf('month').format('YYYY-MM-DD'),
-    //           'end': moment(this.service.today).endOf('month').format('YYYY-MM-DD')
-    //     }
-    //     // const monthYearFormat = this.currentDateFormat.substr(0, this.currentDateFormat.lastIndexOf('-'));        
-    //     let url: string = `package/itemslist/${rangeDate['start']}/${rangeDate['end']}`;
-    //     const totalAmountData = [];
-    //     const totalAmountDate = [];
-    //     const _self = this;
-    //     // const default = [];
-
-    //     this.setChart([''], [{ 'data': { totalAmountData }, 'label': 'total amount'}], 'bar');
-    //     this.service.get(url, this.service.headers)
-    //         .subscribe(
-    //           (data) => {
-    //              // const amount = parseInt(data[0]['budget_amount'], 10);
-    //             //  const amount = parseInt(data[0]['total_amount'], 10);
-    //             data = data.length === 0 ? [{'date': '', 'total_amount': '0'}] : data;
-    //             data.forEach((ele, inx) => {
-    //                 const amount = parseFloat(ele['total_amount']);
-    //                 totalAmountDate.push(ele['date']);
-    //                 totalAmountData.push(amount);
-    //             });
-    //               this.setChart('er', [{ 'data': { totalAmountData }, 'label': totalAmountDate}], 'bar');
-    //           },
-    //           (error) => {
-    //             this.service.showGlobalAlert('Bar chart have some error');
-    //          }
-    //         );
-    // }
-
 
     public onSumitForm(value: Object) {
 

@@ -13,6 +13,8 @@ import { SignupComponent } from './signup.component';
     ReactiveFormsModule,
     NgbModule.forRoot(),
   ],
-  declarations: [SignupComponent]
+  declarations: [
+  	SignupComponent
+  ]
 })
 export class SignupModule { }

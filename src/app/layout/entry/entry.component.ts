@@ -74,7 +74,6 @@ export class EntryComponent implements OnInit {
    */
   private showFormAlert( msg: string , _type: string = 'danger') {
       this.entryFormAlert = [];
-     // this.entryFormAlert.push({type: _type, message: msg});
      this.service.showGlobalAlert(msg, _type);
   }
 
@@ -107,7 +106,6 @@ export class EntryComponent implements OnInit {
              this.content404 = false;
           },
           (error) => {
-            //   if (error.status )
               const msg = this.service.isClinetOrServerSidesError(error);
               this.showFormAlert(`the List is ${msg} in the server.`);
               this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
@@ -132,7 +130,6 @@ export class EntryComponent implements OnInit {
           entryGroupGroup: [!!_object ? _object['group'] : '', Validators.required],
           entryGroupDate: [!!_object ? _object['date'] : '', Validators.required],
           entryGroupItems: this.entryFormGroupBuilder.array(temp)
-        //   Validators.compose([Validators.required, Validators.minLength(7)])
       };
       return _return;
   }
@@ -216,7 +213,6 @@ export class EntryComponent implements OnInit {
                       this.service.needTableUpdate = true;
                       this.service.needChartUpdate = true;
                       this.service.listOfGroupItems.push(data['group']);
-                    //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
                       const msg = this.service.isClinetOrServerSidesError(error);
@@ -234,10 +230,8 @@ export class EntryComponent implements OnInit {
                       this.service.needTableUpdate = true;
                       this.service.needChartUpdate = true;
                       this.service.listOfGroupItems.push(data['group']);
-                    //   this.service.requireUpdate['entry'] = true;
                   },
                   (error) => {
-                    //   this.showFormAlert(error, 'danger');
                       this.hideLoadingSpin(false);
                       const msg = this.service.isClinetOrServerSidesError(error);
                       this.showFormAlert(msg, 'danger');
@@ -280,13 +274,11 @@ export class EntryComponent implements OnInit {
      // check for the formcontrol under form array `entryGroupItems`
      if (controls['entryGroupItems'].invalid) {
          controls.entryGroupItems['controls'].forEach((element, index) => {
-            //  element.invalid ? element.markAsTouched({ onlySelf: true }) : undefined;
              const amount = element.controls['amount'];
              const name = element.controls['name'];
              amount.invalid ? amount.markAsTouched({ onlySelf: true }) : undefined;
              name.invalid ? name.markAsTouched({ onlySelf: true }) : undefined;
          });
-        //  return invalid;
      }
      return invalid;
  }

@@ -93,21 +93,6 @@
                     <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
                         {{ 'French' | translate }}
                     </a>
-<!--                     <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('ur')">
-                        {{ 'Urdu' | translate }}
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('es')">
-                        {{ 'Spanish' | translate }}
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('it')">
-                        {{ 'Italian' | translate }}
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fa')">
-                        {{ 'Farsi' | translate }}
-                    </a>
-                    <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('de')">
-                        {{ 'German' | translate }}
-                    </a> -->
                 </div>
             </li>
             <li class="nav-item dropdown" ngbDropdown>
@@ -124,9 +109,6 @@
                     <a class="dropdown-item" [routerLink]="['/profile']">
                         <i class="fa fa-fw fa-user"></i> {{ getUserName() }}
                     </a>
-                    <!-- <a class="dropdown-item" href="javascript:void(0)">
-                        <i class="fa fa-fw fa-envelope"></i> {{ 'Inbox' | translate }}
-                    </a> -->
                     <a class="dropdown-item" [routerLink]="['/settings']">
                         <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
                     </a>
