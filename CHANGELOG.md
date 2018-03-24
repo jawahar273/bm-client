@@ -1,10 +1,13 @@
 # CHANGELOG
 
 ## [Planning]
-- UI change in alert box for better interaction.
-- UI change in date for dashboard.
+- ~~UI change in alert box for better interaction.~~
+- ~~UI change in date for dashboard.~~
 - Tourism for the app.
-- CSS issue in header bar for mid-size modbile screen.
+- ~~CSS issue in header bar for mid-size modbile screen.~~
+
+### 0.3.0
+- Add weather setting.
 
 ### 0.2.2
 - Moving session to cookies.

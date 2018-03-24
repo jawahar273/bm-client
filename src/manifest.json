@@ -4,11 +4,15 @@
  "name": "Budget Manager",
  "short_name": "BM",
  "theme_color": "transparent",
- "orientation": "landscape",
+ "orientation": "portrait",
  "background_color": "white",
  "related_applications": [],
  "start_url": "/bm-client/",
  "splash_pages": null,
+ "display": "standalone",
+ "permissions": [
+  "geolocation"
+ ],
  "icons": [
   {
    "src": "icons/android-icon-36x36.png",
@@ -46,6 +50,5 @@
    "type": "image/png",
    "density": "4.0"
   }
- ],
- "display": "standalone"
+ ]
 }
