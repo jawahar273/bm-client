@@ -59,14 +59,62 @@
                 </ul>
             </li> -->
        <!-- notification for pending task -->
+          <li class="nav-item dropdown" ngbDropdown *ngIf="!isMobileScreen()">
+
+                <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
+
+                    <i class="fa fa-skyatlas"></i>
+                    <b class="caret"></b><span class="sr-only">(current)</span>
+
+                </a>
+
+            <ul class="dropdown-menu dropdown-menu-right messages col-lg-8" >
+
+                <li class="media" *ngFor="let item of service.airPollutionKeys" style="border-bottom: 0px;">
+
+                    <!-- <img class="d-flex align-self-center mr-3"
+                        src="" alt="Generic placeholder image"
+                    > -->
+                    
+                    <!-- <div class="d-flex align-self-center mr-3" >
+                        header
+                    </div> -->
+
+                    <div class="media-body allow-center">
+
+                        <h4 class="mt-0 mb-1">
+                            {{item}}
+                        </h4>
+
+                        <p class="small text-muted"><i class="fa fa-clock-o"></i> {{service.currentDateWithMomentJS}}
+                        </p>
+                     
+                        <p class="last">
+                            Mix Ratio: {{service.airPollutionData[item]['value']}}<br>
+                            Pressure: {{service.airPollutionData[item]['pressure']}}
+                        </p>
+                   
+                    </div>
+
+                </li>
+
+            </ul>
+
+            </li>
+            
             <li class="nav-item dropdown" ngbDropdown>
+            
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+            
                     <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
                 </a>
+
                 <ul class="dropdown-menu dropdown-menu-right">
+                
                     <a href="javascript:void(0)" class="dropdown-item">
                         {{ 'Work in Progress' | translate }} <span class="badge badge-info"> 0</span>
                     </a>
+                
                     <!-- <a href="javascript:void(0)" class="dropdown-item">
                         {{ 'Pending Task' | translate }} <span class="badge badge-info">6</span>
                     </a>
@@ -81,21 +129,33 @@
                         {{ 'View All' | translate }}
                     </a> -->
                 </ul>
+           
             </li>
+           
             <li class="nav-item dropdown" ngbDropdown>
+           
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
+           
                     <i class="fa fa-language"></i> {{ 'Language' | translate }} <b class="caret"></b>
+           
                 </a>
+           
                 <div class="dropdown-menu dropdown-menu-right">
+           
                     <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
                         {{ 'English' | translate }}
                     </a>
+           
                     <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
                         {{ 'French' | translate }}
                     </a>
+           
                 </div>
+           
             </li>
+           
             <li class="nav-item dropdown" ngbDropdown>
+           
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                     <!-- <i class="fa fa-user"></i> {{getUserName()}} <b class="caret"></b> -->
                     <!-- <ng-template #profileImageToolTip >
@@ -104,19 +164,32 @@
                     https://www.gravatar.com/avatar/d2cbb7c6e345cd648da871bf22db4876?d=identicon
  -->                    <img src="{{getUserProfileURL()}}"  
                     id="profileImageHeaderBar" alt="Profile image" />
+           
                 </a>
+           
                 <div class="dropdown-menu dropdown-menu-right">
+           
                     <a class="dropdown-item" [routerLink]="['/profile']">
+           
                         <i class="fa fa-fw fa-user"></i> {{ getUserName() }}
                     </a>
+           
                     <a class="dropdown-item" [routerLink]="['/settings']">
+           
                         <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
+           
                     </a>
+           
                     <a class="dropdown-item" [routerLink]="['/login']" (click)="onLoggedout()">
                         <i class="fa fa-fw fa-power-off"></i> {{ 'Log Out' | translate }}
                     </a>
+              
                 </div>
+            
             </li>
+        
         </ul>
+    
     </div>
+
 </nav>

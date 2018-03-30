@@ -1,6 +1,7 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
+
 import { CommonService } from '../services/common.services';
 
 
@@ -11,16 +12,19 @@ import { CommonService } from '../services/common.services';
 })
 export class LayoutComponent implements OnInit {
 
+
     /*
      * Singleton REST call (which don't affect other component)
      * should be call from here(or side bar/ header componet are allow allowed)
      */
     constructor(public service: CommonService, private router: Router) {
-       
+      
+        // init function call after the success obtain of 
+        // authentication token.
         if (this.service.getUserAuth()) {
        
             this.onSuccess();
-       
+  
         } else {
        
             this.onFail();
@@ -30,6 +34,7 @@ export class LayoutComponent implements OnInit {
     }
 
     ngOnInit() {}
+
     
     public closeGlobalAlert(alert) {
     
@@ -63,7 +68,8 @@ export class LayoutComponent implements OnInit {
     
         this.setAuthorizationInHeader();
         this.getCurrenctDetails();
-    
+        this.service.getAirPollution();
+
     }
 
     private setAuthorizationInHeader(): void {
@@ -78,6 +84,7 @@ export class LayoutComponent implements OnInit {
          }, (error) => {
              // this.showGlobalAlert('');
          });
+    
     }
 
     private getCurrenctDetails(): void {
