@@ -24,12 +24,14 @@ export class CommonService {
     public startLimitOfYears: number;
     public globalalertBox: Array<any> = [];
     public globalServiceErrorMapping = {
+  
         'password': undefined,
         'username': undefined,
         'non_field_errors': undefined,
         'detail': undefined,
         'items': undefined,
         'month_year': undefined,
+  
     };
     public clientErrorCode = new Set([400, 401, 403, 404, 406,408, 410]);
     public serverErrorCode = new Set([500, 502, 503, 504 ]);
@@ -56,9 +58,11 @@ export class CommonService {
     public doughNutChartDataMonth: Array<any>;
     // components package settings
     public serviceFieldPackageSettings = {
+  
         'packCurrencyDetails': 'currency_details',
         'packForceMbaUpdate': 'force_mba_update',
         'packActivePaytm': 'active_paytm',
+  
       };
 
     // weather
@@ -66,6 +70,7 @@ export class CommonService {
     public airPollutionKeys: Array<string>;
 
     constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
+  
         this.isUserLogin = false;
         this.today  = new Date();
         this.currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
@@ -103,6 +108,7 @@ export class CommonService {
         const url = this.joinURL(environment.domainName, environment.apiPath, false);
         this.commonURL = `${environment.protocol}${url}`;
     }
+
     /**
      * To help in concating the base url with the given url
      * and the end slash is must as it is configure in server.
@@ -167,7 +173,7 @@ export class CommonService {
             .catch((error: any) => Observable.throw(error.json()));
     
     }
-    
+
     /**
      * Check the error is client side or server side if client side
      * return corresponding error message.

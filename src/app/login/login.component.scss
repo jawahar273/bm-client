@@ -58,9 +58,9 @@ $place-holder-color: rgba(255, 255, 255, 0.85);
     .rounded-btn {
         -webkit-border-radius: 50px;
         border-radius: 50px;
-        color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 1);
         background: $topnav-background-color;
-        border: 2px solid rgba(255, 255, 255, 0.8);
+        border: 2px solid rgba(255, 255, 255, 1);
         font-size: 18px;
         line-height: 40px;
         padding: 0 25px;
@@ -69,8 +69,8 @@ $place-holder-color: rgba(255, 255, 255, 0.85);
     .rounded-btn:focus,
     .rounded-btn:active,
     .rounded-btn:visited {
-        color: rgba(255, 255, 255, 1);
-        border: 2px solid rgba(255, 255, 255, 1);
+        color: rgba(255, 255, 255, 0.8);
+        border: 2px solid rgba(255, 255, 255, 0.8);
         outline: none;
     }
 

@@ -1,8 +1,8 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js run angular-cli-ghpages --dir docs
+  /usr/bin/node /usr/share/yarn/bin/yarn.js run ng g c layout/login/component/confirm-email --spec --module confirm-email
 
 PATH: 
-  /home/jawahar/.npm/bin:/home/jawahar/miniconda3/bin:/home/jawahar/bin:/home/jawahar/.local/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/usr/local/go/bin
+  /home/jawahar/.npm/bin:/home/jawahar/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin
 
 Yarn version: 
   1.5.1
@@ -18,6 +18,7 @@ npm manifest:
     "name": "BM",
     "version": "0.2.2",
     "license": "MIT",
+   "engines" : { "node" : ">=6.13.2" },
     "scripts": {
       "ng": "ng",
       "start": "ng serve --ec true --port 4300 --proxy-config proxy.conf.json",
@@ -9765,7 +9766,7 @@ Trace:
   Error: Command failed.
   Exit code: 1
   Command: sh
-  Arguments: -c /media/jawahar/jon1/new_project/bm-client/node_modules/.bin/angular-cli-ghpages --dir docs
+  Arguments: -c ng g c layout/login/component/confirm-email --spec --module confirm-email
   Directory: /media/jawahar/jon1/new_project/bm-client
   Output:
   
