@@ -19,8 +19,6 @@ export class ListedItemsComponent implements OnInit {
   }
 
   checkFormError(name: string): void {
-    // console.log('dfdf');
-    // this.checkFormErrorItemsFunc.emit({ name: name, index: this.indx});
     const temp = this.formGroupToList.get(name);
     return (temp.invalid && temp.touched);
   }

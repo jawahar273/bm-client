@@ -1,65 +1,142 @@
 <div [@routerTransition] class="container-fluid pagination-centered profile"  >
+
 	<app-page-header [heading]="'Settings'" [icon]="'fa-etsy'"></app-page-header>
-	<div class="row p-content">
-		<div class="col-lg-12 col-xs-12 p-body">
-			<div class="row align-items-start">
-				<div class="col-lg-4 col-xs-6">
-					<h2>Package's Setting</h2>
-				</div>
-				<div *ngIf="!hideLoadSpin" class="col-lg-8 col-xs-6 " >
-					<i class="fa fa-spinner fa-spin fa-1x fa-fw " style="font-size: 50px;" ></i>
-				</div>
-				<div class="col-lg-8 col-xs-6" *ngIf="hideLoadSpin">
-					<form [formGroup]="packageSettingForm" (ngSubmit)="onSubmitPackageSettings()"  >
-						<div class="form-group">
-							<input type="text" name="packCurrencyDetails" [ngbTypeahead]="typeAheadForCurrency"
-				 			[resultFormatter]="formatter"
-				 			formControlName="packCurrencyDetails"
-				 			placeholder="Currency Code Only" class="form-control">
-						</div>
-						<div class="form-group">
-							<p>Select Yes option for model automatically asking 
-							Month Amount</p>
-							<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="Y"
-							formControlName="packForceMbaUpdate">
-							<label for="mbaForceUpdateYes">Yes</label>
+	<div class="container">
+		<div class="row p-content">
 
-							<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="N" 
-							formControlName="packForceMbaUpdate">
-							<label for="mbaForceUpdateNo">No</label>
-						</div>
-						<div class="form-group">
-							<p>Select Yes option active Paytm uploading
-							   <span class="badge badge-info">Beta</span>
-						    </p>
-							<!-- <br> -->
-							<input type="radio" name="packActivePaytm" id="paytmActiveYes" value="Y"
-							formControlName="packActivePaytm">
-							<label for="paytmActiveYes">Yes</label>
+			<div class="col-lg-12 col-xs-12 p-body">
 
-							<input type="radio" name="packActivePaytm" id="paytmActiveNo" value="N" 
-							formControlName="packActivePaytm" checked="checked">
-							<label for="paytmActiveNo">No</label>
-						</div>
-<!-- 						<div *ngFor="let item of formFieldsValue" [ngSwitch]="item.baseTag">						
-							<div class="form-group" *ngSwitchCase="'input'">
-							  <div *ngIf="checkFormFields(item.type)" >
-			                      <input type="{{item.type}}"  name="{{item.name}}" class="form-control {{item?.class}}" id="{{item?.id}}" formControlName="{{convertToFormField(item.name)}}"
-			                      placeholder="{{item.placeholder}}">
-							  </div>
-							  <div *ngIf="item.type == 'radio'" >  
-	                              <p>{{item.helpText}}</p>
-	                              <div *ngFor="let radioItems of item.options" class="checking">
-				                      <input type="{{item.type}}"  name="{{item.name}}" class="{{item?.class}}" id="{{item?.id}}" value="{{radioItems.value}}" checked="{{radioItems.status}}" formControlName="{{convertToFormField(item.name)}}">
-				                      <label>{{radioItems.lable}}</label>
-	                              </div>	
-							  </div>
+				<div class="row align-items-start">
+
+					<div class="col-lg-4 col-xs-6">
+
+						<h2>Package's Settings</h2>
+
+						<p>
+							Package's setting controls the chart, dashboard, new entry elements by retriving the 
+							required data from the server and from the user.
+						</p>
+
+					</div>
+
+					<div *ngIf="!hideLoadSpin" class="col-lg-8 col-xs-6 " >
+
+						<i class="fa fa-spinner fa-spin fa-1x fa-fw " style="font-size: 50px;" ></i>
+
+					</div>
+
+					<div class="col-lg-8 col-xs-6" *ngIf="hideLoadSpin">
+						<form [formGroup]="packageSettingForm" (ngSubmit)="onSubmitPackageSettings()"  >
+
+							<div class="form-group">
+
+								<input type="text" name="packCurrencyDetails" [ngbTypeahead]="typeAheadForCurrency"
+					 			[resultFormatter]="formatter"
+					 			formControlName="packCurrencyDetails"
+					 			placeholder="Currency Code Only" class="form-control">
+
 							</div>
-						</div> -->
-						<button class="btn app-button allow-center"> Submit </button>
-					</form>
+
+							<div class="form-group">
+
+								<p>
+									Select <b>Yes</b> option for model automatically asking Month Amount
+								</p>
+
+								<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="Y"
+								formControlName="packForceMbaUpdate">
+
+								<label for="mbaForceUpdateYes">Yes</label>
+
+								<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="N" 
+								formControlName="packForceMbaUpdate">
+								<label for="mbaForceUpdateNo">No</label>
+
+							</div>
+
+							<div class="form-group">
+
+								<p>
+									Select <b>Yes</b> option active Paytm uploading
+
+								    <span class="badge badge-info">Beta</span>
+							    </p>
+
+								<!-- <br> -->
+								<input type="radio" name="packActivePaytm" id="paytmActiveYes" value="Y"
+								formControlName="packActivePaytm">
+
+								<label for="paytmActiveYes">Yes</label>
+
+								<input type="radio" name="packActivePaytm" id="paytmActiveNo" value="N" 
+								formControlName="packActivePaytm" checked="checked">
+
+								<label for="paytmActiveNo">No</label>
+
+							</div>
+
+							<div class="form-group">
+
+								<p>
+									Set the interval for refresh to get
+									<b>Geo location</b> in mins.
+							    </p>
+
+					 			<div class="row" style="margin: 0.40rem;">
+									<input type="number" name="packGeoLocInterval"
+						 			formControlName="packGeoLocInterval"
+						 			placeholder="Currency Code Only" class="form-control col-lg-8 col-sm-12">
+
+					 				<select class="custom-select col-lg-4 col-sm-12" (change)="onChangeIntervalHumanFormat($event.target.value)"
+					 				[value]="IntervalHumanFormat()"
+					 				>
+
+					 				 	<option *ngFor="let item of listDisplayIntervalFormat" [value]="item['value']">
+					 				 		{{item['name']}}
+					 					</option>
+
+					 				</select>
+						 			
+					 			</div>
+
+							</div>
+
+							<button class="btn app-button allow-center"> Submit </button>
+
+						</form>
+					
+					</div>
+
 				</div>
+
 			</div>
+
 		</div>
+
+<!--    review and important one
+     <div class="row align-items-start">
+
+            <div class="col-lg-4 col-xs-6">
+
+                <h2>Weather's Settings</h2>
+
+                <p>
+                    Weather setting is related to the control of 
+                    weather element dispaly in the app.
+                </p>
+
+            </div>
+
+            <div *ngIf="!hideLoadSpin" class="col-lg-8 col-xs-6 " >
+
+                <i class="fa fa-spinner fa-spin fa-1x fa-fw " style="font-size: 50px;" ></i>
+
+            </div>
+
+            <div class="col-lg-8 col-xs-6" *ngIf="hideLoadSpin">
+            </div>
+            
+        </div> -->
+
 	</div>
 </div>

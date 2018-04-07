@@ -20,6 +20,7 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { environment } from '../environments/environment';
 import { CommonService } from './services/common.services';
+import { ConfirmEmailModule } from './confirm-email/confirm-email.module';
 
 
 // AoT requires an exported function for factories
@@ -56,6 +57,7 @@ export function createTranslateLoader(http: HttpClient) {
         // environment.production ? ServiceWorkerModule.register('/bm-client/ngsw-worker.js') : [],
         AsyncLocalStorageModule,
         CookieModule.forRoot(),
+        ConfirmEmailModule,
     ],
     declarations: [AppComponent],
     providers: [AuthGuard, CommonService],

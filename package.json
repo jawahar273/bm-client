@@ -2,6 +2,7 @@
   "name": "BM",
   "version": "0.2.2",
   "license": "MIT",
+ "engines" : { "node" : ">=6.13.2" },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ec true --port 4300 --proxy-config proxy.conf.json",

@@ -38,9 +38,6 @@ import { StatModule } from '../../shared';
         NotificationComponent,
         ChatComponent,
         DashTableComponent,
-    ],
-    providers: [
-        // CommonService
     ]
 })
 export class DashboardModule {}

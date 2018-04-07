@@ -12,49 +12,233 @@ import { routerTransition } from '../../router.animations';
 import { formValues } from './package-settings-form.config';
 
 @Component({
+
   selector: 'app-package-settings',
   templateUrl: './package-settings.component.html',
   styleUrls: ['./package-settings.component.scss'],
   animations: [routerTransition()]
+
 })
 export class PackageSettingsComponent implements OnInit {
+
   packageSettingForm: FormGroup;
-  serviceFields: object;
-  formFieldsValue:Array<object>;
-  hideLoadSpin: boolean;
-  currencyCode: Array<string>;
+  serviceFields: Object;
+  formFieldsValue: Array<Object>;
+  hideLoadSpin: Boolean;
+  currencyCode: Array<String>;
+  listDisplayIntervalFormat: Array<Object>;
+  displayIntervalFormat: Object;
+  maxInterval: Number;
 
   constructor(public service: CommonService, public fb: FormBuilder) { 
+    
       this.serviceFields = this.service.serviceFieldPackageSettings;
       this.hideLoadSpin = false;
       this.packageSettingForm = this.fb.group({});
+      this.listDisplayIntervalFormat = [{name: 'Hours', value:'hrs'},
+                                    {name: 'Minutes', value: 'mins'}];
+
+      this.displayIntervalFormat = {format: 'mins', value: 0};
+      this.maxInterval = 8; // hrs only
       this.getOrSetPackageSettingForm();
+
       this.service.localStorage.getItem('currency')
        .subscribe((data) => {
-          this.currencyCode = Object.keys(data);
+
+          if (!data) {
+
+              this.service.get('package/currency', this.service.headers)
+              .subscribe((_data) => {
+
+                this.currencyCode = _data;
+
+              }, (error) => {
+                 console.log(error);
+              });
+
+          } else {
+
+             this.currencyCode = Object.keys(data);
+
+          }
+       
        });
+
 
   }
 
   ngOnInit() {
+  
     this.formFieldsValue = formValues;
+  
+  }
+
+  /*
+   * Set the package setting from the rest api or from the
+   * brower-db and process them into
+   * form object and display them into form to the user.
+   */
+  public getOrSetPackageSettingForm() {
+
+    this.setHideLoadSpinner(false);
+
+    this.service.localStorage.getItem(`packageSettings-${localStorage.getItem('userName')}`)
+    .subscribe((data) => {
+
+      this.setHideLoadSpinner(false);
+
+      if (!data) {
+
+        this.service.get('package/settings', this.service.headers)
+         .subscribe((data) => {
+
+            const formFields = Object.assign({}, this.serviceFields);
+            formFields['packCurrencyDetails'] = data['currency_details'];
+            formFields['packForceMbaUpdate'] = data['force_mba_update'];
+            formFields['packActivePaytm'] = data['active_paytm'];
+            formFields['packGeoLocInterval'] = data['geoloc_interval'];
+
+            this.packageSettingForm = this.fb.group(formFields);
+            
+            // saving the setting to the brower db.
+            this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, formFields)
+             .subscribe((data) => {
+               console.log('save package setting ...');
+             });
+
+            this.setHideLoadSpinner(true);
+         
+         }, (error) => {
+         
+           const temp = this.service.isClinetOrServerSidesError(error);
+           this.service.showGlobalAlert(temp);
+           this.setHideLoadSpinner(true);
+         
+         });
+      
+      } else {
+      
+           this.packageSettingForm = this.fb.group(data);
+           this.setHideLoadSpinner(true);
+      
+      }
+    
+    });
+  
+  }
+ 
+  /*
+   *convert the minutest to hours. 
+   *
+   */
+  public convertMinsToHrs(min): Object {
+  
+      const num = min;
+      const hours = (num / 60);
+      const rhours = Math.floor(hours);
+      const minutes = (hours - rhours) * 60;
+      const rminutes = Math.round(minutes);
+      return {'hours': rhours, 'minutes': rminutes}
+      // return num + " minutes = " + rhours + " hour(s) and " + rminutes + " minute(s).";
+  
+  }
+
+  public convertHrsToMins(hrs): Number {
+
+    return hrs * 60;
+  
   }
   
+  public IntervalHumanFormat(): String {
+  
+    return this.displayIntervalFormat['format'];
+  
+  }
+
+  public checkIntervalHumanFormat(value): Boolean {
+
+       if (this.displayIntervalFormat['format'] == 'hrs' && value > this.maxInterval) {
+
+         this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
+         this.packageSettingForm.get('packGeoLocInterval').setValue(this.maxInterval);
+         return false;
+       
+       } else if (this.displayIntervalFormat['format'] == 'mins' && this.convertHrsToMins(this.maxInterval) > this.maxInterval) {
+
+         this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
+         this.packageSettingForm.get('packGeoLocInterval').setValue(this.convertHrsToMins(this.maxInterval));
+         return false;
+
+       }
+       
+       return true;
+  }
+
+  public onChangeIntervalHumanFormat(value) {
+        
+        this.displayIntervalFormat['format'] = value;
+         
+         if (value == 'hrs') {
+
+           const hrsValue = this.packageSettingForm.get('packGeoLocInterval').value;
+           const status = this.checkIntervalHumanFormat(hrsValue);
+         
+           if (status) {
+
+             this.displayIntervalFormat['value'] = hrsValue;
+             this.packageSettingForm.get('packGeoLocInterval').setValue(this.convertHrsToMins(value))
+           
+           } else {
+             
+             this.displayIntervalFormat['value'] = this.maxInterval;
+
+           }
+
+         } else {
+           
+           const minsValue = this.packageSettingForm.get('packGeoLocInterval').value;
+           this.displayIntervalFormat['value'] = minsValue;
+           const status = this.checkIntervalHumanFormat(minsValue);
+           
+           if (status) {
+
+             this.packageSettingForm.get('packGeoLocInterval').setValue(this.convertHrsToMins(value))
+           
+           } else {
+
+              this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
+              this.displayIntervalFormat['value'] = this.convertHrsToMins(this.maxInterval);
+
+           } 
+         
+         }
+  }
+
+  /*
+   * @deprecated
+   */
   public checkFormFields(itemsValues) {
+  
     return itemsValues != ('radio' || 'checkbox');
+  
   }
   /*
    * String to field which helps in mapping
    * REST service field and form fields
+   * @deprecated
    */
   public convertToFormField(value, strip=' '):string {
+   
     value = value.split(strip).map(this.service.toTitleCase).join('');
     value = `pack${value}`
     return value
+  
   }
 
   private setHideLoadSpinner(value): void {
+  
     this.hideLoadSpin = value;
+  
   }
 
   formatter = (result: string) => `${result}-${this.service.currencyDetails[result].name}`;
@@ -66,67 +250,41 @@ export class PackageSettingsComponent implements OnInit {
         : this.currencyCode.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
   
 
-  /*
-   * Set the package setting from the rest api or from the
-   * brower-db and process them into
-   * form object and display them into form to the user.
-   */
-  public getOrSetPackageSettingForm() {
-    this.setHideLoadSpinner(false);
-    this.service.localStorage.getItem(`packageSettings-${localStorage.getItem('userName')}`)
-    .subscribe((data) => {
-      this.setHideLoadSpinner(false);
-      if (!data) {
-        this.service.get('package/settings', this.service.headers)
-         .subscribe((data) => {
-            const formFields = Object.assign({}, this.serviceFields);
-            formFields['packCurrencyDetails'] = data['currency_details'];
-            formFields['packForceMbaUpdate'] = data['force_mba_update'];
-            formFields['packActivePaytm'] = data['active_paytm']
-            // const temp = data['new_settings'];
-            // for (const key in temp) {
-            //   const temp2 = this.convertToFormField(key, '_');
-            //   formFields[temp2] = temp[key];
-            // }
-            // debugger;
-            this.packageSettingForm = this.fb.group(formFields);
-            // saving the setting to the brower db.
-            this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, formFields)
-             .subscribe((data) => {
-               console.log('save package setting ...');
-             });
-            this.setHideLoadSpinner(true);
-         }, (error) => {
-           const temp = this.service.isClinetOrServerSidesError(error);
-           this.service.showGlobalAlert(temp);
-           this.setHideLoadSpinner(true);
-         });
-      } else {
-           // const temp = this.service.renameObjectAllKeys(this.service.serviceFieldPackageSettings, data, 'c')
-           this.packageSettingForm = this.fb.group(data);
-           this.setHideLoadSpinner(true);
-      }
-    });
-  }
 
-  public onSubmitPackageSettings() {
-    // console.log(this.packageSettingForm.value);
-    // const clientField = Object.keys(this.serviceFields);
-    // const serverField = Object.values();
-    let body = this.service.renameObjectAllKeys(this.serviceFields, this.packageSettingForm.value, 's');
+
+  private updatePackageSetting(body: Object): void {
+
     this.service.update('package/settings', this.service.headers, body)
      .subscribe((data) => {
+    
        const name = `userCurrencyDetails-${localStorage.getItem('userName')}`;
        const value = this.service.currencyDetails[data['currency_details']];
        localStorage.setItem(name, value);
+    
         this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, this.packageSettingForm.value)
          .subscribe((data) => {
            console.log('save package setting ...');
          });
+    
        this.service.showGlobalAlert('package setting has been updated', 'success');
+    
      }, (error) => {
+    
        const temp = this.service.isClinetOrServerSidesError(error);
        this.service.showGlobalAlert(temp);
-     });
+    
+    });
+
   }
+
+  public onSubmitPackageSettings() {
+    
+    let body = this.service.renameObjectAllKeys(this.serviceFields, this.packageSettingForm.value, 's');
+ 
+    if (this.checkIntervalHumanFormat(this.displayIntervalFormat['value'])) {
+      this.updatePackageSetting(body);
+    } 
+
+  }
+
 }
