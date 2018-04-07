@@ -1,5 +1,7 @@
 # Budget Manager 
 
+![BM icon](readMeIcons.png "Icons")
+
 [![forthebadge](https://forthebadge.com/images/badges/60-percent-of-the-time-works-every-time.svg)](https://forthebadge.com)
 
 > Due to code complexcity in mapping rest data to form in entry component, code will 
