@@ -51,7 +51,7 @@ export class ConfirmEmailComponent implements OnInit {
 
               this.pathHandler.navigate(['/login']);
           
-          }, 3000);
+          }, 2500);
 
       }, (error) => {
 
