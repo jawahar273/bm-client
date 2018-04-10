@@ -62,12 +62,13 @@ export class CommonService {
         'packCurrencyDetails': 'currency_details',
         'packForceMbaUpdate': 'force_mba_update',
         'packActivePaytm': 'active_paytm',
-  
+        'packGeoLocInterval': 'geoloc_interval',
       };
 
     // weather
     public airPollutionData: object;
     public airPollutionKeys: Array<string>;
+    public currencyCode: Array<string>;
 
     constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
   

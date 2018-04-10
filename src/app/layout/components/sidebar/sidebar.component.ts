@@ -49,6 +49,9 @@ export class SidebarComponent {
   public getBudgetAmount():any {
  
     return this.service.budgetAmount;
+
+    // const odometerBudgetAmount: HTMLElement = document.getElementById('odometerBudgetAmount');
+    // odometerBudgetAmount.innerText = String(this.service.budgetAmount);
  
   }
 
@@ -188,7 +191,10 @@ export class SidebarComponent {
   private setCurrencyDetails(value) {
         // this.currencyDetails[''] = 'USD';
 
-    const temp = value['packCurrencyDetails'];
+    let temp = value['packCurrencyDetails'];
+    if (temp == '')
+      temp = 'USD'
+
     this.service.localStorage.getItem('currency')
      .subscribe((data) => {
        if (!data) {

@@ -33,7 +33,31 @@ export class LayoutComponent implements OnInit {
     
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+          this.service.localStorage.getItem('currency')
+           .subscribe((data) => {
+
+              if (!data) {
+
+                  this.service.get('package/currency', this.service.headers)
+                  .subscribe((_data) => {
+
+                    this.service.currencyCode = _data;
+
+                  }, (error) => {
+      
+                     console.log(error);
+      
+                  });
+
+              } else {
+
+                 this.service.currencyCode = Object.keys(data);
+
+              }
+           
+           });
+    }
 
     
     public closeGlobalAlert(alert) {
@@ -88,7 +112,7 @@ export class LayoutComponent implements OnInit {
     }
 
     private getCurrenctDetails(): void {
-    
+        
        this.service.localStorage.getItem('currency')
         .subscribe((data) => {
     
@@ -97,8 +121,9 @@ export class LayoutComponent implements OnInit {
                 this.service.get('package/currency', this.service.headers)
                  .subscribe((data) => {
     
-                     this.service.localStorage.setItem('currency', data);
-                     // .subscribe((data) => {});
+                     this.service.localStorage.setItem('currency', data)
+                     .subscribe((data) => {
+                     });
                      this.service.currencyDetails = data;
     
                  }, (error) => {
@@ -115,6 +140,8 @@ export class LayoutComponent implements OnInit {
     
         }, (error) => {
 
+            console.log('error in the get currency');
+            
         });
     
     }

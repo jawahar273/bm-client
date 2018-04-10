@@ -51,7 +51,7 @@ page_to_gitlab:
 
   - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher
   # - yarn add --save intl  
-  - phantomjs –webdriver=8910
+  # - yarn run phantomjs –webdriver=8910
   - yarn run e2e --progress false --browser PhantomJS
 
 # .before_script: &before_script_test_with_e2e

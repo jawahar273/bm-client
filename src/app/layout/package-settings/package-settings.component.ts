@@ -29,7 +29,11 @@ export class PackageSettingsComponent implements OnInit {
   listDisplayIntervalFormat: Array<Object>;
   displayIntervalFormat: Object;
   maxInterval: Number;
-
+  /*
+   * This is page to handle the package setting.
+   * If you add new field to the page add the field 
+   * in common.server `serviceFieldPackageSettings`
+   */
   constructor(public service: CommonService, public fb: FormBuilder) { 
     
       this.serviceFields = this.service.serviceFieldPackageSettings;
@@ -41,29 +45,7 @@ export class PackageSettingsComponent implements OnInit {
       this.displayIntervalFormat = {format: 'mins', value: 0};
       this.maxInterval = 8; // hrs only
       this.getOrSetPackageSettingForm();
-
-      this.service.localStorage.getItem('currency')
-       .subscribe((data) => {
-
-          if (!data) {
-
-              this.service.get('package/currency', this.service.headers)
-              .subscribe((_data) => {
-
-                this.currencyCode = _data;
-
-              }, (error) => {
-                 console.log(error);
-              });
-
-          } else {
-
-             this.currencyCode = Object.keys(data);
-
-          }
-       
-       });
-
+      this.currencyCode = this.service.currencyCode;
 
   }
 
@@ -72,6 +54,16 @@ export class PackageSettingsComponent implements OnInit {
     this.formFieldsValue = formValues;
   
   }
+
+  formatter = (result: string) => result.toUpperCase();
+  // `${result}-${this.service.currencyDetails[result].name}`
+  typeAheadForCurrency = (text$: Observable<string>) => 
+     text$
+      .debounceTime(100)
+      .distinctUntilChanged()
+      .map(term => term.length < 1 ? []
+        : this.currencyCode.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+  
 
   /*
    * Set the package setting from the rest api or from the
@@ -105,7 +97,6 @@ export class PackageSettingsComponent implements OnInit {
              .subscribe((data) => {
                console.log('save package setting ...');
              });
-
             this.setHideLoadSpinner(true);
          
          }, (error) => {
@@ -240,16 +231,6 @@ export class PackageSettingsComponent implements OnInit {
     this.hideLoadSpin = value;
   
   }
-
-  formatter = (result: string) => `${result}-${this.service.currencyDetails[result].name}`;
-  typeAheadForCurrency = (text$: Observable<string>) => 
-     text$
-      .debounceTime(200)
-      .distinctUntilChanged()
-      .map(term => term.length < 1 ? []
-        : this.currencyCode.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
-  
-
 
 
   private updatePackageSetting(body: Object): void {
