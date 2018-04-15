@@ -1,5 +1,5 @@
 Arguments: 
-  /usr/bin/node /usr/share/yarn/bin/yarn.js run ng g c layout/login/component/confirm-email --spec --module confirm-email
+  /usr/bin/node /usr/share/yarn/bin/yarn.js start
 
 PATH: 
   /home/jawahar/.npm/bin:/home/jawahar/miniconda3/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/usr/local/go/bin
@@ -9764,9 +9764,9 @@ Lockfile:
 
 Trace: 
   Error: Command failed.
-  Exit code: 1
+  Exit code: 139
   Command: sh
-  Arguments: -c ng g c layout/login/component/confirm-email --spec --module confirm-email
+  Arguments: -c ng serve --ec true --port 4300 --proxy-config proxy.conf.json
   Directory: /media/jawahar/jon1/new_project/bm-client
   Output:
   

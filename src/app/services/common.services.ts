@@ -625,12 +625,9 @@ export class CommonService {
       this.get(url, this.headers)
         .subscribe((data) => {
 
-            if (data.length > 2) {
 
                 this.airPollutionData = data['detail'];
                 this.airPollutionKeys = Object.keys(data['detail']);
-
-            }  
         
         }, (error) => {
 

@@ -41,6 +41,7 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('948302ufdpofs0a9'+this.service.airPollutionData)
     }
 
     public isToggled(): boolean {
