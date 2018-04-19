@@ -45,7 +45,8 @@ export class PackageSettingsComponent implements OnInit {
       this.displayIntervalFormat = {format: 'mins', value: 0};
       this.maxInterval = 8; // hrs only
       this.getOrSetPackageSettingForm();
-      this.currencyCode = this.service.currencyCode;
+      this.getCurrencyCodeFromStorage();
+      // this.currencyCode = this.service.currencyCode;
 
   }
 
@@ -53,6 +54,13 @@ export class PackageSettingsComponent implements OnInit {
   
     this.formFieldsValue = formValues;
   
+  }
+
+  public getCurrencyCodeFromStorage(): void {
+    this.service.localStorage.getItem('currency')
+      .subscribe((data) => {
+        this.currencyCode = Object.keys(data);
+      });
   }
 
   formatter = (result: string) => result.toUpperCase();
@@ -63,7 +71,6 @@ export class PackageSettingsComponent implements OnInit {
       .distinctUntilChanged()
       .map(term => term.length < 1 ? []
         : this.currencyCode.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
-  
 
   /*
    * Set the package setting from the rest api or from the
@@ -165,7 +172,7 @@ export class PackageSettingsComponent implements OnInit {
        return true;
   }
 
-  public onChangeIntervalHumanFormat(value) {
+  private onChangeIntervalHumanFormat(value) {
         
         this.displayIntervalFormat['format'] = value;
          
@@ -203,27 +210,6 @@ export class PackageSettingsComponent implements OnInit {
            } 
          
          }
-  }
-
-  /*
-   * @deprecated
-   */
-  public checkFormFields(itemsValues) {
-  
-    return itemsValues != ('radio' || 'checkbox');
-  
-  }
-  /*
-   * String to field which helps in mapping
-   * REST service field and form fields
-   * @deprecated
-   */
-  public convertToFormField(value, strip=' '):string {
-   
-    value = value.split(strip).map(this.service.toTitleCase).join('');
-    value = `pack${value}`
-    return value
-  
   }
 
   private setHideLoadSpinner(value): void {

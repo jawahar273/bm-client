@@ -33,6 +33,7 @@
 								<input type="text" name="packCurrencyDetails" [ngbTypeahead]="typeAheadForCurrency"
 					 			[resultFormatter]="formatter"
 					 			formControlName="packCurrencyDetails"
+					 			pattern="[A-Z]{3}"
 					 			placeholder="Currency Code Only" class="form-control">
 
 							</div>
@@ -57,7 +58,7 @@
 							<div class="form-group">
 
 								<p>
-									Select <b>Yes</b> option active Paytm uploading
+									Select <b>Yes</b> option for activating Paytm uploading
 
 								    <span class="badge badge-info">Beta</span>
 							    </p>
@@ -101,7 +102,7 @@
 
 							</div>
 
-							<button class="app-button mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--accent allow-center"> Submit </button>
+							<button class="btn app-button allow-center"> Submit </button>
 
 						</form>
 					
