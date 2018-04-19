@@ -45,7 +45,7 @@ export class PackageSettingsComponent implements OnInit {
       this.displayIntervalFormat = {format: 'mins', value: 0};
       this.maxInterval = 8; // hrs only
       this.getOrSetPackageSettingForm();
-      this.getCurrencyCodeFromStorage();
+      this.getCountryCodeFromStorage();
       // this.currencyCode = this.service.currencyCode;
 
   }
@@ -55,8 +55,13 @@ export class PackageSettingsComponent implements OnInit {
     this.formFieldsValue = formValues;
   
   }
-
-  public getCurrencyCodeFromStorage(): void {
+  /*
+   * Due to quick loading of data in package setting
+   * components than layout component new private
+   * function is created. The global Contry code
+   * may depreated.
+   */
+  private getCountryCodeFromStorage(): void {
     this.service.localStorage.getItem('currency')
       .subscribe((data) => {
         this.currencyCode = Object.keys(data);

@@ -33,33 +33,9 @@ export class LayoutComponent implements OnInit {
     
     }
 
-    ngOnInit() {
-          this.service.localStorage.getItem('currency')
-           .subscribe((data) => {
+    ngOnInit() {}
 
-              if (!data) {
 
-                  this.service.get('package/currency', this.service.headers)
-                  .subscribe((_data) => {
-
-                    this.service.currencyCode = _data;
-
-                  }, (error) => {
-      
-                     console.log(error);
-      
-                  });
-
-              } else {
-
-                 this.service.currencyCode = Object.keys(data);
-
-              }
-           
-           });
-    }
-
-    
     public closeGlobalAlert(alert) {
     
        this.service.closeGlobalAlert(alert);
@@ -91,7 +67,10 @@ export class LayoutComponent implements OnInit {
     private onSuccess() {
     
         this.setAuthorizationInHeader();
+        // don't worry both of them has diffrent purpose
+        // but access same data.
         this.getCurrenctDetails();
+        // this.getCurrencyCode();
         this.service.getAirPollution();
 
     }
@@ -144,6 +123,36 @@ export class LayoutComponent implements OnInit {
             
         });
     
+    }
+    /*
+     * @deprecated
+     */
+    private getCurrencyCode(): void {
+
+          this.service.localStorage.getItem('currency')
+           .subscribe((data) => {
+
+              if (!data) {
+
+                  this.service.get('package/currency', this.service.headers)
+                  .subscribe((_data) => {
+
+                    this.service.currencyCode = _data;
+
+                  }, (error) => {
+      
+                     console.log(error);
+      
+                  });
+
+              } else {
+
+                 this.service.currencyCode = Object.keys(data);
+
+              }
+           
+           });
+
     }
 
     /**
