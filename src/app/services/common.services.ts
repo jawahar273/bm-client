@@ -68,7 +68,6 @@ export class CommonService {
     // weather
     public airPollutionData: object;
     public airPollutionKeys: Array<string>;
-    public currencyCode: Array<string>;
 
     constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
   
