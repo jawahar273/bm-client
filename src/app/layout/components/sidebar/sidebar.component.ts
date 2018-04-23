@@ -24,7 +24,9 @@ export class SidebarComponent {
       this.datePickerModel = this.service.currentDateWithMomentJS;
       this.service.getBudgetAmount();
       this.getOrSetPackageSetting();
- 
+      console.log(this.service.currencyDetails);
+      debugger;
+      
   }
 
   eventCalled() {

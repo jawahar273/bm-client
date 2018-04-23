@@ -93,4 +93,12 @@ export class HeaderComponent implements OnInit {
     
     }
 
+    public roundOfData(data, decimal=2): number {
+
+        const temp = 10 ** decimal;
+        debugger;
+        return Math.round(data * temp) / temp;
+
+    }
+
 }

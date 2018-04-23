@@ -90,8 +90,9 @@
                         </p>
                      
                         <p class="last">
-                            Mix Ratio: {{service.airPollutionData[item]['value']}}<br>
-                            Pressure: {{service.airPollutionData[item]['pressure']}} hPa
+                            Mix Ratio: 
+                            {{roundOfData(service.airPollutionData[item]['value'])}}<br>
+                            Pressure: {{roundOfData(service.airPollutionData[item]['pressure'])}} hPa
                         </p>
                    
                     </div>
