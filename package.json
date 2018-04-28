@@ -47,7 +47,8 @@
     "ngx-cookie": "^2.0.1",
     "reselect": "*",
     "rxjs": "^5.5.6",
-    "zone.js": "^0.8.19"
+    "zone.js": "^0.8.19",
+    "socket.io-client": "2.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-optimizer": "^0.0.38",

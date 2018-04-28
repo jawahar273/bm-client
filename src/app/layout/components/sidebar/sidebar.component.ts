@@ -12,6 +12,17 @@ export class SidebarComponent {
     public isActive: boolean = false;
     public showMenu: string = '';
     public closeResult: string;
+    public currencyDetails = {
+            
+            "symbol": "$",
+            "name": "US Dollar",
+            "symbol_native": "$",
+            "decimal_digits": 2,
+            "rounding": 0,
+            "code": "USD",
+            "name_plural": "US dollars"
+        
+        };
     
     private datePickerModel: string ;
     private sideBarAmountModel: number = 0;
@@ -24,9 +35,7 @@ export class SidebarComponent {
       this.datePickerModel = this.service.currentDateWithMomentJS;
       this.service.getBudgetAmount();
       this.getOrSetPackageSetting();
-      console.log(this.service.currencyDetails);
-      debugger;
-      
+
   }
 
   eventCalled() {
@@ -192,7 +201,6 @@ export class SidebarComponent {
    */
   private setCurrencyDetails(value) {
         // this.currencyDetails[''] = 'USD';
-
     let temp = value['packCurrencyDetails'];
     if (temp == '')
       temp = 'USD'

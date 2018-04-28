@@ -28,7 +28,7 @@ export class PackageSettingsComponent implements OnInit {
   currencyCode: Array<String>;
   listDisplayIntervalFormat: Array<Object>;
   displayIntervalFormat: Object;
-  maxInterval: Number;
+  maxInterval: number;
   /*
    * This is page to handle the package setting.
    * If you add new field to the page add the field 
@@ -163,10 +163,10 @@ export class PackageSettingsComponent implements OnInit {
        if (this.displayIntervalFormat['format'] == 'hrs' && value > this.maxInterval) {
 
          this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
-         this.packageSettingForm.get('packGeoLocInterval').setValue(this.maxInterval);
+         this.packageSettingForm.get('packGeoLocInterval').setValue(this.maxInterval - 1);
          return false;
        
-       } else if (this.displayIntervalFormat['format'] == 'mins' && this.convertHrsToMins(this.maxInterval) > this.maxInterval) {
+       } else if (this.displayIntervalFormat['format'] == 'mins' && this.convertHrsToMins(value) > this.convertHrsToMins(this.maxInterval)) {
 
          this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
          this.packageSettingForm.get('packGeoLocInterval').setValue(this.convertHrsToMins(this.maxInterval));
@@ -209,7 +209,7 @@ export class PackageSettingsComponent implements OnInit {
            
            } else {
 
-              this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
+              this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowed`, 'warning');
               this.displayIntervalFormat['value'] = this.convertHrsToMins(this.maxInterval);
 
            } 
@@ -231,6 +231,7 @@ export class PackageSettingsComponent implements OnInit {
     
        const name = `userCurrencyDetails-${localStorage.getItem('userName')}`;
        const value = this.service.currencyDetails[data['currency_details']];
+       debugger;
        localStorage.setItem(name, value);
     
         this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, this.packageSettingForm.value)
