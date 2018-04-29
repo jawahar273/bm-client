@@ -2,7 +2,7 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-import io from 'socket.io-client';
+// import io from 'socket.io-client';
 
 import { CommonService } from '../../services/common.services';
 import { routerTransition } from '../../router.animations';
@@ -51,7 +51,7 @@ export class UploadComponent implements OnInit {
     this.spinnerIcon = true;
     let temp_url = this.service.joinURL(environment.domainName, environment.apiPath, false);
     temp_url = `${environment.ws_protocol}${temp_url}`;
-    this.ioSocket = io(temp_url);
+    // this.ioSocket = io(temp_url);
     this.getUploadTermsCondtions();
 
   }
