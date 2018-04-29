@@ -4,7 +4,6 @@ import { CommonModule } from '@angular/common';
 import {FormsModule} from '@angular/forms';
 import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
-
 import { PageHeaderModule } from '../../shared';
 import { UploadRoutingModule } from './upload-routing.module';
 import { UploadComponent } from './upload.component';

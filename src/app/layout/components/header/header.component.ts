@@ -3,7 +3,6 @@ import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
 
-
 import { CommonService } from '../../../services/common.services';
 
 
@@ -24,14 +23,12 @@ export class HeaderComponent implements OnInit {
         this.translate.setDefaultLang('en');
         const browserLang = this.translate.getBrowserLang();
         this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+
         this.router.events.subscribe(val => {
+
+            const status = (val instanceof NavigationEnd) && window.innerWidth <= 992 && this.isToggled();
         
-            if (
-        
-                val instanceof NavigationEnd &&
-                window.innerWidth <= 992 &&
-                this.isToggled()
-            ) {
+            if (status) {
         
                 this.toggleSidebar();
         
