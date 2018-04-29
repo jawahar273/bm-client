@@ -497,8 +497,10 @@ export class CommonService {
                      } else {
     
                          if (bmt){
-    
-                            this.budgetAmount = parseFloat(data[0]['budget_amount']);
+
+                            let default_value = data[0]['budget_amount'];
+                            default_value = !!default_value ? default_value : 0;
+                            this.budgetAmount = parseFloat(default_value);
     
                          }
     

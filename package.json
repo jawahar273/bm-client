@@ -2,7 +2,7 @@
   "name": "BM",
   "version": "0.2.2",
   "license": "MIT",
- "engines" : { "node" : ">=6.13.2" },
+ "engines" : { "node" : ">=6.13" },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ec true --port 4300 --proxy-config proxy.conf.json",
@@ -58,7 +58,6 @@
     "@angular/compiler-cli": "^5.2.2",
     "@angular/language-service": "^5.2.2",
     "@compodoc/compodoc": "^1.0.5",
-    "@storybook/cli": "^3.3.15",
     "@types/jasmine": "~2.6.3",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.0.51",
