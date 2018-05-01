@@ -1,6 +1,6 @@
 {
   "name": "BM",
-  "version": "0.2.2",
+  "version": "0.4.0",
   "license": "MIT",
  "engines" : { "node" : ">=6.13" },
   "scripts": {

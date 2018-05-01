@@ -25,7 +25,10 @@ export class LoginComponent implements OnInit {
     public spinnerIcon: Boolean;
     
     constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
+        // clear all the brower storages.
         this.service.localStorage.clear();
+        localStorage.clear();
+        
         this.loginForm = this.fb.group({
            
             loginPassName: ['', Validators.compose([Validators.required])],

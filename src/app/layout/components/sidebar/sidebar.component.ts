@@ -2,10 +2,14 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { CommonService } from '../../../services/common.services';
+import { slideToRight as routerTransition } from '../../../router.animations';
+
 @Component({
     selector: 'app-sidebar',
     templateUrl: './sidebar.component.html',
     styleUrls: ['./sidebar.component.scss'],
+    animations: [routerTransition()],
+
 })
 export class SidebarComponent {
    
@@ -117,13 +121,13 @@ export class SidebarComponent {
 
   public getUserName(): string {
   
-    return localStorage.getItem('userName');
+    return this.service.userName;
   
   }
 
   public getUserProfileURL(): string {
   
-    return localStorage.getItem('userProfileURL');
+    return this.service.syncLocalStorage('userProfileURL');
   
   }
 
@@ -150,7 +154,7 @@ export class SidebarComponent {
 
   public getOrSetPackageSetting() {
   
-    this.service.localStorage.getItem(`packageSettings-${localStorage.getItem('userName')}`)
+    this.service.localStorage.getItem(`packageSettings-${this.service.userName}`)
     .subscribe((data) => {
   
       if (!data) {
@@ -167,7 +171,7 @@ export class SidebarComponent {
             // saving the setting to the brower db.
             let temp = this.service.renameObjectAllKeys(this.service.serviceFieldPackageSettings, data, 'c');
             this.setCurrencyDetails(temp);
-            this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, temp)
+            this.service.localStorage.setItem(`packageSettings-${this.service.userName}`, temp)
              .subscribe((data) => {
   
                console.log('save package setting ...');

@@ -2,22 +2,24 @@ import { Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { slideToBottom as routerTransition } from '../../../router.animations';
 
 import { CommonService } from '../../../services/common.services';
-
-
+import { UploadWsNotification } from '../../../services/notification.services';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
     styleUrls: ['./header.component.scss'],
-
-
+   animations: [routerTransition()],
 })
 export class HeaderComponent implements OnInit {
 
     public pushRightClass: string = 'push-right';
 
-    constructor(private translate: TranslateService, public router: Router, private service: CommonService) {
+    constructor(private translate: TranslateService,
+                public router: Router,
+                private service: CommonService,
+                private uploadService: UploadWsNotification) {
 
         // this.getAirPollution();
 
@@ -40,6 +42,7 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log(this.uploadService)
     }
 
     public isToggled(): boolean {
@@ -81,19 +84,19 @@ export class HeaderComponent implements OnInit {
 
     public getUserName(): string {
     
-        return localStorage.getItem('userName');
+        return this.service.userName;
     
     }
 
     public getUserProfileURL(): string {
     
-        return localStorage.getItem('userProfileURL');
+        return this.service.syncLocalStorage('userProfileURL');
     
     }
 
     public roundOfData(data, decimal=2): number {
 
-        const temp = 10 ** decimal;
+        const temp = 100 ** decimal;
         return Math.round(data * temp) / temp;
 
     }

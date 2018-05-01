@@ -2,10 +2,11 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
-// import io from 'socket.io-client';
+import io from 'socket.io-client';
 
 import { CommonService } from '../../services/common.services';
 import { routerTransition } from '../../router.animations';
+import { NotificationsServices } from '../../services/notification.services';
 
 // config from  ts.config.json
 import { environment } from 'environments/environment';
@@ -28,9 +29,10 @@ export class UploadComponent implements OnInit {
   public uploadTermsAndCondtions: Object;
   public closeResult: string;
   public spinnerIcon: Boolean;
-  public ioSocket: any;
 
-  constructor(public service: CommonService, private modalService: NgbModal) { 
+  constructor(public service: CommonService,
+              private modalService: NgbModal,
+              public notifices: NotificationsServices) { 
 
     this.flagForUpload = {
       'entryType': false,
@@ -49,17 +51,15 @@ export class UploadComponent implements OnInit {
 
     this.defaultEntryOptionType = 'default';
     this.spinnerIcon = true;
-    let temp_url = this.service.joinURL(environment.domainName, environment.apiPath, false);
-    temp_url = `${environment.ws_protocol}${temp_url}`;
     // this.ioSocket = io(temp_url);
     this.getUploadTermsCondtions();
 
   }
 
   ngOnInit() {
-this.ioSocket.on('connect', () => {
-  console.log(this.ioSocket.connected); // true
-});
+    // for testing only 
+         this.notifices.makeNoticies('upload');
+
   }
   
   public setLoadSpinner(value: Boolean): void {
@@ -212,6 +212,8 @@ this.ioSocket.on('connect', () => {
 
          this.service.showGlobalAlert('File has been uploaded.', 'success');
          this.setLoadSpinner(false);
+         // make notifications
+         this.notifices.makeNoticies('upload');
 
        }, (error) => {
 

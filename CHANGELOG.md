@@ -6,6 +6,10 @@
 - Tourism for the app.
 - ~~CSS issue in header bar for mid-size modbile screen.~~
 
+### 0.4.0
+- Implementing WebSocket
+- Change the header `fa fa-skyatlas` font size
+
 ### 0.3.0
 - Add weather setting.
 

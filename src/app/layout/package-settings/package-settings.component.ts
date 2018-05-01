@@ -86,7 +86,7 @@ export class PackageSettingsComponent implements OnInit {
 
     this.setHideLoadSpinner(false);
 
-    this.service.localStorage.getItem(`packageSettings-${localStorage.getItem('userName')}`)
+    this.service.localStorage.getItem(`packageSettings-${this.service.userName}`)
     .subscribe((data) => {
 
       this.setHideLoadSpinner(false);
@@ -105,7 +105,7 @@ export class PackageSettingsComponent implements OnInit {
             this.packageSettingForm = this.fb.group(formFields);
             
             // saving the setting to the brower db.
-            this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, formFields)
+            this.service.localStorage.setItem(`packageSettings-${this.service.userName}`, formFields)
              .subscribe((data) => {
                console.log('save package setting ...');
              });
@@ -229,15 +229,15 @@ export class PackageSettingsComponent implements OnInit {
     this.service.update('package/settings', this.service.headers, body)
      .subscribe((data) => {
     
-       const name = `userCurrencyDetails-${localStorage.getItem('userName')}`;
+       const name = `userCurrencyDetails-${this.service.userName}`;
        const value = this.service.currencyDetails[data['currency_details']];
-       debugger;
        localStorage.setItem(name, value);
     
-        this.service.localStorage.setItem(`packageSettings-${localStorage.getItem('userName')}`, this.packageSettingForm.value)
+        this.service.localStorage.setItem(`packageSettings-${this.service.userName}`, this.packageSettingForm.value)
          .subscribe((data) => {
            console.log('save package setting ...');
          });
+         debugger;
     
        this.service.showGlobalAlert('package setting has been updated', 'success');
     

@@ -1,6 +1,6 @@
 import { Injectable, isDevMode } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
-import { Observable, Subscriber } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
 import { AsyncLocalStorage } from 'angular-async-local-storage';
 import { CookieService } from 'ngx-cookie';
@@ -14,14 +14,14 @@ import { environment } from 'environments/environment';
 @Injectable()
 export class CommonService {
     //global settings
-    public isUserLogin: Object;
-    public requireUpdate: Object;
+    public isUserLogin: Object; // @review
+    public requireUpdate: Object; // @review
     public headers: Headers;
     public today: Date;
-    public defaultMobileScreenOffSet: number;
+    public defaultMobileScreenOffSet: number; // @review
     public isMobileScreen: boolean;
-    public countOfYears: number;
-    public startLimitOfYears: number;
+    public countOfYears: number; // @review
+    public startLimitOfYears: number;// @review
     public globalalertBox: Array<any> = [];
     public globalServiceErrorMapping = {
   
@@ -69,6 +69,7 @@ export class CommonService {
     public airPollutionData: object;
     public airPollutionKeys: Array<string>;
     public currencyCode: Array<string>; // @deprecated
+    public userName: string;
 
     constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
   
@@ -78,6 +79,7 @@ export class CommonService {
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
         this.listOfMonths.reverse();
         this.monthInMenu = `${this.listOfMonths.slice(0,1)}-${this.today.getFullYear()}`;
+        // const for screen UI.
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
         this.timeOutForAlertBox = 4100;
@@ -103,7 +105,7 @@ export class CommonService {
         
              'Accept': 'application/json',
              'Content-Type': 'application/json',
-             'Authorization': ``,
+             'Authorization': '',
         
         });
         const url = this.joinURL(environment.domainName, environment.apiPath, false);
@@ -701,13 +703,18 @@ export class CommonService {
      */
     public setUserDetailsToLocalStorage(_data) {
     
-      localStorage.setItem('userName', _data['username']);
+      // localStorage.setItem('userName', _data['username']);
+      this.userName = _data['username'];
       localStorage.setItem('userEmail', _data['email']);
-      localStorage.setItem('userProfileURL', _data['profile_url']);
-      localStorage.setItem('userFirstName', _data['first_name']);
-      localStorage.setItem('userLastName', _data['last_name']);
-      localStorage.setItem('userGender', _data['gender']);
+      localStorage.setItem(`userProfileURL-${this.userName}`, _data['profile_url']);
+      localStorage.setItem(`userFirstName-${this.userName}`, _data['first_name']);
+      localStorage.setItem(`userLastName-${this.userName}`, _data['last_name']);
+      localStorage.setItem(`userGender-${this.userName}`, _data['gender']);
     
+    }
+
+    public syncLocalStorage(name): any {
+        return localStorage.getItem(`${name}-${this.userName}`);
     }
 
     public onLoggedout() {
