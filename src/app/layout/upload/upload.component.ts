@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
-import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import io from 'socket.io-client';
 
 import { CommonService } from '../../services/common.services';
@@ -59,7 +59,6 @@ export class UploadComponent implements OnInit {
   ngOnInit() {
     // for testing only 
          this.notifices.makeNoticies('upload');
-
   }
   
   public setLoadSpinner(value: Boolean): void {

@@ -101,11 +101,17 @@ export class CommonService {
           'end': moment(this.today).endOf('month').format('YYYY-MM-DD')
         
         }
+
+        let accessControlAllowOrigin = ''
+        if (isDevMode) {
+            accessControlAllowOrigin = ''
+        }
         this.headers = new Headers({
         
              'Accept': 'application/json',
              'Content-Type': 'application/json',
              'Authorization': '',
+             // 'Access-Control-Allow-Origin': ''
         
         });
         const url = this.joinURL(environment.domainName, environment.apiPath, false);
@@ -705,7 +711,7 @@ export class CommonService {
     
       // localStorage.setItem('userName', _data['username']);
       this.userName = _data['username'];
-      localStorage.setItem('userEmail', _data['email']);
+      localStorage.setItem(`userEmail-${this.userName}`, _data['email']);
       localStorage.setItem(`userProfileURL-${this.userName}`, _data['profile_url']);
       localStorage.setItem(`userFirstName-${this.userName}`, _data['first_name']);
       localStorage.setItem(`userLastName-${this.userName}`, _data['last_name']);

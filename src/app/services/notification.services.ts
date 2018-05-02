@@ -1,8 +1,9 @@
 
 import { Injectable } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
-import io from 'socket.io-client';
+import * as io from 'socket.io-client';
 
+import { CommonService } from './common.services';
 import { environment } from 'environments/environment';
 
 
@@ -29,19 +30,34 @@ export class UploadWsNotification {
     public percentage: any;
     public WSIO: io;
 
-    constructor(notifices: NotificationsServices) {
-
+    constructor(private service: CommonService,
+                public notifices: NotificationsServices) {
         notifices.status$.subscribe((data) => {
-
             if (data.toLowerCase() == 'upload') {
-                let temp_url = `${environment.domainName}/${environment.apiPath}`
-                temp_url = `${environment.ws_protocol}${temp_url}`
-                temp_url += '/ws/upload_status/'
-                this.WSIO = io(temp_url);
-                this.WSIO.on('connect', () => {
+                let temp_url = `${environment.domainName}`
+                temp_url = `${environment.ws_protocol}${temp_url}`;
+                temp_url += '/ws/upload_status/';
+                // const wsOptions = {
+                //    transports: ['websocket'],
+                //    // path: ,
+                //    autoConnect: false,
+                //    extraHeaders: {
+                //        Authorization: this.service.headers.get('Authorization')
+                //    }
+                // }
+                // this.WSIO = io(temp_url, wsOptions);
+                // this.WSIO.on('connect', () => {
                
-                    console.log(this.WSIO.id);
+                //     console.log(this.WSIO.id);
                
+                // });
+
+                let ws = new WebSocket(temp_url);
+                ws.addEventListener('open', function(event) {
+                    console.log(event.data);
+                });
+                ws.addEventListener('message', function (event) {
+                    console.log('Message from server ', event);
                 });
 
             }

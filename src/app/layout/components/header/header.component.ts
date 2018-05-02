@@ -42,7 +42,6 @@ export class HeaderComponent implements OnInit {
     }
 
     ngOnInit() {
-        console.log(this.uploadService)
     }
 
     public isToggled(): boolean {

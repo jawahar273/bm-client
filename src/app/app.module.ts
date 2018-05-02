@@ -62,7 +62,10 @@ export function createTranslateLoader(http: HttpClient) {
         ConfirmEmailModule,
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, CommonService],
+    providers: [AuthGuard,
+                CommonService,
+                NotificationsServices,
+                UploadWsNotification],
     bootstrap: [AppComponent],
 })
 export class AppModule {}
