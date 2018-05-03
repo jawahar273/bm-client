@@ -8,7 +8,7 @@
 
 ### 0.4.0
 - Implementing WebSocket
-- Change the header `fa fa-skyatlas` font size.
+- Change the header class name: `fa fa-skyatlas` font size.
 - Change in the local storage names.
 
 ### 0.3.0

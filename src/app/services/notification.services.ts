@@ -37,6 +37,7 @@ export class UploadWsNotification {
                 let temp_url = `${environment.domainName}`
                 temp_url = `${environment.ws_protocol}${temp_url}`;
                 temp_url += '/ws/upload_status/';
+                temp_url += this.service.headers.get('Authorization').split(' ')[1]
                 // const wsOptions = {
                 //    transports: ['websocket'],
                 //    // path: ,
@@ -54,7 +55,7 @@ export class UploadWsNotification {
 
                 let ws = new WebSocket(temp_url);
                 ws.addEventListener('open', function(event) {
-                    console.log(event.data);
+                    console.log(event);
                 });
                 ws.addEventListener('message', function (event) {
                     console.log('Message from server ', event);
