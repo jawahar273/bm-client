@@ -1,7 +1,7 @@
 {
   "name": "BM",
   "version": "0.4.0",
-  "license": "MIT",
+  "license": "Apache",
  "engines" : { "node" : ">=6.13" },
   "scripts": {
     "ng": "ng",
