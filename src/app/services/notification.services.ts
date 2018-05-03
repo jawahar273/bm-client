@@ -36,7 +36,7 @@ export class UploadWsNotification {
             if (data.toLowerCase() == 'upload') {
                 let temp_url = `${environment.domainName}`
                 temp_url = `${environment.ws_protocol}${temp_url}`;
-                temp_url += '/ws/upload_status/';
+                temp_url += '/ws/upload_status/?token';
                 temp_url += this.service.headers.get('Authorization').split(' ')[1]
                 // const wsOptions = {
                 //    transports: ['websocket'],
