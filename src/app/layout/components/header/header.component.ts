@@ -31,13 +31,13 @@ export class HeaderComponent implements OnInit {
         this.router.events.subscribe(val => {
 
             const status = (val instanceof NavigationEnd) && window.innerWidth <= 992 && this.isToggled();
-        
+
             if (status) {
-        
+
                 this.toggleSidebar();
-        
+
             }
-        
+
         });
     }
 
@@ -45,17 +45,17 @@ export class HeaderComponent implements OnInit {
     }
 
     public isToggled(): boolean {
-        
+
         const dom: Element = document.querySelector('body');
         return dom.classList.contains(this.pushRightClass);
-    
+
     }
 
     public toggleSidebar() {
-    
+
         const dom: any = document.querySelector('body');
         dom.classList.toggle(this.pushRightClass);
-    
+
     }
 
     // public rltAndLtr() {
@@ -64,33 +64,33 @@ export class HeaderComponent implements OnInit {
     // }
 
     public isMobileScreen() {
-    
+
         return this.service.isMobileScreen;
-    
+
     }
 
     public onLoggedout() {
-    
+
         this.service.onLoggedout()
-    
+
     }
 
     public changeLang(language: string) {
-    
+
         this.translate.use(language);
-    
+
     }
 
     public getUserName(): string {
-    
+
         return this.service.userName;
-    
+
     }
 
     public getUserProfileURL(): string {
-    
+
         return this.service.syncLocalStorage('userProfileURL');
-    
+
     }
 
     public roundOfData(data, decimal=2): number {

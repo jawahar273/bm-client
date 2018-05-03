@@ -17,8 +17,8 @@ export class DashTableComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     private headers: any;
-    private isMobileScreen: boolean;
-    public hideLoadSpin: boolean = true;
+    private isMobileScreen: Boolean;
+    public hideLoadSpin: Boolean = true;
 
     @ViewChild('dashTable') dashTable;
 
@@ -99,7 +99,7 @@ export class DashTableComponent implements OnInit {
     }
 
     /**
-     * 
+     *
      * @param {Date} date JS date object.
      * @description get the JS date object and find the number of distance in human terms.
      */
@@ -109,7 +109,7 @@ export class DashTableComponent implements OnInit {
 
     }
     private deleteRow(itemID: number, indx: number) {
-        
+
         if (itemID) {
 
             this.hideLoadSpinIcon(false);
@@ -149,50 +149,50 @@ export class DashTableComponent implements OnInit {
     public getObjectValue(t: Object): Array<any> {
 
         return Object.values(t);
-    
+
     }
 
     public getIsMobileScreen(): boolean {
-    
+
         return this.isMobileScreen;
-    
+
     }
 
     private hideLoadSpinIcon(value: boolean) {
-    
+
         this.hideLoadSpin = value;
-    
+
     }
-    
+
     /*
     * get the layout with resize event.
     */
     @HostListener('window:resize', ['$event'])
     public layoutResizeListener(event) {
-    
+
       this.service.isMobileScreen = event.target.innerWidth <= this.service.defaultMobileScreenOffSet;
-    
+
     }
 
     public getMonthInMenu() {
 
        return  this.service.monthInMenu.split('-')[0]; 
-    
+
     }
 
     public setMonthInMenu(value: string) {
-    
+
        this.service.monthInMenu = `${value}-${this.service.today.getFullYear()}`;
-       this.service.dateRangOfMonths = { 
-    
+       this.service.dateRangOfMonths = {
+
             'start': moment(`01-${this.service.monthInMenu}`, 'DD-MMMM-YYYY').startOf('month').format('YYYY-MM-DD'),
             'end': moment(`01-${this.service.monthInMenu}`, 'DD-MMMM-YYYY').endOf('month').format('YYYY-MM-DD')
-    
-       }
-    
+
+       };
+
        this.updateTable();
-       return  this.service.monthInMenu; 
-    
+       return  this.service.monthInMenu;
+
     }
 
 }

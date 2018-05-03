@@ -20,85 +20,85 @@ export class ProfileComponent implements OnInit {
   
      this.getInitProfileSetting();
      this.getInitPackageSettings();
-  
+
   }
 
   ngOnInit() {
   }
 
   private getInitProfileSetting() {
-  
+
       this.profileForm = this.profileFormBuilder.group({
        proFirstName : localStorage.getItem('userFirstName'),
        proLastName: localStorage.getItem('userLastName'),
        proGender: localStorage.getItem('userGender'),
      });
-  
+
      this.serviceField = {
-  
+
        'proFirstName' : 'first_name',
        'proLastName': 'last_name',
        'proGender': 'gender',
-     }   
-  
+     };
+
   }
 
   private getInitPackageSettings() {
-  
+
     this.packageForm = this.profileFormBuilder.group({
-  
+
       packCurrencyDetails: '',
       packForceMbaUpdate: ''
-  
+
     });
-  
+
     this.servicePackageSettingsField = {
-  
+
       'packCurrencyDetails': 'currency_details',
       'packForceMbaUpdate': 'force_mba_update'
-  
-    }
-  
+
+    };
+
   }
 
   public getUserProfileURL() {
-  
-  	return this.service.syncLocalStorage('userProfileURL');
-  
+
+    return this.service.syncLocalStorage('userProfileURL');
+
   }
 
   public getUserEmail() {
-  
+
     return this.service.syncLocalStorage('userEmail');
-  
+
   }
 
-  public checkFormHasErrorUser(name:string): boolean {
-  
+  public checkFormHasErrorUser(name: string): boolean {
+
     return this.service.checkFormHasError(name, this.profileForm);
-  
+
   }
 
   public onSubmitProfileSetting() {
-  
+
     const formValues = this.profileForm.value;
     // const oldName = Object.keys(this.serviceField);
     // const newName = Object.values(this.serviceField);
-    let body = this.service.renameObjectAllKeys(this.serviceField, formValues, 's');
+    const body = this.service.renameObjectAllKeys(this.serviceField, formValues, 's');
     // body = JSON.stringify(body);
     this.service.update('rest-auth/user', this.service.headers, body)
      .subscribe((data) => {
-  
+
        this.service.showGlobalAlert('Personal details updated', 'success');
        this.service.setUserDetailsToLocalStorage(data);
-  
+
      }, (error) => {
-  
+
        const temp = this.service.isClinetOrServerSidesError(error);
        this.service.showGlobalAlert(temp);
-  
+
      });
-  
+
   }
 
   // public onSumitPackageSetting() {

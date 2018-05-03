@@ -57,10 +57,10 @@ export class UploadComponent implements OnInit {
   }
 
   ngOnInit() {
-    // for testing only 
+    // for testing only
          this.notifices.makeNoticies('upload');
   }
-  
+
   public setLoadSpinner(value: Boolean): void {
 
     this.spinnerIcon = value;
@@ -80,7 +80,7 @@ export class UploadComponent implements OnInit {
     });
 
   }
-  
+
   private getDismissReason(reason: any): string {
 
     if (reason === ModalDismissReasons.ESC) {
@@ -97,7 +97,7 @@ export class UploadComponent implements OnInit {
 
     }
 
-  } 
+  }
 
   public getKeys(data: Object): Array<any> {
 
@@ -125,7 +125,7 @@ export class UploadComponent implements OnInit {
 
        } else {
 
-         this.uploadTermsAndCondtions = data; 
+         this.uploadTermsAndCondtions = data;
 
        }
 
@@ -141,7 +141,7 @@ export class UploadComponent implements OnInit {
 
   private setFlagVar(
      {name, value, msg, msgType}:
-     {name: string, value: Boolean, msg?: string, msgType?:string} = {name: '', value: null}
+     {name: string, value: Boolean, msg?: string, msgType?: string} = {name: '', value: null}
     ): void {
 
     // refer : https://jawahar273.gitbooks.io/blog/content/Typescript/
@@ -151,7 +151,7 @@ export class UploadComponent implements OnInit {
 
     if (msg) {
 
-      msgType = !msgType ? 'danger' : msgType
+      msgType = !msgType ? 'danger' : msgType;
       this.service.showGlobalAlert(msg, msgType);
 
     }
@@ -182,25 +182,23 @@ export class UploadComponent implements OnInit {
 
   public onSubmitUploadFile(value: any) {
 
-  	// console.log(this.uploadForm.value);
-
-    if (value['entryType'] == 'default') {
+    if (value['entryType'] === 'default') {
 
       const msg = 'upload type `None` is not allowed. Please choose other options'
-      this.setFlagVar({name: 'entryType', value: true, msg: msg})
+      this.setFlagVar({name: 'entryType', value: true, msg: msg});
 
     } else {
 
       this.setLoadSpinner(false);
       let url = 'package/upload';
 
-      if (value['entryType'] == 'paytm') {
+      if (value['entryType'] === 'paytm') {
 
-        url = 'package/paytm-upload'
+        url = 'package/paytm-upload';
 
       } else {
 
-        url = 'package/upload'
+        url = 'package/upload';
 
       }
 
