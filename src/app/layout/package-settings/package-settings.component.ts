@@ -22,12 +22,12 @@ import { formValues } from './package-settings-form.config';
 export class PackageSettingsComponent implements OnInit {
 
   packageSettingForm: FormGroup;
-  serviceFields: Object;
-  formFieldsValue: Array<Object>;
+  serviceFields: object;
+  formFieldsValue: Array<object>;
   hideLoadSpin: Boolean;
-  currencyCode: Array<String>;
-  listDisplayIntervalFormat: Array<Object>;
-  displayIntervalFormat: Object;
+  currencyCode: Array<string>;
+  listDisplayIntervalFormat: Array<object>;
+  displayIntervalFormat: object;
   maxInterval: number;
   /*
    * This is page to handle the package setting.

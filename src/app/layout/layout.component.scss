@@ -16,20 +16,21 @@
 
 .float-btn {
     // top: 100px;
-    bottom:  100px;
+    bottom: 100px;
     background-color:black;
     // width:40;
     // height:60;
     // padding:6px;
     position: fixed;
-    border-radius:200em;
+    border-radius: 50%;
     color: white;
-    width:40px;
+    width: 40px;
     display:inline-block;
-    overflow: auto;
+    overflow: hidden;
+    z-index: 1;
     white-space: nowrap;
-    margin:0px auto;
-
+    margin: 0px auto;
+    vertical-align: middle;
 }
 
 .float-left-btn {
