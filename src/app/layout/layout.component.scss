@@ -13,3 +13,32 @@
         margin-left: 0px !important;
     }
 }
+
+.float-btn {
+    // top: 100px;
+    bottom:  100px;
+    background-color:black;
+    // width:40;
+    // height:60;
+    // padding:6px;
+    position: fixed;
+    border-radius:200em;
+    color: white;
+    width:40px;
+    display:inline-block;
+    overflow: auto;
+    white-space: nowrap;
+    margin:0px auto;
+
+}
+
+.float-left-btn {
+    @extend .float-btn;
+    float:left;
+
+}
+
+.float-right-btn {
+    @extend .float-btn;
+    float:right;
+}

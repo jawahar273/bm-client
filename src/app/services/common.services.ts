@@ -36,7 +36,7 @@ export class CommonService {
     public clientErrorCode = new Set([400, 401, 403, 404, 406,408, 410]);
     public serverErrorCode = new Set([500, 502, 503, 504 ]);
     public currentDateWithMomentJS;
-    public currencyDetails: Object;
+    public currencyDetails: object;
 
 
     private commonURL: string;
@@ -44,17 +44,17 @@ export class CommonService {
     public timeOutForAlertBoxDanger: number;
 
     // components headers and sidebar var
-    public budgetAmount: Number = 0;
+    public budgetAmount: number = 0;
 
     // components dashboard
-    public needTableUpdate: Boolean = true;
+    public needTableUpdate: boolean = true;
     public dataTableDashboard: Array<any>;
     public listOfGroupItems: Array<string>;
     public listOfMonths: Array<string>;
-    public dateRangOfMonths: Object;
+    public dateRangOfMonths: object;
     public monthInMenu: string;
     // components chart
-    public needChartUpdate: Boolean = true;
+    public needChartUpdate: boolean = true;
     public doughNutChartDataMonth: Array<any>;
     // components package settings
     public serviceFieldPackageSettings = {

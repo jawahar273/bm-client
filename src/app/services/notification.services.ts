@@ -1,5 +1,4 @@
-
-import { Injectable } from '@angular/core';
+import { Injectable, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs/Rx';
 import * as io from 'socket.io-client';
 
@@ -8,13 +7,17 @@ import { environment } from 'environments/environment';
 
 
 @Injectable()
-export class NotificationsServices {
+export class NotificationsServices implements OnDestroy {
     public status$: Subject<any>;
 
     constructor() {
 
         this.status$ = new Subject();
 
+    }
+
+    ngOnDestroy() {
+        this.status$.unsubscribe();
     }
 
     public makeNoticies(name: string): void {
@@ -26,7 +29,7 @@ export class NotificationsServices {
 }
 
 @Injectable()
-export class UploadWsNotification {
+export class UploadWsNotification implements OnDestroy {
     public percentage: any;
     public WSIO: io;
 
@@ -53,5 +56,9 @@ export class UploadWsNotification {
 
         });
     }
+
+    ngOnDestroy() {
+    }
+
 
 }

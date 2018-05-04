@@ -17,8 +17,8 @@ export class DashTableComponent implements OnInit {
     public alerts: Array<any> = [];
     public sliders: Array<any> = [];
     private headers: any;
-    private isMobileScreen: Boolean;
-    public hideLoadSpin: Boolean = true;
+    private isMobileScreen: boolean;
+    public hideLoadSpin: boolean = true;
 
     @ViewChild('dashTable') dashTable;
 

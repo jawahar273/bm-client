@@ -13,8 +13,8 @@ import { slideToRight as routerTransition } from '../../../router.animations';
 })
 export class SidebarComponent {
    
-    public isActive: Boolean = false;
-    public showMenu: String = '';
+    public isActive: boolean = false;
+    public showMenu: string = '';
     public closeResult: string;
     public currencyDetails = {
       'symbol': '$',
