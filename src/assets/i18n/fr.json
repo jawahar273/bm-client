@@ -29,6 +29,7 @@
     "Mail" : "Courrier",
     "View All" : "Voir tout",
     "New Entry": "New Entry-fr",
-    "Amount": "Amount-fr",
-    "Spendings List": "Spendings List-fr"
+    "Amount": "Montant",
+    "Spendings List": "Liste des dépenses",
+    "Upload": "télécharger"
 }

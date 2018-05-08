@@ -19,7 +19,7 @@
                             {{this.service.currentDateWithMomentJS}}
                         </strong>
                     </ng-template>
- Amount: {{getBudgetAmount() | currency:currencyDetails['code']:currencyDetails['symbol_native'] }}
+ {{ 'Amount' | translate }}: {{getBudgetAmount() | currency:currencyDetails['code']:currencyDetails['symbol_native'] }}
                 </span>
             </a>
         </div>

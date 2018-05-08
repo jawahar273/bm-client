@@ -10,6 +10,7 @@
 - Implementing WebSocket
 - Change the header class name: `fa fa-skyatlas` font size.
 - Change in the local storage names.
+- Adding few french workds.
 
 ### 0.3.0
 - Add weather setting.

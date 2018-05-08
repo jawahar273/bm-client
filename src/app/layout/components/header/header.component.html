@@ -106,7 +106,7 @@
 
             </li>
             
-            <li class="nav-item dropdown" ngbDropdown [@routerTransition]>
+            <li class="nav-item dropdown" ngbDropdown>
             
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
             
@@ -114,8 +114,8 @@
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                
-                    <a href="javascript:void(0)" class="dropdown-item">
+                    
+                    <a href="javascript:void(0)" class="dropdown-item" *ngIf="uploadService.WSIO">
                         {{ 'Work in Progress' | translate }} <span class="badge badge-info"> 0</span>
                     </a>
                 

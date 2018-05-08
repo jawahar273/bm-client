@@ -19,7 +19,7 @@ export class HeaderComponent implements OnInit {
     constructor(private translate: TranslateService,
                 public router: Router,
                 private service: CommonService,
-                private uploadService: UploadWsNotification) {
+                public uploadService: UploadWsNotification) {
 
         // this.getAirPollution();
 

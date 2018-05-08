@@ -633,7 +633,7 @@ export class CommonService {
                 this.airPollutionKeys = Object.keys(data['detail']);
 
         }, (error) => {
-
+            const msg = this.isClinetOrServerSidesError(error);
             this.showGlobalAlert('Weather api is not working', 'warning');
 
         });
