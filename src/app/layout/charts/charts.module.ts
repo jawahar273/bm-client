@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import {
           NgbTooltipModule,
         } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { ChartsRoutingModule } from './charts-routing.module';
 import { ChartsComponent } from './charts.component';
@@ -14,6 +15,7 @@ import { PageHeaderModule } from '../../shared';
     imports: [
     	CommonModule,
     	Ng2Charts,
+        TranslateModule,
         ChartsRoutingModule,
         PageHeaderModule,
         ReactiveFormsModule,

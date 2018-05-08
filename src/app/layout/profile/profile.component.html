@@ -10,9 +10,9 @@
 
 				<div class="col-lg-4 col-xs-6">
 
-					<h2>Public Image</h2>
+					<h2>{{'Public Image' | translate}}</h2>
 
-					<p>Please upload image to <a href="http://gravatar.com/" target="_black">gravatar.com</a></p>
+					<p>{{'Please upload image to' | translate}} <a href="http://gravatar.com/" target="_black">gravatar.com</a></p>
 
 				</div>
 
@@ -34,10 +34,10 @@
 
 				<div class="col-lg-4 col-xs-6">
 
-					<h2>About Me</h2>
+					<h2>{{'About Me' | translate}}</h2>
 
 					<p>
-						Basic user's details.
+						{{'Basic user details.' | translate}}
 					</p>
 
 				</div>
@@ -58,25 +58,32 @@
 					
 							<input type="text" formControlName="
 							proFirstName" [ngClass]="{'has-error':checkFormHasErrorUser('proFirstName')}" class="form-control input-underline"
-							 id="proFirstName" placeholder="First Name">
+							 id="proFirstName" placeholder="{{'First Name' | translate}}">
 						
 						</div>
 						
 						<div class="form-group" >
 						
 							<input type="text" formControlName="proLastName" [ngClass]="{'has-error':checkFormHasErrorUser('proLastName')}" class="form-control input-underline"
-							 id="proLastName" placeholder="Last Name">
+							 id="proLastName" placeholder="{{'Last Name' | translate}}">
 						
 						</div>
 						
 						<div class="form-group" >
 						
 							<select formControlName="proGender" class="custom-select" id="proGender">
-						
-								<option value="F">Female</option>
-								<option value="M">Male</option>
-								<option value="O">Other</option>
-								<option value="N">Not Willing to say</option>
+								<option value="F">
+									{{ 'Female' | translate }}
+								<option>
+								<option value="M">
+									{{ 'Male' | translate }}
+								</option>
+								<option value="O">
+									{{ 'Other' | translate }}
+								</option>
+								<option value="N">
+									{{'Not Willing to say' | translate}}
+								</option>
 
 							</select>  
 						
@@ -85,7 +92,7 @@
                         <div>
                         
                         	<button class="btn app-button form-group .p-btn">
-                        	  Submit
+                        	  {{ 'Submit' | translate }}
                             </button>
                         
                         </div>

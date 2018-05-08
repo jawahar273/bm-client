@@ -73,7 +73,7 @@ export class DashTableComponent implements OnInit {
                 this.service.dataTableDashboard = data;
                 if (alert) {
 
-                    let msg = 'table update';
+                    let msg = 'Table updated';
                     if (data.length === 0) {
 
                         msg = 'No List need to been shown';
@@ -117,7 +117,7 @@ export class DashTableComponent implements OnInit {
                 .subscribe(
                    (data) => {
 
-                       this.showErrorAlert('Item has been delete successully', 'success');
+                       this.showErrorAlert('Item has been deleted successfully', 'success');
                        this.updateTable(false);
                        this.hideLoadSpinIcon(true);
 
@@ -125,7 +125,7 @@ export class DashTableComponent implements OnInit {
                    (error) => {
 
                        this.hideLoadSpinIcon(true);
-                       this.showErrorAlert('Unable to request the delete operation due to "some unexpected errors"');
+                       this.showErrorAlert('Unable to request the delete operation due to some unexpected errors');
 
                    }
 

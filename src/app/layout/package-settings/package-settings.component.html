@@ -10,11 +10,10 @@
 
 					<div class="col-lg-4 col-xs-6">
 
-						<h2>Package's Settings</h2>
+						<h2>Package Settings</h2>
 
 						<p>
-							Package's setting controls the chart, dashboard, new entry elements by retriving the 
-							required data from the server and from the user.
+							{{'Package setting controls the chart, dashboard, new entry elements by retrieving the required data from the server and from the user.' | translate}}
 						</p>
 
 					</div>
@@ -41,24 +40,28 @@
 							<div class="form-group">
 
 								<p>
-									Select <b>Yes</b> option for model automatically asking Month Amount
+									{{'Select Yes option for model automatically asking Month Amount' | translate}}
 								</p>
 
 								<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="Y"
 								formControlName="packForceMbaUpdate">
 
-								<label for="mbaForceUpdateYes">Yes</label>
+								<label for="mbaForceUpdateYes">
+									{{  'Yes' | translate }}
+								</label>
 
 								<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="N" 
 								formControlName="packForceMbaUpdate">
-								<label for="mbaForceUpdateNo">No</label>
+								<label for="mbaForceUpdateNo">
+									{{ 'No' | translate }}
+								</label>
 
 							</div>
 
 							<div class="form-group">
 
 								<p>
-									Select <b>Yes</b> option for activating Paytm uploading
+									{{'Select Yes option for activating Paytm uploading' | translate}}
 
 								    <span class="badge badge-info">Beta:Paytm</span>
 							    </p>
@@ -67,20 +70,22 @@
 								<input type="radio" name="packActivePaytm" id="paytmActiveYes" value="Y"
 								formControlName="packActivePaytm">
 
-								<label for="paytmActiveYes">Yes</label>
+								<label for="paytmActiveYes">	{{  'Yes' | translate }}
+								</label>
 
 								<input type="radio" name="packActivePaytm" id="paytmActiveNo" value="N" 
 								formControlName="packActivePaytm" checked="checked">
 
-								<label for="paytmActiveNo">No</label>
+								<label for="paytmActiveNo">
+									{{ 'No' | translate }}
+								</label>
 
 							</div>
 
 							<div class="form-group">
 
 								<p>
-									Set the interval for refresh to get
-									<b>Geo location</b> in mins.
+									{{'Set the interval for refresh to get Geolocation in mins' | translate}}
 							    </p>
 
 					 			<div class="row" style="margin: 0.40rem;">

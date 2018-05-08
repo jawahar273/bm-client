@@ -222,7 +222,7 @@ export class CommonService {
 
             } else {
 
-                msg = 'unexpected error occured';
+                msg = 'Unexpected error occurred';
 
             }
 
@@ -234,7 +234,7 @@ export class CommonService {
 
         }
 
-        return 'Error on ower end';
+        return 'Error on our end';
 
     }
 
@@ -246,7 +246,7 @@ export class CommonService {
 
         const preCommonMsg = 'or';
         const sufCommonMsg = '.';
-
+        // need a method for translation
         switch (statusCode) {
 
             case 400:
@@ -540,7 +540,7 @@ export class CommonService {
 
                 }
 
-                this.showGlobalAlert('date for buget amount updated', 'success');
+                this.showGlobalAlert('Date for budget amount updated', 'success');
                 // # <-- review
                 this.localStorage.getItem<any>('donut').subscribe((read) => {
                     read['data'][0] = data['budget_amount'];
@@ -562,7 +562,7 @@ export class CommonService {
                      .subscribe(
                          (data) => {
 
-                            this.showGlobalAlert('new date for buget amount created', 'success');
+                            this.showGlobalAlert('New date for budget amount created', 'success');
                             // # <-- review
                             this.localStorage.getItem<any>('donut').subscribe((read) => {
 
@@ -657,7 +657,7 @@ export class CommonService {
 
               }, (error) => {
 
-                  this.showGlobalAlert('Permission denial or Unknow Error in getting client geolocation', 'warning');
+                  this.showGlobalAlert('Permission denial or Unknown Error in getting client geolocation', 'warning');
 
               });
 
@@ -709,7 +709,6 @@ export class CommonService {
       localStorage.setItem(`userFirstName-${this.userName}`, _data['first_name']);
       localStorage.setItem(`userLastName-${this.userName}`, _data['last_name']);
       localStorage.setItem(`userGender-${this.userName}`, _data['gender']);
-
     }
 
     public syncLocalStorage(name): any {

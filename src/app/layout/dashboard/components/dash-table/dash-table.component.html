@@ -25,7 +25,7 @@
 
                   <p>
 
-                  	Columns are resiable and sortable.
+                  	{{ 'Columns are resizable and sortable.' | translate }}
 
                   </p>  
 
@@ -35,7 +35,7 @@
             <button class="btn btn-xs  app-button" (click)="updateTable()" [disabled]="!hideLoadSpin"
             [ngClass]="{'pull-right': getIsMobileScreen() }">
 
-                <span [hidden]="!hideLoadSpin">Update</span>
+                <span [hidden]="!hideLoadSpin">{{'Update' | translate}}</span>
 
                 <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
 
@@ -69,30 +69,30 @@
 
 	                        <li class="list-group-item">
 
-	                            <strong>Bundle Name</strong> : {{row.name}}
+	                            <strong>{{'Bundle Name' | translate}} </strong> : {{row.name}}
 	                        </li>
 
 	                        <li class="list-group-item">
 
-	                            <strong>Place</strong> : {{row.place}}
+	                            <strong>{{'Place' | translate}}</strong> : {{row.place}}
 
 	                        </li>
 
 	                        <li class="list-group-item">
 
-	                            <strong>Group</strong> : {{row.group}}
+	                            <strong>{{'Group' | translate}}</strong> : {{row.group}}
 
 	                        </li>
 
 	                        <li class="list-group-item"><strong>
 
-	                            Total Amount</strong> : {{row.total_amount}}
+	                            {{'Total Amount' | translate}}</strong> : {{row.total_amount}}
 
 	                        </li>
 
 	                        <li class="list-group-item">
 
-	                            <strong>Date</strong> :  {{row.date}}
+	                            <strong>{{'Date' | translate}}</strong> :  {{row.date}}
 
 	                                <div class="d-flex w-100 justify-content-between">
 
@@ -108,7 +108,7 @@
 
 	                       <li class="list-group-item">
 
-	                            <strong>Action</strong> 
+	                            <strong>{{'Action' | translate}}</strong> 
 
 	                            <a href="entry/{{row.id}}">
 	                                <i class="fa fa-pencil-square-o"></i>
@@ -282,7 +282,7 @@
                     <!-- <span *ngIf="selectedMessage">
                       {{selectedCount.toLocaleString()}} {{selectedMessage}} / 
                     </span>
- -->                   Total List Count: {{rowCount.toLocaleString() }}
+ -->                   {{'Total List Count' | translate}}: {{rowCount.toLocaleString() }}
                   </div>
                  
                   <datatable-pager

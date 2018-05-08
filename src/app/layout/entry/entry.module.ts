@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
 import {  NgbTypeaheadModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpModule } from '@angular/http';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { PageHeaderModule } from '../../shared';
 import { EntryRoutingModule } from './entry-routing.module';
@@ -15,6 +16,7 @@ import { ListedItemsModule } from './listed-items/listed-items.module';
   imports: [
     CommonModule,
     HttpModule,
+    TranslateModule,
     PageHeaderModule,
     ReactiveFormsModule,
     NgbTypeaheadModule.forRoot(),

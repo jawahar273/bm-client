@@ -62,7 +62,7 @@
 
             <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
               <div class="modal-header">
-                <h4 class="modal-title">Setting Budget Amount</h4>
+                <h4 class="modal-title">{{'Setting Budget Amount' | translate}}</h4>
                 <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -83,7 +83,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-info" (click)="onAmountSubmit(c)" >Submit</button>
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                <button class="btn btn-info" (click)="onAmountSubmit(c)" >{{'Submit' | translate}}</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">{{'Close' | translate}}</button>
               </div>
             </ng-template>

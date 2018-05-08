@@ -49,15 +49,16 @@ export class UploadWsNotification implements OnDestroy {
                 temp_url += this.service.headers.get('Authorization').split(' ')[1];
 
                 this.WSIO = new WebSocket(`${environment.ws_protocol}` + temp_url);
+                
+                const self = this;
                 this.WSIO.addEventListener('open', function(event) {
                 
-                    console.log(event);
+                    console.log('Connection has been opened..');
                 
                 });
                 this.WSIO.addEventListener('message', function(event) {
-                    
-                    console.log('Message from server ', event);
-                
+                    // console.log('Message from server ', event['data']);
+                    self.percentage = event['data'];
                 });
 
             }
