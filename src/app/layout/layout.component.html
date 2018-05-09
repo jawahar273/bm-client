@@ -3,8 +3,16 @@
 <section class="main-container">
     <p *ngFor="let alert of service.globalalertBox">
         <ngb-alert [type]="alert.type" (close)="closeGlobalAlert(alert)">
-            {{ alert.message }}
+            {{ alert.message | translate }}
         </ngb-alert>
     </p>
     <router-outlet></router-outlet>
-</section>
+<!-- <div >
+
+    <button class="float-left-btn">df</button>
+</div>
+<div >
+
+    <button  class="float-right-btn" >ri</button>
+</div>
+ --></section>

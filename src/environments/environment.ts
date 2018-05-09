@@ -8,5 +8,6 @@ export const environment = {
   domainName: '127.0.0.1:8000',
   apiPath: 'api',
   protocol: 'http://',
+  ws_protocol: 'ws://',
   ServiceWorkersBasehref: '/',
 };

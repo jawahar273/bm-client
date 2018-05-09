@@ -1,4 +1,4 @@
-<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}">
+<nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}" [@routerTransition]>
     <div class="list-group">
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
@@ -19,13 +19,13 @@
                             {{this.service.currentDateWithMomentJS}}
                         </strong>
                     </ng-template>
- Amount: {{getBudgetAmount() | currency:service.currencyDetails['code']:service.currencyDetails['symbol_native'] }}
+ {{ 'Amount' | translate }}: {{getBudgetAmount() | currency:currencyDetails['code']:currencyDetails['symbol_native'] }}
                 </span>
             </a>
         </div>
         <a [routerLink]="['/upload']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-cloud-upload"></i>&nbsp;{{ 'Upload' | translate }}
-            <span class="badge badge-info">Beta</span>
+            <span class="badge badge-info">Beta:Paytm</span>
         </a>
         <a href="https://github.com/jawahar273/bm-client/blob/master/CHANGELOG.md" class="list-group-item" target="_blank">
             <i class="fa fa-list-alt"></i>&nbsp;{{ 'Change Log' | translate }}
@@ -36,7 +36,7 @@
                 <!-- <span><i class="fa fa-user"></i>&nbsp; {{ getUserName() }}</span> -->
                 <img src="{{getUserProfileURL()}}"  
                     id="profileImageSideBar" alt="Profile Image" />
-                Menu
+                {{ 'Menu' | translate }}
             </a>
             <li class="nested" [class.expand]="showMenu === 'pages'">
                 <ul class="submenu">
@@ -57,12 +57,32 @@
                 </ul>
             </li>
         </div>
+        <div class="nested-menu" [hidden]="!service.isMobileScreen">
+            <a class="list-group-item" (click)="addExpandClass('language')">
+                <i class="fa fa-language"></i>
+                {{ 'Language' | translate }}
+            </a>
+            <li class="nested" [class.expand]="showMenu === 'language'">
+                <ul class="submenu">
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
+                            {{ 'English' | translate }}
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
+                            {{ 'French' | translate }}
+                        </a>
+                    </li>
+                </ul>
+            </li>
+        </div>
     </div>                    
 </nav>
 
             <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
               <div class="modal-header">
-                <h4 class="modal-title">Setting Budget Amount</h4>
+                <h4 class="modal-title">{{'Setting Budget Amount' | translate}}</h4>
                 <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
                   <span aria-hidden="true">&times;</span>
                 </button>
@@ -83,7 +103,7 @@
                 </div>
               </div>
               <div class="modal-footer">
-                <button class="btn btn-info" (click)="onAmountSubmit(c)" >Submit</button>
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+                <button class="btn btn-info" (click)="onAmountSubmit(c)" >{{'Submit' | translate}}</button>
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">{{'Close' | translate}}</button>
               </div>
             </ng-template>

@@ -33,13 +33,13 @@ export class ConfirmEmailComponent implements OnInit {
   ngOnInit() {
   }
 
-  public setLoadSpinner(value : boolean) {
-  
+  public setLoadSpinner(value: boolean) {
+
     this.spinnerIcon = value;
-  
+
   }
 
-  public submitConfirmEmailToken():void {
+  public submitConfirmEmailToken(): void {
 
       const body = {'key': this.confirmToken };
       this.service.post(`rest-auth/registration/verify-email`, this.service.headers, body)
@@ -50,7 +50,7 @@ export class ConfirmEmailComponent implements OnInit {
           setTimeout(() => {
 
               this.pathHandler.navigate(['/login']);
-          
+
           }, 2500);
 
       }, (error) => {
@@ -58,7 +58,7 @@ export class ConfirmEmailComponent implements OnInit {
           const msg = this.service.isClinetOrServerSidesError(error);
           this.service.showGlobalAlert(msg);
           this.setLoadSpinner(true);
-      
+
       });
       this.setLoadSpinner(false);
 

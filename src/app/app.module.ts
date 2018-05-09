@@ -20,6 +20,8 @@ import { AppComponent } from './app.component';
 import { AuthGuard } from './shared';
 import { environment } from '../environments/environment';
 import { CommonService } from './services/common.services';
+import { NotificationsServices,
+         UploadWsNotification } from './services/notification.services';
 import { ConfirmEmailModule } from './confirm-email/confirm-email.module';
 
 
@@ -60,7 +62,10 @@ export function createTranslateLoader(http: HttpClient) {
         ConfirmEmailModule,
     ],
     declarations: [AppComponent],
-    providers: [AuthGuard, CommonService],
+    providers: [AuthGuard,
+                CommonService,
+                NotificationsServices,
+                UploadWsNotification],
     bootstrap: [AppComponent],
 })
 export class AppModule {}

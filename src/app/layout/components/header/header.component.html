@@ -1,10 +1,12 @@
-<nav class="navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg fixed-top" [@routerTransition]>
     <button class="navbar-toggler" type="button" (click)="toggleSidebar()">
         <span class="navbar-toggler-icon">  
           <i class="fa fa-bars text-muted" aria-hidden="true"></i>
         </span>
     </button>
-    <a class="navbar-brand" href="#">Budget Management</a>
+    <a class="navbar-brand" href="#">
+        {{ 'Budget Management' | translate }}
+    </a>
     <div class="collapse navbar-collapse">
         <!-- <form class="form-inline my-2 my-lg-0">
             <input class="form-control mr-sm-2" type="text" placeholder="{{ 'Search' | translate }}" >
@@ -63,14 +65,15 @@
 
                 <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
 
-                    <i class="fa fa-skyatlas"></i>
-                    <b class="caret"></b><span class="sr-only">(current)</span>
+                    <i class="fa fa-skyatlas" style="font-size: 19px;"></i>
+                    <b class="caret"></b>
+                    <span class="sr-only">(current)</span>
 
                 </a>
 
-            <ul class="dropdown-menu dropdown-menu-right messages col-lg-8" >
+            <ul class="dropdown-menu dropdown-menu-right messages col-lg-8">
 
-                <li class="media" *ngFor="let item of service.airPollutionKeys" style="border-bottom: 0px;">
+                <li class="media" id="pollution-data" *ngFor="let item of service.airPollutionKeys" style="border-bottom: 0px;">
 
                     <!-- <img class="d-flex align-self-center mr-3"
                         src="" alt="Generic placeholder image"
@@ -83,16 +86,21 @@
                     <div class="media-body allow-center">
 
                         <h4 class="mt-0 mb-1">
-                            {{item}}
+                            {{ item }}
                         </h4>
 
-                        <p class="small text-muted"><i class="fa fa-clock-o"></i> {{service.currentDateWithMomentJS}}
+                        <p class="small text-muted"><i class="fa fa-clock-o"></i> 
+                            {{ service.currentDateWithMomentJS }}
                         </p>
                      
-                        <p class="last">
-                            Mix Ratio: {{service.airPollutionData[item]['value']}}<br>
-                            Pressure: {{service.airPollutionData[item]['pressure']}} hPa
-                        </p>
+                            <ul class="last" style="list-style: none;padding: 0;">
+                                <li>
+                                    {{ 'Mix Ratio' | translate}}: {{ roundOfData(service.airPollutionData[item]['value']) }}
+                                </li>
+                                <li>
+                                    {{ 'Pressure' | translate }}: {{ roundOfData(service.airPollutionData[item]['pressure']) }} hPa
+                                </li>
+                            </ul>
                    
                     </div>
 
@@ -102,17 +110,21 @@
 
             </li>
             
-            <li class="nav-item dropdown" ngbDropdown>
+            <li class="nav-item dropdown" id="upload-status" ngbDropdown [ngStyle]="{'color': uploadService.percentage? 'blue' : '#999'}">
             
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
             
-                    <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
+                    <i class="fa fa-bell"></i>
+                    <b class="caret"></b>
+                    <span class="sr-only">(current)</span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
-                
-                    <a href="javascript:void(0)" class="dropdown-item">
-                        {{ 'Work in Progress' | translate }} <span class="badge badge-info"> 0</span>
+                    
+                    <a href="javascript:void(0)" class="dropdown-item" *ngIf="uploadService.percentage">
+                        {{ 'Upload Status' | translate }}
+                        <span class="badge badge-info"> {{ uploadService.percentage }}
+                        </span>
                     </a>
                 
                     <!-- <a href="javascript:void(0)" class="dropdown-item">
@@ -132,11 +144,13 @@
            
             </li>
            
-            <li class="nav-item dropdown" ngbDropdown>
+            <li class="nav-item dropdown" id="language" ngbDropdown >
            
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
            
-                    <i class="fa fa-language"></i> {{ 'Language' | translate }} <b class="caret"></b>
+                    <i class="fa fa-language"></i>
+                    {{ 'Language' | translate }}
+                    <b class="caret"></b>
            
                 </a>
            
@@ -154,7 +168,7 @@
            
             </li>
            
-            <li class="nav-item dropdown" ngbDropdown>
+            <li class="nav-item dropdown" id="profile-menu" ngbDropdown>
            
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                     <!-- <i class="fa fa-user"></i> {{getUserName()}} <b class="caret"></b> -->

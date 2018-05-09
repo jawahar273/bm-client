@@ -7,6 +7,7 @@ import {
           NgbDropdownModule
         } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { TranslateModule } from '@ngx-translate/core';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -29,6 +30,7 @@ import { StatModule } from '../../shared';
         NgbDropdownModule.forRoot(),
         StatModule,
         NgxDatatableModule,
+        TranslateModule,
         DashboardRoutingModule,
         PageHeaderModule,
     ],
