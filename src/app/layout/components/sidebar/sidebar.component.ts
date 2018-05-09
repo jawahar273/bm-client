@@ -38,11 +38,11 @@ export class SidebarComponent {
               public service: CommonService,
               private modalService: NgbModal) {
 
-      this.translate.addLangs(['en', 'fr']);
-      const defaultLan = localStorage.getItem('language');
-      this.translate.setDefaultLang(defaultLan? defaultLan : 'en');
-      const browserLang = this.translate.getBrowserLang();
-      this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+      // this.translate.addLangs(['en', 'fr']);
+      // const defaultLan = localStorage.getItem('language');
+      // this.translate.setDefaultLang(defaultLan? defaultLan : 'en');
+      // const browserLang = this.translate.getBrowserLang();
+      // this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 
 
       this.datePickerModel = this.service.currentDateWithMomentJS;
