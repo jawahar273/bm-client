@@ -4,7 +4,8 @@
         <div class="col col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    Bar Chart
+                    
+                    {{'Bar Chart' | translate }}
                 </div>
                 <div class="card-body">
                     <canvas baseChart *ngIf="barChartLabels && barChartData"
@@ -13,19 +14,19 @@
                     </canvas>
                 </div>
                 <div class="card-footer">
-                    Current Month's Group/Catogories
+                    {{'Current Month Group/Categories' | translate }}
                 </div>
             </div>
         </div>
         <div class="col col-sm-6">
             <div class="card mb-3">
                 <div class="card-header">
-                    Doughnut Chart
+                    {{ 'Doughnut Chart' | translate }}
                     <span placement="right" [ngbTooltip]="tipDashTableContent2" 
                     [hidden]="hideBudgetAmountZero">
                         <i class="fa fa-question-circle "></i>
                         <ng-template #tipDashTableContent2>
-                           Spending amount exced the budget amount of the month.
+                           {{ 'Spending amount exceed the budget amount of the month.' | translate }}
                         </ng-template>
                     </span>
                 </div>
@@ -35,7 +36,7 @@
                     </canvas>
                 </div>
                 <div class="card-footer">
-                     Selected Month's Budget and Spend Amount
+                     {{ 'Selected Month Budget and Spend Amount' | translate }}
                 </div>
             </div>
         </div>

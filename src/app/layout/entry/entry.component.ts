@@ -24,15 +24,15 @@ export class EntryComponent implements OnInit {
 
     entryForm: FormGroup;
     itemEntry: Array<any> = [];
-    hiddleAlert: boolean = true;
+    hiddleAlert: Boolean = true;
     entryFormAlert: Array<any> = [];
-    hideLoadSpin: boolean = true;
+    hideLoadSpin: Boolean = true;
     headers: Headers;
     id: number;
     serviceFields: Object;
-    submitForm: boolean = false;
+    submitForm: Boolean = false;
     // flag for check the value has been found or not in getting entry object on `id`.
-    content404: boolean = false;
+    content404: Boolean = false;
 
     /**
      *
@@ -48,7 +48,8 @@ export class EntryComponent implements OnInit {
       this.headers = this.service.headers;
       this.route.params.subscribe(params => { this.id = params['id']; });
       this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
-      !!this.id ? this.getOneItemListObject(this.id) : '';
+      // need reivew
+      //   !!this.id ? this.getOneItemListObject(this.id) : '';
 
   }
 
@@ -97,7 +98,7 @@ export class EntryComponent implements OnInit {
 
   /**
    * Get the object based on the given id and map them to the form value
-   * 
+   *
    * @param id unique id of the entry which is from back-end.
    */
   private getOneItemListObject(id: any): any {
@@ -125,10 +126,10 @@ export class EntryComponent implements OnInit {
  * Get the object from the service if the object is not null then
  * get the value and embeded them into the form in the entry page or generate 
  * new formgroup with empty data by calling the @method generateGroupItemsFormControl .
- * 
+ *
  * @param _object Object from the response(server) api.
  * @return {Object}  for creating dymanic based on the request data
- * 
+ *
  */
   private getObjectForUpdate(_object?: Object): Object {
 
@@ -148,7 +149,7 @@ export class EntryComponent implements OnInit {
 
   private generateListOfItems(items): Array<FormGroup> {
 
-      let pushArray = [];
+      const pushArray = [];
       Object.keys(items).forEach((element, index) => {
 
           const temp = this.generateGroupItemsFormControl(items[element]['amount'], items[element]['name'] );
@@ -208,10 +209,10 @@ export class EntryComponent implements OnInit {
 
   public trackByFnForEntryGroupItems(index, item) { 
 
-      return item.id; 
+      return item.id;
 
   }
-  
+
   formatter = (result: string) => this.service.toTitleCase(result);
   typeAheadForGroupItems = (text$: Observable<string>) => 
     text$
@@ -219,7 +220,7 @@ export class EntryComponent implements OnInit {
       .distinctUntilChanged()
       .map(term => term.length < 2 ? []
         : this.service.listOfGroupItems.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
-  
+
 
   /**
    * This function is called on the event `onsubmit`. That the formcontrol are mapped to
@@ -236,7 +237,7 @@ export class EntryComponent implements OnInit {
         const url = 'package/itemslist';
         // const oldName = Object.keys(this.serviceFields);
         // const newName = Object.values(this.serviceFields);
-        let _body = this.service.renameObjectAllKeys(this.serviceFields, this.entryForm.value, 's');
+        const _body = this.service.renameObjectAllKeys(this.serviceFields, this.entryForm.value, 's');
 
         if (!!this.id && !this.content404) {
 
@@ -314,7 +315,7 @@ export class EntryComponent implements OnInit {
 
  public findInvalidControls(checkAllFields: boolean = false) {
 
-     let invalid = [];
+     const invalid = [];
      const controls = this.entryForm.controls;
      const _names = Object.keys(controls);
      const inx = _names.indexOf('entryGroupItems');
@@ -343,7 +344,8 @@ export class EntryComponent implements OnInit {
      if (controls['entryGroupItems'].invalid) {
 
          controls.entryGroupItems['controls'].forEach((element, index) => {
-             const amount = element.controls['amount'];
+
+            const amount = element.controls['amount'];
              const name = element.controls['name'];
              amount.invalid ? amount.markAsTouched({ onlySelf: true }) : undefined;
              name.invalid ? name.markAsTouched({ onlySelf: true }) : undefined;

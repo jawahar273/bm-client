@@ -54,7 +54,7 @@ export class ChartsComponent implements OnInit {
 
     // lineChart
     public lineChartData: Array<any>;
-    public lineChartLabels: Array<any>; 
+    public lineChartLabels: Array<any>;
     public lineChartOptions: any = {
         responsive: true
     };
@@ -90,10 +90,10 @@ export class ChartsComponent implements OnInit {
     public lineChartLegend: boolean = true;
     public lineChartType: string = 'line';
     public displayMonths: number = 2; // used inside the html
-    // if the bugdet is less than the total spend amount 
-    // in the chart then hide the chart for budget amount in 
+    // if the bugdet is less than the total spend amount
+    // in the chart then hide the chart for budget amount in
     // chart.
-    public hideBudgetAmountZero: boolean ; 
+    public hideBudgetAmountZero: boolean ;
 
     private sumOfCurrentMonthSpending: number = 0;
     rangeMonthAndYear: FormGroup;
@@ -121,79 +121,79 @@ export class ChartsComponent implements OnInit {
     }
 
     private getBarChart() {
-    
+
         console.log(this.service.dataTableDashboard);
         if (!this.service.dataTableDashboard) {
-    
-            const rangeDate = { 
-    
+
+            const rangeDate = {
+
               'start': moment(this.service.today).startOf('month').format('YYYY-MM-DD'),
               'end': moment(this.service.today).endOf('month').format('YYYY-MM-DD')
-    
-            }
-    
+
+            };
+
             this.service.get(`package/itemslist/${rangeDate['start']}/${rangeDate['end']}`, this.service.headers).subscribe(
                 (data) => {
-    
+
                     this.service.dataTableDashboard = data;
                     this.calculateBarChartData(data);
-    
+
                 },
                 (error) => {
-    
+
                     this.service.showGlobalAlert('Error in Chart and Table');
-    
+
             });
-    
+
             this.service.needTableUpdate = false;
-    
+
         } else {
-    
+
                 this.calculateBarChartData(this.service.dataTableDashboard);
-    
+
         }
-    
+
     }
 
 
     private toTitleCaseLongSent(data, service=this.service): string {
-    
+
       return data.split().map(service.toTitleCase).join(' ')
-    
+
     }
 
     private addTwoValues(value1, value2): number {
-    
+
         return value1 + value2;
-    
+
     }
 
     private calculateBarChartData(data) {
-    
+
         const chartContent = [];
         let currentMonthitemsContent: Array<any>;
 
         const selectedDateFormat = this.service.dateRangOfMonths['start'];
         const monthYearFormat = selectedDateFormat.substr(0, selectedDateFormat.lastIndexOf('-'));
-        let groups = {};
+        const groups = {};
         // checking the content is present or not
         currentMonthitemsContent =  data.length === 0 ? data = [{'group' : '', 'total_amount': 0}] 
                                        : data;
         const _self = this;
         currentMonthitemsContent.forEach((ele, indx) => {
-    
+
             const temp = parseFloat(ele['total_amount']);
             // add the value if present or it initilize new one..
             groups[`${ele['group'].toLowerCase()}`] = groups[`${ele['group'].toLowerCase()}`] + temp || temp;
-    
+
         });
-    
+
         const totalAmountArray = Object.values(groups);
         this.sumOfCurrentMonthSpending = <number>totalAmountArray.reduce(this.addTwoValues);
         const tempGroup = Object.keys(groups).map((data) => {
-    
+
              return data.split(' ').map(this.service.toTitleCase).join(' ')
-    
+
          });
 
         const content: Object = {'lable': tempGroup , 'data': [{ 'data': totalAmountArray, 'label': monthYearFormat }], 'chartType':'bar'};
@@ -201,7 +201,7 @@ export class ChartsComponent implements OnInit {
                         content['data'],
                         content['chartType']);     
         this.getDoughNutChart();
-    
+
     }
 
     /**
@@ -216,28 +216,28 @@ export class ChartsComponent implements OnInit {
         this.service.get(url, this.service.headers)
           .subscribe(
               (data) => {
-    
+
                 if (data.length) {
-    
+
                     let amount = parseFloat(data[0]['budget_amount']);
-    
+
                     if (amount > this.sumOfCurrentMonthSpending) {
-    
+
                        amount -= this.sumOfCurrentMonthSpending;
-    
+
                     } else {
-    
+
                         amount = 0;
                         this.hideBudgetAmountZero = false;
-    
+
                     }
-    
+
                     const content: Object = {
-    
+
                         'lable': [`Month\'s Budget Amount`, 'Total Spending Amount'],
                         'data': [amount, this.sumOfCurrentMonthSpending],
                         'chartType': 'donut'
-    
+
                     };
 
                     this.setChart(
@@ -245,17 +245,17 @@ export class ChartsComponent implements OnInit {
                         content['data'],
                         content['chartType']
                     );
-    
+
                 } else {
-    
+
                    this.service.showGlobalAlert(`Need to show 'Doughnut chart'. Please click 'Amount' menu and fill.`);
-    
+
                 }
               },
               (error) => {
-    
+
                   this.service.showGlobalAlert('Pie chart have some error');
-    
+
               }
           );
     }
@@ -267,34 +267,34 @@ export class ChartsComponent implements OnInit {
      * @description set the given data for the correspond to the chart and display them.
      */
     public setChart(label: Array<String>, _data: Array<any>, type: string): void {
-        
+
         switch (type) {
-            
+
             case 'donut':
                this.doughnutChartLabels = label;
                this.doughnutChartData = _data;
                break;
-            
+
             case 'radar':
                 this.radarChartLabels = label;
                 this.radarChartData = _data;
                 break;
-        
+
             case 'bar':
                 this.barChartLabels = label;
                 this.barChartData = _data;
                 break;
-        
+
             case 'line':
                 this.lineChartLabels = label;
                 this.lineChartData = _data;
                 break;
-        
+
         }
     }
 
     public onSumitForm(value: Object) {
 
     }
-    
+
 }

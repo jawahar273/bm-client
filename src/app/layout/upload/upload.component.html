@@ -1,72 +1,142 @@
 <div [@routerTransition] >
+
     <app-page-header [heading]="'Upload File'" [icon]="'fa-bar-chart-o'"></app-page-header>
+
     <div class="row allow-center">
+
     	<div class="card col-lg-6 col-xs-5">
+
 	    	<div class="card-block" style="padding-top: 10px; padding-bottom: 10px;">
+
 	    		<h2 class="card-title">
-	     			Entry Upload 
+	     			{{ 'Entry Upload' | translate }}
+
 	     			<span>
+
 	     				<i class="fa fa-question-circle " (click)="open(UploadTermsCondtionsModel)" ></i>
+
 	     			</span>
+
 	    		</h2>
+
 	    		<div>
-	    			Upload the csv/excel into your account with few clicks.
+
+	    			{{'Upload the csv/excel into your account with few clicks.'| translate}}
+
 	    		</div> <br>
+
 	    		<div class="container-fluid">    			
+
 					<form id="uploadFileForm"  #uploadFileForm="ngForm" (ngSubmit)="onSubmitUploadFile(uploadFileForm.value)" novalidate>
+
 						   <div class="form-group">
+
 							   	<div class="">
-							   	    <label for="entry-type">Choose Entry Type</label>
+
+							   	    <label for="entry-type">
+                                      {{ 'Choose Entry Type' | translate }}
+                                    </label>
+
 								   	 <select class="custom-select" id="entry-type"
 								   	 name="entryType" [(ngModel)]="defaultEntryOptionType" (change)="onChangEntryType($event)">
+
 								   	 	<option *ngFor="let item of entryOptionTypes" [value]="item.value">
-								   	 		{{ item.name }}
+								   	 		{{ item.name | translate }}
 								   	 	</option>
+
 								   	 </select>
+
 							   	</div>
+
 						   </div>
+
 						   <div class="form-group">
+
 						   	    <div class="">				   	    	
 							   	   <!--  <label for="entry-file" id="entry-file-lable">Choose File</label> -->
+
 								   	 <input type="file" id="entry-file" multiple
 								   	 name="file" placeholder="Upload File" 
 								   	 (change)="onChangeFile($event)" ngModle>
+
 						   	    </div>
+
 						   </div>
+
 						   <div class="card-text" [ngClass]="{'col-xs-12': service.isMobileScreen}">
-							   <button class="btn app-button" [disabled]="flagForUploadBtn" [ngClass]="{'pull-right': !service.isMobileScreen}" >submit
+
+							   <button class="btn app-button" [disabled]="flagForUploadBtn" [ngClass]="{'pull-right': !service.isMobileScreen}" >{{ 'Submit' | translate }}
+
 							   <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="registerButton" [hidden]="spinnerIcon"></i>
+
 							   </button>
+
 						   </div>
+
 					</form>
+
 	    		</div>
+
 	    	</div>	
+
     	</div>
+
 	</div>
+
             <ng-template #UploadTermsCondtionsModel let-c="close" let-d="dismiss">
+
               <div class="modal-header">
-                <h4 class="modal-title">Condtions in Upload</h4>
+
+                <h4 class="modal-title">{{ 'Condtions in Upload' | translate }}</h4>
+
                 <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+
                   <span aria-hidden="true">&times;</span>
+
                 </button>
+
               </div>
+
               <div class="modal-body">
+
                 <!-- {{uploadTermsAndCondtions | json}} -->
+
                 <ngb-tabset>
+
 	                <ngb-tab *ngFor="let title of getKeys(uploadTermsAndCondtions)">
+
 	                	<ng-template ngbTabTitle>
-	                		<b>{{service.toTitleCase(title)}}</b>
+
+	                		<b>
+                                {{ service.toTitleCase(title) }}
+                            </b>
+
 	                	</ng-template>
+
 	                	<ng-template ngbTabContent>
+
 	                		<ol>
-	                		  <li *ngFor="let content of uploadTermsAndCondtions[title]"> {{content}}</li>
+
+	                		  <li *ngFor="let content of uploadTermsAndCondtions[title]">    {{ content }}
+                              </li>
+
 	                		</ol>
+
 	                	</ng-template>
+
 	                </ngb-tab>
+
                 </ngb-tabset>
+
               </div>
+
               <div class="modal-footer">
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">Close</button>
+
+                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">      {{ 'Close' | translate }}
+                </button>
+
               </div>
+
             </ng-template>
+
 </div>

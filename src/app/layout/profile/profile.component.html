@@ -1,58 +1,110 @@
 <div [@routerTransition] class="container-fluid pagination-centered profile"  >
+
 	<app-page-header [heading]="'Profile'" [icon]="'fa-etsy'"></app-page-header>
+
 	<div class="row p-content">
+
 		<div class="col-lg-12 col-xs-12 p-body">
+
 			<div class="row align-items-start">
+
 				<div class="col-lg-4 col-xs-6">
-					<h2>Public Image</h2>
-					<p>Please upload image to <a href="http://gravatar.com/" target="_black">gravatar.com</a></p>
+
+					<h2>{{'Public Image' | translate}}</h2>
+
+					<p>{{'Please upload image to' | translate}} <a href="http://gravatar.com/" target="_black">gravatar.com</a></p>
+
 				</div>
+
 				<div class="col-lg-8 col-xs-6">
+
 					<img src="{{getUserProfileURL()}}&s=400" alt="profile image" class="rounded-circle p-image" [ngClass]="{'allow-center': service.isMobileScreen}">
+
 				</div>
+
 				<hr>
+
 			</div>
+
 		</div>
+
 		<div class="col-lg-12 col-xs-12 p-body">
+
 			<div class="row align-items-start">
+
 				<div class="col-lg-4 col-xs-6">
-					<h2>About Me</h2>
+
+					<h2>{{'About Me' | translate}}</h2>
+
 					<p>
-						Basic user's details.
+						{{'Basic user details.' | translate}}
 					</p>
+
 				</div>
+
 				<div class="col-lg-8 col-xs-6">
+
 				    <div class="form-group" >
+
 						<input type="text"  readonly="readonly" class="form-control input-underline"
 						[value]="getUserEmail()"
 						 id="proEmail" placeholder="Email">
+
 					</div>
+
 					<form [formGroup]="profileForm" (ngSubmit)="onSubmitProfileSetting()">
+					
 						<div class="form-group" >
-							<input type="text" formControlName="proFirstName" [ngClass]="{'has-error':checkFormHasErrorUser('proFirstName')}" class="form-control input-underline"
-							 id="proFirstName" placeholder="First Name">
+					
+							<input type="text" formControlName="
+							proFirstName" [ngClass]="{'has-error':checkFormHasErrorUser('proFirstName')}" class="form-control input-underline"
+							 id="proFirstName" placeholder="{{'First Name' | translate}}">
+						
 						</div>
+						
 						<div class="form-group" >
+						
 							<input type="text" formControlName="proLastName" [ngClass]="{'has-error':checkFormHasErrorUser('proLastName')}" class="form-control input-underline"
-							 id="proLastName" placeholder="Last Name">
+							 id="proLastName" placeholder="{{'Last Name' | translate}}">
+						
 						</div>
+						
 						<div class="form-group" >
+						
 							<select formControlName="proGender" class="custom-select" id="proGender">
-								<option value="F">Female</option>
-								<option value="M">Male</option>
-								<option value="O">Other</option>
-								<option value="N">Not Willing to say</option>
+								<option value="F">
+									{{ 'Female' | translate }}
+								<option>
+								<option value="M">
+									{{ 'Male' | translate }}
+								</option>
+								<option value="O">
+									{{ 'Other' | translate }}
+								</option>
+								<option value="N">
+									{{'Not Willing to say' | translate}}
+								</option>
 
 							</select>  
+						
 						</div>
+                        
                         <div>
+                        
                         	<button class="btn app-button form-group .p-btn">
-                        	  Submit
+                        	  {{ 'Submit' | translate }}
                             </button>
+                        
                         </div>
+
 					</form>
+
 				</div>
+
 			</div>
+
 		</div>
+
 	</div>
+
 </div>

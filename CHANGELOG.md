@@ -6,6 +6,15 @@
 - Tourism for the app.
 - ~~CSS issue in header bar for mid-size modbile screen.~~
 
+### 0.4.0
+- Implementing WebSocket
+- Change the header class name: `fa fa-skyatlas` font size.
+- Change in the local storage names.
+- Bi-language (English/French[70% done]).
+- Auto-change to last selected language.
+- Equalization fr-en json.
+- Adding notification on upload status.
+
 ### 0.3.0
 - Add weather setting.
 
