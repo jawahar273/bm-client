@@ -49,3 +49,5 @@ docs2/
 __*.sh
 test_build/
 README.html
+
+.fuse_hidden*
