@@ -711,8 +711,16 @@ export class CommonService {
       localStorage.setItem(`userGender-${this.userName}`, _data['gender']);
     }
 
-    public syncLocalStorage(name): any {
+    public syncLocalStorage(name: string): any {
+
         return localStorage.getItem(`${name}-${this.userName}`);
+
+    }
+
+    public syncLocalStorageSet(name:string, value: any): void {
+
+        localStorage.setItem(`${name}-${this.userName}`, value);
+
     }
 
     public onLoggedout() {

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateService } from '@ngx-translate/core';
 
 import { CommonService } from '../../../services/common.services';
 import { slideToRight as routerTransition } from '../../../router.animations';
@@ -33,7 +34,16 @@ export class SidebarComponent {
     @ViewChild('sideBarAmountModelcontent') sideBarAmountModelcontent;
 
 
-  constructor(public service: CommonService, private modalService: NgbModal) {
+  constructor(private translate: TranslateService,
+              public service: CommonService,
+              private modalService: NgbModal) {
+
+      this.translate.addLangs(['en', 'fr']);
+      const defaultLan = localStorage.getItem('language');
+      this.translate.setDefaultLang(defaultLan? defaultLan : 'en');
+      const browserLang = this.translate.getBrowserLang();
+      this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
+
 
       this.datePickerModel = this.service.currentDateWithMomentJS;
       this.service.getBudgetAmount();
@@ -64,10 +74,14 @@ export class SidebarComponent {
 
     return this.service.budgetAmount;
 
-    // const odometerBudgetAmount: HTMLElement = document.getElementById('odometerBudgetAmount');
-    // odometerBudgetAmount.innerText = String(this.service.budgetAmount);
-
   }
+
+    public changeLang(language: string): void {
+
+        localStorage.setItem('language', language);
+        this.translate.use(language);
+
+    }
 
   public onAmountSubmit(close: any) {
 

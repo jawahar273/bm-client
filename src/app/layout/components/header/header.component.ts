@@ -1,9 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
-import { slideToBottom as routerTransition } from '../../../router.animations';
+import { NgbDropdown } from '@ng-bootstrap/ng-bootstrap';
+import * as moment from 'moment';
 
+import { slideToBottom as routerTransition } from '../../../router.animations';
 import { CommonService } from '../../../services/common.services';
 import { UploadWsNotification } from '../../../services/notification.services';
 @Component({
@@ -15,6 +17,8 @@ import { UploadWsNotification } from '../../../services/notification.services';
 export class HeaderComponent implements OnInit {
 
     public pushRightClass: string = 'push-right';
+    @ViewChild(NgbDropdown)
+    private navDropdown: NgbDropdown;
 
     constructor(private translate: TranslateService,
                 public router: Router,
@@ -23,8 +27,11 @@ export class HeaderComponent implements OnInit {
 
         // this.getAirPollution();
 
+
         this.translate.addLangs(['en', 'fr']);
-        this.translate.setDefaultLang('en');
+        let defaultLan = localStorage.getItem('language');
+        defaultLan = defaultLan ? defaultLan : 'en'
+        this.translate.setDefaultLang(defaultLan);
         const browserLang = this.translate.getBrowserLang();
         this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 
@@ -75,8 +82,9 @@ export class HeaderComponent implements OnInit {
 
     }
 
-    public changeLang(language: string) {
+    public changeLang(language: string):void {
 
+        localStorage.setItem('language', language);
         this.translate.use(language);
 
     }

@@ -66,13 +66,14 @@
                 <a class="nav-link" href="javascript:void(0)" ngbDropdownToggle>
 
                     <i class="fa fa-skyatlas" style="font-size: 19px;"></i>
-                    <b class="caret"></b><span class="sr-only">(current)</span>
+                    <b class="caret"></b>
+                    <span class="sr-only">(current)</span>
 
                 </a>
 
-            <ul class="dropdown-menu dropdown-menu-right messages col-lg-8" >
+            <ul class="dropdown-menu dropdown-menu-right messages col-lg-8">
 
-                <li class="media" *ngFor="let item of service.airPollutionKeys" style="border-bottom: 0px;">
+                <li class="media" id="pollution-data" *ngFor="let item of service.airPollutionKeys" style="border-bottom: 0px;">
 
                     <!-- <img class="d-flex align-self-center mr-3"
                         src="" alt="Generic placeholder image"
@@ -109,11 +110,13 @@
 
             </li>
             
-            <li class="nav-item dropdown" ngbDropdown>
+            <li class="nav-item dropdown" id="upload-status" ngbDropdown [ngStyle]="{'color': uploadService.percentage? 'blue' : '#999'}">
             
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
             
-                    <i class="fa fa-bell"></i> <b class="caret"></b><span class="sr-only">(current)</span>
+                    <i class="fa fa-bell"></i>
+                    <b class="caret"></b>
+                    <span class="sr-only">(current)</span>
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-right">
@@ -141,7 +144,7 @@
            
             </li>
            
-            <li class="nav-item dropdown" ngbDropdown >
+            <li class="nav-item dropdown" id="language" ngbDropdown >
            
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
            
@@ -165,7 +168,7 @@
            
             </li>
            
-            <li class="nav-item dropdown" ngbDropdown>
+            <li class="nav-item dropdown" id="profile-menu" ngbDropdown>
            
                 <a href="javascript:void(0)" class="nav-link" ngbDropdownToggle>
                     <!-- <i class="fa fa-user"></i> {{getUserName()}} <b class="caret"></b> -->

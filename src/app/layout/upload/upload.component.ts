@@ -45,8 +45,8 @@ export class UploadComponent implements OnInit {
 
     this.entryOptionTypes = [
       { value: 'default', name: 'None' }, // this should the first one
-      { value: 'paytm', name: 'paytm' },
-      { value: 'other', name: 'other' },
+      { value: 'paytm', name: 'Paytm' },
+      { value: 'other', name: 'Other' },
     ];
 
     this.defaultEntryOptionType = 'default';
@@ -58,7 +58,7 @@ export class UploadComponent implements OnInit {
 
   ngOnInit() {
     // for testing only
-         this.notifices.makeNoticies('upload');
+         // this.notifices.makeNoticies('upload');
   }
 
   public setLoadSpinner(value: Boolean): void {
@@ -147,7 +147,7 @@ export class UploadComponent implements OnInit {
     // refer : https://jawahar273.gitbooks.io/blog/content/Typescript/
     this.flagForUpload[name] = value;
     this.flagForUploadBtn = value;
-    // this.flagMsg = msg;
+
 
     if (msg) {
 
