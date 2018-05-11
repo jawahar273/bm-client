@@ -121,27 +121,27 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 MIT
 MIT
 
-@angular/common@5.2.2
+@angular/common@5.2.10
 MIT
 MIT
 
-@angular/core@5.2.2
+@angular/core@5.2.10
 MIT
 MIT
 
-@angular/forms@5.2.2
+@angular/forms@5.2.10
 MIT
 MIT
 
-@angular/http@5.2.2
+@angular/http@5.2.10
 MIT
 MIT
 
-@angular/platform-browser@5.2.2
+@angular/platform-browser@5.2.10
 MIT
 MIT
 
-@angular/router@5.2.2
+@angular/router@5.2.10
 MIT
 MIT
 
