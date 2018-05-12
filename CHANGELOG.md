@@ -5,6 +5,10 @@
 - ~~UI change in date for dashboard.~~
 - Tourism for the app.
 - ~~CSS issue in header bar for mid-size modbile screen.~~
+- User choice date display.
+
+### 0.4.1
+- New icons.
 
 ### 0.4.0
 - Implementing WebSocket
@@ -14,6 +18,7 @@
 - Auto-change to last selected language.
 - Equalization fr-en json.
 - Adding notification on upload status.
+
 
 ### 0.3.0
 - Add weather setting.
