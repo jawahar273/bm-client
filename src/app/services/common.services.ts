@@ -192,7 +192,7 @@ export class CommonService {
     public isClinetOrServerSidesError(status: Object, lookUpField?: any, extraInfo = true): string {
 
         const status_code: number = status['status_code'];
-        if (this.clientErrorCode.has(status_code)) {
+        if (this.clientErrorCode.has(status_code) || !status_code) {
 
             // check the lookupfield is ``undefined` if so then assign the `detail` field.
             lookUpField = !!lookUpField ?
