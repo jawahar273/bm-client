@@ -88,7 +88,7 @@ export class LoginComponent implements OnInit {
 
               (error) => {
 
-                  const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping);
+                  const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping, false);
                   this.service.showGlobalAlert(msg);
                   this.setLoadSpinner(true);
                   this.router.navigate(['/login']);
