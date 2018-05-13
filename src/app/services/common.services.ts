@@ -711,9 +711,10 @@ export class CommonService {
       localStorage.setItem(`userGender-${this.userName}`, _data['gender']);
     }
 
-    public syncLocalStorage(name: string): any {
-
-        return localStorage.getItem(`${name}-${this.userName}`);
+    public syncLocalStorage(name: string, default_value?: any): any {
+        let temp = localStorage.getItem(`${name}-${this.userName}`);
+        temp = temp ? temp : default_value;
+        return temp;
 
     }
 

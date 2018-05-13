@@ -12,12 +12,17 @@ import { CommonService } from '../../services/common.services';
 })
 export class ProfileComponent implements OnInit {
   public profileForm: FormGroup;
-  public serviceField: Object;
+  public serviceField: object;
 
   public packageForm: FormGroup;
-  public servicePackageSettingsField: Object;
+  public servicePackageSettingsField: object;
+  public genderObject: Array<object>;
+
   constructor(public service: CommonService, public profileFormBuilder: FormBuilder) {
-  
+     this.genderObject = [{name: 'Male', value: 'M'},
+                          {name: 'Female', value: 'F'},
+                          {name: 'Other', value: 'O'},
+                          {name: 'Not Willing to say', value: 'N'}]
      this.getInitProfileSetting();
      this.getInitPackageSettings();
 
@@ -28,9 +33,9 @@ export class ProfileComponent implements OnInit {
 
   private getInitProfileSetting() {
       this.profileForm = this.profileFormBuilder.group({
-       proFirstName : this.service.syncLocalStorage('userFirstName'),
-       proLastName: this.service.syncLocalStorage('userLastName'),
-       proGender: this.service.syncLocalStorage('userGender'),
+       proFirstName : this.service.syncLocalStorage('userFirstName', ''),
+       proLastName: this.service.syncLocalStorage('userLastName', ''),
+       proGender: this.service.syncLocalStorage('userGender', 'N'),
      });
 
      this.serviceField = {
@@ -43,11 +48,11 @@ export class ProfileComponent implements OnInit {
   }
 
   private getInitPackageSettings() {
-
+    // @review
     this.packageForm = this.profileFormBuilder.group({
 
       packCurrencyDetails: '',
-      packForceMbaUpdate: ''
+      packForceMbaUpdate: '',
 
     });
 
