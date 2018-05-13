@@ -56,8 +56,7 @@
 					
 						<div class="form-group" >
 					
-							<input type="text" formControlName="
-							proFirstName" [ngClass]="{'has-error':checkFormHasErrorUser('proFirstName')}" class="form-control input-underline"
+							<input type="text" formControlName="proFirstName" [ngClass]="{'has-error':checkFormHasErrorUser('proFirstName')}" class="form-control input-underline"
 							 id="proFirstName" placeholder="{{'First Name' | translate}}">
 						
 						</div>
@@ -72,7 +71,11 @@
 						<div class="form-group" >
 						
 							<select formControlName="proGender" class="custom-select" id="proGender">
-								<option value="F">
+
+						   	 	<option *ngFor="let item of genderObject" [value]="item.value">
+						   	 		{{ item.name | translate }}
+						   	 	</option>
+<!-- 								<option value="F">
 									{{ 'Female' | translate }}
 								<option>
 								<option value="M">
@@ -83,7 +86,7 @@
 								</option>
 								<option value="N">
 									{{'Not Willing to say' | translate}}
-								</option>
+								</option> -->
 
 							</select>  
 						
