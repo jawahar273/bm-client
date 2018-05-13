@@ -2,7 +2,7 @@
   "name": "BM",
   "version": "0.4.1",
   "license": "Apache",
- "engines" : { "node" : ">=8.11.1" },
+ "engines" : { "node" : ">=8.11" },
   "scripts": {
     "ng": "ng",
     "start": "ng serve --ec true --port 4300 --proxy-config proxy.conf.json",

@@ -186,8 +186,9 @@ export class SidebarComponent {
             this.setCurrencyDetails(temp);
             this.service.localStorage.setItem(`packageSettings-${this.service.userName}`, temp)
              .subscribe((data) => {
-
+               // Take the contry code from here
                console.log('save package setting ...');
+               this.setCurrencyDetails(data);
 
              });
 
@@ -234,7 +235,7 @@ export class SidebarComponent {
 
               this.service.currencyDetails = data[temp];
               this.service.localStorage.setItem('currency', data);
-
+              this.currencyDetails = data[temp];
             },
            (error) => {
 
@@ -246,7 +247,7 @@ export class SidebarComponent {
        } else {
 
          this.service.currencyDetails = data[temp];
-
+         this.currencyDetails = data[temp];
        }
 
      }, (error) => {
