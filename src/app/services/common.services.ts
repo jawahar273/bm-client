@@ -269,20 +269,6 @@ export class CommonService {
 
     }
 
-    /**
-     * @deprecated since version 0.1.2
-     * Get the require header params and create a new localheader by merging with
-     * global header.
-     *
-     * @param main is a argument for getting addtion header options.
-     * @returns {Object} return the new local headers for the service.
-     */
-    public toLocalHeaders(main: Object): Object {
-
-        return Object.assign({}, this.headers, main);
-
-    }
-
     public mergeJSObject(value1, value2): Object {
 
         return Object.assign({}, value1, value2)   ;
@@ -309,7 +295,7 @@ export class CommonService {
 
     /**
      * Get the service field object and form data in object convert the 
-     * value to given service field. 
+     * value to given service field.
      *
      * @param {object} serviceField which contains the client and service field name but the client is act as key.
      * @param {object} ele content object.
@@ -610,7 +596,7 @@ export class CommonService {
      * add the given date or today with count along in the terms of days, months,
      * etc.. as it given.
      *
-     * @params count {number} count in the terms of number
+     * @param  {number}  count in the terms of number
      */
     public addTime(count, terms = 'days', useDate?: Date) {
 
@@ -718,7 +704,7 @@ export class CommonService {
 
     }
 
-    public syncLocalStorageSet(name:string, value: any): void {
+    public syncLocalStorageSet(name: string, value: any): void {
 
         localStorage.setItem(`${name}-${this.userName}`, value);
 

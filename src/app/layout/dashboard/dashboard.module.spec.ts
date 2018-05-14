@@ -13,6 +13,7 @@ describe('DashboardModule', () => {
     dashboardModule = new DashboardModule();
     ngbCarouselModule = new NgbCarouselModule();
     ngbTooltipModule = new NgbTooltipModule();
+    ngDataTable = new NgxDatatableModule();
   });
 
   it('should create an instance', () => {
@@ -20,5 +21,6 @@ describe('DashboardModule', () => {
     expect(ngDataTable).toBeTruthy();
     expect(ngbCarouselModule).toBeTruthy();
     expect(ngbTooltipModule).toBeTruthy();
+    expect(ngDataTable).toBeTruthy();
   });
 });

@@ -1,9 +1,9 @@
 import { Component, OnInit, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
 
-
 import { CommonService } from '../services/common.services';
-
+import { NotificationsServices } from '../services/notification.services';
+import { AsynUserName } from '../services/notification.services';
 
 @Component({
     selector: 'app-layout',
@@ -17,7 +17,10 @@ export class LayoutComponent implements OnInit {
      * Singleton REST call (which don't affect other component)
      * should be call from here(or side bar/ header componet are allow allowed)
      */
-    constructor(public service: CommonService, private router: Router) {
+    constructor(public service: CommonService,
+                private router: Router,
+                public notifies: NotificationsServices,
+                private userNameService: AsynUserName) {
 
         // init function call after the success obtain of 
         // authentication token.
@@ -49,7 +52,7 @@ export class LayoutComponent implements OnInit {
                 (_data) => {
 
                   this.service.setUserDetailsToLocalStorage(_data);
-
+                  this.notifies.makeNoticies(this.userNameService.KEYWORD);
                 },
                 (_error) => {
 
@@ -107,7 +110,7 @@ export class LayoutComponent implements OnInit {
 
                  }, (error) => {
 
-                     console.error('error in stroing currency'+error);
+                     console.error('error in stroing currency' + error);
 
                  });
 

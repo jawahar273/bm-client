@@ -8,6 +8,7 @@ import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 
 import { CommonService } from '../../services/common.services';
+import { AsynUserName } from '../../services/notification.services';
 import { routerTransition } from '../../router.animations';
 import { formValues } from './package-settings-form.config';
 
@@ -31,11 +32,13 @@ export class PackageSettingsComponent implements OnInit {
   maxInterval: number;
   /*
    * This is page to handle the package setting.
-   * If you add new field to the page add the field 
+   * If you add new field to the page add the field
    * in common.server `serviceFieldPackageSettings`
    */
-  constructor(public service: CommonService, public fb: FormBuilder) { 
-  
+  constructor(public service: CommonService,
+              public fb: FormBuilder,
+              public userNameService: AsynUserName) {
+
       this.serviceFields = this.service.serviceFieldPackageSettings;
       this.hideLoadSpin = false;
       this.packageSettingForm = this.fb.group({});
@@ -44,7 +47,8 @@ export class PackageSettingsComponent implements OnInit {
 
       this.displayIntervalFormat = {format: 'mins', value: 0};
       this.maxInterval = 8; // hrs only
-      this.getOrSetPackageSettingForm();
+      // this.getOrSetPackageSettingForm();
+      this.userNameService.makeCall(this.getOrSetPackageSettingForm);
       this.getCountryCodeFromStorage();
       // this.currencyCode = this.service.currencyCode;
 
@@ -71,7 +75,7 @@ export class PackageSettingsComponent implements OnInit {
 
   formatter = (result: string) => result.toUpperCase();
   // `${result}-${this.service.currencyDetails[result].name}`
-  typeAheadForCurrency = (text$: Observable<string>) => 
+  typeAheadForCurrency = (text$: Observable<string>) =>
      text$
       .debounceTime(100)
       .distinctUntilChanged()
@@ -108,8 +112,10 @@ export class PackageSettingsComponent implements OnInit {
             // saving the setting to the brower db.
             this.service.localStorage.setItem(`packageSettings-${this.service.userName}`, formFields)
              .subscribe((data) => {
-               console.log('save package setting ...');
-             });
+
+              console.log('save package setting ...');
+
+            });
             this.setHideLoadSpinner(true);
 
          }, (error) => {
@@ -225,7 +231,10 @@ export class PackageSettingsComponent implements OnInit {
 
   }
 
-
+  /**
+   *
+   * @param body this object of the form value.
+   */
   private updatePackageSetting(body: Object): void {
 
     this.service.update('package/settings', this.service.headers, body)
@@ -251,12 +260,18 @@ export class PackageSettingsComponent implements OnInit {
 
   }
 
+  /**
+   * This function is used to submit on
+   * package settigns.
+   */
   public onSubmitPackageSettings() {
 
     const body = this.service.renameObjectAllKeys(this.serviceFields, this.packageSettingForm.value, 's');
 
     if (this.checkIntervalHumanFormat(this.displayIntervalFormat['value'])) {
+
       this.updatePackageSetting(body);
+
     }
 
   }

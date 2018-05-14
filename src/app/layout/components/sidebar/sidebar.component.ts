@@ -3,6 +3,7 @@ import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CommonService } from '../../../services/common.services';
+import { AsynUserName } from '../../../services/notification.services';
 import { slideToRight as routerTransition } from '../../../router.animations';
 
 @Component({
@@ -13,7 +14,7 @@ import { slideToRight as routerTransition } from '../../../router.animations';
 
 })
 export class SidebarComponent {
-   
+
     public isActive: boolean = false;
     public showMenu: string = '';
     public closeResult: string;
@@ -36,7 +37,8 @@ export class SidebarComponent {
 
   constructor(private translate: TranslateService,
               public service: CommonService,
-              private modalService: NgbModal) {
+              private modalService: NgbModal,
+              public userNameService: AsynUserName) {
 
       // this.translate.addLangs(['en', 'fr']);
       // const defaultLan = localStorage.getItem('language');
@@ -47,7 +49,7 @@ export class SidebarComponent {
 
       this.datePickerModel = this.service.currentDateWithMomentJS;
       this.service.getBudgetAmount();
-      this.getOrSetPackageSetting();
+      // this.getOrSetPackageSetting();
 
   }
 
@@ -166,7 +168,7 @@ export class SidebarComponent {
   }
 
   public getOrSetPackageSetting() {
-
+    console.log(`user name: ${this.service.userName}`);
     this.service.localStorage.getItem(`packageSettings-${this.service.userName}`)
     .subscribe((data) => {
 
@@ -186,7 +188,7 @@ export class SidebarComponent {
             this.setCurrencyDetails(temp);
             this.service.localStorage.setItem(`packageSettings-${this.service.userName}`, temp)
              .subscribe((data) => {
-               // Take the contry code from here
+
                console.log('save package setting ...');
                this.setCurrencyDetails(data);
 
@@ -228,6 +230,7 @@ export class SidebarComponent {
 
     this.service.localStorage.getItem('currency')
      .subscribe((data) => {
+
        if (!data) {
 
          this.service.get('package/currency', this.service.headers)
