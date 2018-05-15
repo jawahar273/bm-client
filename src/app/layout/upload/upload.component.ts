@@ -100,9 +100,7 @@ export class UploadComponent implements OnInit {
   }
 
   public getKeys(data: Object): Array<any> {
-    if (!data) {
-      return ['error in server'];
-    }
+
     return Object.keys(data);
 
   }
