@@ -6,12 +6,12 @@ input[type=text], input[type=email] {
     font-size: 12px;
 }
 
- .app-button {
-   background-color: black;
-   color: #fff;
+.app-button {
+   background-color: $default-color;
+   color: $default-font-color;
    &:hover {
-     background-color: black;
-     color: #fff;
+     background-color: $default-color;
+     color: $default-font-color;
     }
 }
 

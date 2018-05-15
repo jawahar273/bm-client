@@ -1,23 +1,23 @@
 
 .navbar {
-    background-color: $material-blue;
+    background-color: $default-color;
 }
 
 .navbar .nav-item > a {
-    color: $material-white;
+    color: $default-font-color;
 }
 
 .sidebar {
-    background-color: $material-blue;
-    color: $material-white; 
+    background-color: $default-color;
+    color: $default-font-color; 
 }
 
 .sidebar .list-group a.list-group-item {
-    background-color: $material-blue;
-    color: $material-white;
+    background-color: $default-color;
+    color: $default-font-color;
 }
 
 .sidebar .list-group a:hover {
-    background-color: $material-blue;
-    color: $material-white;
+    background-color: #1976d2 !important;
+    color: $default-hover-font-color;
 }
