@@ -38,8 +38,7 @@ export class SidebarComponent {
 
   constructor(private translate: TranslateService,
               public service: CommonService,
-              private modalService: NgbModal,
-              public userNameService: AsynUserName) {
+              private modalService: NgbModal) {
 
       // this.translate.addLangs(['en', 'fr']);
       // const defaultLan = localStorage.getItem('language');
@@ -54,6 +53,10 @@ export class SidebarComponent {
 
   }
 
+  ngAfterContentInit() {
+    this.getOrSetPackageSetting();
+  }
+  
   eventCalled() {
 
       this.isActive = !this.isActive;

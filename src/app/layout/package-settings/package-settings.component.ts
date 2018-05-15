@@ -47,8 +47,8 @@ export class PackageSettingsComponent implements OnInit {
 
       this.displayIntervalFormat = {format: 'mins', value: 0};
       this.maxInterval = 8; // hrs only
-      // this.getOrSetPackageSettingForm();
-      this.userNameService.makeCall(this.getOrSetPackageSettingForm);
+      this.getOrSetPackageSettingForm();
+      // this.userNameService.makeCall(this.getOrSetPackageSettingForm);
       this.getCountryCodeFromStorage();
       // this.currencyCode = this.service.currencyCode;
 
