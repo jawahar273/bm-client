@@ -90,8 +90,7 @@ export class UploadWsNotification implements OnDestroy {
 export class AsynUserName implements OnDestroy {
 
     public KEYWORD: string;
-    constructor(public notifices: NotificationsServices,
-                private callback: any) {
+    constructor(public notifices: NotificationsServices) {
 
         this.KEYWORD = 'userdetails';
 
@@ -102,12 +101,12 @@ export class AsynUserName implements OnDestroy {
      * This method used to make callback of the given
      * function.
      */
-    public makeCall(callback: any): void {
+    public makeCall(callback: () => void  ): void {
         this.notifices.status$.subscribe((data) => {
 
             if (data.toLowerCase() === this.KEYWORD) {
 
-                this.callback();
+                callback();
 
             }
 

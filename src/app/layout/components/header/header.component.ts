@@ -8,6 +8,7 @@ import * as moment from 'moment';
 import { slideToBottom as routerTransition } from '../../../router.animations';
 import { CommonService } from '../../../services/common.services';
 import { UploadWsNotification } from '../../../services/notification.services';
+
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',

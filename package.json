@@ -2,10 +2,12 @@
   "name": "BM",
   "version": "0.4.1",
   "license": "Apache",
- "engines" : { "node" : ">=8.11" },
+  "engines": {
+    "node": ">=8.11"
+  },
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --ec true --port 4300 --proxy-config proxy.conf.json",
+    "start": "ng serve  --port 4300 --proxy-config ./proxy.conf.json",
     "build": "ng build --prod",
     "build-user-define": "ng build",
     "gitbuild": "ng build --prod --base /git-build/dist",
@@ -18,7 +20,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^5.2.10",
+    "@angular/animations": "5.2.10",
     "@angular/common": "^5.2.10",
     "@angular/compiler": "^5.2.10",
     "@angular/core": "^5.2.10",
@@ -28,13 +30,13 @@
     "@angular/platform-browser-dynamic": "^5.2.10",
     "@angular/router": "^5.2.10",
     "@angular/service-worker": "^5.2.10",
-    "@ng-bootstrap/ng-bootstrap": "^1.0.0-beta.5",
+    "@ng-bootstrap/ng-bootstrap": "^1.1.2",
     "@ngrx/core": "*",
     "@ngrx/effects": "^5.0.1",
     "@ngrx/store": "^5.0.0",
     "@ngx-translate/core": "^8.0.0",
     "@ngx-translate/http-loader": "^2.0.0",
-    "@swimlane/ngx-datatable": "*",
+    "@swimlane/ngx-datatable": "^12.0.0",
     "angular-async-local-storage": "3.1.1",
     "angular-bootstrap-md": "^5.1.2",
     "bootswatch": "^4.0.0",
@@ -50,13 +52,13 @@
     "zone.js": "^0.8.19"
   },
   "devDependencies": {
-    "@angular-devkit/build-optimizer": "^0.6.0",
-    "@angular-devkit/core": "^0.6.0",
-    "@angular-devkit/schematics": "0.6.0",
-    "@angular/cli": "^6.0.0",
+    "@angular-devkit/build-optimizer": "^0.6.1",
+    "@angular-devkit/core": "^0.6.1",
+    "@angular-devkit/schematics": "0.6.1",
+    "@angular/cli": "1.7.4",
     "@angular/compiler-cli": "^5.2.10",
     "@angular/language-service": "^5.2.10",
-    "@compodoc/compodoc": "^1.0.5",
+    "@compodoc/compodoc": "^1.1.2",
     "@types/jasmine": "~2.6.3",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~8.0.51",
@@ -71,14 +73,11 @@
     "karma-jasmine": "~1.1.0",
     "karma-jasmine-html-reporter": "^0.2.2",
     "ngrx-store-logger": "*",
-    "node-sass": "*",
+    "node-sass": "4.9.0",
     "protractor": "~5.2.0",
     "ts-node": "~3.3.0",
     "tslint": "~5.8.0",
     "typescript": "~2.4.2",
-    "webpack": "*",
-    "webpack-dev-server": "^2.11.1",
-    "webpack-jarvis": "^0.1.1",
-    "yarn": "^1.3.2"
+    "yarn": "=>1.5.4"
   }
 }

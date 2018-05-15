@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
+import { interval } from 'rxjs/observable/interval';
 
 import { CommonService } from '../../../services/common.services';
 import { AsynUserName } from '../../../services/notification.services';
@@ -167,6 +168,18 @@ export class SidebarComponent {
 
   }
 
+  private convertMinsToMillsec(value: number): number {
+
+    return value * 60000;
+  
+  }
+
+  private convertHrsToMins(value: number): number {
+
+    return value * 60;
+
+  }
+
   public getOrSetPackageSetting() {
     console.log(`user name: ${this.service.userName}`);
     this.service.localStorage.getItem(`packageSettings-${this.service.userName}`)
@@ -191,7 +204,8 @@ export class SidebarComponent {
 
                console.log('save package setting ...');
                this.setCurrencyDetails(data);
-
+               // interval()
+               // setting interval for interval package setting.
              });
 
          }, (error) => {
@@ -251,6 +265,7 @@ export class SidebarComponent {
 
          this.service.currencyDetails = data[temp];
          this.currencyDetails = data[temp];
+
        }
 
      }, (error) => {
