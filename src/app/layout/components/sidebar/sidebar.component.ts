@@ -49,12 +49,11 @@ export class SidebarComponent {
 
       this.datePickerModel = this.service.currentDateWithMomentJS;
       this.service.getBudgetAmount();
-      // this.getOrSetPackageSetting();
-
+      this.getOrSetPackageSetting();
   }
 
-  ngAfterContentInit() {
-    this.getOrSetPackageSetting();
+  ngAfterViewInit() {
+    // this.getOrSetPackageSetting();
   }
   
   eventCalled() {
@@ -144,6 +143,14 @@ export class SidebarComponent {
 
   }
 
+  public currencyCode(): string {
+    return this.currencyDetails['code'];
+  }
+
+  public currencySymbole(): string {
+    return this.currencyDetails['symbol_native'];
+  }
+
   public getUserProfileURL(): string {
 
     return this.service.syncLocalStorage('userProfileURL');
@@ -184,7 +191,7 @@ export class SidebarComponent {
   }
 
   public getOrSetPackageSetting() {
-    console.log(`user name: ${this.service.userName}`);
+
     this.service.localStorage.getItem(`packageSettings-${this.service.userName}`)
     .subscribe((data) => {
 
@@ -239,41 +246,46 @@ export class SidebarComponent {
   private setCurrencyDetails(value) {
         // this.currencyDetails[''] = 'USD';
     let temp = value['packCurrencyDetails'];
-    if (temp === '') {
 
-        temp = 'USD';
+
+      if (!!temp) {
+
+            if (temp === '') {
+              temp = 'USD';
+            }
+
+            this.service.localStorage.getItem('currency')
+             .subscribe((data) => {
+
+               if (!data) {
+
+                 this.service.get('package/currency', this.service.headers)
+                 .subscribe((data) => {
+
+                      this.service.currencyDetails = data[temp];
+                      this.service.localStorage.setItem('currency', data);
+                      this.currencyDetails = data[temp];
+                    },
+                   (error) => {
+
+                     const msg = this.service.isClinetOrServerSidesError(error);
+                     this.service.showGlobalAlert('Getting Currency details failed.');
+
+                   });
+
+               } else {
+
+                 this.service.currencyDetails = data[temp];
+                 this.currencyDetails = data[temp];
+               }
+
+             }, (error) => {
+
+             });
 
       }
 
-    this.service.localStorage.getItem('currency')
-     .subscribe((data) => {
 
-       if (!data) {
-
-         this.service.get('package/currency', this.service.headers)
-         .subscribe((data) => {
-
-              this.service.currencyDetails = data[temp];
-              this.service.localStorage.setItem('currency', data);
-              this.currencyDetails = data[temp];
-            },
-           (error) => {
-
-             const msg = this.service.isClinetOrServerSidesError(error);
-             this.service.showGlobalAlert('Getting Currency details failed.');
-
-           });
-
-       } else {
-
-         this.service.currencyDetails = data[temp];
-         this.currencyDetails = data[temp];
-
-       }
-
-     }, (error) => {
-
-     });
   }
 
   public checkBudgetAmountIsEmpty(data?: string) {
