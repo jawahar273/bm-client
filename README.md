@@ -15,7 +15,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 
 ### How to start
-**Note** that this seed project requires  **node >=v6.9.0 and npm >=3/yarn >=1.3.2**.
+**Note** that this seed project requires  **node >=v6.9.0 and npm >=3/yarn >=1.6.0**.
 
 In order to start the project use:
 ```bash

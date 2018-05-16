@@ -7,8 +7,11 @@
 - ~~CSS issue in header bar for mid-size modbile screen.~~
 - User choice date display.
 
+### 0.4.2
+- Complete new logo.
+
 ### 0.4.1
-- New icons.
+- Modified logo.
 
 ### 0.4.0
 - Implementing WebSocket

@@ -1,6 +1,6 @@
 {
   "name": "BM",
-  "version": "0.4.1",
+  "version": "0.4.2",
   "license": "Apache",
   "engines": {
     "node": ">=8.11"
@@ -38,7 +38,6 @@
     "@ngx-translate/http-loader": "^2.0.0",
     "@swimlane/ngx-datatable": "^12.0.0",
     "angular-async-local-storage": "3.1.1",
-    "angular-bootstrap-md": "^5.1.2",
     "bootswatch": "^4.0.0",
     "chart.js": "^2.7.1",
     "core-js": "^2.5.1",
@@ -78,6 +77,6 @@
     "ts-node": "~3.3.0",
     "tslint": "~5.8.0",
     "typescript": "~2.4.2",
-    "yarn": "=>1.5.4"
+    "yarn": "~1.6.0"
   }
 }
