@@ -30,12 +30,8 @@ export class DashTableComponent implements OnInit {
 
     ngOnInit() {
 
-        if (this.service.needTableUpdate) {
-
            this.updateTable(false);
-           this.service.needTableUpdate = false;
 
-        }
     }
 
     /**
