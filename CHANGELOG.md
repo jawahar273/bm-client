@@ -9,12 +9,16 @@
 
 ### 0.4.2
 - Complete new logo.
+- Ripple effect.
+- Change in the menu color(mobile).
+- Changed the amount datapicker to native.
+- Fixed amount model not opening issue.
 
 ### 0.4.1
 - Modified logo.
 
 ### 0.4.0
-- Implementing WebSocket
+- Implementing WebSocket.
 - Change the header class name: `fa fa-skyatlas` font size.
 - Change in the local storage names.
 - Bi-language (English/French[70% done]).

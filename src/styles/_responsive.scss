@@ -8,4 +8,14 @@
     	// padding: 0.25rem 0.75rem;
     	font-size: 22px;
     }
+
+    .navbar-toggler {
+
+        border-color: $material-white;
+        
+        .navbar-toggler-icon > i {
+            color: $default-font-color;
+        }
+
+    }
 }

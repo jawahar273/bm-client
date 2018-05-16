@@ -14,7 +14,6 @@ import { environment } from 'environments/environment';
 @Injectable()
 export class CommonService {
     // global settings
-    public isUserLogin: Object; // @review
     public requireUpdate: Object; // @review
     public headers: Headers;
     public today: Date;
@@ -47,7 +46,6 @@ export class CommonService {
     public budgetAmount: number = 0;
 
     // components dashboard
-    public needTableUpdate: boolean = true;
     public dataTableDashboard: Array<any>;
     public listOfGroupItems: Array<string>;
     public listOfMonths: Array<string>;
@@ -73,7 +71,6 @@ export class CommonService {
 
     constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
 
-        this.isUserLogin = false;
         this.today  = new Date();
         this.currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);

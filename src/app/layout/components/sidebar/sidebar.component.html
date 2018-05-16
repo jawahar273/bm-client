@@ -16,10 +16,11 @@
                     <i class="fa fa-money"></i><!--  {{ 'Menu1' | translate }} -->
                     <ng-template #sideBarAmountToolTip>
                         <strong>
-                            {{this.service.currentDateWithMomentJS}}
+                            {{service.currentDateWithMomentJS}}
                         </strong>
                     </ng-template>
- {{ 'Amount' | translate }}: {{ getBudgetAmount() | currency:currencyCode() : currencySymbole() }}
+                     {{ 'Amount' | translate }}:
+                     {{ getBudgetAmount() | currency:service.currencyDetails['code'] : service.currencyDetails['symbol_native'] }}
 
                 </span>
             </a>
@@ -95,11 +96,8 @@
                             >
                     </div>
                     <div class="input-group">
-                            <input  type="text" class="form-control input-underline" name="datePicker"
-                            id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel" ngbDatepicker #d="ngbDatepicker">
-                            <span class="btn btn-outline-secondary" (click)="d.toggle();" type="button">
-                              <i class="fa fa-calendar" style="width: 1.2rem; height: 1rem; cursor: pointer; color: black;"></i>
-                            </span>
+                            <input  type="date" class="form-control input-underline" name="datePicker"
+                            id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel">
                     </div>
                 </div>
               </div>
