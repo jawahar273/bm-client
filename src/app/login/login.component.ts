@@ -71,7 +71,7 @@ export class LoginComponent implements OnInit {
               (data) => {
       
                 !!data ? '' : console.log('something went wrong in server');
-                localStorage.setItem('isLoggedin', 'false');
+ 
                 let options: CookieOptions = {
       
                   'expires': this.service.addTime(2, 'days').toString()
@@ -80,9 +80,7 @@ export class LoginComponent implements OnInit {
 
                 this.service.setCookie('authToken', `Token ${data['token']}`, options);
                 this.headers.set('Authorization', `Token ${data['token']}`);
-                this.service.isUserLogin = true;
                 this.router.navigate(['/dashboard']);
-                this.service.needTableUpdate = true;
 
               },
 

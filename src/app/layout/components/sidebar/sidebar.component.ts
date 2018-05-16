@@ -153,7 +153,7 @@ export class SidebarComponent {
 
     this.service.getBudgetAmount().then((data) => {
 
-        if (!this.checkBudgetAmountIsEmpty(data) && this.service.isUserLogin) {
+        if (!this.checkBudgetAmountIsEmpty(data)) {
 
           this.service.showGlobalAlert(`Can't start a month without budget amount. Please click 'Amount' menu and fill.`)
           // set time out to show the modle to get the budget amount.
