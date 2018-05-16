@@ -143,14 +143,6 @@ export class SidebarComponent {
 
   }
 
-  public currencyCode(): string {
-    return this.currencyDetails['code'];
-  }
-
-  public currencySymbole(): string {
-    return this.currencyDetails['symbol_native'];
-  }
-
   public getUserProfileURL(): string {
 
     return this.service.syncLocalStorage('userProfileURL');

@@ -16,10 +16,11 @@
                     <i class="fa fa-money"></i><!--  {{ 'Menu1' | translate }} -->
                     <ng-template #sideBarAmountToolTip>
                         <strong>
-                            {{this.service.currentDateWithMomentJS}}
+                            {{service.currentDateWithMomentJS}}
                         </strong>
                     </ng-template>
- {{ 'Amount' | translate }}: {{ getBudgetAmount() | currency:currencyCode() : currencySymbole() }}
+                     {{ 'Amount' | translate }}:
+                     {{ getBudgetAmount() | currency:service.currencyDetails['code'] : service.currencyDetails['symbol_native'] }}
 
                 </span>
             </a>

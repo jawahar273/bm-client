@@ -461,12 +461,6 @@ angular-async-local-storage@3.1.1:
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/angular-async-local-storage/-/angular-async-local-storage-3.1.1.tgz#a26ed076426f6cbcd8e4f430f9986d7850ba2a60"
 
-angular-bootstrap-md@^5.1.2:
-  version "5.1.2"
-  resolved "https://registry.yarnpkg.com/angular-bootstrap-md/-/angular-bootstrap-md-5.1.2.tgz#bd9ef5c121ab9da52f34e8adfe12de9cf1edcb19"
-  dependencies:
-    moment "2.18.x"
-
 angular-cli-ghpages@*:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/angular-cli-ghpages/-/angular-cli-ghpages-0.5.2.tgz#9551c5022c6982d0e4c5c7c97a21cd29d728b14d"
@@ -992,10 +986,6 @@ boom@5.x.x:
 bootstrap@^4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.0.0.tgz#ceb03842c145fcc1b9b4e15da2a05656ba68469a"
-
-bootstrap@^4.1.1:
-  version "4.1.1"
-  resolved "https://registry.yarnpkg.com/bootstrap/-/bootstrap-4.1.1.tgz#3aec85000fa619085da8d2e4983dfd67cf2114cb"
 
 bootswatch@^4.0.0:
   version "4.0.0"
@@ -4734,7 +4724,7 @@ moment@*:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
-moment@2.18.x, moment@~2.18.0:
+moment@~2.18.0:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
@@ -8092,7 +8082,7 @@ yargs@~3.10.0:
     decamelize "^1.0.0"
     window-size "0.1.0"
 
-yarn@=>1.5.4:
+yarn@~1.6.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.6.0.tgz#9cec6f7986dc237d39ec705ce74d95155fe55d4b"
 
