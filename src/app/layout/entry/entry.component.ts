@@ -247,8 +247,6 @@ export class EntryComponent implements OnInit {
 
                       this.showFormAlert('Content Updated', 'success');
                       this.hideLoadingSpin(true);
-                      this.service.needTableUpdate = true;
-                      this.service.needChartUpdate = true;
                       this.service.listOfGroupItems.push(data['group']);
 
                   },
@@ -271,8 +269,6 @@ export class EntryComponent implements OnInit {
                       console.log(data);
                       this.showFormAlert('Content Created', 'success');
                       this.hideLoadingSpin(true);
-                      this.service.needTableUpdate = true;
-                      this.service.needChartUpdate = true;
                       this.service.listOfGroupItems.push(data['group']);
 
                   },

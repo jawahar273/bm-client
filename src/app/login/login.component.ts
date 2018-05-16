@@ -77,6 +77,8 @@ export class LoginComponent implements OnInit {
                   'expires': this.service.addTime(2, 'days').toString()
       
                 }
+                
+                this.service.syncLocalStorageSet('localGetBudgetAmountCheck', 'false');
 
                 this.service.setCookie('authToken', `Token ${data['token']}`, options);
                 this.headers.set('Authorization', `Token ${data['token']}`);
