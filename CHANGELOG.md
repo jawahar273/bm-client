@@ -13,6 +13,7 @@
 - Change in the menu color(mobile).
 - Changed the amount datapicker to native.
 - Fixed amount model not opening issue.
+- Showing amount model after login only.
 
 ### 0.4.1
 - Modified logo.
