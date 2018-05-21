@@ -1,9 +1,14 @@
-
+// follow the https://www.materialpalette.com/ for
+// coloring patter.
 $material-blue-600: #1e88e5;
 $material-blue-700: #1e88e5;
 $material-blue-800: #1565c0;
 $material-white: white;
 $material-black: black;
+$material-grey: #eee;
+
+$default-background-color: $material-grey !important;
+$default-body-color: $material-white !important;
 
 $default-color: $material-blue-800 !important;
 $default-font-color: $material-white !important;

@@ -1,19 +1,24 @@
 /* You can add global styles to this file, and also import other style files */
 
+ // @import "materialize/core/variables";
+ // @import "materialize/core/mixins";
 @import "bootstrap/bootstrap";
-
-@import "materia/variables";
-@import "materia/bootswatch";
-
-
-@import '~@swimlane/ngx-datatable/release/assets/icons.css';
-@import '~@swimlane/ngx-datatable/release/index.css';
-@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+@import "themes/bootswatch";
+@import "themes/variables";
 
 @import "bm-variables";
+@import "alert";
 @import "input-underline";
 @import "utils";
 @import "spinner";
 @import "rtl";
 @import "responsive";
 @import "menus";
+
+
+// @import "materialize/_material-dashboard";
+
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+

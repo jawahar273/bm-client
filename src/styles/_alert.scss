@@ -1,0 +1,17 @@
+@import "bm-mixins/alert_shadow";
+
+.alert {
+    border-radius: 0px;
+
+    &.alert-success {
+        @include shadow-alert-color(#388e3c);
+    }
+
+    &.alert-danger {
+        @include shadow-alert-color(#e53935);
+    }
+
+    &.alert-warning {
+        @include shadow-alert-color(#fbc02d);
+    }
+}

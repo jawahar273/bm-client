@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, Validators, FormGroup } from '@angular/forms';
 import { Headers } from '@angular/http';
 import {  CookieOptions } from 'ngx-cookie';
@@ -24,11 +24,13 @@ export class LoginComponent implements OnInit {
     public headers: any;
     public spinnerIcon: Boolean;
     
-    constructor(public router: Router, public fb: FormBuilder, public service: CommonService) {
+    constructor(public router: Router,
+                public fb: FormBuilder,
+                public service: CommonService,
+                private activeRouter: ActivatedRoute) {
         // clear all the brower storages.
         this.service.localStorage.clear();
         localStorage.clear();
-        
         this.loginForm = this.fb.group({
            
             loginPassName: ['', Validators.compose([Validators.required])],
@@ -82,7 +84,15 @@ export class LoginComponent implements OnInit {
 
                 this.service.setCookie('authToken', `Token ${data['token']}`, options);
                 this.headers.set('Authorization', `Token ${data['token']}`);
-                this.router.navigate(['/dashboard']);
+                this.service.syncLocalStorageSet('isLoggedin', 'true');
+                this.router.navigate(['/','dashboard']).then(
+                  (value) => {
+                    console.log(value);
+                  },
+                  (error) => {
+                    console.log(error);  
+                  });
+                // window.location.assign('/dashboard')
 
               },
 
@@ -91,7 +101,8 @@ export class LoginComponent implements OnInit {
                   const msg = this.service.isClinetOrServerSidesError(error, this.serviceErrorMapping, false);
                   this.service.showGlobalAlert(msg);
                   this.setLoadSpinner(true);
-                  this.router.navigate(['/login']);
+                  this.router.navigate(['login']);
+                  this.service.syncLocalStorageSet('isLoggedin', 'false');
 
               }
 

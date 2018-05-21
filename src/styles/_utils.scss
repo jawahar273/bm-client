@@ -59,6 +59,9 @@ button {
   padding: 10px 16px;
 }
 
+.card {
+  background-color: $default-body-color;
+}
 @media screen and (max-width: 992px) {
     .modal-content {
         margin-top: 20%;

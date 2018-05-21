@@ -14,6 +14,7 @@
 - Changed the amount datapicker to native.
 - Fixed amount model not opening issue.
 - Showing amount model after login only.
+- Makeing material like look.
 
 ### 0.4.1
 - Modified logo.
