@@ -1,3 +1,6 @@
+input[type=text], input[type=email] {
+  padding: 10px 16px;
+}
 
 textarea:not(textarea), textarea.form-control:not(textarea),
  input.form-control:not(textarea), input[type=text]:not(textarea), 
@@ -17,6 +20,13 @@ textarea:not(textarea), textarea.form-control:not(textarea),
 
 }
 
-.form-control > input[type=email], .form-control > input[type=text]  {
-  padding: 10px 16px;
+
+.form-control {
+    border: 0px;
+    .form-control > input[type=email],
+    .form-control > input[type=text]  {
+      padding: 10px 16px;
+    }
 }
+
+

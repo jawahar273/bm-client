@@ -2,7 +2,7 @@
   <input type="text"
    name="entryGroupItemsHint-{{indx}}" id="entryGroupItemsHint-{{indx}}"
   formControlName="name"
-  placeholder="Hint"
+  placeholder="{{ 'Item Name/Total Amount' | translate }}"
    class="form-control input-underline entrySubItem"
    [ngClass]="{'has-error':checkFormError('name')}"
   />
@@ -10,7 +10,7 @@
    id="entryGroupItemsAmount-{{indx}}"
    formControlName="amount"
    pattern="^\d{1,4}(\.\d{0,2})?$"
-  placeholder="Eg: 2001.12"
+  placeholder="{{ 'Amount' | translate }}"
    class="form-control input-underline entrySubItem"
    title="Only 4 number and 2 number before point is allowed" 
    style="margin-right: 2%;" 
