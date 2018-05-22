@@ -82,15 +82,7 @@ export class LayoutComponent implements OnInit {
 
         this.service.headers.set('Authorization', `${this.service.getUserAuth()}`);
         this.getUserDetails();
-        this.service.get('package/get_group_items', this.service.headers)
-         .subscribe((data) => {
-
-             this.service.listOfGroupItems = Array.from(new Set(data));
-
-         }, (error) => {
-             // this.showGlobalAlert('');
-         });
-
+        // moved to notification components
     }
 
     private getCurrenctDetails(): void {

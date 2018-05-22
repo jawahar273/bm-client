@@ -30,7 +30,7 @@ export class HeaderComponent implements OnInit {
 
 
         this.translate.addLangs(['en', 'fr']);
-        let defaultLan = localStorage.getItem('language');
+        let defaultLan = this.service.syncLocalStorage('language');
         defaultLan = defaultLan ? defaultLan : 'en'
         this.translate.setDefaultLang(defaultLan);
         this.translate.use(defaultLan);
@@ -86,9 +86,9 @@ export class HeaderComponent implements OnInit {
 
     public changeLang(language: string):void {
 
-        localStorage.setItem('language', language);
+        this.service.syncLocalStorageSet('language', language);
         this.translate.use(language);
-
+        moment.locale(language);
     }
 
     public getUserName(): string {

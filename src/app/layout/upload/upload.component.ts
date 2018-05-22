@@ -116,7 +116,8 @@ export class UploadComponent implements OnInit {
           .subscribe((data) => {
 
               this.uploadTermsAndCondtions = data['detail'];
-              this.service.localStorage.setItem('upload-term-condition', data)
+              this.service.localStorage.setItem('upload-term-condition',
+                                                this.uploadTermsAndCondtions)
               .subscribe((data)=>{});
 
           }, (error) => {

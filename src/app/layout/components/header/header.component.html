@@ -134,13 +134,23 @@
 
                 <ul class="dropdown-menu dropdown-menu-right">
                     
-                    <a href="javascript:void(0)" class="dropdown-item" *ngIf="uploadService.percentage">
+                    <a href="javascript:void(0)" class="dropdown-item" *ngIf="uploadService.percentage; else NoStatusForUpload">
                         {{ 'Upload Status' | translate }}
 
                         <span class="badge badge-info"> {{ uploadService.percentage }}
                         </span>
 
                     </a>
+
+                    <ng-template #NoStatusForUpload>
+                        <a href="javascript:void(0)" class="dropdown-item">
+                            {{ 'Upload Status' | translate }}
+
+                            <span class="badge badge-info"> {{ 'None' | translate }}
+                            </span>
+
+                        </a>  
+                    </ng-template>
                 
                     <!-- <a href="javascript:void(0)" class="dropdown-item">
                         {{ 'Pending Task' | translate }} <span class="badge badge-info">6</span>

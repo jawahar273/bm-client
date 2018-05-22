@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
 import { interval } from 'rxjs/observable/interval';
+import * as moment from 'moment';
 
 import { CommonService } from '../../../services/common.services';
 import { AsynUserName } from '../../../services/notification.services';
@@ -89,9 +90,9 @@ export class SidebarComponent {
 
     public changeLang(language: string): void {
 
-        localStorage.setItem('language', language);
+        this.service.syncLocalStorageSet('language', language);
         this.translate.use(language);
-
+        moment.locale(language);
     }
 
   public onAmountSubmit(close: any) {
@@ -300,10 +301,21 @@ export class SidebarComponent {
 
   }
 
-    public roundOfData(data, decimal=2): number {
+    public roundOfData(item: any,
+                       value:string,
+                       decimal=2): number {
 
-        const temp = 10 ** decimal;
-        return Math.round(data * temp) / temp;
+        let temp = 10 ** decimal;
+        let data = this.service.airPollutionData[item];
+
+        if (!data) {
+
+            return null;
+
+        }
+
+        temp = Math.round(data[value]* temp) / temp;
+        return temp;
 
     }
 }
