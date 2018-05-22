@@ -1,107 +1,213 @@
 <nav class="sidebar" [ngClass]="{sidebarPushRight: isActive}" [@routerTransition]>
+    
     <div class="list-group">
+
         <a routerLink="/dashboard" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-dashboard"></i>&nbsp;{{ 'Dashboard' | translate }}
         </a>
+
         <a routerLink="/entry" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-plus"></i>&nbsp;{{ 'New Entry' | translate }}
         </a>
+
         <a [routerLink]="['/charts']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-fw fa-bar-chart-o"></i>&nbsp;{{ 'Charts' | translate }}
         </a>
+
         <div class="nested-menu">
+
             <a class="list-group-item" >
+
                 <span placement="bottom" [ngbTooltip]="sideBarAmountToolTip"
                     trigger="click:focus" (click)="open(sideBarAmountModelcontent)">
+
                     <i class="fa fa-money"></i><!--  {{ 'Menu1' | translate }} -->
+
                     <ng-template #sideBarAmountToolTip>
+
                         <strong>
                             {{service.currentDateWithMomentJS}}
                         </strong>
+
                     </ng-template>
                      {{ 'Amount' | translate }}:
                      {{ getBudgetAmount() | currency:service.currencyDetails['code'] : service.currencyDetails['symbol_native'] }}
 
                 </span>
+
             </a>
+
         </div>
+
         <a [routerLink]="['/upload']" [routerLinkActive]="['router-link-active']" class="list-group-item">
             <i class="fa fa-cloud-upload"></i>&nbsp;{{ 'Upload' | translate }}
         </a>
+
         <a href="https://github.com/jawahar273/bm-client/blob/master/CHANGELOG.md" class="list-group-item" target="_blank">
             <i class="fa fa-list-alt"></i>&nbsp;{{ 'Change Log' | translate }}
         </a>
+
         <hr style="background-color: white;color: white;width: 100%;" [hidden]="!service.isMobileScreen">
+
+
+        <div class="nested-menu" >
+            <!-- [hidden]="!service.isMobileScreen" -->
+
+            <a class="list-group-item" (click)="addExpandClass('weather')" >
+
+                <i class="fa fa-language"></i>
+                {{ 'Weather' | translate }}
+
+            </a>
+
+            <li class="nested" [class.expand]="showMenu === 'weather'">
+
+                <ul class="submenu">
+
+                    <li *ngFor="let item of service.airPollutionKeys">
+
+                        <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
+                        service.currentDateWithMomentJS"
+                        trigger="click:focus" placement="bottom">
+                                {{ 'Mix Ratio' | translate}}: {{ roundOfData(service.airPollutionData[item]['value']) }}
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
+                        service.currentDateWithMomentJS"
+                        trigger="click:focus" placement="bottom">
+                            {{ 'Pressure' | translate }}: {{ roundOfData(service.airPollutionData[item]['pressure']) }} hPa
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </li>
+
+        </div>
+
         <div class="nested-menu" [hidden]="!service.isMobileScreen">
+
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <!-- <span><i class="fa fa-user"></i>&nbsp; {{ getUserName() }}</span> -->
+
                 <img src="{{getUserProfileURL()}}"  
                     id="profileImageSideBar" alt="Profile Image" />
                 {{ 'Menu' | translate }}
             </a>
+
             <li class="nested" [class.expand]="showMenu === 'pages'">
+
                 <ul class="submenu">
+
                     <li>
+
                         <a [routerLink]="['/profile']" ><i class="fa fa-fw fa-user"></i>{{ getUserName()}}</a>
                     </li>
+
                     <li>
+
                         <a class="dropdown-item" [routerLink]="['/settings']">
                             <i class="fa fa-fw fa-gear"></i> {{ 'Settings' | translate }}
                         </a>
+
                     </li>
+
                     <li>
+
                         <a [routerLink]="['/login']" (click)="onLoggedout()"><i class="fa fa-fw fa-power-off"></i>{{ 'Logout' | translate }}</a>
+
                     </li>
  <!--                    <li>
                         <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
                     </li>-->
+
                 </ul>
+
             </li>
+
         </div>
+
         <div class="nested-menu" [hidden]="!service.isMobileScreen">
+
             <a class="list-group-item" (click)="addExpandClass('language')">
+
                 <i class="fa fa-language"></i>
                 {{ 'Language' | translate }}
+
             </a>
+
             <li class="nested" [class.expand]="showMenu === 'language'">
+
                 <ul class="submenu">
+
                     <li>
+
                         <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
                             {{ 'English' | translate }}
                         </a>
+
                     </li>
+
                     <li>
+
                         <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
                             {{ 'French' | translate }}
                         </a>
+
                     </li>
+
                 </ul>
+
             </li>
+
         </div>
+
     </div>                    
+
 </nav>
 
-            <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
-              <div class="modal-header">
-                <h4 class="modal-title">{{'Setting Budget Amount' | translate}}</h4>
-                <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-                  <span aria-hidden="true">&times;</span>
-                </button>
-              </div>
-              <div class="modal-body">
-                <div class="form-horizontal">
-                    <div class="input-group">
-                            <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
-                            >
-                    </div>
-                    <div class="input-group">
-                            <input  type="date" class="form-control input-underline" name="datePicker"
-                            id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel">
-                    </div>
-                </div>
-              </div>
-              <div class="modal-footer">
-                <button class="btn btn-info" (click)="onAmountSubmit(c)" >{{'Submit' | translate}}</button>
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">{{'Close' | translate}}</button>
-              </div>
-            </ng-template>
+    <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
+
+      <div class="modal-header">
+
+        <h4 class="modal-title">{{'Setting Budget Amount' | translate}}</h4>
+
+        <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+          <span aria-hidden="true">&times;</span>
+        </button>
+
+      </div>
+
+      <div class="modal-body">
+
+        <div class="form-horizontal">
+
+            <div class="input-group">
+
+                    <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
+                    >
+            </div>
+
+            <div class="input-group">
+                    <input  type="date" class="form-control input-underline" name="datePicker"
+                    id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel">
+            </div>
+
+        </div>
+
+      </div>
+
+      <div class="modal-footer">
+
+        <button class="btn btn-info" (click)="onAmountSubmit(c)" >{{'Submit' | translate}}</button>
+
+        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">{{'Close' | translate}}</button>
+
+      </div>
+
+    </ng-template>
