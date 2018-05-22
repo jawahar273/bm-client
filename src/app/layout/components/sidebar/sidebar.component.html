@@ -43,33 +43,32 @@
             <i class="fa fa-cloud-upload"></i>&nbsp;{{ 'Upload' | translate }}
         </a>
 
-        <a href="https://github.com/jawahar273/bm-client/blob/master/CHANGELOG.md" class="list-group-item" target="_blank">
-            <i class="fa fa-list-alt"></i>&nbsp;{{ 'Change Log' | translate }}
-        </a>
-
-        <hr style="background-color: white;color: white;width: 100%;" [hidden]="!service.isMobileScreen">
-
-
-        <div class="nested-menu" >
-            <!-- [hidden]="!service.isMobileScreen" -->
+        <div class="nested-menu" [hidden]="!service.isMobileScreen">
 
             <a class="list-group-item" (click)="addExpandClass('weather')" >
 
-                <i class="fa fa-language"></i>
+                <i class="fa fa-skyatlas"
+                style="font-size: 19px;"></i>
                 {{ 'Weather' | translate }}
 
             </a>
 
             <li class="nested" [class.expand]="showMenu === 'weather'">
+                <ul class="submenu" *ngIf="!service.airPollutionKeys">
+                    <li>
+                        <a href="javascript:void(0)">
+                            {{ 'Got No Report' | translate }}
+                        </a>
+                    </li>
+                </ul>
+                <ul class="submenu" *ngIf="service.airPollutionKeys">
 
-                <ul class="submenu">
-
-                    <li *ngFor="let item of service.airPollutionKeys">
+                    <li *ngFor="let item of service.airPollutionKeys" >
 
                         <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
                         service.currentDateWithMomentJS"
                         trigger="click:focus" placement="bottom">
-                                {{ 'Mix Ratio' | translate}}: {{ roundOfData(service.airPollutionData[item]['value']) }}
+                                {{ 'Mix Ratio' | translate}}: {{ roundOfData(service?.airPollutionData[item]['value']) }}
                         </a>
 
                     </li>
@@ -79,7 +78,7 @@
                         <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
                         service.currentDateWithMomentJS"
                         trigger="click:focus" placement="bottom">
-                            {{ 'Pressure' | translate }}: {{ roundOfData(service.airPollutionData[item]['pressure']) }} hPa
+                            {{ 'Pressure' | translate }}: {{ roundOfData(service?.airPollutionData[item]['pressure']) }} hPa
                         </a>
 
                     </li>
@@ -90,13 +89,19 @@
 
         </div>
 
+        <a href="https://github.com/jawahar273/bm-client/blob/master/CHANGELOG.md" class="list-group-item" target="_blank">
+            <i class="fa fa-list-alt"></i>&nbsp;{{ 'Change Log' | translate }}
+        </a>
+
+        <hr style="background-color: white;color: white;width: 100%;" [hidden]="!service.isMobileScreen">
+
         <div class="nested-menu" [hidden]="!service.isMobileScreen">
 
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <!-- <span><i class="fa fa-user"></i>&nbsp; {{ getUserName() }}</span> -->
 
                 <img src="{{getUserProfileURL()}}"  
-                    id="profileImageSideBar" alt="Profile Image" />
+                    id="profileImageSideBar" alt="{{ 'Profile' | translate }}" />
                 {{ 'Menu' | translate }}
             </a>
 

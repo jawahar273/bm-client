@@ -5,6 +5,10 @@
 - User choice date format display.
 - Handle the `islogin` localstorage.
 
+### 0.4.3
+- Adding weather report to sidemenu.
+- Update with french langulage (weather menu).
+
 ### 0.4.2
 - Complete new logo.
 - Ripple effect.
