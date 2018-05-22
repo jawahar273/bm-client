@@ -6,20 +6,23 @@
 @import "themes/bootswatch";
 @import "themes/variables";
 
+@import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import '~@swimlane/ngx-datatable/release/index.css';
+@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
+
+
+@import "bm-mixins/_color_!impotant";
 @import "bm-variables";
 @import "alert";
 @import "card";
 @import "input-underline";
 @import "utils";
 @import "spinner";
+@import "tooltip";
 @import "rtl";
 @import "responsive";
 @import "menus";
 
 
 // @import "materialize/_material-dashboard";
-
-@import '~@swimlane/ngx-datatable/release/assets/icons.css';
-@import '~@swimlane/ngx-datatable/release/index.css';
-@import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
 

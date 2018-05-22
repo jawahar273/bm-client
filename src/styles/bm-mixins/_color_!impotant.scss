@@ -1,0 +1,4 @@
+
+@function make_important($color) {
+    @return $color !important;
+}

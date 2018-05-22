@@ -33,13 +33,17 @@ button {
    }
 }
 
+.btn {
+  border-radius: 0px;
+}
+
 .app-button {
    @extend .ripple;
    background-color: $default-color;
    color: $default-font-color;
-   border-radius: 0px;
-
 }
+
+
 
 .allow-center {
   justify-content: center;
