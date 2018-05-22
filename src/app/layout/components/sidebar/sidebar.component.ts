@@ -300,4 +300,10 @@ export class SidebarComponent {
 
   }
 
+    public roundOfData(data, decimal=2): number {
+
+        const temp = 10 ** decimal;
+        return Math.round(data * temp) / temp;
+
+    }
 }
