@@ -3,6 +3,7 @@
 ## [Planning]
 - Tourism for the app.
 - User choice date format display.
+- Handle the `islogin` localstorage.
 
 ### 0.4.2
 - Complete new logo.
