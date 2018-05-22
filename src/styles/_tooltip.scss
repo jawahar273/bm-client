@@ -2,7 +2,6 @@
 .tooltip {
     opacity: 0;
     transition: opacity, transform .2s ease;
-
     &.bs-tooltip-left .arrow::before,
     .tooltip.bs-tooltip-auto[x-placement^="left"].arrow::before{
         border-left-color: transparent;

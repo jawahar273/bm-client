@@ -101,7 +101,8 @@ export class DashTableComponent implements OnInit {
      */
     private getTheDays(date: Date): string {
 
-        return moment(date, 'YYYY-MM-DD').fromNow();
+        return moment(date,
+                      this.service.serverDateFormat).fromNow();
 
     }
     private deleteRow(itemID: number, indx: number) {

@@ -1,0 +1,28 @@
+
+.list-group {
+
+    border-radius: 0px;
+    .list-group-item.active {
+        background-color: $default-color;
+        border-color: $default-color;
+
+        .list-group-item.active:hover {
+            background-color: $default-color;
+            border-color: $default-color;
+        }
+
+    }
+
+    .list-group-item:hover {
+        background-color: $default-hover-color;
+        color: $default-hover-font-color;
+        .badge-primary {
+           background-color: $default-hover-color;
+        }
+    }
+
+    .badge {
+        border-radius: 0px;
+    }
+
+}

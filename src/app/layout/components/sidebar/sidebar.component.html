@@ -61,14 +61,14 @@
                         </a>
                     </li>
                 </ul>
-                <ul class="submenu" *ngIf="service.airPollutionKeys">
+                <ul class="submenu" *ngIf="service.airPollutionKeys" [hidden]="!service.isMobileScreen">
 
                     <li *ngFor="let item of service.airPollutionKeys" >
 
                         <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
                         service.currentDateWithMomentJS"
                         trigger="click:focus" placement="bottom">
-                                {{ 'Mix Ratio' | translate}}: {{ roundOfData(service?.airPollutionData[item]['value']) }}
+                                {{ 'Mix Ratio' | translate}}: {{ roundOfData(item, 'value') }}
                         </a>
 
                     </li>
@@ -78,7 +78,7 @@
                         <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
                         service.currentDateWithMomentJS"
                         trigger="click:focus" placement="bottom">
-                            {{ 'Pressure' | translate }}: {{ roundOfData(service?.airPollutionData[item]['pressure']) }} hPa
+                            {{ 'Pressure' | translate }}: {{ roundOfData(item,'pressure') }} hPa
                         </a>
 
                     </li>

@@ -19,8 +19,6 @@ export class CommonService {
     public today: Date;
     public defaultMobileScreenOffSet: number; // @review
     public isMobileScreen: boolean;
-    public countOfYears: number; // @review
-    public startLimitOfYears: number;// @review
     public globalalertBox: Array<any> = [];
     public globalServiceErrorMapping = {
 
@@ -35,6 +33,8 @@ export class CommonService {
     public clientErrorCode = new Set([400, 401, 403, 404, 406,408, 410]);
     public serverErrorCode = new Set([500, 502, 503, 504 ]);
     public currentDateWithMomentJS;
+    public bmDateFormat: string;
+    public serverDateFormat: string;
     public currencyDetails: object;
 
 
@@ -72,7 +72,9 @@ export class CommonService {
     constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
 
         this.today  = new Date();
-        this.currentDateWithMomentJS = moment(this.today).format('YYYY-MM-DD');
+        this.bmDateFormat = 'YYYY-MM-DD';
+        this.setMomentLocalLanguage(); // @review
+        this.serverDateFormat = this.bmDateFormat;
         this.listOfMonths = moment.months().slice(0, this.today.getMonth() + 1);
         this.listOfMonths.reverse();
         this.monthInMenu = `${this.listOfMonths.slice(0,1)}-${this.today.getFullYear()}`;
@@ -92,12 +94,7 @@ export class CommonService {
             'name_plural': 'US dollars'
 
         };
-        this.dateRangOfMonths = {
 
-          'start': moment(this.today).startOf('month').format('YYYY-MM-DD'),
-          'end': moment(this.today).endOf('month').format('YYYY-MM-DD')
-
-        };
 
         let accessControlAllowOrigin = '';
         if (isDevMode) {
@@ -113,6 +110,7 @@ export class CommonService {
         });
         const url = this.joinURL(environment.domainName, environment.apiPath, false);
         this.commonURL = `${environment.protocol}${url}`;
+        this.packDateFunctions();
     }
 
     /**
@@ -176,6 +174,58 @@ export class CommonService {
         return this.http.delete(url, options)
             .map((res: Response) => res.json())
             .catch((error: any) => Observable.throw(error.json()));
+
+    }
+
+    private setMomentLocalLanguage(): void {
+
+        let temp = this.syncLocalStorage('language');
+        if (!temp) {
+            temp = 'en';
+        }
+        moment.locale(temp);
+    }
+    /**
+     * Getter and setter property for
+     * `bmDateFormat`.
+     */
+    public get getDateFormat() : any {
+        return this.bmDateFormat;
+    }
+
+    public set getDateFormat(v : any) {
+        this.bmDateFormat = v;
+    }
+
+    /**
+     * This method will be use to set the date format
+     * through out the app using the setting.
+     */
+    public setCurrentDateFormat() : void {
+        this.currentDateWithMomentJS = moment(this.today).format(this.getDateFormat);
+    }
+
+    /**
+     * This method will be used for setting the
+     * months date ranges.
+     */
+    public setDateRange(): void {
+        this.dateRangOfMonths = {
+
+          'start': moment(this.today).startOf('month').format(this.getDateFormat),
+          'end': moment(this.today).endOf('month').format(this.getDateFormat)
+
+        };
+    }
+
+    /**
+     * Calling all the required date
+     * functions in one call.
+     */
+    public packDateFunctions(): void {
+
+      this.setCurrentDateFormat();
+      this.setDateRange();
 
     }
 
@@ -705,6 +755,18 @@ export class CommonService {
 
         localStorage.setItem(`${name}-${this.userName}`, value);
 
+    }
+
+    public asyncLocalStorage(name: string, default_value?: any): any {
+    
+      return this.localStorage.getItem(`${name}-${this.userName}`);
+    
+    }
+
+    public asyncLocalStorageSet(name: string, value: any): any {
+    
+      return this.localStorage.setItem(`${name}-${this.userName}`, value);
+    
     }
 
     public onLoggedout() {
