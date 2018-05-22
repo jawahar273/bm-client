@@ -16,3 +16,7 @@ textarea:not(textarea), textarea.form-control:not(textarea),
         /*box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(250, 56, 100, 0.80);*/
 
 }
+
+.form-control > input[type=email], .form-control > input[type=text]  {
+  padding: 10px 16px;
+}

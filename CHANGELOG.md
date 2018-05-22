@@ -1,11 +1,8 @@
 # CHANGELOG
 
 ## [Planning]
-- ~~UI change in alert box for better interaction.~~
-- ~~UI change in date for dashboard.~~
 - Tourism for the app.
-- ~~CSS issue in header bar for mid-size modbile screen.~~
-- User choice date display.
+- User choice date format display.
 
 ### 0.4.2
 - Complete new logo.
@@ -15,6 +12,7 @@
 - Fixed amount model not opening issue.
 - Showing amount model after login only.
 - Makeing material like look.
+- CSS issue in header bar for mid-size modbile screen.
 
 ### 0.4.1
 - Modified logo.

@@ -36,10 +36,13 @@ button {
       transition: background 0s;
    }
 }
+
 .app-button {
    @extend .ripple;
    background-color: $default-color;
    color: $default-font-color;
+   border-radius: 0px;
+
 }
 
 .allow-center {
@@ -55,13 +58,7 @@ button {
   margin-top: 10%;
 }
 
-.form-control > input[type=email], .form-control > input[type=text]  {
-  padding: 10px 16px;
-}
 
-.card {
-  background-color: $default-body-color;
-}
 @media screen and (max-width: 992px) {
     .modal-content {
         margin-top: 20%;
