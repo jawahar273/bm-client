@@ -1,5 +1,33 @@
 
 .tooltip {
-    background-color: make_important($material-black);
-    color: make_important($material-black);
+    opacity: 0;
+    transition: opacity, transform .2s ease;
+
+    &.bs-tooltip-left .arrow::before,
+    .tooltip.bs-tooltip-auto[x-placement^="left"].arrow::before{
+        border-left-color: transparent;
+    }
+
+    &.bs-tooltip-right .arrow::before,
+    .tooltip.bs-tooltip-auto[x-placement^="right"] .arrow::before{
+        border-right-color: transparent;
+    }
+    
+    &.bs-tooltip-top .arrow::before,
+    .tooltip.bs-tooltip-auto[x-placement^="top"] .arrow::before{
+        border-top-color: transparent;
+    }
+    
+    &.bs-tooltip-bottom .arrow::before,
+    .tooltip.bs-tooltip-auto[x-placement^="bottom"] .arrow::before{
+        border-bottom-color: transparent;
+    }
+    
 }
+
+.tooltip-inner {
+    background-color: make_important($material-grey);
+    color: make_important($material-black);
+    border-radius: 0px;
+}
+

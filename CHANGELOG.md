@@ -13,6 +13,7 @@
 - Showing amount model after login only.
 - Makeing material like look.
 - CSS issue in header bar for mid-size modbile screen.
+- Changing UI for Tooltip.
 
 ### 0.4.1
 - Modified logo.
