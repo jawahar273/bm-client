@@ -8,6 +8,7 @@
 ### 0.4.3
 - Adding weather report to sidemenu.
 - Update with french langulage (weather menu).
+- Changes in int alert text(amount model).  
 
 ### 0.4.2
 - Complete new logo.

@@ -247,7 +247,7 @@ export class ChartsComponent implements OnInit {
 
                 } else {
 
-                   this.service.showGlobalAlert(`Need to show 'Doughnut chart'. Please click 'Amount' menu and fill.`);
+                   this.service.showGlobalAlert(`Please click 'Amount' menu and fill.`);
 
                 }
               },
