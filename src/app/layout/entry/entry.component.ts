@@ -247,7 +247,24 @@ export class EntryComponent implements OnInit {
 
                       this.showFormAlert('Content Updated', 'success');
                       this.hideLoadingSpin(true);
-                      this.service.listOfGroupItems.push(data['group']);
+                      // this.service.listOfGroupItems.push(data['group']);
+                      // about variable is deprecated.
+                      // Comment below code and remove
+                      // to table related to itemsgroups list.
+                      this.service.asyncLocalStorage(this.service._db.groupItemsNameOnlyDB)
+                      .subscribe((data) => {
+                            const groupValue = data['group'];
+                            const temp = data.push(groupValue);
+                            this.service.asyncLocalStorageSet(this.service._db.groupItemsNameOnlyDB, temp);
+                            this.service.asyncLocalStorage(this.service._db.groupItemsDB)
+                            .subscribe((_data) => {
+                                const _temp = {}
+                                _temp['date'] = this.service.convertDateFormat(this.service.today);
+                                _temp['group'] = groupValue;
+                                _data.push(_temp)
+                                this.service.asyncLocalStorageSet(this.service._db.groupItemsDB, _data);
+                            });
+                        });
 
                   },
                   (error) => {

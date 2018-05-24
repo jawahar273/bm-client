@@ -10,6 +10,8 @@
 - Update with french langulage (weather menu).
 - Changes in int alert text(amount model).
 - Added new Category/Group with recent activity.
+- Migrating IndexDB libery
+- Common DB name interace initilize.
 
 ### 0.4.2
 - Complete new logo.

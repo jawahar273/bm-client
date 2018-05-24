@@ -82,8 +82,10 @@ export class LayoutComponent implements OnInit {
 
         this.service.headers.set('Authorization', `${this.service.getUserAuth()}`);
         this.getUserDetails();
-        // moved to notification components
+        
     }
+
+
 
     private getCurrenctDetails(): void {
 

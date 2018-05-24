@@ -255,7 +255,7 @@ export class SidebarComponent {
               temp = 'USD';
             }
 
-            this.service.localStorage.getItem('currency')
+            this.service.asyncLocalStorage('currency')
              .subscribe((data) => {
 
                if (!data) {

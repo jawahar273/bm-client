@@ -14,13 +14,14 @@ export class NotificationComponent implements OnInit {
     constructor(public service: CommonService) {
         this.categoriesArray = [{'group': 'Error',
                                 'date': '2017-12-31'}];
-        this.getItemsGroupsNameOnly();
+        this.getItemsNameOnly();
         this.getItemsGroups();
     }
     ngOnInit() { }
 
-    private getItemsGroupsNameOnly(): void {
-        this.service.asyncLocalStorage('itemGroupNamesOnly')
+
+    private getItemsNameOnly(): void {
+        this.service.asyncLocalStorage(this.service._db.groupItemsNameOnlyDB)
         .subscribe((data) => {
 
             if (!data) {
@@ -36,12 +37,12 @@ export class NotificationComponent implements OnInit {
                          groupList.push(data[i]['group']);
 
                      }
-                     this.service.listOfGroupItems = Array.from(new Set(groupList));
-                     this.categoriesArray = data;
-                     this.service.asyncLocalStorageSet('itemGroupNamesOnly',
-                                                       this.service.listOfGroupItems);
-                     this.service.asyncLocalStorageSet('itemGroups', data);
-                     this.getItemsGroups();
+
+
+                     this.service.asyncLocalStorageSet(this.service._db.groupItemsNameOnlyDB,
+                                                       Array.from(new Set(groupList)));
+                     this.service.asyncLocalStorageSet(this.service._db.groupItemsDB, data);
+
                  }, (error) => {
                      // this.showGlobalAlert('');
                  });
@@ -49,10 +50,9 @@ export class NotificationComponent implements OnInit {
 
         });
     }
-
     private getItemsGroups() {
 
-        this.service.asyncLocalStorage('itemGroups')
+        this.service.asyncLocalStorage(this.service._db.groupItemsDB)
         .subscribe((data) => {
 
             if (data) {
@@ -61,6 +61,8 @@ export class NotificationComponent implements OnInit {
             }
 
         });
+
+
     }
 
     private getTheDays(date: Date): string {

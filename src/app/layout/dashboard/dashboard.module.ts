@@ -12,6 +12,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { PageHeaderModule } from '../../shared';
+import { DashBoardSerices } from './dashboardtour.services';
 
 import {
     TimelineComponent,
@@ -40,6 +41,7 @@ import { StatModule } from '../../shared';
         NotificationComponent,
         ChatComponent,
         DashTableComponent,
-    ]
+    ],
+    providers: [DashBoardSerices]
 })
 export class DashboardModule {}
