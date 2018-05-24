@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from '@ngx-translate/core';
-import { interval } from 'rxjs/observable/interval';
+import { interval } from 'rxjs';
 import * as moment from 'moment';
 
 import { CommonService } from '../../../services/common.services';
@@ -51,10 +51,6 @@ export class SidebarComponent {
       this.datePickerModel = this.service.currentDateWithMomentJS;
       this.service.getBudgetAmount();
       this.getOrSetPackageSetting();
-  }
-
-  ngAfterViewInit() {
-    // this.getOrSetPackageSetting();
   }
 
   ngOnDestroy() {

@@ -3,21 +3,21 @@
 
     border-radius: 0px;
     .list-group-item.active {
-        background-color: $default-color;
-        border-color: $default-color;
+        background-color: $bm-color;
+        border-color: $bm-color;
 
         .list-group-item.active:hover {
-            background-color: $default-color;
-            border-color: $default-color;
+            background-color: $bm-color;
+            border-color: $bm-color;
         }
 
     }
 
     .list-group-item:hover {
-        background-color: $default-hover-color;
-        color: $default-hover-font-color;
+        background-color: $bm-hover-color;
+        color: $bm-hover-font-color;
         .badge-primary {
-           background-color: $default-hover-color;
+           background-color: $bm-hover-color;
         }
     }
 

@@ -23,7 +23,7 @@ button {
 
    &:hover {
      background: #47a7f5 radial-gradient(circle, transparent 1%, #47a7f5 1%) center/15000%;
-     color: $default-font-color;
+     color: $bm-font-color;
     }
 
    &:active {
@@ -39,8 +39,8 @@ button {
 
 .app-button {
    @extend .ripple;
-   background-color: $default-color;
-   color: $default-font-color;
+   background-color: $bm-color;
+   color: $bm-font-color;
 }
 
 

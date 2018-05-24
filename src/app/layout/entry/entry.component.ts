@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import {  Headers } from '@angular/http';
 
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';

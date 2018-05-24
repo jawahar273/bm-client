@@ -1,0 +1,56 @@
+
+// follow the https://www.materialpalette.com/ for
+// coloring patter.
+$material-blue-600: #1e88e5;
+$material-blue-700: #1e88e5;
+$material-blue-800: #1565c0;
+$material-white: white;
+$material-black: black;
+$material-grey: #eee;
+
+$bm-background-color: $material-grey !important;
+$bm-body-color: $material-white !important;
+
+$bm-color: $material-blue-800 !important;
+$bm-font-color: $material-white !important;
+
+$bm-hover-color: $material-blue-700 !important;
+$bm-hover-font-color: $material-white !important;
+
+$bm-active-color: $material-blue-700 !important;
+$bm-active-font-color: $material-white;
+
+$bm-visited-color: $material-blue-700 !important;
+$bm-visited-font-color: $material-white !important;
+
+$bm-focus-color: $material-blue-700 !important;
+$bm-focus-font-color: $material-white !important;
+
+
+// $bm-color-inverse: $material-blue-800 !important;
+$bm-font-color-inverse: $material-black !important;
+
+// $bm-hover-color-inverse: $material-blue-700 !important;
+$bm-hover-font-color-inverse: $material-black !important;
+
+// $bm-active-color-inverse: $material-blue-700 !important;
+$bm-active-font-color-inverse: $material-black;
+
+// $bm-visited-color-inverse: $material-blue-700 !important;
+$bm-visited-font-color-inverse: $material-black !important;
+
+// $bm-focus-color-inverse: $material-blue-700 !important;
+$bm-focus-font-color-inverse: $material-black !important;
+
+// button property
+$button-large-icon-font-size: 1.6rem !default;
+$button-large-height: 15px * 1.5 !default;
+$button-border: none !default;
+// floating btn
+
+$button-floating-size: 40px !default;
+$button-floating-radius: 50% !default;
+$button-floating-large-size: 56px !default;
+$button-floating-background: red !default;
+$button-floating-color: #fff !default;
+$button-floating-background-hover: $button-floating-background !default;

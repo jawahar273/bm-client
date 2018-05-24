@@ -1,9 +1,12 @@
 # CHANGELOG
 
 ## [Planning]
-- Tourism for the app.
 - User choice date format display.
 - Handle the `islogin` localstorage.
+
+### 0.5.0
+- Upgrading to angualr 6.x
+- Tourism for the app.
 
 ### 0.4.3
 - Adding weather report to sidemenu.

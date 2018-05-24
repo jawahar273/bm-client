@@ -4,35 +4,48 @@ import { TourService, IStepOption } from 'ngx-tour-ng-bootstrap';
 @Injectable()
 export class DashBoardSerices implements OnDestroy {
     public tour: any;
-    constructor(private tourService: TourService) {
+    constructor(public tourService: TourService) {
 
         this.tourService.initialize([
                {
                   anchorId: 'start.tour.dashboard',
                   content: 'Welcome to the Dashboard!',
-                  placement: 'right',
+                  placement: 'left',
                   title: 'Welcome',
+                  prevBtnTitle: '',
+                  nextBtnTitle: ''
                },
                {
                   anchorId: 'tour.date-ranges',
                   content: 'This date ranage will be used to retrive data from the server',
-                  placement: 'right',
+                  placement: 'bottom',
                   title: 'Date Ranges',
+                  prevBtnTitle: '',
+                  nextBtnTitle: ''
                },
                {
                   anchorId: 'tour.update.btn',
                   content: 'Press this button to refresh',
-                  placement: 'left',
-                  title: 'Refresh',      
+                  placement: 'bottom',
+                  title: 'Refresh',   
+                  prevBtnTitle: '',
+                  nextBtnTitle: ''   
                },
                {
                   anchorId: 'tour.dash-table-content',
                   content: 'Spend of the seleted date range will be showen',
                   placement: 'top',
-                  title: 'Dash Table', 
-               }
-            ]);
-        this.tourService.start();
+                  title: 'Dash Table',
+                  prevBtnTitle: '',
+                  nextBtnTitle: '' 
+               },
+
+            ],{
+                preventScrolling: false,
+                prevBtnTitle: 'fa fa-train',
+                nextBtnTitle: 'fa fa-train' 
+            });
+        // this.tourService.start();
     }
     
     ngOnDestroy() {
@@ -51,7 +64,7 @@ export class DashBoardSerices implements OnDestroy {
             class: 'shepherd shepherd-open shepherd-theme-arrows shepherd-transparent-text',
             button: [
                 {
-                    text: 'Next',
+                    text: '',
                     classes: 'shepherd-button-example-primary',
                     action: this.tour.next
                 },{
@@ -61,7 +74,7 @@ export class DashBoardSerices implements OnDestroy {
                     action: this.tour.cancel
                 }
                
-            ]
+            ],
         });
     }
 

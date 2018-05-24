@@ -2,7 +2,7 @@
 // varaiable from bm-vairable.scss
 
 .card {
-  background-color: $default-body-color;
+  background-color: $bm-body-color;
   border-radius: 0px;
 
   // &:hover, &:active {
@@ -10,7 +10,7 @@
   // }
 
   &-header {
-     background-color: $default-body-color;
+     background-color: $bm-body-color;
   }
 
 }

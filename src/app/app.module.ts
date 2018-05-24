@@ -12,7 +12,6 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-import { LocalStorageModule } from '@ngx-pwa/local-storage';
 import { CookieModule } from 'ngx-cookie';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -59,7 +58,6 @@ export function createTranslateLoader(http: HttpClient) {
            enabled: environment.production
         }),
         // environment.production ? ServiceWorkerModule.register('/bm-client/ngsw-worker.js') : [],
-        LocalStorageModule,
         CookieModule.forRoot(),
         ConfirmEmailModule,
     ],

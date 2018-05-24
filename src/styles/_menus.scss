@@ -1,20 +1,20 @@
 
 .navbar {
-    background-color: $default-color;
+    background-color: $bm-color;
 }
 
 .navbar .nav-item > a {
-    color: $default-font-color;
+    color: $bm-font-color;
 }
 
 .sidebar {
-    background-color: $default-color;
-    color: $default-font-color; 
+    background-color: $bm-color;
+    color: $bm-font-color; 
 }
 
 .sidebar .list-group a.list-group-item {
-    background-color: $default-color;
-    color: $default-font-color;
+    background-color: $bm-color;
+    color: $bm-font-color;
 }
 
 .sidebar .list-group a {
@@ -22,7 +22,7 @@
    transition: background 0.8s;
     &:hover {
      background: $material-blue-600 radial-gradient(circle, transparent 1%, $material-blue-600 1%) center/15000% !important;
-     color: $default-hover-font-color;
+     color: $bm-hover-font-color;
     }
 
    &:active {

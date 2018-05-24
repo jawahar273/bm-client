@@ -1,14 +1,57 @@
 <div [@routerTransition]>
     <app-page-header [heading]="'Dashboard'" [icon]="'fa-bar-chart-o'"></app-page-header>
     
-    <tour-step-template>        
+<tour-step-template>
+  
+  <ng-template let-step="step">
+
+    <p class="tour-step-content">{{step?.content}}</p>
+
+    <div class="tour-step-navigation">
+
+          <button *ngIf="tour.tourService.hasPrev(step)" class="btn btn-sm btn-default" (click)="tour.tourService.prev()">
+            {{step?.prevBtnTitle}}
+          </button>
+
+          <button *ngIf="tour.tourService.hasNext(step)" class="btn btn-sm btn-default" (click)="tour.tourService.next()">
+            {{step?.nextBtnTitle}}
+          </button>
+
+          <button class="btn btn-sm btn-default" (click)="tour.tourService.end()">
+            {{step?.endBtnTitle}}
+          </button>
+
+    </div>
+
+  </ng-template>
+
+</tour-step-template>
+
+    <app-dash-table></app-dash-table>
     
-        <app-dash-table></app-dash-table>
-    
-        <app-notification></app-notification>
-    
-    </tour-step-template>
+    <app-notification></app-notification>
 <!--     <app-chat></app-chat>
     <app-timeline></app-timeline> -->
-    
+    <div class="fixed-action-btn float-right">
+        
+        <button (click)="tour.startTour()" tourAnchor="start.tour.dashboard">
+            
+            <i class="fa fa-train" ></i>
+            
+        </button>
+<!--         <ul>
+            <li>
+                <button>
+                    <i class="fa fa-train" ></i>
+                </button>
+            </li>
+            <li>
+                <button>
+                    <i class="fa fa-train" ></i>
+                </button>
+            </li>
+
+        </ul> -->
+    </div>
+
 </div>
