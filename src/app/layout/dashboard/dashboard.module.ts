@@ -8,6 +8,7 @@ import {
         } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TranslateModule } from '@ngx-translate/core';
+import { TourNgBootstrapModule } from 'ngx-tour-ng-bootstrap';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
@@ -32,6 +33,7 @@ import { StatModule } from '../../shared';
         StatModule,
         NgxDatatableModule,
         TranslateModule,
+        TourNgBootstrapModule.forRoot(),
         DashboardRoutingModule,
         PageHeaderModule,
     ],

@@ -4839,6 +4839,19 @@ ngx-cookie@^2.0.1:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/ngx-cookie/-/ngx-cookie-2.0.1.tgz#031d8938bf9026954356b3b3ae668e2e1964e584"
 
+ngx-tour-core@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-tour-core/-/ngx-tour-core-3.0.0.tgz#d9275d11ae40c989d898d8de640f9cb12706ddef"
+  dependencies:
+    tslib "^1.9.0"
+
+ngx-tour-ng-bootstrap@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/ngx-tour-ng-bootstrap/-/ngx-tour-ng-bootstrap-3.0.0.tgz#c2abfe35f43d0314218fdb7a84dbc61c7895c7e0"
+  dependencies:
+    tslib "^1.9.0"
+    withinviewport "^2.0.0"
+
 no-case@^2.2.0:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/no-case/-/no-case-2.3.2.tgz#60b813396be39b3f1288a4c1ed5d1e7d28b464ac"
@@ -7126,16 +7139,6 @@ term-size@^1.2.0:
   dependencies:
     execa "^0.7.0"
 
-tether-shepherd@^1.8.1:
-  version "1.8.1"
-  resolved "https://registry.yarnpkg.com/tether-shepherd/-/tether-shepherd-1.8.1.tgz#4fd9b2fdd9059f04b6c4249456d5ae145a3e9223"
-  dependencies:
-    tether "^1.0.1"
-
-tether@^1.0.1:
-  version "1.4.4"
-  resolved "https://registry.yarnpkg.com/tether/-/tether-1.4.4.tgz#9dc6eb2b3e601da2098fd264e7f7a8b264de1125"
-
 text-table@~0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
@@ -7907,6 +7910,10 @@ win-release@^1.0.0:
 window-size@0.1.0:
   version "0.1.0"
   resolved "https://registry.yarnpkg.com/window-size/-/window-size-0.1.0.tgz#5438cd2ea93b202efa3a19fe8887aee7c94f9c9d"
+
+withinviewport@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/withinviewport/-/withinviewport-2.0.0.tgz#5df1468b087832812dfba0a793c2be4e96b2da85"
 
 wordwrap@0.0.2:
   version "0.0.2"

@@ -3,6 +3,7 @@ import * as moment from 'moment';
 import { Headers } from '@angular/http';
 // import { ngbDropdownMenu } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from '../../../../services/common.services';
+import { DashBoardSerices } from '../../dashboardtour.services';
 
 const formatter = (result: string) => result.toUpperCase();
 
@@ -22,7 +23,8 @@ export class DashTableComponent implements OnInit {
 
     @ViewChild('dashTable') dashTable;
 
-    constructor(public service: CommonService) {
+    constructor(public service: CommonService,
+                public tour: DashBoardSerices) {
  
         this.isMobileScreen = window.innerWidth <= 992;
 
