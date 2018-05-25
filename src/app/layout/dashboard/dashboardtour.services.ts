@@ -42,8 +42,6 @@ export class DashBoardSerices implements OnDestroy {
 
             ],{
                 preventScrolling: false,
-                prevBtnTitle: 'fa fa-train',
-                nextBtnTitle: 'fa fa-train' 
             });
         // this.tourService.start();
     }

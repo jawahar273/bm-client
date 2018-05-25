@@ -3,7 +3,7 @@
     
 <tour-step-template>
   
-  <ng-template let-step="step">
+  <ng-template let-step="step" class="pulse">
 
     <p class="tour-step-content">{{step?.content}}</p>
 
@@ -34,7 +34,7 @@
     <app-timeline></app-timeline> -->
     <div class="fixed-action-btn float-right">
         
-        <button (click)="tour.startTour()" tourAnchor="start.tour.dashboard">
+        <button (click)="tour.startTour()" class="btn-float" tourAnchor="start.tour.dashboard">
             
             <i class="fa fa-train" ></i>
             

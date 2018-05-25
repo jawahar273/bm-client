@@ -125,12 +125,7 @@ export class ChartsComponent implements OnInit {
         console.log(this.service.dataTableDashboard);
         if (!this.service.dataTableDashboard) {
 
-            const rangeDate = {
-
-              'start': moment(this.service.today).startOf('month').format('YYYY-MM-DD'),
-              'end': moment(this.service.today).endOf('month').format('YYYY-MM-DD')
-
-            };
+            const rangeDate = this.service.dateRangOfMonths;
 
             this.service.get(`package/itemslist/${rangeDate['start']}/${rangeDate['end']}`, this.service.headers).subscribe(
                 (data) => {
