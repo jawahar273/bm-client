@@ -48,7 +48,6 @@ export class CommonService {
 
     // components dashboard
     public dataTableDashboard: Array<any>;
-    public listOfGroupItems: Array<string>; // @deprecated
     public _db: DBNames;
     public listOfMonths: Array<string>;
     public dateRangOfMonths: object;
@@ -780,17 +779,18 @@ export class CommonService {
 
     }
 
-    public asyncLocalStorage(name: string, default_value?: any): any {
+    public joinUserName(name: string, default_value?: any): string {
     
-      return this.localStorage.getItem(`${name}-${this.userName}`);
+        return `${name}-${this.userName}`;
+
     
     }
 
-    public asyncLocalStorageSet(name: string, value: any): any {
+    // public asyncLocalStorageSet(name: string, value: any): any {
     
-      return this.localStorage.setItem(`${name}-${this.userName}`, value);
+    //    this.localStorage.setItem(`${name}-${this.userName}`, value);
     
-    }
+    // }
 
     public onLoggedout() {
 

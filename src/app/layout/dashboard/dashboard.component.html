@@ -29,9 +29,10 @@
 
     <app-dash-table></app-dash-table>
     
-    <app-notification></app-notification>
+    <app-notification [categoriesArray]="categoriesArray"></app-notification>
 <!--     <app-chat></app-chat>
     <app-timeline></app-timeline> -->
+
     <div class="fixed-action-btn float-right">
         
         <button>
@@ -41,15 +42,15 @@
         </button>
         <ul>
             <li>
-                <button  (click)="tour.startTour()" class="btn-float" tourAnchor="start.tour.dashboard">
+                <button  (click)="tour.startTour()" class="first-color" tourAnchor="start.tour.dashboard">
                     <i class="fa fa-train" ></i>
                 </button>
             </li>
-<!--             <li>
-                <button>
-                    <i class="fa fa-train" ></i>
-                </button>
-            </li> -->
+            <li>
+              <button class="second-color" routerLink="/entry" [routerLinkActive]="['router-link-active']" ngbTooltip="New Entry" placement="left">
+                  <i class="fa fa-plus"></i>
+              </button>
+            </li>
 
         </ul>
     </div>

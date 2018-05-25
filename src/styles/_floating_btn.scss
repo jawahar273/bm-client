@@ -27,7 +27,7 @@
 
 
 .fixed-action-btn {
-  &:hover {
+  &:hover, &:active {
     ul {
       visibility: visible;
     }
@@ -36,11 +36,11 @@
   position: fixed;
   right: 23px;
   bottom: 23px;
-  padding-top: 15px;
+  padding-top: 20px;
   margin-bottom: 0;
   z-index: 997;
 
-  button {
+  button, a {
     border-radius: 50%;
     background-color: $button-floating-background;
     &:active, &:focus, &:visited {
@@ -62,12 +62,17 @@
     li {
       margin-bottom: 15px;
       border-radius: 50%;
-    }
+      button {
 
-    button.btn-floating {
-      opacity: 0;
+      }
     }
-
   }
 
+}
+
+.first-color {
+  background-color: make_important($material-light-blue-400);
+}
+.second-color {
+  background-color: make_important($material-purple-500);
 }

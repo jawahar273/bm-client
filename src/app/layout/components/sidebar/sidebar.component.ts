@@ -251,7 +251,8 @@ export class SidebarComponent {
               temp = 'USD';
             }
 
-            this.service.asyncLocalStorage('currency')
+            const currencyDB = this.service.joinUserName(this.service._db.currency)
+            this.service.localStorage.getItem(currencyDB)
              .subscribe((data) => {
 
                if (!data) {

@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component,
+         OnInit,
+         Input,
+         SimpleChanges
+        } from '@angular/core';
 import * as moment from 'moment';
 
 import { CommonService } from '../../../../services/common.services';
@@ -10,60 +14,34 @@ import { CommonService } from '../../../../services/common.services';
 })
 export class NotificationComponent implements OnInit {
 
-    private categoriesArray: Array<object>;
+    @Input() categoriesArray: Array<object>;
     constructor(public service: CommonService) {
-        this.categoriesArray = [{'group': 'Error',
-                                'date': '2017-12-31'}];
-        this.getItemsNameOnly();
-        this.getItemsGroups();
+
+        // console.log(this.service.userName);
+
     }
     ngOnInit() { }
 
-
-    private getItemsNameOnly(): void {
-        this.service.asyncLocalStorage(this.service._db.groupItemsNameOnlyDB)
-        .subscribe((data) => {
-
-            if (!data) {
-                // nothing is present in the DB
-                this.service.get('package/get_group_items', this.service.headers)
-                 .subscribe((data) => {
-
-                     // this.service.listOfGroupItems = Array.from(new Set(data));
-                     let groupList = [];
-
-                     for (let i=0; i < data.length; i++) {
-
-                         groupList.push(data[i]['group']);
-
-                     }
-
-
-                     this.service.asyncLocalStorageSet(this.service._db.groupItemsNameOnlyDB,
-                                                       Array.from(new Set(groupList)));
-                     this.service.asyncLocalStorageSet(this.service._db.groupItemsDB, data);
-
-                 }, (error) => {
-                     // this.showGlobalAlert('');
-                 });
-            }
-
-        });
+    ngOnChanges(changes: SimpleChanges) {
+        if (changes['categoriesArray']) {
+            this.categoriesArray = this.categoriesArray;
+        }
     }
-    private getItemsGroups() {
 
-        this.service.asyncLocalStorage(this.service._db.groupItemsDB)
-        .subscribe((data) => {
+    // private getItemsGroups() {
+    //     const groupItemsDB = this.service.joinUserName(this.service._db.groupItemsDB);
+    //     this.service.localStorage.getItem(groupItemsDB)
+    //     .subscribe((data) => {
 
-            if (data) {
-                     this.categoriesArray = data;
+    //         if (data) {
+    //                  this.categoriesArray = data;
                 
-            }
+    //         }
 
-        });
+    //     });
 
 
-    }
+    // }
 
     private getTheDays(date: Date): string {
 
