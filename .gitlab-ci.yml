@@ -14,9 +14,6 @@ before_script:
   - apt-get update
   - apt-get install -y nodejs
   - apt-get install -y yarn
-  - apt-get update
-  - apt-get install -y nodejs
-  - apt-get install -y yarn
   - apt-get install -y default-jre
   - which node
 
@@ -26,21 +23,21 @@ stages:
   - deploy
 
 
-.script: &build_script
-  - yarn -v
-  - cd  /builds/jawahar273/bm-client
-  - yarn install --ignore-engines
-  - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher --ignore-engines
-  # - mkdir docs2
+# .script: &build_script
+#   - yarn -v
+#   - cd  /builds/jawahar273/bm-client
+#   - yarn install --ignore-engines
+#   - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher --ignore-engines
+#   # - mkdir docs2
 
-page_to_gitlab:
-  stage: build
-  script: *build_script
-  artifacts:
-    paths:
-    - public
-  only:
-  - master
+# page_to_gitlab:
+#   stage: build
+#   script: *build_script
+#   artifacts:
+#     paths:
+#     - public
+#   only:
+#   - master
 
 .script: &script_Test_With_e2e
   - yarn -v
