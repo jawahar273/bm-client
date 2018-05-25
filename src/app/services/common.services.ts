@@ -2,12 +2,13 @@ import { Injectable, isDevMode } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import * as moment from 'moment';
-import { AsyncLocalStorage } from 'angular-async-local-storage';
+import { LocalStorage } from '@ngx-pwa/local-storage';
 import { CookieService } from 'ngx-cookie';
 // Import RxJs required methods
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/catch';
 
+import { DBNames } from './dbnames';
 // config from  ts.config.json
 import { environment } from 'environments/environment';
 
@@ -47,7 +48,7 @@ export class CommonService {
 
     // components dashboard
     public dataTableDashboard: Array<any>;
-    public listOfGroupItems: Array<string>;
+    public _db: DBNames;
     public listOfMonths: Array<string>;
     public dateRangOfMonths: object;
     public monthInMenu: string;
@@ -69,7 +70,9 @@ export class CommonService {
     public currencyCode: Array<string>; // @deprecated
     public userName: string;
 
-    constructor(public http: Http, public localStorage?: AsyncLocalStorage, private cookieService?:CookieService) {
+    constructor(public http: Http,
+                public localStorage: LocalStorage,
+                private cookieService: CookieService) {
 
         this.today  = new Date();
         this.bmDateFormat = 'YYYY-MM-DD';
@@ -110,7 +113,10 @@ export class CommonService {
         });
         const url = this.joinURL(environment.domainName, environment.apiPath, false);
         this.commonURL = `${environment.protocol}${url}`;
+
         this.packDateFunctions();
+        this.dbNameInitilize()
+
     }
 
     /**
@@ -185,6 +191,16 @@ export class CommonService {
         }
         moment.locale(temp);
     }
+
+    private dbNameInitilize(): void {
+        this._db = {
+            groupItemsNameOnlyDB: 'itemGroupNamesOnly',
+            groupItemsDB: 'itemGroups',
+            currency: 'currency',
+            userProfileURL: 'userProfileURL',
+            userEmail: 'userEmail'
+        }
+    }
     /**
      * Getter and setter property for
      * `bmDateFormat`.
@@ -216,6 +232,12 @@ export class CommonService {
           'end': moment(this.today).endOf('month').format(this.getDateFormat)
 
         };
+    }
+
+    public convertDateFormat(date,
+                            from=this.getDateFormat,
+                            to=this.serverDateFormat): string {
+        return moment(date, from).format(to);
     }
 
     /**
@@ -757,17 +779,18 @@ export class CommonService {
 
     }
 
-    public asyncLocalStorage(name: string, default_value?: any): any {
+    public joinUserName(name: string, default_value?: any): string {
     
-      return this.localStorage.getItem(`${name}-${this.userName}`);
+        return `${name}-${this.userName}`;
+
     
     }
 
-    public asyncLocalStorageSet(name: string, value: any): any {
+    // public asyncLocalStorageSet(name: string, value: any): any {
     
-      return this.localStorage.setItem(`${name}-${this.userName}`, value);
+    //    this.localStorage.setItem(`${name}-${this.userName}`, value);
     
-    }
+    // }
 
     public onLoggedout() {
 

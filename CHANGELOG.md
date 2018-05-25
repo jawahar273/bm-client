@@ -1,15 +1,22 @@
 # CHANGELOG
 
 ## [Planning]
-- Tourism for the app.
 - User choice date format display.
 - Handle the `islogin` localstorage.
+
+### 0.5.0
+- Upgrading to angualr 6.x
+- Tourism for the app.
+- Adding wave scale effect in tour btn.
+- Fixed bug in autocomplete in new entry and Category/Group
 
 ### 0.4.3
 - Adding weather report to sidemenu.
 - Update with french langulage (weather menu).
 - Changes in int alert text(amount model).
 - Added new Category/Group with recent activity.
+- Migrating IndexDB libery
+- Common DB name interace initilize.
 
 ### 0.4.2
 - Complete new logo.

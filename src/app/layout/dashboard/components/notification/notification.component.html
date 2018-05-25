@@ -1,5 +1,4 @@
 <div class="card-body col-xl-5 col-lg-6 col-sm-12">
-
     <div class="list-group list-group-flush">
 
         <a href="javascript:void(0)" class="list-group-item active clearfix d-block" >
@@ -12,19 +11,35 @@
             </span>
 
         </a>
+        
+        <span *ngIf="categoriesArray then groupActive else notGroupActive"></span>
 
-        <a href="javascript:void(0)" class="list-group-item clearfix d-block" *ngFor="let values of categoriesArray">
+        <ng-template #groupActive>
+            <a href="javascript:void(0)" class="list-group-item clearfix d-block" *ngFor="let values of categoriesArray">
 
-            <!-- <i class="fa fa-comment fa-fw"></i> -->
+                <!-- <i class="fa fa-comment fa-fw"></i> -->
 
-                {{ values['group'] }}
+                    {{ values['group'] }}
 
-            <span class="float-right small badge badge-primary badge-pill "
-              placement="left" [ngbTooltip]="values['date']">
-                <em>{{ getTheDays(values['date']) }}</em>
-            </span>
+                <span class="float-right small badge badge-primary badge-pill "
+                  placement="left" [ngbTooltip]="values['date']">
+                    <em>{{ getTheDays(values['date']) }}</em>
+                </span>
 
-        </a>
+            </a>
+        </ng-template>
+
+        <ng-template #notGroupActive>
+            <a href="javascript:void(0)" class="list-group-item clearfix d-block">
+
+                    Error
+
+                <span class="float-right small badge badge-primary badge-pill">
+                    <em>Infinate</em>
+                </span>
+
+            </a>
+        </ng-template>
 
     </div>
     <!-- /.list-group -->

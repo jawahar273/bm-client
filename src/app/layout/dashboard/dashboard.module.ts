@@ -8,10 +8,12 @@ import {
         } from '@ng-bootstrap/ng-bootstrap';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TranslateModule } from '@ngx-translate/core';
+import { TourNgBootstrapModule } from 'ngx-tour-ng-bootstrap';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
 import { PageHeaderModule } from '../../shared';
+import { DashBoardSerices } from './dashboardtour.services';
 
 import {
     TimelineComponent,
@@ -31,6 +33,7 @@ import { StatModule } from '../../shared';
         StatModule,
         NgxDatatableModule,
         TranslateModule,
+        TourNgBootstrapModule.forRoot(),
         DashboardRoutingModule,
         PageHeaderModule,
     ],
@@ -40,6 +43,7 @@ import { StatModule } from '../../shared';
         NotificationComponent,
         ChatComponent,
         DashTableComponent,
-    ]
+    ],
+    providers: [DashBoardSerices]
 })
 export class DashboardModule {}

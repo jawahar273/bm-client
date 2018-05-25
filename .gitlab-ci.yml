@@ -29,10 +29,10 @@ stages:
 .script: &build_script
   - yarn -v
   - cd  /builds/jawahar273/bm-client
-  - yarn install
-  - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher
+  - yarn install --ignore-engines
+  - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher --ignore-engines
   # - yarn add --save intl 
-  - yarn add  @angular-devkit/core@0.0.28 --save-dev
+  - yarn add  @angular-devkit/core@0.0.28 --save-dev --ignore-engines
   - mkdir docs2
 
 page_to_gitlab:
@@ -47,12 +47,12 @@ page_to_gitlab:
 .script: &script_Test_With_e2e
   - yarn -v
   - ls
-  - yarn install
+  - yarn install --ignore-engines
 
-  - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher
+  - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher --ignore-engines
   # - yarn add --save intl  
   # - yarn run phantomjs –webdriver=8910
-  - yarn run e2e --progress false --browser PhantomJS
+  - yarn run e2e --progress false --browser PhantomJS --ignore-engines
 
 # .before_script: &before_script_test_with_e2e
 

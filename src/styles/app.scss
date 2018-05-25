@@ -10,14 +10,15 @@
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/bootstrap.css';
 
-
 @import "bm-mixins/_color_!impotant";
-@import "bm-variables";
+@import "bm_variables";
 @import "alert";
 @import "card";
+@import "floating_btn";
 @import "input-underline";
 @import "utils";
 @import "spinner";
+@import "pulse";
 @import "list_group";
 @import "tooltip";
 @import "rtl";

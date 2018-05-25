@@ -1,5 +1,6 @@
-import { Component, OnInit, HostListener } from '@angular/core';
+import { Component, OnInit, HostListener, ElementRef } from '@angular/core';
 import { Router } from '@angular/router';
+// import * as Hammer from 'hammerjs';
 
 import { CommonService } from '../services/common.services';
 import { NotificationsServices } from '../services/notification.services';
@@ -20,6 +21,7 @@ export class LayoutComponent implements OnInit {
     constructor(public service: CommonService,
                 private router: Router,
                 public notifies: NotificationsServices,
+                // public el: ElementRef,
                 private userNameService: AsynUserName) {
 
         // init function call after the success obtain of 
@@ -38,6 +40,14 @@ export class LayoutComponent implements OnInit {
 
     ngOnInit() {}
 
+  // ngAfterViewInit() {
+  //   let hammer = new Hammer(this.el.nativeElement);
+  //   console.log(hammer.get('swipe'))
+  //   hammer.on('swipleft', (event) => {
+  //     console.log('swipping left');
+  //     debugger
+  //   });
+  // }
 
     public closeGlobalAlert(alert) {
 
@@ -82,8 +92,10 @@ export class LayoutComponent implements OnInit {
 
         this.service.headers.set('Authorization', `${this.service.getUserAuth()}`);
         this.getUserDetails();
-        // moved to notification components
+        
     }
+
+
 
     private getCurrenctDetails(): void {
 

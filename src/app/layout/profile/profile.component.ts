@@ -67,13 +67,13 @@ export class ProfileComponent implements OnInit {
 
   public getUserProfileURL() {
 
-    return this.service.syncLocalStorage('userProfileURL');
+    return this.service.syncLocalStorage(this.service._db.userProfileURL);
 
   }
 
   public getUserEmail() {
 
-    return this.service.syncLocalStorage('userEmail');
+    return this.service.syncLocalStorage(this.service._db.userEmail);
 
   }
 

@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import {  Headers } from '@angular/http';
 
-import {Observable} from 'rxjs/Observable';
+import {Observable} from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -33,6 +33,7 @@ export class EntryComponent implements OnInit {
     submitForm: Boolean = false;
     // flag for check the value has been found or not in getting entry object on `id`.
     content404: Boolean = false;
+    listOfGroupItems: Array<string>;
 
     /**
      *
@@ -72,6 +73,15 @@ export class EntryComponent implements OnInit {
 
   }
 
+  ngAfterViewInit() {
+
+      const itemNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB);
+      this.service.localStorage.getItem(itemNameOnlyDB)
+      .subscribe((data) => {
+        this.listOfGroupItems = data;
+      });
+
+  }
 
   /**
    *
@@ -219,9 +229,16 @@ export class EntryComponent implements OnInit {
       .debounceTime(200)
       .distinctUntilChanged()
       .map(term => term.length < 2 ? []
-        : this.service.listOfGroupItems.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
+        : this.listOfGroupItems.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
 
+   private removeKeysDB() {
+      const groupItemsDB = this.service.joinUserName(this.service._db.groupItemsDB);
+      this.service.localStorage.removeItem(groupItemsDB);
+      const itemsNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB);
+      this.service.localStorage.removeItem(itemsNameOnlyDB);
+
+   }
   /**
    * This function is called on the event `onsubmit`. That the formcontrol are mapped to
    * the service(rest server api) filed name. By using the @method service.renameObjectAllKeys.
@@ -247,8 +264,8 @@ export class EntryComponent implements OnInit {
 
                       this.showFormAlert('Content Updated', 'success');
                       this.hideLoadingSpin(true);
-                      this.service.listOfGroupItems.push(data['group']);
 
+                      this.removeKeysDB();
                   },
                   (error) => {
 
@@ -269,7 +286,8 @@ export class EntryComponent implements OnInit {
                       console.log(data);
                       this.showFormAlert('Content Created', 'success');
                       this.hideLoadingSpin(true);
-                      this.service.listOfGroupItems.push(data['group']);
+                      // this.listOfGroupItems.push(data['group']);
+                      this.removeKeysDB();
 
                   },
                   (error) => {
