@@ -21,7 +21,7 @@ before_script:
   - which node
 
 stages:
-  - build
+  # - build
   - test
   - deploy
 
@@ -31,9 +31,7 @@ stages:
   - cd  /builds/jawahar273/bm-client
   - yarn install --ignore-engines
   - yarn add --save-dev phantomjs-prebuilt karma-phantomjs-launcher --ignore-engines
-  # - yarn add --save intl 
-  - yarn add  @angular-devkit/core@0.0.28 --save-dev --ignore-engines
-  - mkdir docs2
+  # - mkdir docs2
 
 page_to_gitlab:
   stage: build
