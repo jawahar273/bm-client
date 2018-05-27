@@ -20,6 +20,7 @@ export class DashTableComponent implements OnInit {
     private headers: any;
     private isMobileScreen: boolean;
     public hideLoadSpin: boolean = true;
+    public seletedRows: Array<any> = [];
 
     @ViewChild('dashTable') dashTable;
 
@@ -57,6 +58,31 @@ export class DashTableComponent implements OnInit {
         this.service.closeGlobalAlert(alert);
 
     }
+
+
+    public onSelect({ selected }) {
+        console.log('Select Event', selected, this.seletedRows);
+
+        this.seletedRows.splice(0, this.seletedRows.length);
+        this.seletedRows.push(...selected);
+    }
+
+
+    public onActivate(event) {
+        console.log('Activate Event', event);
+    }
+
+    /**
+     * Determine whether
+     * to show a checkbox on the row
+     * by returning `True`
+     */
+    public displayCheck(row, column, value) {
+        return row.name !== 'Ethel Price';
+        // return false;
+    }
+
+
     /**
      *
      * @param {boolean} alert a flag setting for alert box

@@ -60,6 +60,9 @@ export class PackageSettingsComponent implements OnInit {
 
   }
 
+  private changeRadioInput(event) {
+    debugger
+  }
   /*
    * Due to quick loading of data in package setting
    * components than layout component new private
