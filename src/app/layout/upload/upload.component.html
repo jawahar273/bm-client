@@ -64,13 +64,22 @@
 						   </div>
 
 						   <div class="card-text" [ngClass]="{'col-xs-12': service.isMobileScreen}">
+                                <div class="bm-btn-group">
 
-							   <button class="btn app-button" [disabled]="flagForUploadBtn" [ngClass]="{'pull-right': !service.isMobileScreen}" >{{ 'Submit' | translate }}
+    							   <button class="btn app-button" [disabled]="flagForUploadBtn" >
+                                    
+                                    {{ 'Submit' | translate }}
 
-							   <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="registerButton" [hidden]="spinnerIcon"></i>
+    							   <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="registerButton" [hidden]="spinnerIcon"></i>
 
-							   </button>
-
+    							   </button>
+                
+                                    <button type="reset" class="btn app-button" (click)="uploadFileForm.resetForm({entryType:  defaultEntryOptionType})">
+                                    
+                                        {{ 'Cancle' | translate }}
+                                    
+                                    </button>
+                                </div>
 						   </div>
 
 					</form>

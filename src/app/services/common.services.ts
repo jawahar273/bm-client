@@ -198,7 +198,8 @@ export class CommonService {
             groupItemsDB: 'itemGroups',
             currency: 'currency',
             userProfileURL: 'userProfileURL',
-            userEmail: 'userEmail'
+            userEmail: 'userEmail',
+            uploadTerms: 'upload-terms-condtions',
         }
     }
     /**

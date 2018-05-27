@@ -6,27 +6,7 @@
       "name": "app",
       "installMode": "prefetch",
       "updateMode": "prefetch",
-      "urls": [
-        "/bm-client/index.html",
-        "/bm-client/0.chunk.js",
-        "/bm-client/1.chunk.js",
-        "/bm-client/10.chunk.js",
-        "/bm-client/11.chunk.js",
-        "/bm-client/12.chunk.js",
-        "/bm-client/2.chunk.js",
-        "/bm-client/3.chunk.js",
-        "/bm-client/4.chunk.js",
-        "/bm-client/5.chunk.js",
-        "/bm-client/6.chunk.js",
-        "/bm-client/7.chunk.js",
-        "/bm-client/8.chunk.js",
-        "/bm-client/9.chunk.js",
-        "/bm-client/inline.bundle.js",
-        "/bm-client/main.bundle.js",
-        "/bm-client/polyfills.bundle.js",
-        "/bm-client/scripts.bundle.js",
-        "/bm-client/styles.bundle.css"
-      ],
+      "urls": [],
       "patterns": []
     },
     {
@@ -43,11 +23,6 @@
         "/bm-client/assets/i18n/fr.json",
         "/bm-client/assets/i18n/it.json",
         "/bm-client/assets/i18n/ur.json",
-        "/bm-client/assets/images/logo.png",
-        "/bm-client/assets/images/slider1.jpg",
-        "/bm-client/assets/images/slider2.jpg",
-        "/bm-client/assets/images/slider3.jpg",
-        "/bm-client/assets/images/icons/icons.json",
         "/bm-client/assets/images/icons/android/android-launchericon-144-144.png",
         "/bm-client/assets/images/icons/android/android-launchericon-192-192.png",
         "/bm-client/assets/images/icons/android/android-launchericon-48-48.png",
@@ -66,6 +41,7 @@
         "/bm-client/assets/images/icons/firefox/firefox-general-90-90.png",
         "/bm-client/assets/images/icons/firefox/firefox-marketplace-128-128.png",
         "/bm-client/assets/images/icons/firefox/firefox-marketplace-512-512.png",
+        "/bm-client/assets/images/icons/icons.json",
         "/bm-client/assets/images/icons/ios/ios-appicon-1024-1024.png",
         "/bm-client/assets/images/icons/ios/ios-appicon-120-120.png",
         "/bm-client/assets/images/icons/ios/ios-appicon-152-152.png",
@@ -150,7 +126,11 @@
         "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-125.png",
         "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-150.png",
         "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-200.png",
-        "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-400.png"
+        "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-400.png",
+        "/bm-client/assets/images/logo.png",
+        "/bm-client/assets/images/slider1.jpg",
+        "/bm-client/assets/images/slider2.jpg",
+        "/bm-client/assets/images/slider3.jpg"
       ],
       "patterns": [
         "https:\\/\\/fonts\\.googleapis\\.com\\/.*"
@@ -173,43 +153,19 @@
     }
   ],
   "hashTable": {
-    "/bm-client/0.chunk.js": "13ee5620d950925897930146cdc6e82b71161537",
     "/bm-client/assets/favicon.ico": "84161b857f5c547e3699ddfbffc6d8d737542e01",
-    "/bm-client/1.chunk.js": "880d814d78c999c84f76d047850b7ee640c915c0",
     "/bm-client/assets/font-awesome.css": "0140952c64e3f2b74ef64e050f2fe86eab6624c8",
-    "/bm-client/10.chunk.js": "c95b6940e3a39f03dd2c1256407b9d3bf4eac740",
     "/bm-client/assets/i18n/de.json": "0580a1b8555ec21fe2dc53ff6c538d55e53dd675",
-    "/bm-client/11.chunk.js": "a94163d563e7948ccf05bcea54d4669252e0d79a",
-    "/bm-client/assets/i18n/en.json": "d876f35f0f1396c6b8a8e43c992fee62a8b20ba4",
-    "/bm-client/12.chunk.js": "ed2c45d140eb006111e5d0b1e637f755ee8a5125",
+    "/bm-client/assets/i18n/en.json": "d4493b1c5ddc0ba47b30f440db16ae3bd70607d4",
     "/bm-client/assets/i18n/es.json": "6ea2e4ad6deb617c07919b64d17623113c5de3ea",
-    "/bm-client/2.chunk.js": "cd6402ce6af87396c72c81c4534fd1418a7aba37",
     "/bm-client/assets/i18n/fa.json": "b5ce35fb72839961c275f87459ed0daf592399ba",
-    "/bm-client/3.chunk.js": "287aaacd5b027ed675805c421f17ec0fac19ddbf",
-    "/bm-client/assets/i18n/fr.json": "b4c01ce74ab97cfa4c8cd9c0e6a843b0750358db",
-    "/bm-client/4.chunk.js": "023f5e5d87b09a889d7b128db01754bdbc54216c",
+    "/bm-client/assets/i18n/fr.json": "bdb181cc5cee678e075e4223fbe7b8398b876e86",
     "/bm-client/assets/i18n/it.json": "989e77e5c28c5c2b316791803416d43753e9bd50",
-    "/bm-client/5.chunk.js": "1f411bfda5d1fdcd2545e048f5b70d5f0cf624ce",
     "/bm-client/assets/i18n/ur.json": "e5e02e0492b587d29476b67b930c016a38e52178",
-    "/bm-client/6.chunk.js": "61202f9abffc95b6b149a15f662956004126c605",
-    "/bm-client/assets/images/logo.png": "85ddebbb8bd316c1784e85cdda8dbeb6578d90cb",
-    "/bm-client/7.chunk.js": "adf1f4ec06f2bb6491484e95fa07947be2c8c855",
-    "/bm-client/assets/images/slider1.jpg": "7270aa6438456e96ed66f8f6b1422085eb202089",
-    "/bm-client/8.chunk.js": "c4f513aa316d6bde62071154afdeca4ecffdd2be",
-    "/bm-client/assets/images/slider2.jpg": "ab0756987eb265d3e090a1234235c09d1dc80a1a",
-    "/bm-client/9.chunk.js": "02e93e3ac6c6c83768c09520e3986a0b828b7e52",
-    "/bm-client/assets/images/slider3.jpg": "63916c33f025021b36aceaf070ac229a4edf1340",
-    "/bm-client/inline.bundle.js": "c6786bedeb9af86af3609d5e0dc2d03411bc9482",
-    "/bm-client/assets/images/icons/icons.json": "fe4503232c7bf6dd3a4b80e2cafc840b65014702",
-    "/bm-client/main.bundle.js": "9f1f17e7677efe1a905017371f8d45f9ae9e66e6",
     "/bm-client/assets/images/icons/android/android-launchericon-144-144.png": "d3342c4fb558a29d5c4f936ced5f3a1bdff2182d",
-    "/bm-client/polyfills.bundle.js": "05c1ec0a84b04a5f2e887b577bb23daa5cea79bb",
     "/bm-client/assets/images/icons/android/android-launchericon-192-192.png": "cdef02a6c23915bb8870ef3b24a5820c642fe49e",
-    "/bm-client/scripts.bundle.js": "ea268bac7e131ea2987fdec1fe19af1dd131ebd0",
     "/bm-client/assets/images/icons/android/android-launchericon-48-48.png": "5d6867d18095ccd0ca0e9e584213d3a3616d6e44",
-    "/bm-client/styles.bundle.css": "d06e9af9ced7f58697503f9f57c57b88488bb1ac",
     "/bm-client/assets/images/icons/android/android-launchericon-512-512.png": "d6202bfdd9f70f28c76409c6f1091eae5ca7dfae",
-    "/bm-client/index.html": "2be77ca086ae862559282e369f3299ca564cb8e3",
     "/bm-client/assets/images/icons/android/android-launchericon-72-72.png": "3cbb79e5b68f390020ae251897fab899af72be48",
     "/bm-client/assets/images/icons/android/android-launchericon-96-96.png": "e158df21b5ef7177cc4f3a0aa84a4153fc42c83a",
     "/bm-client/assets/images/icons/chrome/chrome-extensionmanagementpage-48-48.png": "5d6867d18095ccd0ca0e9e584213d3a3616d6e44",
@@ -224,6 +180,7 @@
     "/bm-client/assets/images/icons/firefox/firefox-general-90-90.png": "527372128f7a55245477a6c18712aba2cafe23bb",
     "/bm-client/assets/images/icons/firefox/firefox-marketplace-128-128.png": "46935e4d72d3e7fbafac5e5ae7aeacb77cbc3678",
     "/bm-client/assets/images/icons/firefox/firefox-marketplace-512-512.png": "d6202bfdd9f70f28c76409c6f1091eae5ca7dfae",
+    "/bm-client/assets/images/icons/icons.json": "fe4503232c7bf6dd3a4b80e2cafc840b65014702",
     "/bm-client/assets/images/icons/ios/ios-appicon-1024-1024.png": "ac144a5fa1ffd2ba9bd531457ddc1564166f1841",
     "/bm-client/assets/images/icons/ios/ios-appicon-120-120.png": "d96a014c319d57810801be9cd1970f929c086397",
     "/bm-client/assets/images/icons/ios/ios-appicon-152-152.png": "166d2f2e0862338abf7ed5fdf8c757b1a1f93db0",
@@ -308,6 +265,28 @@
     "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-125.png": "58b0d76a063706b2b398d9832f89bbcfae28adba",
     "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-150.png": "e0f4d360ea8c6d85cde26a2f933ece01939459d2",
     "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-200.png": "35d343423ad6f4a2f0c16e99a53841d955c7b2aa",
-    "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-400.png": "08a815f3a6a15df39b143623bb24a31bbf97c685"
-  }
+    "/bm-client/assets/images/icons/windows10/Wide310x150Logo.scale-400.png": "08a815f3a6a15df39b143623bb24a31bbf97c685",
+    "/bm-client/assets/images/logo.png": "85ddebbb8bd316c1784e85cdda8dbeb6578d90cb",
+    "/bm-client/assets/images/slider1.jpg": "7270aa6438456e96ed66f8f6b1422085eb202089",
+    "/bm-client/assets/images/slider2.jpg": "ab0756987eb265d3e090a1234235c09d1dc80a1a",
+    "/bm-client/assets/images/slider3.jpg": "63916c33f025021b36aceaf070ac229a4edf1340"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^\\/]*\\.[^\\/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^\\/]*__[^\\/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^\\/]*__[^\\/]*\\/.*$"
+    }
+  ]
 }

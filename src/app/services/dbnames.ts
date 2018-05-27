@@ -1,5 +1,5 @@
 
-export interface DBNames extends UserDBNames {
+export interface DBNames extends UserDBNames, UploadDBNames {
     groupItemsDB: string;
     groupItemsNameOnlyDB: string;
     currency: string;
@@ -9,4 +9,8 @@ export interface DBNames extends UserDBNames {
 interface UserDBNames {
     userProfileURL: string;
     userEmail: string;
+}
+
+interface UploadDBNames {
+    uploadTerms: string;
 }

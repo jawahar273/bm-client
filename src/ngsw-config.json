@@ -9,7 +9,7 @@
         "/index.html",
         "ngsw-worker.js"
       ],
-      "versionedFiles": [
+      "files": [
         "/*.bundle.css",
         "/*.bundle.js",
         "/*.chunk.js"

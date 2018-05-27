@@ -43,6 +43,11 @@ button {
    color: $bm-font-color;
 }
 
+.bm-btn-group {
+  button {
+    margin-right: 5px;
+  }
+}
 
 
 .allow-center {
