@@ -70,7 +70,7 @@
 						
 						<div class="form-group" >
 						
-							<select formControlName="proGender" class="custom-select" id="proGender">
+							<select formControlName="proGender" class="custom-select" id="proGender" >
 
 						   	 	<option *ngFor="let item of genderObject" [value]="item.value">
 						   	 		{{ item.name | translate }}
@@ -92,12 +92,16 @@
 						
 						</div>
                         
-                        <div>
+                        <div class="bm-btn-group">
                         
                         	<button class="btn app-button form-group .p-btn">
                         	  {{ 'Submit' | translate }}
                             </button>
-                        
+                        	<button type="reset" class="btn app-button form-group .p-btn"
+                        	(click)="getInitProfileSetting()">
+                        	  {{ 'Cancle' | translate }}
+                            </button>
+
                         </div>
 
 					</form>

@@ -61,7 +61,7 @@ export class EntryComponent implements OnInit {
      */
   ngOnInit() {
 
-      this.entryForm.get('entryGroupDate').setValue(this.service.today.toISOString().substring(0, 10));
+      this.entryForm.get('entryGroupDate').setValue(this.ISODate());
       /** @type {Object} serviceFields to convert the server and client fields in between sending & receving objects.*/
       this.serviceFields = {
           entryGroupName: 'name',
@@ -83,6 +83,10 @@ export class EntryComponent implements OnInit {
 
   }
 
+  private ISODate() {
+    return this.service.today.toISOString().substring(0, 10)
+  }
+  
   /**
    *
    * @param msg get the message for the error to display in the form alert

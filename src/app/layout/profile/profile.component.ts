@@ -19,10 +19,21 @@ export class ProfileComponent implements OnInit {
   public genderObject: Array<object>;
 
   constructor(public service: CommonService, public profileFormBuilder: FormBuilder) {
+     this.serviceField = {
+
+       'proFirstName' : 'first_name',
+       'proLastName': 'last_name',
+       'proGender': 'gender',
+     };
+     const temp = {
+       proGender: 'N',
+     };
+     this.profileForm = this.profileFormBuilder.group(temp);
      this.genderObject = [{name: 'Male', value: 'M'},
                           {name: 'Female', value: 'F'},
                           {name: 'Other', value: 'O'},
-                          {name: 'Not Willing to say', value: 'N'}]
+                          {name: 'Not Willing to say', value: 'N'}];
+
      this.getInitProfileSetting();
      this.getInitPackageSettings();
 
@@ -33,17 +44,10 @@ export class ProfileComponent implements OnInit {
 
   private getInitProfileSetting() {
       this.profileForm = this.profileFormBuilder.group({
-       proFirstName : this.service.syncLocalStorage('userFirstName', ''),
-       proLastName: this.service.syncLocalStorage('userLastName', ''),
-       proGender: this.service.syncLocalStorage('userGender', 'N'),
+       proFirstName : this.service.syncLocalStorage('userFirstName'),
+       proLastName: this.service.syncLocalStorage('userLastName'),
+       proGender: this.service.syncLocalStorage('userGender'),
      });
-
-     this.serviceField = {
-
-       'proFirstName' : 'first_name',
-       'proLastName': 'last_name',
-       'proGender': 'gender',
-     };
 
   }
 

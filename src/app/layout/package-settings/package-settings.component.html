@@ -105,8 +105,18 @@
 					 			</div>
 
 							</div>
+							<div class="bm-btn-group">
 
-							<button class="btn app-button allow-center"> Submit </button>
+								<button class="btn app-button allow-center"> {{ 'Submit' | translate }} 
+								</button>
+
+                <button class="btn app-button allow-center" (click)="getOrSetPackageSettingForm()">
+                
+                    {{ 'Cancle' | translate }}
+                
+                </button>
+
+							</div>
 
 						</form>
 					

@@ -2,7 +2,6 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Headers } from '@angular/http';
 import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import io from 'socket.io-client';
 
 import { CommonService } from '../../services/common.services';
 import { routerTransition } from '../../router.animations';
@@ -106,8 +105,9 @@ export class UploadComponent implements OnInit {
   }
 
   private getUploadTermsCondtions(): void {
+    const uploadTermsDB = this.service.joinUserName(this.service._db.uploadTerms);
 
-    this.service.localStorage.getItem('upload-terms-condtions')
+    this.service.localStorage.getItem(uploadTermsDB)
      .subscribe((data) => {
 
        if (!data) {
@@ -116,7 +116,7 @@ export class UploadComponent implements OnInit {
           .subscribe((data) => {
 
               this.uploadTermsAndCondtions = data['detail'];
-              this.service.localStorage.setItem('upload-term-condition',
+              this.service.localStorage.setItem(uploadTermsDB,
                                                 this.uploadTermsAndCondtions)
               .subscribe((data)=>{});
 
