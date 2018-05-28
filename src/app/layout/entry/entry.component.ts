@@ -5,7 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { NgbTypeahead } from "@ng-bootstrap/ng-bootstrap";
 import {  Headers } from '@angular/http';
 
-import {Observable} from 'rxjs';
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
@@ -70,10 +70,9 @@ export class EntryComponent implements OnInit {
           entryGroupDate: 'date',
           entryGroupItems: 'items'
       };
-
   }
 
-  ngAfterViewInit() {
+  ngAfterContentChecked() {
 
       const itemNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB);
       this.service.localStorage.getItem(itemNameOnlyDB)
@@ -83,7 +82,7 @@ export class EntryComponent implements OnInit {
 
   }
 
-  private ISODate() {
+  public ISODate() {
     return this.service.today.toISOString().substring(0, 10)
   }
   
@@ -232,15 +231,21 @@ export class EntryComponent implements OnInit {
     text$
       .debounceTime(200)
       .distinctUntilChanged()
-      .map(term => term.length < 2 ? []
+      .map(term => term.length < 1 ? []
         : this.listOfGroupItems.filter(v => v.toLowerCase().indexOf(term.toLowerCase()) > -1).slice(0, 10));
 
 
    private removeKeysDB() {
       const groupItemsDB = this.service.joinUserName(this.service._db.groupItemsDB);
-      this.service.localStorage.removeItem(groupItemsDB);
+      this.service.localStorage.removeItem(groupItemsDB)
+      .subscribe((data) => {
+        // console.log(data);
+      });
       const itemsNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB);
-      this.service.localStorage.removeItem(itemsNameOnlyDB);
+      this.service.localStorage.removeItem(itemsNameOnlyDB)
+      .subscribe((data) => {
+        // console.log(data);
+      });
 
    }
   /**
@@ -256,8 +261,6 @@ export class EntryComponent implements OnInit {
         // entryFormAlert
         this.hideLoadingSpin(false);
         const url = 'package/itemslist';
-        // const oldName = Object.keys(this.serviceFields);
-        // const newName = Object.values(this.serviceFields);
         const _body = this.service.renameObjectAllKeys(this.serviceFields, this.entryForm.value, 's');
 
         if (!!this.id && !this.content404) {
@@ -290,7 +293,6 @@ export class EntryComponent implements OnInit {
                       console.log(data);
                       this.showFormAlert('Content Created', 'success');
                       this.hideLoadingSpin(true);
-                      // this.listOfGroupItems.push(data['group']);
                       this.removeKeysDB();
 
                   },

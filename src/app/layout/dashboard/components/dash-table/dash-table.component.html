@@ -14,20 +14,29 @@
 <div class="col-xl-12 col-lg-12 col-sm-12 dash-table">
 
     <div class="card mb-3 ">
-          <div class="temp-card-header">
+          <div class="card-header allow-center">
             <span *ngIf="seletedRows.length > 0 then dataTableDeleteView; else nonDataTableDeleteView">
             </span>
 
            <ng-template #dataTableDeleteView>
-            <div class="card-header">
+            <div class="temp-card-header seleted-items">
               <span>{{seletedRows.length}}</span>
-              {{ 'entry' | translate}}
+              {{ 'Item' | pluralization: seletedRows.length  | translate }}
               {{ 'seleted' | translate }}
+                <button class="btn btn-xs btn-danger ripple-danger"
+                (click)="bulkDelete()" [disabled]="!hideLoadSpin"
+                [ngClass]="{'pull-right': getIsMobileScreen() }" style="margin-left: 5px;">
+
+                    <span [hidden]="!hideLoadSpin">{{'Delete' | translate}}</span>
+
+                    <i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
+
+                </button>
             </div>
            </ng-template>
 
            <ng-template #nonDataTableDeleteView>
-            <div class="card-header">
+            <div class="temp-card-header">
                 {{ 'Spendings List' | translate }}
                 <span placement="top" [ngbTooltip]="tipDashTableContent" >
 
@@ -43,7 +52,7 @@
                     </ng-template>
                 </span>
 
-                <button class="btn btn-xs  app-button" (click)="updateTable()" [disabled]="!hideLoadSpin"
+                <button class="btn btn-xs btn-success ripple-success" (click)="updateTable()" [disabled]="!hideLoadSpin"
                 [ngClass]="{'pull-right': getIsMobileScreen() }" tourAnchor="tour.update.btn" style="margin-left: 5px;">
 
                     <span [hidden]="!hideLoadSpin">{{'Update' | translate}}</span>
@@ -183,7 +192,7 @@
 
                  <ng-template  let-column="column" let-sort="sortFn" ngx-datatable-header-template>
 
-                     <span >{{column?.name}}</span>
+                     <span >{{ column?.name | translate }}</span>
 
                  </ng-template>
 
@@ -197,7 +206,7 @@
 
                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
 
-                     <span (click)="sort()">{{column?.name}}</span>
+                     <span (click)="sort()">{{ column?.name | translate }}</span>
 
                  </ng-template>
 
@@ -213,7 +222,7 @@
 
                  <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
                   
-                        <span (click)="sort()">{{column?.name}}</span>
+                        <span (click)="sort()">{{column?.name | translate}}</span>
                  
                     </ng-template>
                  
@@ -228,7 +237,7 @@
              
                     <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
              
-                        <span (click)="sort()">{{column.name}}</span>
+                        <span (click)="sort()">{{column?.name | translate}}</span>
              
                     </ng-template>
              
@@ -244,7 +253,7 @@
              
                     <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
              
-                        <span (click)="sort()">{{column.name}}</span>
+                        <span (click)="sort()">{{column?.name | translate}}</span>
               
                     </ng-template>
               
@@ -260,7 +269,7 @@
            
                     <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
             
-                        <span (click)="sort()">{{column?.name}}
+                        <span (click)="sort()">{{column?.name | translate}}
                         </span>
             
                     </ng-template>

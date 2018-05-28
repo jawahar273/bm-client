@@ -47,8 +47,11 @@
                 </button>
             </li>
             <li>
-              <button class="second-color" routerLink="/entry" [routerLinkActive]="['router-link-active']" ngbTooltip="New Entry" placement="left">
+              <button class="second-color" routerLink="/entry" [routerLinkActive]="['router-link-active']" [ngbTooltip]="tooltipNewEntry" placement="left">
                   <i class="fa fa-plus"></i>
+                  <ng-template #tooltipNewEntry>
+                    {{ 'New Entry' | translate }} 
+                  </ng-template>
               </button>
             </li>
 

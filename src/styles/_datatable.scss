@@ -1,4 +1,47 @@
 
+
+.card > .card-header {
+  background-color: #1565c0 !important;
+  color: white;
+}
+.card > .card-header:first-child {
+  border-radius: 0px;
+}
+
+.ripple-success {
+   background-position: center;
+   transition: background 0.8s;
+
+   &:hover {
+     background: #1e7e34 radial-gradient(circle, transparent 1%, #1e7e34 1%) center/15000%;
+     color: $bm-font-color;
+    }
+
+   &:active {
+      background-color: #1e7e34;
+      background-size: 100%;
+      transition: background 0s;
+   }
+}
+
+.ripple-danger {
+   background-position: center;
+   transition: background 0.8s;
+
+   &:hover {
+     background: #bd2130 radial-gradient(circle, transparent 1%, #bd2130 1%) center/15000%;
+     color: $bm-font-color;
+    }
+
+   &:active {
+      background-color: #bd2130;
+      background-size: 100%;
+      transition: background 0s;
+   }
+}
+
+
+
 .ngx-datatable.bootstrap {
     .datatable-body {
         .datatable-body-row {
@@ -15,6 +58,6 @@
 }
 .ngx-datatable.bootstrap .datatable-body 
 .datatable-body-row.datatable-row-even {
-                background-color: transparent;
+    background-color: transparent;
 
 }

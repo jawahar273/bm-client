@@ -183,6 +183,17 @@ export class CommonService {
 
     }
 
+    /**
+     * Passing header and body in the options. 
+     */
+    public deleteV2(url: string, options?: Object): Observable<any[]> {
+        url = this.joinURL(this.commonURL, url);
+        options = new RequestOptions(options);
+        return this.http.delete(url, options)
+            .map((res: Response) => res.json())
+            .catch((error: any) => Observable.throw(error.json()));
+
+    }
     private setMomentLocalLanguage(): void {
 
         let temp = this.syncLocalStorage('language');

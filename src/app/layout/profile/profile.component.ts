@@ -42,7 +42,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
   }
 
-  private getInitProfileSetting() {
+  public getInitProfileSetting() {
       this.profileForm = this.profileFormBuilder.group({
        proFirstName : this.service.syncLocalStorage('userFirstName'),
        proLastName: this.service.syncLocalStorage('userLastName'),

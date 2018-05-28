@@ -1,4 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+
 import { routerTransition } from '../../router.animations';
 import { CommonService } from '../../services/common.services';
 import { DashBoardSerices } from './dashboardtour.services';
@@ -17,8 +18,8 @@ export class DashboardComponent implements OnInit {
   constructor(public service: CommonService,
               public tour: DashBoardSerices) {
 
-     this.categoriesArray = [{'group': 'Error',
-                            'date': '2017-12-31'}];
+     this.categoriesArray = [{'group': 'Wait',
+                            'date': '2018-01-01'}];
      this.getItemsNameOnly();
   }
 
@@ -30,13 +31,13 @@ export class DashboardComponent implements OnInit {
   }
 
     public getItemsNameOnly(): void { 
-        const itemNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB)
+        const itemNameDB = this.service.joinUserName(this.service._db.groupItemsDB)
 
-        this.service.localStorage.getItem(itemNameOnlyDB)
+        this.service.localStorage.getItem(itemNameDB)
         .subscribe((data) => {
 
             if (!data) {
-                this.service.get('package/get_group_items', this.service.headers)
+                this.service.get(`package/get_group_items/${this.service.dateRangOfMonths['start']}/${this.service.dateRangOfMonths['end']}`, this.service.headers)
                  .subscribe((data) => {
 
                      // this.service.listOfGroupItems = Array.from(new Set(data));
@@ -47,7 +48,7 @@ export class DashboardComponent implements OnInit {
                          groupList.push(data[i]['group']);
 
                      }
-                    
+                    // data.reverse();
                     this.categoriesArray = data;
                      
                      const itemNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB)

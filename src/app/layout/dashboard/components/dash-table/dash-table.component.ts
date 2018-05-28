@@ -4,6 +4,7 @@ import { Headers } from '@angular/http';
 // import { ngbDropdownMenu } from '@ng-bootstrap/ng-bootstrap';
 import { CommonService } from '../../../../services/common.services';
 import { DashBoardSerices } from '../../dashboardtour.services';
+// import { PluralizationPipe } from '../../../shared/pipes/pluralization-pipes/pluralization.pipe';
 
 const formatter = (result: string) => result.toUpperCase();
 
@@ -61,7 +62,7 @@ export class DashTableComponent implements OnInit {
 
 
     public onSelect({ selected }) {
-        console.log('Select Event', selected, this.seletedRows);
+        // console.log('Select Event', selected, this.seletedRows);
 
         this.seletedRows.splice(0, this.seletedRows.length);
         this.seletedRows.push(...selected);
@@ -122,6 +123,56 @@ export class DashTableComponent implements OnInit {
         );
     }
 
+   private removeKeysDB() {
+      const groupItemsDB = this.service.joinUserName(this.service._db.groupItemsDB);
+      this.service.localStorage.removeItem(groupItemsDB)
+      .subscribe((data) => {
+        // console.log(data);
+      });
+      const itemsNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB);
+      this.service.localStorage.removeItem(itemsNameOnlyDB)
+      .subscribe((data) => {
+        // console.log(data);
+      });
+
+   }
+
+    /**
+      * get the id or given key from the array object.
+      */
+    private getIdOnly(value: Array<object>, key='id'): Object {
+        const temp = [];
+        for (let inx = 0; inx < value.length; inx++) {
+            temp.push(value[inx][key]);
+        }
+
+        return {
+            'id_list': temp,
+        };
+    }
+
+    /**
+      * Delete the seleted in bulk on
+      * one scoop.
+      */
+    public bulkDelete(): void {
+        this.hideLoadSpinIcon(false);
+        const options = {
+            headers: this.service.headers,
+            body: this.getIdOnly(this.seletedRows)['id_list'],
+        }
+        this.service.deleteV2('package/delete-bulk', options)
+        .subscribe((data) => {
+            this.service.showGlobalAlert('Seleted Items has been deleted', 'success');
+            this.hideLoadSpinIcon(true);
+            this.updateTable(false);
+            this.removeKeysDB();
+        }, (error) => {
+            const msg = this.service.isClinetOrServerSidesError(error);
+            this.service.showGlobalAlert(msg, 'danger');
+            this.hideLoadSpinIcon(true);
+        })
+    }
     /**
      *
      * @param {Date} date JS date object.

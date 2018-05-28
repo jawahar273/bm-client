@@ -97,6 +97,41 @@
 
         <div class="nested-menu" [hidden]="!service.isMobileScreen">
 
+            <a class="list-group-item" (click)="addExpandClass('language')">
+
+                <i class="fa fa-language"></i>
+                {{ 'Language' | translate }}
+
+            </a>
+
+            <li class="nested" [class.expand]="showMenu === 'language'">
+
+                <ul class="submenu">
+
+                    <li>
+
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
+                            {{ 'English' | translate }}
+                        </a>
+
+                    </li>
+
+                    <li>
+
+                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
+                            {{ 'French' | translate }}
+                        </a>
+
+                    </li>
+
+                </ul>
+
+            </li>
+
+        </div>
+
+        <div class="nested-menu" [hidden]="!service.isMobileScreen">
+
             <a class="list-group-item" (click)="addExpandClass('pages')">
                 <!-- <span><i class="fa fa-user"></i>&nbsp; {{ getUserName() }}</span> -->
 
@@ -130,41 +165,6 @@
  <!--                    <li>
                         <a href="javascript:void(0)"><span>{{ 'Submenu' | translate }}</span></a>
                     </li>-->
-
-                </ul>
-
-            </li>
-
-        </div>
-
-        <div class="nested-menu" [hidden]="!service.isMobileScreen">
-
-            <a class="list-group-item" (click)="addExpandClass('language')">
-
-                <i class="fa fa-language"></i>
-                {{ 'Language' | translate }}
-
-            </a>
-
-            <li class="nested" [class.expand]="showMenu === 'language'">
-
-                <ul class="submenu">
-
-                    <li>
-
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('en')">
-                            {{ 'English' | translate }}
-                        </a>
-
-                    </li>
-
-                    <li>
-
-                        <a class="dropdown-item" href="javascript:void(0)" (click)="changeLang('fr')">
-                            {{ 'French' | translate }}
-                        </a>
-
-                    </li>
 
                 </ul>
 

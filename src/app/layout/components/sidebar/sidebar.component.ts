@@ -41,18 +41,20 @@ export class SidebarComponent {
               public service: CommonService,
               private modalService: NgbModal) {
 
-      // this.translate.addLangs(['en', 'fr']);
-      // const defaultLan = localStorage.getItem('language');
-      // this.translate.setDefaultLang(defaultLan? defaultLan : 'en');
-      // const browserLang = this.translate.getBrowserLang();
-      // this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
-
-
       this.datePickerModel = this.service.currentDateWithMomentJS;
       this.service.getBudgetAmount();
       this.getOrSetPackageSetting();
   }
 
+  ngAfterContentChecked() {
+
+      this.translate.addLangs(['en', 'fr']);
+      let defaultLan = this.service.syncLocalStorage('language');
+      defaultLan = defaultLan ? defaultLan : 'en'
+      this.translate.setDefaultLang(defaultLan);
+      this.translate.use(defaultLan);
+
+  }
   ngOnDestroy() {
     this.modalService = null;
     this.translate = null;
