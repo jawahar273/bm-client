@@ -1,15 +1,33 @@
+
 .ngx-datatable.bootstrap {
     font-size: medium;
+    &.fixed-header {
+      &.datatable-header {
+          &.datatable-header-inner {
+            &.datatable-header-cell {
+               font-weight: 600;
+            }
+          }
+      }
+    }
+    .tooltip-inner {
+        background-color: black !important;
+        color: white !important;
+    }
+    .datatable-body {
+        .datatable-body-row {
+            &.datatable-row-even {            
+                background-color: transparent;
+                color: black;
+            }
+            &.active {
+                background-color: transparent;
+                color: black;
+            }
+        }
+    }
 }
-.ngx-datatable.bootstrap.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
-   font-weight: 600;
-}
-// .ngx-datatable.bootstrap .datatable-body .datatable-body-row.datatable-row-even {
-//    background-color: white;
-// }
-// .ngx-datatable.bootstrap .datatable-body .datatable-body-row:hover {
-//    background-color: rgba(0, 0, 0, 0.05);
-// }
+
 
 .db-blue {
     color: #007bff;

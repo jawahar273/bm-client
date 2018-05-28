@@ -12,7 +12,11 @@ import { TourNgBootstrapModule } from 'ngx-tour-ng-bootstrap';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-import { PageHeaderModule } from '../../shared';
+        
+        
+import { PageHeaderModule, SharedPipesModule } from '../../shared';
+// import { PluralizationPipe } from '../../shared/pipes';
+
 import { DashBoardSerices } from './dashboardtour.services';
 
 import {
@@ -36,6 +40,7 @@ import { StatModule } from '../../shared';
         TourNgBootstrapModule.forRoot(),
         DashboardRoutingModule,
         PageHeaderModule,
+        SharedPipesModule
     ],
     declarations: [
         DashboardComponent,

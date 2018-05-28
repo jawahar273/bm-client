@@ -28,12 +28,6 @@ export class HeaderComponent implements OnInit {
 
         // this.getAirPollution();
 
-
-        this.translate.addLangs(['en', 'fr']);
-        let defaultLan = this.service.syncLocalStorage('language');
-        defaultLan = defaultLan ? defaultLan : 'en'
-        this.translate.setDefaultLang(defaultLan);
-        this.translate.use(defaultLan);
         // const browserLang = this.translate.getBrowserLang();
         // this.translate.use(browserLang.match(/en|fr/) ? browserLang : 'en');
 

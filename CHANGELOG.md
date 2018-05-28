@@ -2,13 +2,15 @@
 
 ## [Planning]
 - User choice date format display.
-- Handle the `islogin` localstorage.
 
 ### 0.5.0
 - Upgrading to angualr 6.x
 - Tourism for the app.
 - Adding wave scale effect in tour btn.
 - Fixed bug in autocomplete in new entry and Category/Group
+- Cancle button.
+- Bulk delete in dashboard.
+- Bug fix in group recent active.
 
 ### 0.4.3
 - Adding weather report to sidemenu.

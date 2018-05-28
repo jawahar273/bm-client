@@ -43,16 +43,20 @@
 									{{'Select Yes option for model automatically asking Month Amount' | translate}}
 								</p>
 
-								<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="Y"
-								formControlName="packForceMbaUpdate">
 
-								<label for="mbaForceUpdateYes">
+
+								<label class="label-container" for="mbaForceUpdateYes">
+								<input  type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="Y"
+								formControlName="packForceMbaUpdate">
+								<span class="checkmark"></span>
 									{{  'Yes' | translate }}
 								</label>
 
+
+								<label class="label-container" for="mbaForceUpdateNo">
 								<input type="radio" name="packForceMbaUpdate" id="mbaForceUpdate"  value="N" 
 								formControlName="packForceMbaUpdate">
-								<label for="mbaForceUpdateNo">
+								<span class="checkmark"></span>
 									{{ 'No' | translate }}
 								</label>
 
