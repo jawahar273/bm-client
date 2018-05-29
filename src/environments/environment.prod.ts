@@ -5,5 +5,5 @@ export const environment = {
   protocol: 'https://',
   ws_protocol: 'ws://',
   // client
-  ServiceWorkersBasehref: '/bm-client/',
+  ServiceWorkersBasehref: '/',
 };
