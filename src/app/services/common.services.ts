@@ -807,7 +807,7 @@ export class CommonService {
     public onLoggedout() {
 
       localStorage.clear();
-      this.localStorage.clear();
+      this.localStorage.clear().subscribe(() => {});
 
     }
 }
