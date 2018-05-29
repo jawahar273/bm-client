@@ -19,6 +19,7 @@
             "assets": [
               "src/assets",
               "src/icons",
+              "src/manifest.json",
               "src/manifest.json"
             ],
             "styles": [
@@ -129,6 +130,7 @@
             "assets": [
               "src/assets",
               "src/icons",
+              "src/manifest.json",
               "src/manifest.json"
             ]
           }

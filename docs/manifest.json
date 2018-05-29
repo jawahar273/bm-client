@@ -1,17 +1,12 @@
 {
- "lang": "en",
- "dir": "ltr",
- "name": "Budget Manager",
- "short_name": "BM",
- "theme_color": "transparent",
- "orientation": "portrait",
- "background_color": "white",
- "related_applications": [],
- "start_url": "/",
- "splash_pages": null,
- "permissions": [
-  "geolocation"
- ],
+  "name": "Budget Manager",
+  "short_name": "BM",
+  "theme_color": "transparent",
+  "orientation": "portrait",
+  "background_color": "white",
+  "display": "standalone",
+  "scope": "/",
+  "start_url": "/",
   "icons": [
         {
             "src": "icons/android-chrome-192x192.png",
@@ -24,5 +19,4 @@
             "type": "image/png"
         }
     ],
- "display": "standalone"
 }

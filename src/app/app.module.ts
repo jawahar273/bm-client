@@ -60,6 +60,7 @@ export function createTranslateLoader(http: HttpClient) {
         // environment.production ? ServiceWorkerModule.register('/bm-client/ngsw-worker.js') : [],
         CookieModule.forRoot(),
         ConfirmEmailModule,
+        ServiceWorkerModule.register('/ngsw-worker.js', { enabled: environment.production }),
     ],
     declarations: [AppComponent],
     providers: [AuthGuard,
