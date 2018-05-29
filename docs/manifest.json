@@ -7,7 +7,7 @@
  "orientation": "portrait",
  "background_color": "white",
  "related_applications": [],
- "start_url": "/bm-client/",
+ "start_url": "/",
  "splash_pages": null,
  "permissions": [
   "geolocation"
