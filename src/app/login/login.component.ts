@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
                 public service: CommonService,
                 private activeRouter: ActivatedRoute) {
         // clear all the brower storages.
-        this.service.localStorage.clear();
+        this.service.localStorage.clear().subscribe(() => {});
         localStorage.clear();
         this.loginForm = this.fb.group({
            
