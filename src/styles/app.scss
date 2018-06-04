@@ -3,7 +3,7 @@
  // @import "materialize/core/variables";
  // @import "materialize/core/mixins";
 @import "bootstrap/bootstrap";
-@import "themes/bootswatch";
+// @import "themes/bootswatch";
 @import "themes/variables";
 
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
@@ -15,6 +15,7 @@
 @import "alert";
 @import "card";
 @import "datatable";
+@import "form";
 @import "floating_btn";
 @import "input-underline";
 @import "utils";
@@ -25,6 +26,8 @@
 @import "radio_button";
 @import "rtl";
 @import "responsive";
+@import "navbar";
+@import "navs";
 @import "menus";
 
 

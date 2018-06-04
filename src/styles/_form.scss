@@ -1,0 +1,255 @@
+// Materia 4.1.1
+// Bootswatch
+
+.col-form-label {
+  font-size: 16px;
+
+  &-sm {
+    font-size: $font-size-sm;
+  }
+
+  &-lg {
+    font-size: $font-size-lg;
+  }
+}
+
+textarea,
+textarea.form-control,
+input.form-control,
+input[type=text],
+input[type=password],
+input[type=email],
+input[type=number],
+[type=text].form-control,
+[type=password].form-control,
+[type=email].form-control,
+[type=tel].form-control,
+[contenteditable].form-control {
+  font-size: 1rem;
+  box-shadow: inset 0 -1px 0 #ddd;
+  transition: all 0.2s;
+
+  &:focus {
+    box-shadow: inset 0 -2px 0 $primary;
+  }
+
+  &[disabled],
+  &[readonly] {
+    box-shadow: none;
+    border-bottom: 1px dotted #ddd;
+  }
+
+  &:not(textarea) {
+    height: $input-height;
+  }
+
+  &.form-control {
+    &-sm {
+      height: $input-height-sm;
+      font-size: $font-size-sm;
+    }
+
+    &-lg {
+      height: $input-height-lg;
+      font-size: $font-size-lg;
+    }
+  }
+
+  &::-ms-clear {
+    display: none;
+  }
+}
+
+select,
+select.form-control {
+  appearance: none;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAJ1BMVEVmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmZmaP/QSjAAAADHRSTlMAAgMJC0uWpKa6wMxMdjkoAAAANUlEQVR4AeXJyQEAERAAsNl7Hf3X6xt0QL6JpZWq30pdvdadme+0PMdzvHm8YThHcT1H7K0BtOMDniZhWOgAAAAASUVORK5CYII=);
+  background-size: 13px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  box-shadow: inset 0 -1px 0 #ddd;
+
+  &::-ms-expand {
+    display: none;
+  }
+
+  &.input {
+    &-sm {
+      font-size: $font-size-sm;
+    }
+
+    &-lg {
+      font-size: $font-size-lg;
+    }
+  }
+
+  &:focus {
+    box-shadow: inset 0 -2px 0 $primary;
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAaCAMAAACelLz8AAAAJ1BMVEUhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISEhISF8S9ewAAAADHRSTlMAAgMJC0uWpKa6wMxMdjkoAAAANUlEQVR4AeXJyQEAERAAsNl7Hf3X6xt0QL6JpZWq30pdvdadme+0PMdzvHm8YThHcT1H7K0BtOMDniZhWOgAAAAASUVORK5CYII=);
+  }
+
+  &[multiple] {
+    background: none;
+  }
+}
+
+.custom-control-label {
+  &::before {
+    top: 0;
+    border: 2px solid $gray-400;
+  }
+  &::after {
+    top: 0;
+  }
+
+  .custom-control-input:checked ~ &::before {
+    border-color: $primary;
+  }
+}
+
+.custom-checkbox .custom-control-input:checked {
+  ~ .custom-control-label::after {
+    transform: scale(1.5);
+  }
+}
+
+.custom-radio .custom-control-input {
+  &:checked {
+    ~ .custom-control-label::before {
+      background-color: $white;
+    }
+    ~ .custom-control-label::after {
+      transform: scale(1.125);
+      transition: 240ms;
+    }
+  }
+  & {
+    ~ .custom-control-label::after {
+      transform: scale(.75);
+    }
+  }
+}
+
+.has-warning {
+  input:not([type=checkbox]),
+  .form-control,
+  input.form-control[readonly],
+  input[type=text][readonly],
+  [type=text].form-control[readonly],
+  input:not([type=checkbox]):focus,
+  .form-control:focus {
+    border-bottom: none;
+    box-shadow: inset 0 -2px 0 $warning;
+  }
+}
+
+.has-danger {
+  input:not([type=checkbox]),
+  .form-control,
+  input.form-control[readonly],
+  input[type=text][readonly],
+  [type=text].form-control[readonly],
+  input:not([type=checkbox]):focus,
+  .form-control:focus {
+    border-bottom: none;
+    box-shadow: inset 0 -2px 0 $danger;
+  }
+}
+
+.has-success {
+  input:not([type=checkbox]),
+  .form-control,
+  input.form-control[readonly],
+  input[type=text][readonly],
+  [type=text].form-control[readonly],
+  input:not([type=checkbox]):focus,
+  .form-control:focus {
+    border-bottom: none;
+    box-shadow: inset 0 -2px 0 $success;
+  }
+}
+
+// Remove the Bootstrap feedback styles for input addons
+.input-group-addon {
+  .has-warning &, .has-danger &, .has-success & {
+    color: $input-color;
+    border-color: $input-group-addon-border-color;
+    background-color: $input-group-addon-bg;
+  }
+}
+
+.input-group {
+
+  > .input-group-prepend > .input-group-text {
+    padding-right: 0.25rem;
+  }
+
+  > .input-group-append > .input-group-text {
+    padding-left: 0.25rem;
+  }
+
+  .form-control {
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+  }
+}
+
+.input-group-sm {
+
+  > .input-group-prepend > .btn,
+  > .input-group-append > .btn {
+    padding: $input-btn-padding-y-sm $input-btn-padding-x-sm;
+  }
+
+  > .input-group-prepend > .input-group-text {
+    padding: $input-btn-padding-y-sm $input-btn-padding-x-sm $input-btn-padding-y-sm 0;
+  }
+
+  > .input-group-append > .input-group-text {
+    padding: $input-btn-padding-y-sm 0 $input-btn-padding-y-sm $input-btn-padding-x-sm;
+  }
+
+  > .input-group-prepend > .btn {
+    border-top-left-radius: $btn-border-radius-sm;
+    border-bottom-left-radius: $btn-border-radius-sm;
+  }
+
+  > .input-group-append > .btn {
+    border-top-right-radius: $btn-border-radius-sm;
+    border-bottom-right-radius: $btn-border-radius-sm;
+  }
+}
+
+.input-group-lg {
+
+  > .input-group-prepend > .btn,
+  > .input-group-append > .btn {
+    padding: $input-btn-padding-y-lg $input-btn-padding-x-lg;
+  }
+
+  > .input-group-prepend > .input-group-text {
+    padding: $input-btn-padding-y-lg $input-btn-padding-x-lg $input-btn-padding-y-lg 0;
+  }
+
+  > .input-group-append > .input-group-text {
+    padding: $input-btn-padding-y-lg 0 $input-btn-padding-y-lg $input-btn-padding-x-lg;
+  }
+
+  > .input-group-prepend > .btn {
+    border-top-left-radius: $btn-border-radius-lg;
+    border-bottom-left-radius: $btn-border-radius-lg;
+  }
+
+  > .input-group-append > .btn {
+    border-top-right-radius: $btn-border-radius-lg;
+    border-bottom-right-radius: $btn-border-radius-lg;
+  }
+}
+
+
+.form-group-lg {
+  select,
+  select.form-control {
+    line-height: 1.5;
+  }
+}
