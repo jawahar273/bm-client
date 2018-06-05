@@ -3,6 +3,8 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
+import { config } from './enivronment.vairable';
+
 export const environment = {
   production: false,
   domainName: '127.0.0.1:8000',
@@ -10,4 +12,5 @@ export const environment = {
   protocol: 'http://',
   ws_protocol: 'ws://',
   ServiceWorkersBasehref: '/',
+  config: config
 };

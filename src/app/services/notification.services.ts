@@ -42,10 +42,12 @@ export class UploadWsNotification implements OnDestroy {
     public percentage: any;
     public WSIO: WebSocket;
     public KEYWORD: string;
+    public CLOSE: string;
 
     constructor(private service: CommonService,
                 public notifices: NotificationsServices) {
         this.KEYWORD = 'upload';
+
         this.notifices.status$.subscribe((data) => {
 
             if (data.toLowerCase() === this.KEYWORD) {

@@ -1,3 +1,5 @@
+import { config } from './enivronment.vairable';
+
 export const environment = {
   production: true,
   domainName: 'jawahar-bm.herokuapp.com',
@@ -6,4 +8,6 @@ export const environment = {
   ws_protocol: 'ws://',
   // client
   ServiceWorkersBasehref: '/',
+  config: config
+
 };

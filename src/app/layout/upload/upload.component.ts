@@ -202,20 +202,20 @@ export class UploadComponent implements OnInit {
         url = 'package/upload';
 
       }
+      
+      this.notifices.makeNoticies('upload');
 
       this.service.headers.append('Content-Disposition', `form-data; filename=${this.fileObject.name}`);
       this.service.headers.set('Content-Type', `${this.fileObject.type}`);
       this.service.post(`${url}/${this.fileObject.name}`, this.service.headers, value)
        .subscribe((data) => {
 
-         this.service.showGlobalAlert('File has been uploaded.', 'success');
+        // make notifications
+         this.service.showGlobalAlert(<any>data, 'success');
          this.setLoadSpinner(false);
-         // make notifications
-         this.notifices.makeNoticies('upload');
 
        }, (error) => {
-
-         const msg = this.service.isClinetOrServerSidesError(error);
+         const msg = this.service.isClinetOrServerSidesError(error, false);
          this.service.showGlobalAlert(msg);
          this.setLoadSpinner(false);
 

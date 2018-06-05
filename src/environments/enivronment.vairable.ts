@@ -4,5 +4,5 @@ export let config  = {
     appShortName: 'BM',
     dashBoard: {
         title: 'Dashboard'
-    }
+    },
 }
