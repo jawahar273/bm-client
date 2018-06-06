@@ -12,12 +12,14 @@ import { routerTransition } from '../router.animations';
     animations: [routerTransition()]
 })
 export class SignupComponent implements OnInit {
+
     serviceFields = {
         'signUpUserName': 'username',
         'signUpEmail': 'email',
         'signUpNewPassword': 'password1',
         'signUpConfirmPassword': 'password2'
     };
+
     serviceMappingForErrorHandling = {
         'username': undefined,
         'email': undefined,
@@ -26,6 +28,7 @@ export class SignupComponent implements OnInit {
         'non_field_errors': undefined,
         'detail': undefined,
     };
+
     signupFormGroup: FormGroup;
     showErrorInButton: boolean = false;
     spinnerIcon: boolean = true;
