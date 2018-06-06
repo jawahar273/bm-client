@@ -72,9 +72,9 @@ export class SignupComponent implements OnInit {
                       this.service.showGlobalAlert('Please accept Email verfication to Login', 'success');
                   },
                   (error) => {
+                      this.setLoadSpinner(true);
                       const msg = this.service.isClinetOrServerSidesError(error, this.serviceMappingForErrorHandling);
                       this.service.showGlobalAlert(msg);
-                      this.setLoadSpinner(true);
                   }
               );
         } else {

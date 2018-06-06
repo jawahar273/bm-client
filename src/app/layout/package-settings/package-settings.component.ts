@@ -123,9 +123,9 @@ export class PackageSettingsComponent implements OnInit {
 
          }, (error) => {
 
+           this.setHideLoadSpinner(true);
            const temp = this.service.isClinetOrServerSidesError(error);
            this.service.showGlobalAlert(temp);
-           this.setHideLoadSpinner(true);
 
          });
 

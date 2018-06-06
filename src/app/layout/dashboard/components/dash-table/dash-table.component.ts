@@ -167,12 +167,17 @@ export class DashTableComponent implements OnInit {
       */
     private getIdOnly(value: Array<object>, key='id'): Object {
         const temp = [];
+
         for (let inx = 0; inx < value.length; inx++) {
+
             temp.push(value[inx][key]);
+
         }
 
         return {
+
             'id_list': temp,
+
         };
     }
 
@@ -183,20 +188,27 @@ export class DashTableComponent implements OnInit {
     public bulkDelete(): void {
         this.hideLoadSpinIcon(false);
         const options = {
+
             headers: this.service.headers,
             body: this.getIdOnly(this.seletedRows)['id_list'],
+
         }
+
         this.service.deleteV2('package/delete-bulk', options)
         .subscribe((data) => {
+
             this.service.showGlobalAlert('Seleted Items has been deleted', 'success');
             this.hideLoadSpinIcon(true);
             this.updateTable(false);
             this.removeKeysDB();
+
         }, (error) => {
+
+            this.hideLoadSpinIcon(true);
             const msg = this.service.isClinetOrServerSidesError(error);
             this.service.showGlobalAlert(msg, 'danger');
-            this.hideLoadSpinIcon(true);
-        })
+
+        });
     }
     /**
      *
