@@ -83,16 +83,9 @@ export class DashTableComponent implements OnInit {
         // return false;
     }
 
-
-    /**
-     *
-     * @param {boolean} alert a flag setting for alert box
-     * @description the perpouse of this function is update the dashboard table
-     */
-    public updateTable(alert = true) {
-
-        this.hideLoadSpinIcon(false);
-        this.service.get(`package/itemslist/${this.service.dateRangOfMonths['start']}/${this.service.dateRangOfMonths['end']}`, this.service.headers).subscribe(
+    private getDataTable(alert = true) {
+         const dateRange = `${this.service.dateRangOfMonths['start']}/${this.service.dateRangOfMonths['end']}`;
+        this.service.get(`package/itemslist/${dateRange}`, this.service.headers).subscribe(
             (data) => {
 
                 this.service.dataTableDashboard = data;
@@ -104,6 +97,9 @@ export class DashTableComponent implements OnInit {
                         msg = 'No List need to been shown';
 
                     }
+                    const dateRangeDB = this.service.joinUserName(dateRange);
+                    this.service.localStorage.setItem(dateRangeDB, data)
+                    .subscribe((data) => {});
 
                     this.showErrorAlert(msg, 'success');
 
@@ -122,18 +118,47 @@ export class DashTableComponent implements OnInit {
 
         );
     }
+    /**
+     *
+     * @param {boolean} alert a flag setting for alert box
+     * @description the perpouse of this function is update the dashboard table
+     */
+    public updateTable(alert = true) {
+
+        this.hideLoadSpinIcon(false);
+        const dateRange = `${this.service.dateRangOfMonths['start']}/${this.service.dateRangOfMonths['end']}`;
+        const dashTableDB = this.service.joinUserName(dateRange);
+        this.service.localStorage.getItem(dashTableDB)
+        .subscribe((data) => {
+          if (data) {
+
+            this.service.dataTableDashboard = data;
+            this.hideLoadSpinIcon(true);
+
+          } else {
+
+            this.getDataTable(alert);
+
+          }
+
+        });
+
+    }
 
    private removeKeysDB() {
-      const groupItemsDB = this.service.joinUserName(this.service._db.groupItemsDB);
-      this.service.localStorage.removeItem(groupItemsDB)
-      .subscribe((data) => {
-        // console.log(data);
-      });
-      const itemsNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB);
-      this.service.localStorage.removeItem(itemsNameOnlyDB)
-      .subscribe((data) => {
-        // console.log(data);
-      });
+
+     const removeKeysList = [
+       this.service._db.groupItemsDB,
+       this.service._db.groupItemsNameOnlyDB,
+     ];
+
+      for (var inx = removeKeysList.length - 1; inx >= 0; inx--) {
+
+          const dbName = this.service.joinUserName(removeKeysList[inx]);
+
+          this.service.localStorage.removeItem(dbName)
+          .subscribe((data) => {});
+      }
 
    }
 

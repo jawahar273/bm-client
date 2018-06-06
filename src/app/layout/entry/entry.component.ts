@@ -236,16 +236,22 @@ export class EntryComponent implements OnInit {
 
 
    private removeKeysDB() {
-      const groupItemsDB = this.service.joinUserName(this.service._db.groupItemsDB);
-      this.service.localStorage.removeItem(groupItemsDB)
-      .subscribe((data) => {
-        // console.log(data);
-      });
-      const itemsNameOnlyDB = this.service.joinUserName(this.service._db.groupItemsNameOnlyDB);
-      this.service.localStorage.removeItem(itemsNameOnlyDB)
-      .subscribe((data) => {
-        // console.log(data);
-      });
+     const dateRange = `${this.service.dateRangOfMonths['start']}/${this.service.dateRangOfMonths['end']}`;
+
+     const removeKeysList = [
+       this.service._db.groupItemsDB,
+       this.service._db.groupItemsNameOnlyDB,
+       dateRange,
+     ];
+
+      for (var inx = removeKeysList.length - 1; inx >= 0; inx--) {
+          const dbName = this.service.joinUserName(removeKeysList[inx]);
+
+          this.service.localStorage.removeItem(dbName)
+          .subscribe((data) => {
+            // console.log(data);
+          });
+      }
 
    }
   /**
@@ -276,9 +282,9 @@ export class EntryComponent implements OnInit {
                   },
                   (error) => {
 
+                      this.hideLoadingSpin(false);
                       const msg = this.service.isClinetOrServerSidesError(error);
                       this.showFormAlert(msg, 'danger' );
-                      this.hideLoadingSpin(false);
 
                   }
 

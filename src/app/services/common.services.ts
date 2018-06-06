@@ -211,6 +211,7 @@ export class CommonService {
             userProfileURL: 'userProfileURL',
             userEmail: 'userEmail',
             uploadTerms: 'upload-terms-condtions',
+            dashTable: 'dashTable',
         }
     }
     /**
