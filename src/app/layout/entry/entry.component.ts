@@ -128,10 +128,10 @@ export class EntryComponent implements OnInit {
           },
           (error) => {
 
+              this.content404 = true;
+              this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
               const msg = this.service.isClinetOrServerSidesError(error);
               this.showFormAlert(`the List is ${msg} in the server.`);
-              this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
-              this.content404 = true;
       });
   }
 

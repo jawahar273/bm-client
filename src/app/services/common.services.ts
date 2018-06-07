@@ -103,16 +103,18 @@ export class CommonService {
         if (isDevMode) {
             accessControlAllowOrigin = '';
         }
+
+        const url = this.joinURL(environment.domainName, environment.apiPath, false);
+        this.commonURL = `${environment.protocol}${url}`;
+
         this.headers = new Headers({
 
              'Accept': 'application/json',
-             'Content-Type': 'application/json',
+             'Content-Type': 'application/json ; charset="utf-8"',
              'Authorization': '',
              // 'Access-Control-Allow-Origin': ''
 
         });
-        const url = this.joinURL(environment.domainName, environment.apiPath, false);
-        this.commonURL = `${environment.protocol}${url}`;
 
         this.packDateFunctions();
         this.dbNameInitilize()

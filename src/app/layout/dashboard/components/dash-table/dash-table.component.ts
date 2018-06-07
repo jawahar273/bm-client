@@ -30,6 +30,7 @@ export class DashTableComponent implements OnInit {
 
     @ViewChild('dashTable') dashTable;
 
+
     constructor(public service: CommonService,
                 public tour: DashBoardSerices) {
  
@@ -152,9 +153,12 @@ export class DashTableComponent implements OnInit {
 
    private removeKeysDB() {
 
+     const dateRange = `${this.service.dateRangOfMonths['start']}/${this.service.dateRangOfMonths['end']}`;
+
      const removeKeysList = [
        this.service._db.groupItemsDB,
        this.service._db.groupItemsNameOnlyDB,
+       dateRange,
      ];
 
       for (var inx = removeKeysList.length - 1; inx >= 0; inx--) {
@@ -204,8 +208,9 @@ export class DashTableComponent implements OnInit {
 
             this.service.showGlobalAlert('Seleted Items has been deleted', 'success');
             this.hideLoadSpinIcon(true);
-            this.updateTable(false);
+            this.seletedRows = [];
             this.removeKeysDB();
+            this.updateTable();
 
         }, (error) => {
 
@@ -215,17 +220,7 @@ export class DashTableComponent implements OnInit {
 
         });
     }
-    /**
-     *
-     * @param {Date} date JS date object.
-     * @description get the JS date object and find the number of distance in human terms.
-     */
-    private getTheDays(date: Date): string {
 
-        return moment(date,
-                      this.service.serverDateFormat).fromNow();
-
-    }
     private deleteRow(itemID: number, indx: number) {
 
         if (itemID) {
@@ -234,7 +229,8 @@ export class DashTableComponent implements OnInit {
             this.service.delete(`package/itemslist/${itemID}`, this.service.headers)
                 .subscribe(
                    (data) => {
-
+                       
+                       this.removeKeysDB();
                        this.showErrorAlert('Item has been deleted successfully', 'success');
                        this.updateTable(false);
                        this.hideLoadSpinIcon(true);
@@ -252,6 +248,18 @@ export class DashTableComponent implements OnInit {
             }
 
         }
+
+    /**
+     *
+     * @param {Date} date JS date object.
+     * @description get the JS date object and find the number of distance in human terms.
+     */
+    private getTheDays(date: Date): string {
+
+        return moment(date,
+                      this.service.serverDateFormat).fromNow();
+
+    }
 
     public toggleExpandRow(row) {
 

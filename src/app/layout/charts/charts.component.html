@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <canvas baseChart *ngIf="barChartLabels && barChartData"
                      [datasets]="barChartData" [labels]="barChartLabels" [options]="barChartOptions" [legend]="barChartLegend"
-                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)">
+                        [chartType]="barChartType" (chartHover)="chartHovered($event)" (chartClick)="chartClicked($event)" >
                     </canvas>
                 </div>
                 <div class="card-footer">
