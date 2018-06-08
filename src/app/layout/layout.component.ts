@@ -99,7 +99,9 @@ export class LayoutComponent implements OnInit {
 
     private getCurrenctDetails(): void {
 
-       this.service.localStorage.getItem('currency')
+      const currencyDB = this.service._db.currency;
+
+       this.service.localStorage.getItem(currencyDB)
         .subscribe((data) => {
 
             if (!data) {
@@ -107,7 +109,7 @@ export class LayoutComponent implements OnInit {
                 this.service.get('package/currency', this.service.headers)
                  .subscribe((data) => {
 
-                     this.service.localStorage.setItem('currency', data)
+                     this.service.localStorage.setItem(currencyDB, data)
                      .subscribe((data) => {
                      });
                      this.service.currencyDetails = data;

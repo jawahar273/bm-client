@@ -188,7 +188,7 @@ export class SidebarComponent {
     return value * 60;
 
   }
-
+ // need review for moving to layout components.
   public getOrSetPackageSetting() {
 
     this.service.localStorage.getItem(`packageSettings-${this.service.userName}`)
@@ -239,13 +239,15 @@ export class SidebarComponent {
     });
 
   }
+
+ // need review for moving to layout components.
+
   /*
-   * set the currency details
+   * set the currency details(this function is backup).
    */
   private setCurrencyDetails(value) {
         // this.currencyDetails[''] = 'USD';
     let temp = value['packCurrencyDetails'];
-
 
       if (!!temp) {
 
@@ -253,7 +255,7 @@ export class SidebarComponent {
               temp = 'USD';
             }
 
-            const currencyDB = this.service.joinUserName(this.service._db.currency)
+            const currencyDB = this.service._db.currency;
             this.service.localStorage.getItem(currencyDB)
              .subscribe((data) => {
 
@@ -263,7 +265,7 @@ export class SidebarComponent {
                  .subscribe((data) => {
 
                       this.service.currencyDetails = data[temp];
-                      this.service.localStorage.setItem('currency', data);
+                      this.service.localStorage.setItem(currencyDB, data);
                       this.currencyDetails = data[temp];
                     },
                    (error) => {
