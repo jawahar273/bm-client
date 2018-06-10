@@ -73,18 +73,22 @@
     </div>
     <div class="modal-body">
       <p>
-  <select class="custom-select"
-  [value]="printSummaryKeys[0]">
-  
-        <option *ngFor="let key of printSummaryKeys" class="dropdown-item" [value]="key"> {{customizeSummaryKey(key)}}
-         </option>
-  
-    </select> 
+        Get email summary for
+        <select class="custom-select"
+        [value]="printSummaryKeys[0]"
+        (change)="onChangePrintSummary($event.target.value)">
+        
+              <option *ngFor="let key of printSummaryKeys" class="dropdown-item" [value]="key"> {{customizeSummaryKey(key)}}
+               </option>
+        
+        </select> 
       </p>
     </div>
     <div class="modal-footer">
-      <button type="button" class="btn btn-light" (click)="c('Close click')">Close</button>
-    </div>
+      <button class="btn btn-info" (click)="getPrintSummary()" >{{'Send' | translate}}</button>
+
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">{{'Close' | translate}}</button>
+      </div>
   </ng-template>
 
 </div>

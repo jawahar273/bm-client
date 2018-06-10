@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
     public categoriesArray: Array<object>;
     private closeResult: string;
     public printSummaryKeys: Object;
+    private printSummaryValue: string;
 
   constructor(public service: CommonService,
               public tour: DashBoardSerices,
@@ -138,6 +139,7 @@ export class DashboardComponent implements OnInit {
           .subscribe((data) => {
 
               this.printSummaryKeys = this.generatePrintSummaryKey(data['detail']);
+              this.printSummaryValue = this.printSummaryKeys[0];
 
           },(error) => {
             const msg = this.service.isClinetOrServerSidesError(error);
@@ -147,4 +149,26 @@ export class DashboardComponent implements OnInit {
 
     }
 
+    public onChangePrintSummary(value: string): void {
+
+        this.printSummaryValue = value;
+
+    }
+
+    public getPrintSummary(): void {
+
+        const url = `package/print-summary/${this.printSummaryValue}`;
+        this.service.post(url, this.service.headers)
+        .subscribe((data) => {
+
+          this.service.showGlobalAlert(data['detail'].toString(), 'success');
+        
+        }, (error) => {
+
+          const msg = this.service.isClinetOrServerSidesError(error);
+          this.service.showGlobalAlert(msg);
+
+        });
+
+    }
 }

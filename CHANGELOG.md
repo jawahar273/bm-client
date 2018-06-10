@@ -3,6 +3,9 @@
 ## [Planning]
 - User choice date format display.
 
+### 0.5.1
+- Export Summary of statement
+
 ### 0.5.0
 - Upgrading to angualr 6.x
 - Tourism for the app.
