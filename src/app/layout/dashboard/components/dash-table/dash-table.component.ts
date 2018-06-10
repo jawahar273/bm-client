@@ -315,7 +315,7 @@ export class DashTableComponent implements OnInit {
             'end': moment(`01-${this.service.monthInMenu}`, 'DD-MMMM-YYYY').endOf('month').format('YYYY-MM-DD')
 
        };
-
+       this.seletedRows = [];
        this.updateTable();
        return  this.service.monthInMenu;
 
