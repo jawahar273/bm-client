@@ -12,6 +12,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+// import { CookieModule } from 'ngx-cookie';
 import { CookieModule } from 'ngx-cookie';
 
 import { AppRoutingModule } from './app-routing.module';

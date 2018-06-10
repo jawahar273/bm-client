@@ -92,60 +92,60 @@
 
 	</div>
 
-            <ng-template #UploadTermsCondtionsModel let-c="close" let-d="dismiss">
+  <ng-template #UploadTermsCondtionsModel let-c="close" let-d="dismiss">
 
-              <div class="modal-header">
+    <div class="modal-header">
 
-                <h4 class="modal-title">{{ 'Condtions in Upload' | translate }}</h4>
+      <h4 class="modal-title">{{ 'Condtions in Upload' | translate }}</h4>
 
-                <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+      <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
 
-                  <span aria-hidden="true">&times;</span>
+        <span aria-hidden="true">&times;</span>
 
-                </button>
+      </button>
 
-              </div>
+    </div>
 
-              <div class="modal-body">
+    <div class="modal-body">
 
-                <!-- {{uploadTermsAndCondtions | json}} -->
+      <!-- {{uploadTermsAndCondtions | json}} -->
 
-                <ngb-tabset>
+      <ngb-tabset>
 
-	                <ngb-tab *ngFor="let title of getKeys(uploadTermsAndCondtions)">
+        <ngb-tab *ngFor="let title of getKeys(uploadTermsAndCondtions)">
 
-	                	<ng-template ngbTabTitle>
+        	<ng-template ngbTabTitle>
 
-	                		<b>
-                                {{ service.toTitleCase(title) }}
-                            </b>
+        		<b>
+                      {{ service.toTitleCase(title) }}
+                  </b>
 
-	                	</ng-template>
+        	</ng-template>
 
-	                	<ng-template ngbTabContent>
+        	<ng-template ngbTabContent>
 
-	                		<ol>
+        		<ol>
 
-	                		  <li *ngFor="let content of uploadTermsAndCondtions['title']">    {{ content }}
-                              </li>
+        		  <li *ngFor="let content of uploadTermsAndCondtions['title']">    {{ content }}
+                    </li>
 
-	                		</ol>
+        		</ol>
 
-	                	</ng-template>
+        	</ng-template>
 
-	                </ngb-tab>
+        </ngb-tab>
 
-                </ngb-tabset>
+      </ngb-tabset>
 
-              </div>
+    </div>
 
-              <div class="modal-footer">
+    <div class="modal-footer">
 
-                <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">      {{ 'Close' | translate }}
-                </button>
+      <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">      {{ 'Close' | translate }}
+      </button>
 
-              </div>
+    </div>
 
-            </ng-template>
+  </ng-template>
 
 </div>

@@ -17,4 +17,5 @@ interface UploadDBNames {
 
 interface DataTableDBNames {
     dashTable: string;
+    printSummaryKey: string;
 }

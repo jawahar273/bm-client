@@ -9,10 +9,10 @@ import {
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { TranslateModule } from '@ngx-translate/core';
 import { TourNgBootstrapModule } from 'ngx-tour-ng-bootstrap';
+import { NgbTabsetModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { DashboardRoutingModule } from './dashboard-routing.module';
 import { DashboardComponent } from './dashboard.component';
-        
         
 import { PageHeaderModule, SharedPipesModule } from '../../shared';
 // import { PluralizationPipe } from '../../shared/pipes';
@@ -40,7 +40,8 @@ import { StatModule } from '../../shared';
         TourNgBootstrapModule.forRoot(),
         DashboardRoutingModule,
         PageHeaderModule,
-        SharedPipesModule
+        SharedPipesModule,
+        NgbTabsetModule
     ],
     declarations: [
         DashboardComponent,

@@ -96,8 +96,8 @@ export class ChartsComponent implements OnInit {
     public hideBudgetAmountZero: boolean ;
 
     private sumOfCurrentMonthSpending: number = 0;
-    rangeMonthAndYear: FormGroup;
-    currentMonthSting: string;
+    public rangeMonthAndYear: FormGroup;
+    public currentMonthSting: string;
 
     constructor(private service: CommonService, private _fb: FormBuilder) {
         this.hideBudgetAmountZero = false;
@@ -186,7 +186,7 @@ export class ChartsComponent implements OnInit {
         this.sumOfCurrentMonthSpending = <number>totalAmountArray.reduce(this.addTwoValues);
         const tempGroup = Object.keys(groups).map((data) => {
 
-             return data.split(' ').map(this.service.toTitleCase).join(' ')
+             return data.split(' ').map(this.service.toTitleCase).join(' ');
 
          });
 
@@ -211,7 +211,7 @@ export class ChartsComponent implements OnInit {
           .subscribe(
               (data) => {
 
-                if (data.length) {
+                if (data.length >= 1) {
 
                     let amount = parseFloat(data[0]['budget_amount']);
 

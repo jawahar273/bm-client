@@ -214,6 +214,7 @@ export class CommonService {
             userEmail: 'userEmail',
             uploadTerms: 'upload-terms-condtions',
             dashTable: 'dashTable',
+            printSummaryKey: 'printSummaryKey'
         }
     }
     /**
@@ -760,7 +761,7 @@ export class CommonService {
     /**
      * conver the given string intp title case
      */
-    public toTitleCase(input): string {
+    public toTitleCase(input: string): string {
 
         return input.replace(/\w\S*/g, (txt => txt[0].toUpperCase() + txt.substr(1).toLowerCase() ));
 

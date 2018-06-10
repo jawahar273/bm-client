@@ -176,43 +176,43 @@
 
 </nav>
 
-    <ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
+<ng-template #sideBarAmountModelcontent let-c="close" let-d="dismiss">
 
-      <div class="modal-header">
+  <div class="modal-header">
 
-        <h4 class="modal-title">{{'Setting Budget Amount' | translate}}</h4>
+    <h4 class="modal-title">{{'Setting Budget Amount' | translate}}</h4>
 
-        <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
-          <span aria-hidden="true">&times;</span>
-        </button>
+    <button type="button" class="close" aria-label="Close" (click)="c('Close click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
 
-      </div>
+  </div>
 
-      <div class="modal-body">
+  <div class="modal-body">
 
-        <div class="form-horizontal">
+    <div class="form-horizontal">
 
-            <div class="input-group">
+        <div class="input-group">
 
-                    <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
-                    >
-            </div>
-
-            <div class="input-group">
-                    <input  type="date" class="form-control input-underline" name="datePicker"
-                    id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel">
-            </div>
-
+                <input  type="number" class="form-control input-underline"  placeholder="Amount" name="sideBaramount" id="sideBaramount" [value]="sideBarAmountModel" (input)="sideBarAmountModel=$event.target.value" 
+                >
         </div>
 
-      </div>
+        <div class="input-group">
+                <input  type="date" class="form-control input-underline" name="datePicker"
+                id="datePickerModel" placeholder="yyyy-mm-dd" [value]="datePickerModel">
+        </div>
 
-      <div class="modal-footer">
+    </div>
 
-        <button class="btn btn-info" (click)="onAmountSubmit(c)" >{{'Submit' | translate}}</button>
+  </div>
 
-        <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">{{'Close' | translate}}</button>
+  <div class="modal-footer">
 
-      </div>
+    <button class="btn btn-info" (click)="onAmountSubmit(c)" >{{'Submit' | translate}}</button>
 
-    </ng-template>
+    <button type="button" class="btn btn-outline-dark" (click)="c('Close click')">{{'Close' | translate}}</button>
+
+  </div>
+
+</ng-template>
