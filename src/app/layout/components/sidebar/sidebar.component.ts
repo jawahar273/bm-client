@@ -7,7 +7,7 @@ import * as moment from 'moment';
 import { CommonService } from '../../../services/common.services';
 import { AsynUserName } from '../../../services/notification.services';
 import { slideToRight as routerTransition } from '../../../router.animations';
-import { LayoutService } from '../../service/layout.service';
+import { LayoutService } from '../../layout-service/layout.service';
 
 @Component({
     selector: 'app-sidebar',

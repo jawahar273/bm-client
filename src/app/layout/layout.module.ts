@@ -9,7 +9,7 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
 import { HeaderComponent } from './components/header/header.component';
-import { LayoutService } from './service/layout.service';
+import { LayoutService } from './layout-service/layout.service';
 
 @NgModule({
     imports: [

@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { slideToBottom as routerTransition } from '../../../router.animations';
 import { CommonService } from '../../../services/common.services';
 import { UploadWsNotification } from '../../../services/notification.services';
-import { LayoutService } from '../../service/layout.service';
+import { LayoutService } from '../../layout-service/layout.service';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
