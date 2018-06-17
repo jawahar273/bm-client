@@ -5,6 +5,7 @@
 
 ### 0.5.1
 - Export Summary of statement
+- Update in upload files.
 
 ### 0.5.0
 - Upgrading to angualr 6.x

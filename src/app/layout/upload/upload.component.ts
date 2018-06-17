@@ -62,7 +62,7 @@ export class UploadComponent implements OnInit {
 
   public setLoadSpinner(value: Boolean): void {
 
-    this.spinnerIcon = value;
+    this.spinnerIcon = !value;
 
   }
 
@@ -190,7 +190,7 @@ export class UploadComponent implements OnInit {
 
     } else {
 
-      this.setLoadSpinner(false);
+      this.setLoadSpinner(true);
       let url = 'package/upload';
 
       if (value['entryType'] === 'paytm') {
@@ -205,14 +205,17 @@ export class UploadComponent implements OnInit {
       
       this.notifices.makeNoticies('upload');
 
-      this.service.headers.append('Content-Disposition', `form-data; filename=${this.fileObject.name}`);
+      const formData = new FormData();
+      formData.append('file', this.fileObject, this.fileObject.name);
+
+      this.service.headers.append('Content-Disposition', `form-data; filename=${this.fileObject.name};`);
       this.service.headers.set('Content-Type', `${this.fileObject.type}`);
-      this.service.post(`${url}/${this.fileObject.name}`, this.service.headers, value)
+      this.service.post(`${url}/${this.fileObject.name}`, this.service.headers, formData)
        .subscribe((data) => {
 
         // make notifications
-         this.service.showGlobalAlert(<any>data, 'success');
          this.setLoadSpinner(false);
+         this.service.showGlobalAlert(<any>data, 'success');
 
        }, (error) => {
 
