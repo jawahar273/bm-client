@@ -28,8 +28,6 @@ export class PackageSettingsComponent implements OnInit {
   hideLoadSpin: Boolean;
   currencyCode: Array<string>;
   listDisplayIntervalFormat: Array<object>;
-  displayIntervalFormat: object;
-  maxInterval: number;
   /*
    * This is page to handle the package setting.
    * If you add new field to the page add the field
@@ -42,11 +40,7 @@ export class PackageSettingsComponent implements OnInit {
       this.serviceFields = this.service.serviceFieldPackageSettings;
       this.hideLoadSpin = false;
       this.packageSettingForm = this.fb.group({});
-      this.listDisplayIntervalFormat = [{name: 'Hours', value: 'hrs'},
-                                    {name: 'Minutes', value: 'mins'}];
 
-      this.displayIntervalFormat = {format: 'mins', value: 0};
-      this.maxInterval = 8; // hrs only
       this.getOrSetPackageSettingForm();
       // this.userNameService.makeCall(this.getOrSetPackageSettingForm);
       this.getCountryCodeFromStorage();
@@ -108,7 +102,6 @@ export class PackageSettingsComponent implements OnInit {
             formFields['packCurrencyDetails'] = data['currency_details'];
             formFields['packForceMbaUpdate'] = data['force_mba_update'];
             formFields['packActivePaytm'] = data['active_paytm'];
-            formFields['packGeoLocInterval'] = data['geoloc_interval'];
 
             this.packageSettingForm = this.fb.group(formFields);
 
@@ -138,94 +131,6 @@ export class PackageSettingsComponent implements OnInit {
 
     });
 
-  }
-
-  /*
-   *convert the minutest to hours.
-   *
-   */
-  public convertMinsToHrs(min): Object {
-
-      const num = min;
-      const hours = (num / 60);
-      const rhours = Math.floor(hours);
-      const minutes = (hours - rhours) * 60;
-      const rminutes = Math.round(minutes);
-      return {'hours': rhours, 'minutes': rminutes}
-      // return num + " minutes = " + rhours + " hour(s) and " + rminutes + " minute(s).";
-
-  }
-
-  public convertHrsToMins(hrs): Number {
-
-    return hrs * 60;
-
-  }
-
-  public IntervalHumanFormat(): String {
-
-    return this.displayIntervalFormat['format'];
-
-  }
-
-  public checkIntervalHumanFormat(value): Boolean {
-
-       if (this.displayIntervalFormat['format'] === 'hrs' && value > this.maxInterval) {
-
-         this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
-         this.packageSettingForm.get('packGeoLocInterval').setValue(this.maxInterval - 1);
-         return false;
-
-       } else if ((this.displayIntervalFormat['format'] === 'mins') &&
-         (this.convertHrsToMins(value) > this.convertHrsToMins(this.maxInterval))) {
-
-         this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowred`, 'warning');
-         this.packageSettingForm.get('packGeoLocInterval').setValue(this.convertHrsToMins(this.maxInterval));
-         return false;
-
-       }
-
-       return true;
-  }
-
-  private onChangeIntervalHumanFormat(value) {
-
-        this.displayIntervalFormat['format'] = value;
-
-         if (value === 'hrs') {
-
-           const hrsValue = this.packageSettingForm.get('packGeoLocInterval').value;
-           const status = this.checkIntervalHumanFormat(hrsValue);
-
-           if (status) {
-
-             this.displayIntervalFormat['value'] = hrsValue;
-             this.packageSettingForm.get('packGeoLocInterval').setValue(this.convertHrsToMins(value))
-
-           } else {
-
-             this.displayIntervalFormat['value'] = this.maxInterval;
-
-           }
-
-         } else {
-
-           const minsValue = this.packageSettingForm.get('packGeoLocInterval').value;
-           this.displayIntervalFormat['value'] = minsValue;
-           const status = this.checkIntervalHumanFormat(minsValue);
-
-           if (status) {
-
-             this.packageSettingForm.get('packGeoLocInterval').setValue(this.convertHrsToMins(value))
-
-           } else {
-
-              this.service.showGlobalAlert(`More than ${this.maxInterval} hours is not allowed`, 'warning');
-              this.displayIntervalFormat['value'] = this.convertHrsToMins(this.maxInterval);
-
-           }
-
-         }
   }
 
   private setHideLoadSpinner(value): void {
@@ -271,11 +176,7 @@ export class PackageSettingsComponent implements OnInit {
 
     const body = this.service.renameObjectAllKeys(this.serviceFields, this.packageSettingForm.value, 's');
 
-    if (this.checkIntervalHumanFormat(this.displayIntervalFormat['value'])) {
-
-      this.updatePackageSetting(body);
-
-    }
+    this.updatePackageSetting(body);
 
   }
 

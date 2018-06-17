@@ -57,11 +57,9 @@ export class CommonService {
     public doughNutChartDataMonth: Array<any>;
     // components package settings
     public serviceFieldPackageSettings = {
-
         'packCurrencyDetails': 'currency_details',
         'packForceMbaUpdate': 'force_mba_update',
         'packActivePaytm': 'active_paytm',
-        'packGeoLocInterval': 'geoloc_interval',
       };
 
     // weather

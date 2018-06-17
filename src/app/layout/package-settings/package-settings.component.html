@@ -85,30 +85,6 @@
 
 							</div>
 
-							<div class="form-group">
-
-								<p>
-									{{'Set the interval for refresh to get Geolocation in mins' | translate}}
-							    </p>
-
-					 			<div class="row" style="margin: 0.40rem;">
-									<input type="number" name="packGeoLocInterval"
-						 			formControlName="packGeoLocInterval"
-						 			placeholder="Time Interval" class="form-control col-lg-8 col-sm-12">
-
-					 				<select class="custom-select col-lg-4 col-sm-12" (change)="onChangeIntervalHumanFormat($event.target.value)"
-					 				[value]="IntervalHumanFormat()"
-					 				>
-
-					 				 	<option *ngFor="let item of listDisplayIntervalFormat" [value]="item['value']">
-					 				 		{{item['name']}}
-					 					</option>
-
-					 				</select>
-						 			
-					 			</div>
-
-							</div>
 							<div class="bm-btn-group">
 
 								<button class="btn app-button allow-center"> {{ 'Submit' | translate }} 

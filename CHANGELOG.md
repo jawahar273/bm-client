@@ -3,6 +3,9 @@
 ## [Planning]
 - User choice date format display.
 
+## [Deprecated]
+- Regular checking for location interval.
+
 ### 0.5.1
 - Export Summary of statement
 - Update in upload files.
