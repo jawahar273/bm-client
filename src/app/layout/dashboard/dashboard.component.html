@@ -65,20 +65,20 @@
   <ng-template #summaryEmail let-c="close" let-d="dismiss">
     <div class="modal-header">
       <h4 class="modal-title">
-        Summary Export
+        {{ 'Summary Export' | translate }}
       </h4>
       <button type="button" class="close" aria-label="Close" (click)="d('Cross click')">
         <span aria-hidden="true">&times;</span>
       </button>
     </div>
-    <div class="modal-body">
+    <div class="modal-body allow-center">
       <p>
-        Get email summary for
+        {{ 'Get email summary for' | translate }}
         <select class="custom-select"
         [value]="printSummaryKeys[0]"
         (change)="onChangePrintSummary($event.target.value)">
         
-              <option *ngFor="let key of printSummaryKeys" class="dropdown-item" [value]="key"> {{customizeSummaryKey(key)}}
+              <option *ngFor="let key of printSummaryKeys" class="dropdown-item" [value]="key"> {{customizeSummaryKey(key) | translate }}
                </option>
         
         </select> 

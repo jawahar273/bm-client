@@ -1,71 +1,78 @@
 
 <div [@routerTransition] class="container-fluid pagination-centered"  >
-
 	<app-page-header [heading]="'Entry'" [icon]="'fa-etsy'"></app-page-header>
 
 	<div class="row allow-center">
 
-		<form id="entryFormGroup" class="col-lg-8 col-xs-12" [formGroup]="entryForm" (ngSubmit)="entrySubmit();">
+		<div class=" card col-lg-10 col-xs-12">
 
-			<div class="form-group" >
+			<h3 class="card-title" style="padding-top: 30px;">
+				{{ 'Fill the form to record your capital expenditure' | translate }}
+			</h3>
+			<hr>
+			<form id="entryFormGroup"  [formGroup]="entryForm" (ngSubmit)="entrySubmit();">
 
-				<input type="text" formControlName="entryGroupName" [ngClass]="{'has-error':checkFormHasError('entryGroupName')}" class="form-control input-underline"
-				 id="groupName" placeholder="{{'Name' | translate}}">
-			</div>
+				<div class="form-group" >
 
-			<div class="form-group">
+					<input type="text" formControlName="entryGroupName" [ngClass]="{'has-error':checkFormHasError('entryGroupName')}" class="form-control input-underline"
+					 id="groupName" placeholder="{{'Name' | translate}}">
+				</div>
 
-				<input type="text" formControlName="entryGroupPlace" [ngClass]="{'has-error':checkFormHasError('entryGroupPlace')}" class="form-control input-underline"
-				 id="groupPlace" placeholder="{{'Place' | translate}}">
+				<div class="form-group">
 
-			</div>
+					<input type="text" formControlName="entryGroupPlace" [ngClass]="{'has-error':checkFormHasError('entryGroupPlace')}" class="form-control input-underline"
+					 id="groupPlace" placeholder="{{'Place' | translate}}">
 
-			<div class="form-group">
+				</div>
 
-				<input type="text" formControlName="entryGroupGroup" [ngClass]="{'has-error': checkFormHasError('entryGroupGroup')}" class="form-control input-underline"
-				 id="groupCategory" placeholder="{{'Category/Group' | translate}}"
-				 [ngbTypeahead]="typeAheadForGroupItems"
-				 [resultFormatter]="formatter">
+				<div class="form-group">
 
-			</div>
+					<input type="text" formControlName="entryGroupGroup" [ngClass]="{'has-error': checkFormHasError('entryGroupGroup')}" class="form-control input-underline"
+					 id="groupCategory" placeholder="{{'Category/Group' | translate}}"
+					 [ngbTypeahead]="typeAheadForGroupItems"
+					 [resultFormatter]="formatter">
 
-			<div class="form-group">
+				</div>
 
-				<input type="date" formControlName="entryGroupDate" [ngClass]="{'has-error':checkFormHasError('entryGroupDate')}" class="form-control input-underline"
-				 id="groupDate" placeholder="{{'Date' | translate}}">
+				<div class="form-group">
 
-			</div>
-			<!-- formArray to add or remote fields -->
+					<input type="date" formControlName="entryGroupDate" [ngClass]="{'has-error':checkFormHasError('entryGroupDate')}" class="form-control input-underline"
+					 id="groupDate" placeholder="{{'Date' | translate}}">
 
-			<div formArrayName="entryGroupItems" >
-					   <app-listed-items [count]="indx"
-					   *ngFor="let form of getEntryGroupItemsControl(); let indx = index; trackBy: trackByFnForEntryGroupItems"
-						[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"
-						(addItemList)="addItem()"
-						(deleteItemList)="deleteItem(indx)">
-					   </app-listed-items>
-					<br>
+				</div>
+				<!-- formArray to add or remote fields -->
+
+				<div formArrayName="entryGroupItems" >
+						   <app-listed-items [count]="indx"
+						   *ngFor="let form of getEntryGroupItemsControl(); let indx = index; trackBy: trackByFnForEntryGroupItems"
+							[formGroupToList]="entryForm.controls.entryGroupItems.controls[indx]"
+							(addItemList)="addItem()"
+							(deleteItemList)="deleteItem(indx)">
+						   </app-listed-items>
+						<br>
+				
+				</div>
+				
+				<div class="bm-btn-group">
+					<button (click)="submitForm=true;" class="btn app-button form-group right" [disabled]="!hideLoadSpin" id="entrySubmitButton">
+
+						{{'Submit' | translate }}
+						<i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
+					
+					</button>
+
+					<button class="btn app-button form-group" (click)="entryForm.reset({
+						entryGroupDate: ISODate()
+					})">
+					
+						{{ 'Cancle' | translate }}
+					
+					</button>
+				</div>
 			
-			</div>
-			
-			<div class="bm-btn-group">
-				<button (click)="submitForm=true;" class="btn app-button form-group right" [disabled]="!hideLoadSpin" id="entrySubmitButton">
+			</form>
 
-					{{'Submit' | translate }}
-					<i class="fa fa-spinner fa-spin fa-1x fa-fw" [hidden]="hideLoadSpin"></i>
-				
-				</button>
-
-				<button class="btn app-button form-group" (click)="entryForm.reset({
-					entryGroupDate: ISODate()
-				})">
-				
-					{{ 'Cancle' | translate }}
-				
-				</button>
-			</div>
-		
-		</form>
+		</div>
 	
 	</div>
 

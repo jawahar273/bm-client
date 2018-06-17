@@ -62,26 +62,28 @@
                     </li>
                 </ul>
                 <ul class="submenu" *ngIf="service.airPollutionKeys" [hidden]="!service.isMobileScreen">
+                    <div  *ngFor="let item of service.airPollutionKeys" >       
+                        <!-- <li>
 
-                    <li *ngFor="let item of service.airPollutionKeys" >
+                            <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
+                            service.currentDateWithMomentJS"
+                            trigger="click:focus" placement="bottom">
+                                   {{ 'Mix Ratio' | translate}}: {{ roundOfData(service.airPollutionData[item]['value']) }}
+                            </a>
 
-                        <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
-                        service.currentDateWithMomentJS"
-                        trigger="click:focus" placement="bottom">
-                                {{ 'Mix Ratio' | translate}}: {{ roundOfData(item, 'value') }}
-                        </a>
+                        </li> -->
 
-                    </li>
+                        <li>
 
-                    <li>
+                            <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
+                            unit: hPa"
+                            placement="right">
+                                 {{item  | uppercase}}:
+                                {{ 'Pressure' | translate }} {{ roundOfData(service.airPollutionData[item]['pressure']) }}
+                            </a>
 
-                        <a class="dropdown-item" href="javascript:void(0)" ngbTooltip="
-                        service.currentDateWithMomentJS"
-                        trigger="click:focus" placement="bottom">
-                            {{ 'Pressure' | translate }}: {{ roundOfData(item,'pressure') }} hPa
-                        </a>
-
-                    </li>
+                        </li>
+                    </div>
 
                 </ul>
 

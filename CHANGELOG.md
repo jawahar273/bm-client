@@ -7,8 +7,9 @@
 - Regular checking for location interval.
 
 ### 0.5.1
-- Export Summary of statement
+- Export Summary of statement.
 - Update in upload files.
+- Translate in Print statement.
 
 ### 0.5.0
 - Upgrading to angualr 6.x

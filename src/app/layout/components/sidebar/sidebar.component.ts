@@ -302,21 +302,11 @@ export class SidebarComponent {
 
   }
 
-    public roundOfData(item: any,
-                       value:string,
-                       decimal=2): number {
+    public roundOfData(data, decimal=2): number {
 
-        let temp = 10 ** decimal;
-        let data = this.service.airPollutionData[item];
-
-        if (!data) {
-
-            return null;
-
-        }
-
-        temp = Math.round(data[value]* temp) / temp;
-        return temp;
+        const temp = 10 ** decimal;
+        return Math.round(data * temp) / temp;
 
     }
+
 }
