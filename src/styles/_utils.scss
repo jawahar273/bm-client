@@ -63,6 +63,10 @@ button {
   margin-top: 10%;
 }
 
+.entrySubItem-action {
+  color: $bm-color;
+}
+
 @media screen and (max-width: 992px) {
     .modal-content {
         margin-top: 20%;

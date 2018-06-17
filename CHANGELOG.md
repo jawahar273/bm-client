@@ -12,7 +12,7 @@
 - Translate in Print statement.
 
 ### 0.5.0
-- Upgrading to angualr 6.x
+- Upgrading to angular 6.x
 - Tourism for the app.
 - Adding wave scale effect in tour btn.
 - Fixed bug in autocomplete in new entry and Category/Group

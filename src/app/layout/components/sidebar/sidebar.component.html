@@ -45,7 +45,7 @@
 
         <div class="nested-menu" [hidden]="!service.isMobileScreen">
 
-            <a class="list-group-item" (click)="addExpandClass('weather')" >
+            <a class="list-group-item" (click)="addExpandClass('weather'); layoutService.updateAirPollution()">
 
                 <i class="fa fa-skyatlas"
                 style="font-size: 19px;"></i>

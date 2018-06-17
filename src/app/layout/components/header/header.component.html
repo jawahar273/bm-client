@@ -31,7 +31,8 @@
 
                 </a>
 
-            <ul class="dropdown-menu dropdown-menu-right messages col-lg-8">
+            <ul class="dropdown-menu dropdown-menu-right messages col-lg-8"
+            (click)="layoutService.updateAirPollution()">
 
                 <li class="media" id="pollution-data" *ngFor="let item of service.airPollutionKeys" style="border-bottom: 0px;">
 

@@ -8,7 +8,7 @@ import * as moment from 'moment';
 import { slideToBottom as routerTransition } from '../../../router.animations';
 import { CommonService } from '../../../services/common.services';
 import { UploadWsNotification } from '../../../services/notification.services';
-
+import { LayoutService } from '../../service/layout.service';
 @Component({
     selector: 'app-header',
     templateUrl: './header.component.html',
@@ -24,6 +24,7 @@ export class HeaderComponent implements OnInit {
     constructor(private translate: TranslateService,
                 public router: Router,
                 private service: CommonService,
+                public layoutService: LayoutService,
                 public uploadService: UploadWsNotification) {
 
         // this.getAirPollution();

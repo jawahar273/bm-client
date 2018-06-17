@@ -7,6 +7,7 @@ import * as moment from 'moment';
 import { CommonService } from '../../../services/common.services';
 import { AsynUserName } from '../../../services/notification.services';
 import { slideToRight as routerTransition } from '../../../router.animations';
+import { LayoutService } from '../../service/layout.service';
 
 @Component({
     selector: 'app-sidebar',
@@ -39,6 +40,7 @@ export class SidebarComponent {
 
   constructor(private translate: TranslateService,
               public service: CommonService,
+              public layoutService: LayoutService,
               private modalService: NgbModal) {
 
       this.datePickerModel = this.service.currentDateWithMomentJS;
