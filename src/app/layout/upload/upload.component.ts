@@ -220,10 +220,11 @@ export class UploadComponent implements OnInit {
        }, (error) => {
 
          this.setLoadSpinner(false);
-         const msg = this.service.isClinetOrServerSidesError(error, false);
+         const msg = this.service.isClinetOrServerSidesError(error, {}, false);
          this.service.showGlobalAlert(msg);
 
        });
+
       //  resetting the header for api call.
       this.service.headers.delete('Content-Disposition');
       this.service.headers.set('Content-Type', 'application/json');
