@@ -11,29 +11,32 @@
     </p>
  
     <div class="row justify-content-md-center">
-        <div class="col-md-6">
+        <div class="col-md-6">        
+            <div class="card">
+                <div class="card-header">
+                    <img class="user-avatar" id="ConfirmEmailImg" src="assets/images/logo.png" />
+         
+                    <h1 id="ConfirmEmailHeader">
+                        Account Confirmation
+                    </h1>
+                    
+                </div>
+                <div class="card-body">
+                    <h4 id="confirmEmailDesc">
+                        By clicking the confirm button your account will
+                        be activated quickly as possible in our system.<br>
+                        Be sure to enjoy as possible.   
+                    </h4>
+                    <br>
+                    <button class="btn app-button" id="confirmEmailBtn"  [disabled]="!spinnerIcon" (click)="submitConfirmEmailToken()">
+                           Confirm
 
-            <img class="user-avatar" id="ConfirmEmailImg" src="assets/images/logo.png" />
- 
-            <h1 id="ConfirmEmailHeader">
-                Confirm the Account
-            </h1>
-            
-            <hr style="color: white">
+                        <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="loginButton" [hidden]="spinnerIcon"></i>
 
-            <h4 id="confirmEmailDesc">
-                By clicking the confirm button your account will
-                be activated quickly as possible in our system.<br>
-                Be sure to enjoy as possible.   
-            </h4>
-            <br>
-            <button class="btn rounded-btn" id="confirmEmailBtn"  [disabled]="!spinnerIcon" (click)="submitConfirmEmailToken()">
-                   Confirm
-
-                <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="loginButton" [hidden]="spinnerIcon"></i>
-
-            </button>
-    
+                    </button>
+                </div>
+        
+            </div>
         </div>
         
 
