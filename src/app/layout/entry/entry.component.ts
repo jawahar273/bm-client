@@ -50,7 +50,7 @@ export class EntryComponent implements OnInit {
       this.route.params.subscribe(params => { this.id = params['id']; });
       this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
       // need reivew
-      //   !!this.id ? this.getOneItemListObject(this.id) : '';
+      !!this.id ? this.getOneItemListObject(this.id) : '';
 
   }
 
@@ -117,6 +117,7 @@ export class EntryComponent implements OnInit {
   private getOneItemListObject(id: any): any {
 
       const _self = this;
+      this.hideLoadingSpin(false);
       this.service.get(`package/itemslist/${id}`, this.headers)
        .subscribe(
          (_object) => {
@@ -124,10 +125,12 @@ export class EntryComponent implements OnInit {
              const entryFormGroupContents = this.getObjectForUpdate(_object);
              this.entryForm = this.entryFormGroupBuilder.group(entryFormGroupContents);
              this.content404 = false;
+            this.hideLoadingSpin(true);
 
           },
           (error) => {
 
+              this.hideLoadingSpin(true);
               this.content404 = true;
               this.entryForm = this.entryFormGroupBuilder.group(this.getObjectForUpdate());
               const msg = this.service.isClinetOrServerSidesError(error);
