@@ -41,10 +41,14 @@ button {
    @extend .ripple;
    background-color: $bm-color;
    color: $bm-font-color;
+
+   .bm-bnt-red {
+     background-color: red !important;
+   }
 }
 
 .bm-btn-group {
-  button {
+  * {
     margin-right: 5px;
   }
 }

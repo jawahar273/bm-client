@@ -15,8 +15,8 @@ export class ForgotPasswordComponent implements OnInit {
 
   public forgotPasswordForm: FormGroup; 
   public serviceField: Object;
-  public spinnerIcon: Boolean;
-  public forceShowEmailRequired: Boolean;
+  public spinnerIcon: boolean;
+  public forceShowEmailRequired: boolean;
   public headers: Headers;
 
   constructor(public service: CommonService, private fb: FormBuilder) {
@@ -58,20 +58,21 @@ export class ForgotPasswordComponent implements OnInit {
     const emailRequiredStatus = this.forgotPasswordForm.get("forgotPasswordEmail").hasError("required"); 
     this.forceShowEmailRequired = emailRequiredStatus;
     // console.log(value);
-
+    this.hideSpinnerIcon(false);
     if (!emailRequiredStatus) {
 
       const body = this.service.renameObjectAllKeys(this.serviceField, value, 's');
       this.service.post('rest-auth/password/reset', this.headers, body)
       .subscribe((data) => {
 
-        this.service.showGlobalAlert('Verfication mail will be send to the registed account mail if present', 'success');
 
+        this.service.showGlobalAlert(data['detail'], 'success');
+        this.hideSpinnerIcon(true);
       }, (error) => {
 
+        this.hideSpinnerIcon(true);
         const msg = this.service.isClinetOrServerSidesError(error, {'new_password2': undefined});
         this.service.showGlobalAlert(msg);
-
       });
 
     }

@@ -5,11 +5,13 @@
         </ngb-alert>
     </p>
     <div class="row justify-content-md-center">
-
         <div class="col-md-4 blur-content">
-            <img src="assets/images/logo.png" class="user-avatar" />
-            <h1>Login</h1>
-            <form role="form" [formGroup]="loginForm" (ngSubmit)="onLoggedin()" >
+          <div class="card">
+            <div class="card-header">
+              <img class="user-avatar" src="assets/images/logo.png" />
+              <h1>Login</h1>
+            </div>
+            <form class="card-body" role="form" [formGroup]="loginForm" (ngSubmit)="onLoggedin()" >
                 <div class="form-content">
                     <div class="form-group">
                         <input type="text" [ngClass]="{'has-error':checkFormHasError('loginPassName')}"
@@ -28,14 +30,15 @@
                 <br>
                 </div>
                 <div class="form-group">                  
-                  <button class="btn rounded-btn" id="loginButton" type="submit"  [disabled]="!spinnerIcon">
+                  <button class="btn app-button" id="loginButton" type="submit"  [disabled]="!spinnerIcon">
                        Log in 
                        <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="registerButton" [hidden]="spinnerIcon"></i>
                   </button>
                   &nbsp;
-                  <a class="btn rounded-btn" [routerLink]="['/signup']">Register</a>
+                  <a class="btn app-button" [routerLink]="['/signup']">Register</a>
                 </div>
             </form>
         </div>
+      </div>
     </div>
 </div>

@@ -6,53 +6,57 @@
     </p>
     <div class="row justify-content-md-center">
         <div class="col-md-4">
-            <img class="user-avatar" src="assets/images/logo.png" />
-            <h1>SignUp</h1>
-            <form role="form" [formGroup]="signupFormGroup" (ngSubmit)="onSignUpFormSubmit(signupFormGroup.value)" >
-                <div class="form-content">
-                    <div class="form-group">
-                        <input type="text" [ngClass]="{'has-error':checkFormHasError('signUpUserName')}"
-                         formControlName="signUpUserName"
-                         class="form-control input-underline input-lg" id="signUpUserName"
-                          placeholder="User name">
-                    </div>
+            <div class="card">
+                <div class="card-header">
+                    <img class="user-avatar" src="assets/images/logo.png" />
+                    <h1>SignUp</h1>
+                </div>           
+                <form class="card-body" role="form" [formGroup]="signupFormGroup" (ngSubmit)="onSignUpFormSubmit(signupFormGroup.value)" >
+                    <div class="form-content">
+                        <div class="form-group">
+                            <input type="text" [ngClass]="{'has-error':checkFormHasError('signUpUserName')}"
+                             formControlName="signUpUserName"
+                             class="form-control input-underline input-lg" id="signUpUserName"
+                              placeholder="User name">
+                        </div>
 
-                    <div class="form-group">
-                        <input type="text" [ngClass]="{'has-error':checkFormHasError('signUpEmail')}"
-                         formControlName="signUpEmail"
-                         class="form-control input-underline input-lg" id="signUpEmail"
-                         placeholder="Email">
-                        <div class="form-control-feedback show-error-msg" *ngIf='checkFormHasError("signUpEmail")'>
-                            Empty or Wrong format is not acceptable
+                        <div class="form-group">
+                            <input type="text" [ngClass]="{'has-error':checkFormHasError('signUpEmail')}"
+                             formControlName="signUpEmail"
+                             class="form-control input-underline input-lg" id="signUpEmail"
+                             placeholder="Email">
+                            <div class="form-control-feedback show-error-msg" *ngIf='checkFormHasError("signUpEmail")'>
+                                Empty or Wrong format is not acceptable
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="form-group">
-                        <input type="password" [ngClass]="{'has-error':checkFormHasError('signUpNewPassword') || showErrorInButton}"
-                         formControlName="signUpNewPassword"
-                         class="form-control input-underline input-lg"
-                         id="new-password" placeholder="Confirm password">
-                        <div class="form-control-feedback show-error-msg" *ngIf='signupFormGroup.get("signUpNewPassword").hasError("minlength")'>
-                            Password should be length of 8.
+                        <div class="form-group">
+                            <input type="password" [ngClass]="{'has-error':checkFormHasError('signUpNewPassword') || showErrorInButton}"
+                             formControlName="signUpNewPassword"
+                             class="form-control input-underline input-lg"
+                             id="new-password" placeholder="Confirm password">
+                            <div class="form-control-feedback show-error-msg" *ngIf='signupFormGroup.get("signUpNewPassword").hasError("minlength")'>
+                                Password should be length of 8.
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" [ngClass]="{'has-error':checkFormHasError('signUpConfirmPassword') || showErrorInButton}"
+                            formControlName="signUpConfirmPassword"
+                             class="form-control input-underline input-lg"
+                             id="confirm-password" placeholder="Repeat password"
+                             (blur)="confirmPasswordValidator()">
+                            <div class="form-control-feedback show-error-msg" *ngIf='showErrorInButton'>
+                                 New password and confirm password are not same.
+                            </div>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <input type="password" [ngClass]="{'has-error':checkFormHasError('signUpConfirmPassword') || showErrorInButton}"
-                        formControlName="signUpConfirmPassword"
-                         class="form-control input-underline input-lg"
-                         id="confirm-password" placeholder="Repeat password"
-                         (blur)="confirmPasswordValidator()">
-                        <div class="form-control-feedback show-error-msg" *ngIf='showErrorInButton'>
-                             New password and confirm password are not same.
-                        </div>
-                    </div>
-                </div>
-                <button class="btn rounded-btn" id="registerButton"  [disabled]="!spinnerIcon">
-                       Register
-                    <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="loginButton" [hidden]="spinnerIcon"></i>
-                </button>&nbsp;
-                <a class="btn rounded-btn" [routerLink]="['/login']"> Log in </a>
-            </form>
+                    <button class="btn app-button" id="registerButton"  [disabled]="!spinnerIcon">
+                           Register
+                        <i class="fa fa-spinner fa-spin fa-1x fa-fw" id="loginButton" [hidden]="spinnerIcon"></i>
+                    </button>&nbsp;
+                    <a class="btn app-button" [routerLink]="['/login']"> Log in </a>
+                </form>
+            </div>
         </div>
     </div>
 </div>

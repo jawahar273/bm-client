@@ -1,6 +1,7 @@
 $topnav-background-color: #222;
 $fouce-red-color: rgb(240, 41, 41);
-$place-holder-color: rgba(255, 255, 255, 0.85);
+$place-holder-color: #888888;
+$bm-primary-color: #1565c0;
 // :host {
 //     display: block;
 // }
@@ -12,12 +13,12 @@ $place-holder-color: rgba(255, 255, 255, 0.85);
     right: 0;
     bottom: 0;
     overflow: auto;
-    background: $topnav-background-color;
+    // background: $topnav-background-color;
     // background-image: url('/assets/images/alex-6732-min.jpg');
     // background-attachment: fixed;
     // background-size: cover;
     text-align: center;
-    color: #fff;
+    // color: #fff;
     padding: 3em;
 
     .col-lg-4 {
@@ -34,8 +35,8 @@ $place-holder-color: rgba(255, 255, 255, 0.85);
         background: 0 0;
         border: none;
         box-shadow: none;
-        border-bottom: 2px solid rgba(255, 255, 255, 0.75);
-        color: #fff;
+        border-bottom: 2px solid $bm-primary-color;
+        // color: #fff;
         border-radius: 0;
     }
     .input-underline:focus {
@@ -54,24 +55,6 @@ $place-holder-color: rgba(255, 255, 255, 0.85);
         // border-bottom: 2px solid rgb(240, 41, 41);
         color:red;
         display: block;       
-    }
-    .rounded-btn {
-        -webkit-border-radius: 50px;
-        border-radius: 50px;
-        color: rgba(255, 255, 255, 1);
-        background: $topnav-background-color;
-        border: 2px solid rgba(255, 255, 255, 1);
-        font-size: 18px;
-        line-height: 40px;
-        padding: 0 25px;
-    }
-    .rounded-btn:hover,
-    .rounded-btn:focus,
-    .rounded-btn:active,
-    .rounded-btn:visited {
-        color: rgba(255, 255, 255, 0.8);
-        border: 2px solid rgba(255, 255, 255, 0.8);
-        outline: none;
     }
 
     h1 {
@@ -116,5 +99,9 @@ $place-holder-color: rgba(255, 255, 255, 0.85);
 
     .form-content {
         padding-bottom: 10px;
+    }
+
+    a,.app-button {
+        text-transform: uppercase;
     }
 }

@@ -82,10 +82,12 @@ export class CommonService {
         // const for screen UI.
         this.defaultMobileScreenOffSet = 992;
         this.isMobileScreen = window.innerWidth <= this.defaultMobileScreenOffSet;
-        this.timeOutForAlertBox = 4100;
+        // alert box timeout
+        // common one such success, warning
+        this.timeOutForAlertBox = 6100;
+        // only timeout for danger
         this.timeOutForAlertBoxDanger = 9000;
         this.currencyDetails = {
-
             'symbol': '$',
             'name': 'US Dollar',
             'symbol_native': '$',
@@ -93,7 +95,6 @@ export class CommonService {
             'rounding': 0,
             'code': 'USD',
             'name_plural': 'US dollars'
-
         };
 
 
