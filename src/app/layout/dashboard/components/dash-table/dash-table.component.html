@@ -187,6 +187,30 @@
     	            <!-- details shower -->
     	        </ngx-datatable-column>
 
+                <ngx-datatable-column name="Action" prop="id">
+               
+                    <ng-template let-column="column"  let-sort="sortFn" ngx-datatable-header-template>
+                        {{column.name}}
+                    </ng-template>
+              
+                    <ng-template let-row="row" let-rowIndex="rowIndex" 
+                 let-value="value" ngx-datatable-cell-template >
+                 
+                        <a href="entry/{{value}}" >
+                         <i class="fa fa-pencil-square"></i>
+                        </a>   
+                  
+                        <!-- <span class="db-warning">
+                  
+                          <i class="fa fa-trash" (click)="deleteRow(value, rowIndex)">
+                         </i>
+                  
+                        </span>   -->           
+               
+                    </ng-template>
+            
+                </ngx-datatable-column>
+
              <ngx-datatable-column name="Series No" >
 
                  <ng-template  let-column="column" let-sort="sortFn" ngx-datatable-header-template>
@@ -284,29 +308,6 @@
                
                     </ng-template>
              
-                </ngx-datatable-column>
-            
-                <ngx-datatable-column name="Action" prop="id">
-               
-                    <ng-template let-column="column"  let-sort="sortFn" ngx-datatable-header-template>
-                    </ng-template>
-              
-                    <ng-template let-row="row" let-rowIndex="rowIndex" 
-                 let-value="value" ngx-datatable-cell-template >
-                 
-                        <a href="entry/{{value}}" >
-                         <i class="fa fa-pencil-square"></i>
-                        </a>   
-                  
-                        <span class="db-warning">
-                  
-                          <i class="fa fa-trash" (click)="deleteRow(value, rowIndex)">
-                         </i>
-                  
-                        </span>             
-               
-                    </ng-template>
-            
                 </ngx-datatable-column>
 
                <ngx-datatable-footer>

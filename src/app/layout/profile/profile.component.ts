@@ -25,10 +25,10 @@ export class ProfileComponent implements OnInit {
        'proLastName': 'last_name',
        'proGender': 'gender',
      };
-     const temp = {
+
+     this.profileForm = this.profileFormBuilder.group({
        proGender: 'N',
-     };
-     this.profileForm = this.profileFormBuilder.group(temp);
+     });
      this.genderObject = [{name: 'Male', value: 'M'},
                           {name: 'Female', value: 'F'},
                           {name: 'Other', value: 'O'},
